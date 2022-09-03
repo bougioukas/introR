@@ -6,9 +6,6 @@
 library(tidyverse)
 library(here)
 
-library(fontawesome)
-
-library(readr)
 ```
 
 ## Installing R and RStudio
@@ -42,21 +39,16 @@ R does all the heavy work (like an airplane engine) while RStudio is an integrat
 
 After we install R and RStudio on our computer, we'll have two new programs (also called applications) we can open. In this textbook, we'll always work in **RStudio**.
 
-
-::: {.callout-tip}
+::: callout-tip
 ## Why R Programming Language?
 
-
-1. R programming is used as a leading tool for machine learning, statistics, and data analysis. Objects, functions, and packages can easily be created by R.
-1. It’s a platform-independent language. This means it can be applied to all operating systems.
-1. It’s an open-source free language. That means anyone can install it in any organization without purchasing a license.
-1. R programming language is not only a statistic software but also allows us to integrate with other languages (C, C++). Thus, we can easily interact with many data sources and statistical tools.
-1. The R programming language has a vast community of users and it’s growing day by day.
-1. R is currently one of the most requested programming languages in the Data Science job market that makes it the hottest trend nowadays.
-
+1.  R programming is used as a leading tool for machine learning, statistics, and data analysis. Objects, functions, and packages can easily be created by R.
+2.  It's a platform-independent language. This means it can be applied to all operating systems.
+3.  It's an open-source free language. That means anyone can install it in any organization without purchasing a license.
+4.  R programming language is not only a statistic software but also allows us to integrate with other languages (C, C++). Thus, we can easily interact with many data sources and statistical tools.
+5.  The R programming language has a vast community of users and it's growing day by day.
+6.  R is currently one of the most requested programming languages in the Data Science job market that makes it the hottest trend nowadays.
 :::
-
-
 
 ## Starting R & RStudio
 
@@ -66,38 +58,34 @@ R starts automatically when we open RStudio [@fig-RStudio_panels] and we are gre
 
 ![RStudio Screenshot with Console on the left and Help tab in the bottom right.](images/RStudio_panels.png){#fig-RStudio_panels width="100%"}
 
-
 The three main panes that divide the screen are:
 
-1. the large **Console pane** on the left runs R code.
+1.  the large **Console pane** on the left runs R code.
 
-2. the workspace pane, which includes the Environment and History tabs, in the upper right.
+2.  the workspace pane, which includes the Environment and History tabs, in the upper right.
 
-    + The **Environment tab** keeps track of the objects we create as we work with R (a major part of our tasks involves creating objects). 
+    -   The **Environment tab** keeps track of the objects we create as we work with R (a major part of our tasks involves creating objects).
 
-    + The **History tab** tracks all of the commands that we have sent to the R console in the session.
+    -   The **History tab** tracks all of the commands that we have sent to the R console in the session.
 
+3.  the Files/Plots/Packages/Help/Viewer pane in the lower right.
 
-3. the Files/Plots/Packages/Help/Viewer pane in the lower right. 
+    -   The **Files tab** lets us create new folders (directories) on our computer, as well as copy, move, delete, or rename files.
 
-   + The **Files tab** lets us create new folders (directories) on our computer, as well as copy, move, delete, or rename files.
+    -   The **Plots tab** holds graphs and charts we generate from our data and during the analysis.
 
-    + The **Plots tab** holds graphs and charts we generate from our data and during the analysis. 
+    -   The **Packages** tab lists of all the R packages installed on our hard drive and indicates whether or not they are currently loaded. We'll discuss packages in more detail in the next sections.
 
-    + The **Packages** tab lists of all the R packages installed on our hard drive and indicates whether or not they are currently loaded. We’ll discuss packages in more detail in the next sections.
+    -   The **Help tab**, provides links to search for help directly from our RStudio window.
 
-    + The **Help tab**, provides links to search for help directly from our RStudio window. 
+    -   The **Viewer tab** in RStudio allows us to view local web content (e.g., to view an html table).
 
-    + The **Viewer tab** in RStudio allows us to view local web content (e.g., to view an html table).
+Throughout this textbook, we'll come to learn what purpose each of these panes serve.
 
-Throughout this textbook, we’ll come to learn what purpose each of these panes serve. 
+::: callout-tip
+## Command prompt  \>
 
-
-::: {.callout-tip}
-## Command prompt  \ >
-
-The Console pane starts with information about the version number, license and contributors, and provides some guidance on how to get help. The last line is a **standard command prompt** (the greater than sign > symbol) that indicates R is ready and expecting instructions to do something.
-
+The Console pane starts with information about the version number, license and contributors, and provides some guidance on how to get help. The last line is a **standard command prompt** (the greater than sign \> symbol) that indicates R is ready and expecting instructions to do something.
 :::
 
  
@@ -110,13 +98,11 @@ Let's type `14 + 16` at the R command prompt and press `Enter`:
 
 So what happened?
 
-Well, R gave us a response (output) to our input (`14 + 16`). That response came after we pressed the Enter key. It was `[1] 30`. It’s clear that `30` is the answer to the `14 + 16`. However, what does the `[1]` mean? At this point we can pretty much ignore it, but technically it refers to the index of the first item on each line. (Sometimes R prints out many lines as an output. The number inside the brackets helps us figure out where in the sequence we are per line).
-
+Well, R gave us a response (output) to our input (`14 + 16`). That response came after we pressed the Enter key. It was `[1] 30`. It's clear that `30` is the answer to the `14 + 16`. However, what does the `[1]` mean? At this point we can pretty much ignore it, but technically it refers to the index of the first item on each line. (Sometimes R prints out many lines as an output. The number inside the brackets helps us figure out where in the sequence we are per line).
 
 ## R scripts
 
-Usually, we do our programming by writing our code in script files. An R script (with the “.R” extension) is simply a text file in which our R code is stored, and then can be “sent” to the console, where R will execute it.
-
+Usually, we do our programming by writing our code in script files. An R script (with the ".R" extension) is simply a text file in which our R code is stored, and then can be "sent" to the console, where R will execute it.
 
 If we go to:
 
@@ -127,52 +113,42 @@ flowchart LR
 
 in the RStudio menu, we should see another pane (Q1) opened on the left above the interactive console [@fig-RStudio_4panels]. This is where we can write a length script with lots of lines of code, and save the file for future use.
 
-
 ![RStudio Screenshot with four panes.](images/RStudio_4panels.png){#fig-RStudio_4panels width="100%"}
 
 Therefore, the RStudio window is divided into **four** panes (quadrants) that contain:
 
-* Q1 - code editor (script)
-* Q2 - console
-* Q3 - environment (workspace), history
-* Q4 - files, plots, packages, help, viewer (for local web content)
+-   Q1 - code editor (script)
+-   Q2 - console
+-   Q3 - environment (workspace), history
+-   Q4 - files, plots, packages, help, viewer (for local web content)
 
-
-::: {.callout-tip}
+::: callout-tip
 ## Layout of the panes
 
-The four panes might be in a different order that those in @fig-RStudio_4panels. If we’d like, we can change the **order** of the windows under RStudio preferences. We select from RStudio menu:
+The four panes might be in a different order that those in @fig-RStudio_4panels. If we'd like, we can change the **order** of the windows under RStudio preferences. We select from RStudio menu:
+
 ```{mermaid}
 flowchart LR
   A[Tools] -.-> B(Global Options) -.-> C(Pane layout)
 ```
 
 We can also change their **shape** by either clicking the minimize or maximize buttons on the top right of each pane, or by clicking and dragging the middle of the borders of the windows.
-
 :::
 
+In Rscript, we can execute our code line by line by putting the cursor on the line or selecting a chunk of lines (by highlighting the text) and pressing the **run** button ![](images/run.png){#fig-run width="8%"} in the source window. We can also run our selected code using the **keywboard shortcut `Ctrl + Enter`**.
 
-
-In Rscript, we can execute our code line by line by putting the cursor on the line or selecting a chunk of lines (by highlighting the text) and pressing the **run** button ![](images/run.png){#fig-run width="8%"} in the source window. 
-We can also run our selected code using the **keywboard shortcut `Ctrl + Enter`**.
-
-::: {.callout-tip}
+::: callout-tip
 ## Advantages writing our R code as an R script file
 
-+ We can save and reuse our code
-+ We can document our work (however, we can only include one-line comments and
-these must be prefixed with the hash symbol, \ #)
-+ We can share our work with others
-+ We can move beyond writing one line of code at a time
-
+-   We can save and reuse our code
+-   We can document our work (however, we can only include one-line comments and these must be prefixed with the hash symbol,  #)
+-   We can share our work with others
+-   We can move beyond writing one line of code at a time
 :::
 
-
-
-
 ## Errors, warnings, and messages in R
- 
-Let’s type the following at the R command prompt and press Enter:
+
+Let's type the following at the R command prompt and press Enter:
 
 ```{r}
 #| error: true
@@ -181,22 +157,18 @@ Let’s type the following at the R command prompt and press Enter:
 hello
 ```
 
-we get the following error:  
+we get the following error:\
 `r kableExtra::text_spec("Error: object ‘hello’ not found", color = "red")`
-
 
 One thing that intimidates new R and RStudio users is how it reports errors, warnings, and messages. R reports errors, warnings, and messages in a glaring red font, which makes it seem like it is scolding us. However, seeing red text in the console is not always bad.
 
 R will show \textcolor{red}{red text} in the console pane in three different situations:
 
-* **Errors:** When the red text is a legitimate error, it will be prefaced with “Error…” and try to explain what went wrong. Generally when there’s an error, the code will not run.
+-   **Errors:** When the red text is a legitimate error, it will be prefaced with "Error..." and try to explain what went wrong. Generally when there's an error, the code will not run.
 
-* **Warnings:** When the red text is a warning, it will be prefaced with “Warning:” and R will try to explain why there’s a warning. Generally our code will still work, but with some caveats.
+-   **Warnings:** When the red text is a warning, it will be prefaced with "Warning:" and R will try to explain why there's a warning. Generally our code will still work, but with some caveats.
 
-
-* **Messages:** When the red text doesn’t start with either “Error” or “Warning”, it’s just a friendly message. 
-
-
+-   **Messages:** When the red text doesn't start with either "Error" or "Warning", it's just a friendly message.
 
 Now, let's type the following:
 
@@ -205,21 +177,15 @@ Now, let's type the following:
 +
 ```
 
-
-
-::: {.callout-important}
-## Plus sign (+) prompt
+::: callout-important
+## If a command is not complete then R will show a Plus sign (+) prompt
 
 If an R command is not complete then R will show a plus sign (`+`) prompt on second and subsequent lines until the command syntax is correct (this means that we can type something to finish the command we are trying to execute). We can also hit the escape key (`ESC`) to cancel whatever command R is waiting for us to finish.
-
 :::
-
-
 
 ## R Help resources
 
-Before asking others for help, it’s generally a good idea for us to try to help ourself. It is strongly recommended to learn how to use R's useful and extensive built-in help system which is an essential part of finding solutions to our R programming problems. 
-
+Before asking others for help, it's generally a good idea for us to try to help ourself. It is strongly recommended to learn how to use R's useful and extensive built-in help system which is an essential part of finding solutions to our R programming problems.
 
 We can use the **`help()`** function or **`?`** help operator which provide access to the R documentation pages for a specific term. For example, if we want information for the `mean` we type the following commands (which give the same result):
 
@@ -239,24 +205,17 @@ or
 ?mean
 ```
 
-
 ![R help() function search for specific term such as `mean`](images/mean_help.png){#fig-mean_help width="80%"}
-
 
 So, R tried to find something called `mean` (@fig-mean_help).
 
- 
- 
-::: {.callout-tip}
+::: callout-tip
 ## Recall a previously typed command in console
 
-In console to recall a previously typed commands use the up arrow key ($\uparrow$). To go between previously typed commands use the up and down arrow ($\downarrow$) keys. To modify or correct a command use the left  ($\leftarrow$) and right arrow ($\rightarrow$) keys.
-
+In console to recall a previously typed commands use the up arrow key ($\uparrow$). To go between previously typed commands use the up and down arrow ($\downarrow$) keys. To modify or correct a command use the left ($\leftarrow$) and right arrow ($\rightarrow$) keys.
 :::
- 
- 
- 
-Two question marks (**`??`**) will search R documentation for a phrase or term and it is a shortcut to `help.search()` function. So for example, let’s say we want to search documentation for `linear regression` analysis. Keep in mind if our phrase is more than one word long, we must put it in quotation marks.
+
+Two question marks (**`??`**) will search R documentation for a phrase or term and it is a shortcut to `help.search()` function. So for example, let's say we want to search documentation for `linear regression` analysis. Keep in mind if our phrase is more than one word long, we must put it in quotation marks.
 
 ```{r}
 #| echo: true
@@ -264,8 +223,7 @@ Two question marks (**`??`**) will search R documentation for a phrase or term a
 
 ??"linear regression"
 ```
- 
- 
+
 To do a keyword search use the **`apropos()`** command with the keyword in double quotes, `"keyword"`, or single quote, `'keyword'`. For example:
 
 ```{r aproposShow}
@@ -273,31 +231,76 @@ To do a keyword search use the **`apropos()`** command with the keyword in doubl
 #| eval: false
 
 apropos("mean")
-``` 
- 
- 
+```
+
 Use the **`example()`** command to run the examples at the end of the help for a function:
 
 ```{r}
 example(mean)
 ```
 
-RStudio also provides search box in the **"Help"** tab to make our life easier (@fig-RStudio_panels). 
+RStudio also provides search box in the **"Help"** tab to make our life easier (@fig-RStudio_panels).
 
 Like Google, but for R is the [RSeek.Org](https://rseek.org/). This is not included in R but is a great search engine built specifically for R-related queries.
 
+Additionally, there are a lot of **on-line** resources that can help (e.g., [R-bloggers](https://www.r-bloggers.com/)). However, we must understand that blindly copying and pasting could be harmful and further it won't help us to learn and develop.
 
-Additionally, there are a lot of **on-line** resources that can help (e.g., [R-bloggers](https://www.r-bloggers.com/)). However, we must understand that blindly copying and pasting could be harmful and further it won't help us to learn and develop. 
+## Working with RStudio Projects
 
+When we are working in R, the program needs to know where to find inputs and deliver outputs, and will look first in what is called a "working directory". Moreover, we want to organize all of the files for a given project in one folder, and that particular folder should be established as our working directory.
+
+### Create a new RStudio Project
+
+Keeping all the files associated with a project organized together -- input data, R scripts, documents and figures -- is such a wise and common practice that RStudio has built-in support for this via its projects. RStudio projects are associated with R working directories [@fig-create_project].
+
+We can create an RStudio project:
+
+-   In a new directory
+-   In an existing directory where we already have R code and data
+-   By cloning a version control (Git or Subversion) repository
+
+Let's create one to use for the rest of this textbook. From the RStudio menu:
+
+```{mermaid}
+flowchart LR
+  A[File] -.-> B(New Project)
+```
+
+The directory name we choose here will be the `project name`. We call it whatever we want (e.g., introR).
+
+![RStudio projects are associated with R working directories](images/create_project.png){#fig-create_project width="80%"}
+
+
+::: callout-important
+## Store the RStudio Project somewhere sensible
+
+We must think carefully in which **subdirectory** we will create the RStudio project. If we don't store it somewhere sensible, it will be hard to find it in the future!
+:::
+
+## RStudio Project folder structure
+
+The files on our computer are organised into folders. RStudio Projects live in our computer's normal folders - they placemark the working directory of each analysis project. These project folders can be viewed or moved around the same way we normally work with files and folders on our computer.
+
+The proposed RStudio Project should contain the following sub-folders [@fig-project_structure]:
+
+-   data: data files of any kind, such as `.csv`, `.xlsx`, `.txt`, etc.
+-   documents: documents of any formats, such as `.docx`, `.pdf`, .`tex`, `.Rmd`, etc.
+-   figures: plots, diagrams, and other figures
+-   scripts: all your R scripts and codes (`.R` extension)
+
+Additionally, there are two important files in the project folder that are created automatically by Rstudio: `name_of_project.Rproj`, and `.Rhistory`:
+
+-   `name_of_project.Rproj`: contains options and meta-data of the project (encoding, the number of spaces used for indentation, whether or not to restore a workspace with launch, etc) and can also be used as a shortcut for opening the project directly from the filesystem.
+
+-   `.Rhistory`: contains a history of code executed
+
+![Project folder structure](images/project_structure.png){#fig-project_structure width="80%"}
+
+It is recommended to work with RStudio Projects. This enables us to switch between different projects without getting the data, scripts, or output files all mixed up. Everything gets read in or saved to the correct place. No more exporting a plot and then going through the various Documents, etc., folders on our computer trying to figure out where our plot might have been saved to. It got saved to the project folder.
 
 ## Quitting R & RStudio
 
 When we quit RStudio we will be asked whether to save workspace with two options:
 
-* "Yes" -- Our current R workspace (containing the work that we have done) will be  restored next time we open RStudio.
-* "No" -- We will start with a fresh R session next time we open RStudio. For now  select "**No**" to prevent errors being carried over from previous sessions.
-
-
-
-
-
+-   "Yes" -- Our current R workspace (containing the work that we have done) will be restored next time we open RStudio.
+-   "No" -- We will start with a fresh R session next time we open RStudio. For now select "**No**" to prevent errors being carried over from previous sessions.

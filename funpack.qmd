@@ -1,0 +1,117 @@
+# R functions and packages {#sec-funpack}
+
+
+## Characteristics of R Functions
+
+We have already used some R functions searching for help (i.e.,  `help()`, `example()`, `apropos()`). Most of the computations in R involves using functions. 
+
+
+**A. Name and argumnets**
+
+> A function essentially has a **name** and a list of **arguments** separated by a comma.
+
+Let's have look at an example:
+
+```{r}
+seq(from = 5, to = 8, by = 0.5)
+```
+
+The function name is `seq` and it has three explicitly named arguments `from`, `to` and `by`. The arguments `from` and `to` are the start and end values of a sequence that we want to create, and `by` is the increment of the sequence.  
+
+
+The above result can also be obtained without naming the arguments as follows:
+
+```{r}
+seq(5, 8, 0.5)
+```
+
+
+::: callout-tip
+## Named arguments
+
+It’s a good idea to name the arguments in the functions. This practice minimizes errors assigning unnamed arguments to options and makes code more readable.
+:::
+
+ 
+
+**B. Positional matching**
+
+
+And what about this?
+
+```{r}
+seq(5, 8)
+```
+
+This result demonstrates something about how R resolves function arguments. 
+
+> If we don't use argument names, R will match the arguments in the order that they appeared (positional matching). 
+
+Here, it is assumed that we want a sequence `from = 5` that goes `to = 8`. Since we didn’t specify step size, the default value of `by` in the function definition is used, which ends up being `1` in this case.
+
+Moreover, the `seq()` function has other arguments that we could use which are documented in the help page running `?seq`. For example, we could use the argument `length.out` (instead of `by`) to fix the length of the sequence as follows:
+
+```{r}
+seq(from = 5, to = 8, length.out = 16)
+```
+
+ 
+
+**C. Optional arguments**
+
+> Some arguments in a function may be **optional**. We can use `args()` for displaying the argument names and corresponding default values of a function.
+
+
+Let's see for example the `log()` function:
+
+```{r}
+args(log)
+```
+
+In the `log()` function `base` comes with a default value exp(1). This means that `base` is an optional argument.  
+
+
+R will use our value for `base` if we supply one: 
+```{r}
+log(15, base = 10)  # R uses our value 10
+```
+
+
+Otherwise R will use the default vaue which here is `exp(1)`:  
+```{r}
+log(15)  # R uses the default value of `exp(1)`
+```
+
+
+In contrast, `x` is a required argument because it is not come with a default value. If we don't supply `x` argument the `log()` function will fail:
+
+
+```{r, error=TRUE, eval= FALSE}
+log(base=10)
+```
+
+`r kableExtra::text_spec("Error: argument x is missing, with no default", color = "red")`
+
+ 
+
+**D. Some functions have not arguments**
+
+
+>Not all functions have (or require) arguments.
+
+For example:
+
+```{r}
+date()
+```
+
+ 
+
+**E. Functions "live" in packages**
+
+> Functions "live" in Base R and in R packages!
+
+
+![Functions live inside the R packages that can be downloaded from the internet](images/packages.png){#fig-packages width="80%"}
+
+

@@ -84,7 +84,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./lab1.html" rel="next">
+<link href="./funpack.html" rel="next">
 <link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -162,6 +162,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./introduction.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R and Rstudio</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./funpack.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R functions and packages</span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -174,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lab1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">LAB II: Descriptive Statistics</span></a>
+  <a href="./lab1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">LAB II: Descriptive Statistics</span></a>
   </div>
 </li>
       </ul>
@@ -196,7 +201,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link" data-scroll-target="#r-scripts"> <span class="header-section-number">1.4</span> R scripts</a></li>
   <li><a href="#errors-warnings-and-messages-in-r" id="toc-errors-warnings-and-messages-in-r" class="nav-link" data-scroll-target="#errors-warnings-and-messages-in-r"> <span class="header-section-number">1.5</span> Errors, warnings, and messages in R</a></li>
   <li><a href="#r-help-resources" id="toc-r-help-resources" class="nav-link" data-scroll-target="#r-help-resources"> <span class="header-section-number">1.6</span> R Help resources</a></li>
-  <li><a href="#quitting-r-rstudio" id="toc-quitting-r-rstudio" class="nav-link" data-scroll-target="#quitting-r-rstudio"> <span class="header-section-number">1.7</span> Quitting R &amp; RStudio</a></li>
+  <li>
+<a href="#working-with-rstudio-projects" id="toc-working-with-rstudio-projects" class="nav-link" data-scroll-target="#working-with-rstudio-projects"> <span class="header-section-number">1.7</span> Working with RStudio Projects</a>
+  <ul class="collapse">
+<li><a href="#create-a-new-rstudio-project" id="toc-create-a-new-rstudio-project" class="nav-link" data-scroll-target="#create-a-new-rstudio-project">Create a new RStudio Project</a></li>
+  </ul>
+</li>
+  <li><a href="#rstudio-project-folder-structure" id="toc-rstudio-project-folder-structure" class="nav-link" data-scroll-target="#rstudio-project-folder-structure"> <span class="header-section-number">1.8</span> RStudio Project folder structure</a></li>
+  <li><a href="#quitting-r-rstudio" id="toc-quitting-r-rstudio" class="nav-link" data-scroll-target="#quitting-r-rstudio"> <span class="header-section-number">1.9</span> Quitting R &amp; RStudio</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -238,7 +250,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The name R for the language was coined after the initials of the forenames of the inventors, plus the influence of the S language.</p>
 <p>R does all the heavy work (like an airplane engine) while RStudio is an integrated development environment (IDE) that was founded by J.J. Allaire in 2009. RStudio provides a friendly interface by adding a plenty of great features, auto-complete functions and tools (like an airplane dashboard with electronic monitors, and navigation systems) and makes life a lot easier.</p>
 <div id="fig-engine_analogy" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/engine_analogy.png" class="lightbox" title="Analogy of difference between R and RStudio" data-gallery="quarto-lightbox-gallery-1"><img src="images/engine_analogy.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<figure class="figure"><p><a href="images/engine_analogy.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Analogy of difference between R and RStudio"><img src="images/engine_analogy.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure 1.1: Analogy of difference between R and RStudio</figcaption><p></p>
 </figure>
 </div>
@@ -268,7 +280,7 @@ Why R Programming Language?
 <p>After the RStudio installation is finished, click the RStudio icon <a href="images/r_studio_icon.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="images/r_studio_icon.png" id="fig-r_studio_icon" class="img-fluid" style="width:5.0%"></a></p>
 <p>R starts automatically when we open RStudio <a href="#fig-RStudio_panels">Figure&nbsp;<span>1.2</span></a> and we are greeted by <strong>three panes</strong>:</p>
 <div id="fig-RStudio_panels" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/RStudio_panels.png" class="lightbox" title="RStudio Screenshot with Console on the left and Help tab in the bottom right." data-gallery="quarto-lightbox-gallery-3"><img src="images/RStudio_panels.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<figure class="figure"><p><a href="images/RStudio_panels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="RStudio Screenshot with Console on the left and Help tab in the bottom right."><img src="images/RStudio_panels.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure 1.2: RStudio Screenshot with Console on the left and Help tab in the bottom right.</figcaption><p></p>
 </figure>
 </div>
@@ -338,7 +350,7 @@ Command prompt &nbsp;&gt;
 </div>
 <p>in the RStudio menu, we should see another pane (Q1) opened on the left above the interactive console <a href="#fig-RStudio_4panels">Figure&nbsp;<span>1.3</span></a>. This is where we can write a length script with lots of lines of code, and save the file for future use.</p>
 <div id="fig-RStudio_4panels" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/RStudio_4panels.png" class="lightbox" title="RStudio Screenshot with four panes." data-gallery="quarto-lightbox-gallery-4"><img src="images/RStudio_4panels.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<figure class="figure"><p><a href="images/RStudio_4panels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="RStudio Screenshot with four panes."><img src="images/RStudio_4panels.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure 1.3: RStudio Screenshot with four panes.</figcaption><p></p>
 </figure>
 </div>
@@ -422,7 +434,7 @@ Advantages writing our R code as an R script file
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Plus sign (+) prompt
+If a command is not complete then R will show a Plus sign (+) prompt
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -441,7 +453,7 @@ Plus sign (+) prompt
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">?</span><span class="va">mean</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div id="fig-mean_help" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/mean_help.png" class="lightbox" title="R help() function search for specific term such as mean" data-gallery="quarto-lightbox-gallery-6"><img src="images/mean_help.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<figure class="figure"><p><a href="images/mean_help.png" class="lightbox" data-gallery="quarto-lightbox-gallery-6" title="R help() function search for specific term such as mean"><img src="images/mean_help.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure 1.4: R help() function search for specific term such as <code>mean</code></figcaption><p></p>
 </figure>
 </div>
@@ -483,8 +495,75 @@ mean&gt; c(xm, mean(x, trim = 0.10))
 <p>RStudio also provides search box in the <strong>“Help”</strong> tab to make our life easier (<a href="#fig-RStudio_panels">Figure&nbsp;<span>1.2</span></a>).</p>
 <p>Like Google, but for R is the <a href="https://rseek.org/">RSeek.Org</a>. This is not included in R but is a great search engine built specifically for R-related queries.</p>
 <p>Additionally, there are a lot of <strong>on-line</strong> resources that can help (e.g., <a href="https://www.r-bloggers.com/">R-bloggers</a>). However, we must understand that blindly copying and pasting could be harmful and further it won’t help us to learn and develop.</p>
-</section><section id="quitting-r-rstudio" class="level2" data-number="1.7"><h2 data-number="1.7" class="anchored" data-anchor-id="quitting-r-rstudio">
-<span class="header-section-number">1.7</span> Quitting R &amp; RStudio</h2>
+</section><section id="working-with-rstudio-projects" class="level2" data-number="1.7"><h2 data-number="1.7" class="anchored" data-anchor-id="working-with-rstudio-projects">
+<span class="header-section-number">1.7</span> Working with RStudio Projects</h2>
+<p>When we are working in R, the program needs to know where to find inputs and deliver outputs, and will look first in what is called a “working directory”. Moreover, we want to organize all of the files for a given project in one folder, and that particular folder should be established as our working directory.</p>
+<section id="create-a-new-rstudio-project" class="level3"><h3 class="anchored" data-anchor-id="create-a-new-rstudio-project">Create a new RStudio Project</h3>
+<p>Keeping all the files associated with a project organized together – input data, R scripts, documents and figures – is such a wise and common practice that RStudio has built-in support for this via its projects. RStudio projects are associated with R working directories <a href="#fig-create_project">Figure&nbsp;<span>1.5</span></a>.</p>
+<p>We can create an RStudio project:</p>
+<ul>
+<li>In a new directory</li>
+<li>In an existing directory where we already have R code and data</li>
+<li>By cloning a version control (Git or Subversion) repository</li>
+</ul>
+<p>Let’s create one to use for the rest of this textbook. From the RStudio menu:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p>
+<pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-3">flowchart LR
+  A[File] -.-&gt; B(New Project)
+</pre>
+<div id="mermaid-tooltip-3" class="mermaidTooltip">
+
+</div>
+
+</div>
+</div>
+</div>
+<p>The directory name we choose here will be the <code>project name</code>. We call it whatever we want (e.g., introR).</p>
+<div id="fig-create_project" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><a href="images/create_project.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7" title="RStudio projects are associated with R working directories"><img src="images/create_project.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">Figure 1.5: RStudio projects are associated with R working directories</figcaption><p></p>
+</figure>
+</div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Store the RStudio Project somewhere sensible
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>We must think carefully in which <strong>subdirectory</strong> we will create the RStudio project. If we don’t store it somewhere sensible, it will be hard to find it in the future!</p>
+</div>
+</div>
+</section></section><section id="rstudio-project-folder-structure" class="level2" data-number="1.8"><h2 data-number="1.8" class="anchored" data-anchor-id="rstudio-project-folder-structure">
+<span class="header-section-number">1.8</span> RStudio Project folder structure</h2>
+<p>The files on our computer are organised into folders. RStudio Projects live in our computer’s normal folders - they placemark the working directory of each analysis project. These project folders can be viewed or moved around the same way we normally work with files and folders on our computer.</p>
+<p>The proposed RStudio Project should contain the following sub-folders <a href="#fig-project_structure">Figure&nbsp;<span>1.6</span></a>:</p>
+<ul>
+<li>data: data files of any kind, such as <code>.csv</code>, <code>.xlsx</code>, <code>.txt</code>, etc.</li>
+<li>documents: documents of any formats, such as <code>.docx</code>, <code>.pdf</code>, .<code>tex</code>, <code>.Rmd</code>, etc.</li>
+<li>figures: plots, diagrams, and other figures</li>
+<li>scripts: all your R scripts and codes (<code>.R</code> extension)</li>
+</ul>
+<p>Additionally, there are two important files in the project folder that are created automatically by Rstudio: <code>name_of_project.Rproj</code>, and <code>.Rhistory</code>:</p>
+<ul>
+<li><p><code>name_of_project.Rproj</code>: contains options and meta-data of the project (encoding, the number of spaces used for indentation, whether or not to restore a workspace with launch, etc) and can also be used as a shortcut for opening the project directly from the filesystem.</p></li>
+<li><p><code>.Rhistory</code>: contains a history of code executed</p></li>
+</ul>
+<div id="fig-project_structure" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><a href="images/project_structure.png" class="lightbox" data-gallery="quarto-lightbox-gallery-8" title="Project folder structure"><img src="images/project_structure.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">Figure 1.6: Project folder structure</figcaption><p></p>
+</figure>
+</div>
+<p>It is recommended to work with RStudio Projects. This enables us to switch between different projects without getting the data, scripts, or output files all mixed up. Everything gets read in or saved to the correct place. No more exporting a plot and then going through the various Documents, etc., folders on our computer trying to figure out where our plot might have been saved to. It got saved to the project folder.</p>
+</section><section id="quitting-r-rstudio" class="level2" data-number="1.9"><h2 data-number="1.9" class="anchored" data-anchor-id="quitting-r-rstudio">
+<span class="header-section-number">1.9</span> Quitting R &amp; RStudio</h2>
 <p>When we quit RStudio we will be asked whether to save workspace with two options:</p>
 <ul>
 <li>“Yes” – Our current R workspace (containing the work that we have done) will be restored next time we open RStudio.</li>
@@ -608,8 +687,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lab1.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">LAB II: Descriptive Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./funpack.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R functions and packages</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -617,7 +696,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":true,"openEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":true});</script>
 
 
 </body></html>
