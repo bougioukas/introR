@@ -12,11 +12,11 @@ book:
   repo-url: https://github.com/bougioukas/introR
   chapters:
     - index.qmd
-    - part: "Medical Statistics"
+    - part: "Basics"
       chapters:
         - introduction.qmd
 
-    - part: "Jamovi LAB"
+    - part: "Special Topics"
       chapters:
         - lab1.qmd
 
