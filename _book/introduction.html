@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.37">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>An Introduction to R - 1&nbsp; Introduction to R and Rstudio</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./lab1.html" rel="next">
+<link href="./index.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script><script src="site_libs/quarto-diagram/mermaid.min.js"></script><script src="site_libs/quarto-diagram/mermaid-init.js"></script><link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+</head>
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R and Rstudio</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">An Introduction to R</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/bougioukas/introR" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">Medical Statistics</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R and Rstudio</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Jamovi LAB</a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./lab1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">LAB II: Descriptive Statistics</span></a>
+  </div>
+</li>
+      </ul>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li><a href="#installing-r-and-rstudio" id="toc-installing-r-and-rstudio" class="nav-link active" data-scroll-target="#installing-r-and-rstudio"> <span class="header-section-number">1.1</span> Installing R and RStudio</a></li>
+  <li><a href="#what-are-r-and-rstudio" id="toc-what-are-r-and-rstudio" class="nav-link" data-scroll-target="#what-are-r-and-rstudio"> <span class="header-section-number">1.2</span> What are R and RStudio?</a></li>
+  <li><a href="#starting-r-rstudio" id="toc-starting-r-rstudio" class="nav-link" data-scroll-target="#starting-r-rstudio"> <span class="header-section-number">1.3</span> Starting R &amp; RStudio</a></li>
+  <li><a href="#r-scripts" id="toc-r-scripts" class="nav-link" data-scroll-target="#r-scripts"> <span class="header-section-number">1.4</span> R scripts</a></li>
+  </ul></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
+<h1 class="title"><span id="sec-introduction" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R and Rstudio</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header><section id="installing-r-and-rstudio" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="installing-r-and-rstudio">
+<span class="header-section-number">1.1</span> Installing R and RStudio</h2>
+<p>First things first. We need to download and install both R and RStudio (an integrated development environment for R) on our personal computer. First, we install R, then we will need to install RStudio.</p>
+<ol type="1">
+<li>First, we must <a href="https://cran.r-project.org/">Download and install R</a>:</li>
+</ol>
+<ul>
+<li><p>If our operating system (OS) is Windows: we click on “Download R for Windows”, then click on “base”, then click on the Download link.</p></li>
+<li><p>If our operating system (OS) is macOS: we click on “Download R for (Mac) OS X”, then under “Latest release:” click on R-X.X.X.pkg, where R-X.X.X is the version number.</p></li>
+</ul>
+<ol start="2" type="1">
+<li>Second, we must <a href="https://www.rstudio.com/products/rstudio/download/">Download and install RStudio</a>:</li>
+</ol>
+<ul>
+<li>We scroll down near the bottom of the page.</li>
+<li>We click on the download link corresponding to your computer’s operating system.</li>
+</ul>
+<p>We follow the usual installation procedures for R and RSudio.</p>
+</section><section id="what-are-r-and-rstudio" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="what-are-r-and-rstudio">
+<span class="header-section-number">1.2</span> What are R and RStudio?</h2>
+<p>We will use R via RStudio. Beginners often confuse the two applications. Using an analogy, R is like an airplane’s engine while RStudio is like an airplane’s dashboard (<a href="#fig-engine_analogy">Figure&nbsp;<span>1.1</span></a>).</p>
+<p>Specifically, R is a statistical programming language (an implementation of the S programming language) and a powerful graphics engine, which was created by Ross Ihahka and Robert Gentleman at the University of Auckland in 1993.</p>
+<p>The name R for the language was coined after the initials of the forenames of the inventors, plus the influence of the S language.</p>
+<p>R does all the heavy work (like an airplane engine) while RStudio is an integrated development environment (IDE) that was founded by J.J. Allaire in 2009. RStudio provides a friendly interface by adding a plenty of great features, auto-complete functions and tools (like an airplane dashboard with electronic monitors, and navigation systems) and makes life a lot easier.</p>
+<div id="fig-engine_analogy" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><a href="images/engine_analogy.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Analogy of difference between R and RStudio"><img src="images/engine_analogy.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">Figure 1.1: Analogy of difference between R and RStudio</figcaption><p></p>
+</figure>
+</div>
+<p>After we install R and RStudio on our computer, we’ll have two new programs (also called applications) we can open. In this textbook, we’ll always work in <strong>RStudio</strong>.</p>
+</section><section id="starting-r-rstudio" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="starting-r-rstudio">
+<span class="header-section-number">1.3</span> Starting R &amp; RStudio</h2>
+<p>After the RStudio installation is finished, click the RStudio icon <a href="images/r_studio_icon.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="images/r_studio_icon.png" id="fig-r_studio_icon" class="img-fluid" style="width:5.0%"></a></p>
+<p>R starts automatically when we open RStudio <a href="#fig-RStudio_panels">Figure&nbsp;<span>1.2</span></a> and we are greeted by <strong>three panes</strong>:</p>
+<div id="fig-RStudio_panels" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><a href="images/RStudio_panels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="RStudio Screenshot with Console on the left and Help tab in the bottom right."><img src="images/RStudio_panels.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">Figure 1.2: RStudio Screenshot with Console on the left and Help tab in the bottom right.</figcaption><p></p>
+</figure>
+</div>
+<p>The three main panes that divide the screen are:</p>
+<ol type="1">
+<li><p>the large <strong>Console pane</strong> on the left runs R code.</p></li>
+<li>
+<p>the workspace pane, which includes the Environment and History tabs, in the upper right.</p>
+<ul>
+<li><p>The <strong>Environment tab</strong> keeps track of the objects we create as we work with R (a major part of our tasks involves creating objects).</p></li>
+<li><p>The <strong>History tab</strong> tracks all of the commands that we have sent to the R console in the session.</p></li>
+</ul>
+</li>
+<li>
+<p>the Files/Plots/Packages/Help/Viewer pane in the lower right.</p>
+<ul>
+<li><p>The <strong>Files tab</strong> lets us create new folders (directories) on our computer, as well as copy, move, delete, or rename files.</p></li>
+<li><p>The <strong>Plots tab</strong> holds graphs and charts we generate from our data and during the analysis.</p></li>
+<li><p>The <strong>Packages</strong> tab lists of all the R packages installed on our hard drive and indicates whether or not they are currently loaded. We’ll discuss packages in more detail in the next sections.</p></li>
+<li><p>The <strong>Help tab</strong>, provides links to search for help directly from our RStudio window.</p></li>
+<li><p>The <strong>Viewer tab</strong> in RStudio allows us to view local web content (e.g., to view an html table).</p></li>
+</ul>
+</li>
+</ol>
+<p>Throughout this textbook, we’ll come to learn what purpose each of these panes serve.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Command prompt &nbsp;&gt;
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The Console pane starts with information about the version number, license and contributors, and provides some guidance on how to get help. The last line is a <strong>standard command prompt</strong> (the greater than sign &gt; symbol) that indicates R is ready and expecting instructions to do something.</p>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Let’s type <code>14 + 16</code> at the R command prompt and press <code>Enter</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">14</span> <span class="op">+</span> <span class="fl">16</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 30</code></pre>
+</div>
+</div>
+<p>So what happened?</p>
+<p>Well, R gave us a response (output) to our input (<code>14 + 16</code>). That response came after we pressed the Enter key. It was <code>[1] 30</code>. It’s clear that <code>30</code> is the answer to the <code>14 + 16</code>. However, what does the <code>[1]</code> mean? At this point we can pretty much ignore it, but technically it refers to the index of the first item on each line. (Sometimes R prints out many lines as an output. The number inside the brackets helps us figure out where in the sequence we are per line).</p>
+</section><section id="r-scripts" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="r-scripts">
+<span class="header-section-number">1.4</span> R scripts</h2>
+<p>Usually, we do our programming by writing our code in script files. An R script (with the “.R” extension) is simply a text file in which our R code is stored, and then can be “sent” to the console, where R will execute it.</p>
+<p>If we go to:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p>
+<pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-1">flowchart LR
+  A[File] -.-&gt; B(New File) -.-&gt; C(R Script)
+</pre>
+<div id="mermaid-tooltip-1" class="mermaidTooltip">
+
+</div>
+
+</div>
+</div>
+</div>
+<p>in the RStudio menu, we should see another pane (Q1) opened on the left above the interactive console <a href="#fig-RStudio_4panels">Figure&nbsp;<span>1.3</span></a>. This is where we can write a length script with lots of lines of code, and save the file for future use.</p>
+<div id="fig-RStudio_4panels" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><a href="images/RStudio_4panels.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="RStudio Screenshot with four panes."><img src="images/RStudio_4panels.png" class="img-fluid figure-img" style="width:100.0%"></a></p>
+<p></p><figcaption class="figure-caption">Figure 1.3: RStudio Screenshot with four panes.</figcaption><p></p>
+</figure>
+</div>
+<p>Therefore, the RStudio window is divided into <strong>four</strong> panes (quadrants) that contain:</p>
+<ul>
+<li>Q1 - code editor (script)</li>
+<li>Q2 - console</li>
+<li>Q3 - environment (workspace), history</li>
+<li>Q4 - files, plots, packages, help, viewer (for local web content)</li>
+</ul>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+RStudio preferences
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The four panes might be in a different order that those in <a href="#fig-RStudio_4panels">Figure&nbsp;<span>1.3</span></a>. If we’d like, we can change the <strong>order</strong> of the windows under RStudio preferences. We select from RStudio menu:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<p>
+</p>
+<pre class="mermaid" data-tooltip-selector="#mermaid-tooltip-2">flowchart LR
+  A[Tools] -.-&gt; B(Global Options) -.-&gt; C(Pane layout)
+</pre>
+<div id="mermaid-tooltip-2" class="mermaidTooltip">
+
+</div>
+
+</div>
+</div>
+</div>
+<p>We can also change their <strong>shape</strong> by either clicking the minimize or maximize buttons on the top right of each pane, or by clicking and dragging the middle of the borders of the windows.</p>
+</div>
+</div>
+<p>In Rscript, we can execute our code line by line by putting the cursor on the line or selecting a chunk of lines (by highlighting the text) and pressing the <strong>run</strong> button <a href="images/run.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="images/run.png" id="fig-run" class="img-fluid" style="width:8.0%"></a> in the source window. We can also run our selected code using the <strong>keywboard shortcut <code>Ctrl + Enter</code></strong>.</p>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Advantages writing our R code as an R script file
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>We can save and reuse our code</li>
+<li>We can document our work (however, we can only include one-line comments and these must be prefixed with the hash symbol, &nbsp;#)</li>
+<li>We can share our work with others</li>
+<li>We can move beyond writing one line of code at a time</li>
+</ul>
+</div>
+</div>
+
+
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+    var links = window.document.querySelectorAll('a:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+          // target, if specified
+          link.setAttribute("target", "_blank");
+      }
+    }
+});
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./lab1.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">LAB II: Descriptive Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer"><div class="nav-footer">
+    <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
+  </div>
+</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom","loop":true,"openEffect":"zoom"});</script>
+
+
+</body></html>

@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "index.html#license",
+    "href": "index.html#license",
+    "title": "An Introduction to R",
+    "section": "License",
+    "text": "License\nThis textbook is free to use, and is licensed under the Creative Commons Attribution-NonCommercial-NoDerivs 4.0 License."
+  },
+  {
+    "objectID": "introduction.html",
+    "href": "introduction.html",
+    "title": "1  Introduction to R and Rstudio",
+    "section": "",
+    "text": "First things first. We need to download and install both R and RStudio (an integrated development environment for R) on our personal computer. First, we install R, then we will need to install RStudio.\n\nFirst, we must Download and install R:\n\n\nIf our operating system (OS) is Windows: we click on “Download R for Windows”, then click on “base”, then click on the Download link.\nIf our operating system (OS) is macOS: we click on “Download R for (Mac) OS X”, then under “Latest release:” click on R-X.X.X.pkg, where R-X.X.X is the version number.\n\n\nSecond, we must Download and install RStudio:\n\n\nWe scroll down near the bottom of the page.\nWe click on the download link corresponding to your computer’s operating system.\n\nWe follow the usual installation procedures for R and RSudio."
+  },
+  {
+    "objectID": "introduction.html#what-are-r-and-rstudio",
+    "href": "introduction.html#what-are-r-and-rstudio",
+    "title": "1  Introduction to R and Rstudio",
+    "section": "\n1.2 What are R and RStudio?",
+    "text": "1.2 What are R and RStudio?\nWe will use R via RStudio. Beginners often confuse the two applications. Using an analogy, R is like an airplane’s engine while RStudio is like an airplane’s dashboard (Figure 1.1).\nSpecifically, R is a statistical programming language (an implementation of the S programming language) and a powerful graphics engine, which was created by Ross Ihahka and Robert Gentleman at the University of Auckland in 1993.\nThe name R for the language was coined after the initials of the forenames of the inventors, plus the influence of the S language.\nR does all the heavy work (like an airplane engine) while RStudio is an integrated development environment (IDE) that was founded by J.J. Allaire in 2009. RStudio provides a friendly interface by adding a plenty of great features, auto-complete functions and tools (like an airplane dashboard with electronic monitors, and navigation systems) and makes life a lot easier.\n\n\nFigure 1.1: Analogy of difference between R and RStudio\n\n\nAfter we install R and RStudio on our computer, we’ll have two new programs (also called applications) we can open. In this textbook, we’ll always work in RStudio."
+  },
+  {
+    "objectID": "introduction.html#starting-r-rstudio",
+    "href": "introduction.html#starting-r-rstudio",
+    "title": "1  Introduction to R and Rstudio",
+    "section": "\n1.3 Starting R & RStudio",
+    "text": "1.3 Starting R & RStudio\nAfter the RStudio installation is finished, click the RStudio icon \nR starts automatically when we open RStudio Figure 1.2 and we are greeted by three panes:\n\n\nFigure 1.2: RStudio Screenshot with Console on the left and Help tab in the bottom right.\n\n\nThe three main panes that divide the screen are:\n\nthe large Console pane on the left runs R code.\n\nthe workspace pane, which includes the Environment and History tabs, in the upper right.\n\nThe Environment tab keeps track of the objects we create as we work with R (a major part of our tasks involves creating objects).\nThe History tab tracks all of the commands that we have sent to the R console in the session.\n\n\n\nthe Files/Plots/Packages/Help/Viewer pane in the lower right.\n\nThe Files tab lets us create new folders (directories) on our computer, as well as copy, move, delete, or rename files.\nThe Plots tab holds graphs and charts we generate from our data and during the analysis.\nThe Packages tab lists of all the R packages installed on our hard drive and indicates whether or not they are currently loaded. We’ll discuss packages in more detail in the next sections.\nThe Help tab, provides links to search for help directly from our RStudio window.\nThe Viewer tab in RStudio allows us to view local web content (e.g., to view an html table).\n\n\n\nThroughout this textbook, we’ll come to learn what purpose each of these panes serve.\n\n\n\n\n\n\nCommand prompt  >\n\n\n\nThe Console pane starts with information about the version number, license and contributors, and provides some guidance on how to get help. The last line is a standard command prompt (the greater than sign > symbol) that indicates R is ready and expecting instructions to do something.\n\n\n \nLet’s type 14 + 16 at the R command prompt and press Enter:\n\n14 + 16\n\n[1] 30\n\n\nSo what happened?\nWell, R gave us a response (output) to our input (14 + 16). That response came after we pressed the Enter key. It was [1] 30. It’s clear that 30 is the answer to the 14 + 16. However, what does the [1] mean? At this point we can pretty much ignore it, but technically it refers to the index of the first item on each line. (Sometimes R prints out many lines as an output. The number inside the brackets helps us figure out where in the sequence we are per line)."
+  },
+  {
+    "objectID": "introduction.html#r-scripts",
+    "href": "introduction.html#r-scripts",
+    "title": "1  Introduction to R and Rstudio",
+    "section": "\n1.4 R scripts",
+    "text": "1.4 R scripts\nUsually, we do our programming by writing our code in script files. An R script (with the “.R” extension) is simply a text file in which our R code is stored, and then can be “sent” to the console, where R will execute it.\nIf we go to:\n\n\n\n\n\nflowchart LR\n  A[File] -.-> B(New File) -.-> C(R Script)\n\n\n\n\n\n\n\n\nin the RStudio menu, we should see another pane (Q1) opened on the left above the interactive console Figure 1.3. This is where we can write a length script with lots of lines of code, and save the file for future use.\n\n\nFigure 1.3: RStudio Screenshot with four panes.\n\n\nTherefore, the RStudio window is divided into four panes (quadrants) that contain:\n\nQ1 - code editor (script)\nQ2 - console\nQ3 - environment (workspace), history\nQ4 - files, plots, packages, help, viewer (for local web content)\n\n\n\n\n\n\n\nRStudio preferences\n\n\n\nThe four panes might be in a different order that those in Figure 1.3. If we’d like, we can change the order of the windows under RStudio preferences. We select from RStudio menu:\n\n\n\n\n\nflowchart LR\n  A[Tools] -.-> B(Global Options) -.-> C(Pane layout)\n\n\n\n\n\n\n\n\nWe can also change their shape by either clicking the minimize or maximize buttons on the top right of each pane, or by clicking and dragging the middle of the borders of the windows.\n\n\nIn Rscript, we can execute our code line by line by putting the cursor on the line or selecting a chunk of lines (by highlighting the text) and pressing the run button  in the source window. We can also run our selected code using the keywboard shortcut Ctrl + Enter.\n\n\n\n\n\n\nAdvantages writing our R code as an R script file\n\n\n\n\nWe can save and reuse our code\nWe can document our work (however, we can only include one-line comments and these must be prefixed with the hash symbol,  #)\nWe can share our work with others\nWe can move beyond writing one line of code at a time"
+  },
+  {
+    "objectID": "lab1.html",
+    "href": "lab1.html",
+    "title": "2  LAB II: Descriptive Statistics",
+    "section": "",
+    "text": "\\(\\equiv\\)"
+  }
+]
