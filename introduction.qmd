@@ -270,7 +270,6 @@ The directory name we choose here will be the `project name`. We call it whateve
 
 ![RStudio projects are associated with R working directories](images/create_project.png){#fig-create_project width="80%"}
 
-
 ::: callout-important
 ## Store the RStudio Project somewhere sensible
 

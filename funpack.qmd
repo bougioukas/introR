@@ -1,12 +1,26 @@
 # R functions and packages {#sec-funpack}
 
+In programming, we use functions to incorporate sets of instructions that we want to use repeatedly or that, because of their complexity, are better self-contained in a sub program and called when needed. 
+
+We have already used some R functions searching for help (i.e., `help()`, `example()`, `apropos()`). Most of the computations in R involves using functions. The base version of R includes many other functions, and thousands of others can be added (by installing packages or by creating them from scratch).
+
+
+
+>A function in R is defined by its **name** and by the list of its **arguments**:
+>`function_name(arg1 = val1, arg2 = val2, ...)`
+
+
+where `arg1, arg2,` ... are called the arguments of the function, whereas `value1` is the value given to the argument arg1, etc.
+
+
+ 
+
 
 ## Characteristics of R Functions
 
-We have already used some R functions searching for help (i.e.,  `help()`, `example()`, `apropos()`). Most of the computations in R involves using functions. 
 
 
-**A. Name and argumnets**
+**A. Name and argumnets of a function**
 
 > A function essentially has a **name** and a list of **arguments** separated by a comma.
 
@@ -16,8 +30,7 @@ Let's have look at an example:
 seq(from = 5, to = 8, by = 0.5)
 ```
 
-The function name is `seq` and it has three explicitly named arguments `from`, `to` and `by`. The arguments `from` and `to` are the start and end values of a sequence that we want to create, and `by` is the increment of the sequence.  
-
+The function name is `seq` and it has three explicitly named arguments `from`, `to` and `by`. The arguments `from` and `to` are the start and end values of a sequence that we want to create, and `by` is the increment of the sequence.
 
 The above result can also be obtained without naming the arguments as follows:
 
@@ -25,17 +38,16 @@ The above result can also be obtained without naming the arguments as follows:
 seq(5, 8, 0.5)
 ```
 
-
 ::: callout-tip
-## Named arguments
+## Name the arguments in the functions
 
-It’s a good idea to name the arguments in the functions. This practice minimizes errors assigning unnamed arguments to options and makes code more readable.
+We do not necessarily need to indicate the names of the arguments, but only the values, as long as we follow their order.
+However, it's a good idea to name at least some of the arguments in the functions. This practice minimizes errors assigning unnamed arguments to options and makes code more readable.
 :::
 
  
 
-**B. Positional matching**
-
+**B. Positional matching of arguments**
 
 And what about this?
 
@@ -43,11 +55,11 @@ And what about this?
 seq(5, 8)
 ```
 
-This result demonstrates something about how R resolves function arguments. 
+This result demonstrates something about how R resolves function arguments.
 
-> If we don't use argument names, R will match the arguments in the order that they appeared (positional matching). 
+> If we don't use argument names, R will match the arguments in the order that they appeared (positional matching).
 
-Here, it is assumed that we want a sequence `from = 5` that goes `to = 8`. Since we didn’t specify step size, the default value of `by` in the function definition is used, which ends up being `1` in this case.
+Here, it is assumed that we want a sequence `from = 5` that goes `to = 8`. Since we didn't specify step size, the default value of `by` in the function definition is used, which ends up being `1` in this case.
 
 Moreover, the `seq()` function has other arguments that we could use which are documented in the help page running `?seq`. For example, we could use the argument `length.out` (instead of `by`) to fix the length of the sequence as follows:
 
@@ -57,10 +69,9 @@ seq(from = 5, to = 8, length.out = 16)
 
  
 
-**C. Optional arguments**
+**C. Required and optional arguments**
 
-> Some arguments in a function may be **optional**. We can use `args()` for displaying the argument names and corresponding default values of a function.
-
+> Some arguments in a function are **required** while others may be **optional**. We can use `args()` for displaying the argument names and corresponding default values of a function.
 
 Let's see for example the `log()` function:
 
@@ -68,23 +79,25 @@ Let's see for example the `log()` function:
 args(log)
 ```
 
-In the `log()` function `base` comes with a default value exp(1). This means that `base` is an optional argument.  
+In the `log()` function `x` is a required argument while `base` is an optional argument and comes with a default value `exp(1)`.
 
 
-R will use our value for `base` if we supply one: 
-```{r}
-log(15, base = 10)  # R uses our value 10
-```
+If we don't supply a value for `base`, R will use the default value `exp(1)`:
 
-
-Otherwise R will use the default vaue which here is `exp(1)`:  
 ```{r}
 log(15)  # R uses the default value of `exp(1)`
 ```
 
 
-In contrast, `x` is a required argument because it is not come with a default value. If we don't supply `x` argument the `log()` function will fail:
+Otherwise, R will use for `base` the value that we supply:
 
+```{r}
+log(15, base = 10)  # R uses our value 10
+```
+
+
+
+In contrast, `x` is a required argument because if we don't supply `x` argument the `log()` function will fail:
 
 ```{r, error=TRUE, eval= FALSE}
 log(base=10)
@@ -92,12 +105,17 @@ log(base=10)
 
 `r kableExtra::text_spec("Error: argument x is missing, with no default", color = "red")`
 
+
+::: callout-tip
+## Required and optional arguments
+
+For R functions, some arguments must be specified (they are required) and others are optional (because a default value is already given in the code of the function).
+:::
+
  
 
-**D. Some functions have not arguments**
 
-
->Not all functions have (or require) arguments.
+Not all functions have (or require) arguments.
 
 For example:
 
@@ -105,13 +123,56 @@ For example:
 date()
 ```
 
+
+
+
+::: callout-note
+## Playing with the arguments in several different ways
+
+To calculate the **natural logarithm of 3**, any of the following expressions can be used:
+
+```{r}
+#| eval: false
+
+log(3)
+log(x=3)
+log(x=3, base=exp(1))
+log(x=3, exp(1))
+log(3, base=exp(1))
+log(3, exp(1))
+log(base=exp(1), 3)
+log(base=exp(1), x=3)
+```
+
+:::
+
+
  
 
-**E. Functions "live" in packages**
+**D. Functions "live" in packages**
 
 > Functions "live" in Base R and in R packages!
 
-
 ![Functions live inside the R packages that can be downloaded from the internet](images/packages.png){#fig-packages width="80%"}
+
+
+
+
+## User Defined Functions
+
+We can create our own functions, using the **`function()`**, which is a very powerful way to extend R. Writing our own functions is outside the scope  of this guide. As we get more and more familiar with R it is very likely that we  will eventually need to learn about them but for now we don't need to.
+
+For example a function that convert Celsius to Kelvin is:
+
+``` {r}
+celsius_to_kelvin <- function(temp_C) {
+  temp_K <- temp_C + 273.15
+  return(temp_K)
+}
+# freezing point of water in Kelvin
+celsius_to_kelvin(0)
+```
+
+
 
 
