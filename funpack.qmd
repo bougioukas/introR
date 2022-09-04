@@ -1,5 +1,13 @@
 # R functions and packages {#sec-funpack}
 
+```{r}
+#| include: false
+
+library(fontawesome)
+
+```
+
+
 In programming, we use functions to incorporate sets of instructions that we want to use repeatedly or that, because of their complexity, are better self-contained in a sub program and called when needed. 
 
 We have already used some R functions searching for help (i.e., `help()`, `example()`, `apropos()`). Most of the computations in R involves using functions. The base version of R includes many other functions, and thousands of others can be added (by installing packages or by creating them from scratch).
@@ -140,10 +148,27 @@ log(x=3, base=exp(1))
 log(x=3, exp(1))
 log(3, base=exp(1))
 log(3, exp(1))
+
 log(base=exp(1), 3)
 log(base=exp(1), x=3)
 ```
 
+:::
+
+ 
+
+::: callout-important
+## Caution
+
+Note that calling
+
+```{r}
+#| eval: false
+
+log(exp(1), 3)
+```
+
+calculates the logarithm of exp(1) in base 3.
 :::
 
 
@@ -162,6 +187,22 @@ log(base=exp(1), x=3)
 
 We can create our own functions, using the **`function()`**, which is a very powerful way to extend R. Writing our own functions is outside the scope  of this guide. As we get more and more familiar with R it is very likely that we  will eventually need to learn about them but for now we don't need to.
 
+
+::: callout-tip
+## Function components
+
+A function has three parts:
+
+1. The `formals()`, the list of arguments that control how you call the function.
+
+2. The `body()`, the code inside the function.
+
+3. The `environment()`, the data structure that determines how the function finds the values associated with the names.
+
+:::
+
+
+
 For example a function that convert Celsius to Kelvin is:
 
 ``` {r}
@@ -172,6 +213,26 @@ celsius_to_kelvin <- function(temp_C) {
 # freezing point of water in Kelvin
 celsius_to_kelvin(0)
 ```
+
+While the formals and body are specified **explicitly** when you create a function, the environment is specified implicitly, based on **where** we defined the function. The function environment always exists, but it is only printed when the function isn’t defined in the R global environment.
+
+
+
+
+::: {.callout-caution collapse="true" icon="false"}
+## `r fa("rocket", fill = "orange")` Function components in detail
+
+```{r}
+formals(celsius_to_kelvin)         # the argument of the function
+
+body(celsius_to_kelvin)            # the code
+
+environment(celsius_to_kelvin)     # the function environment
+```
+
+:::
+
+
 
 
 
