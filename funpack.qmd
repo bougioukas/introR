@@ -180,28 +180,44 @@ calculates the logarithm of exp(1) in base 3.
 
 ![Functions live inside the R packages that can be downloaded from the internet](images/packages.png){#fig-packages width="80%"}
 
+ 
+
+## The sessionInfo() and option() Functions
+
+We can obtain information about R, the OS and attached or loaded packages running the following function:
+
+```{r}
+#| eval: false
+
+sessionInfo()
+```
+
+ 
+
+Additionally, the `options()` function in R can be used to change various default behaviors. For example, the digits argument controls the number of digits to display in output. The current options are returned when `options()` is called, to allow them to be restored. The command `help(options)` lists all of the set table options.
+
+```{r}
+#| eval: false
+
+help(options)
+```
 
 
 
-## User Defined Functions
+ 
 
-We can create our own functions, using the **`function()`**, which is a very powerful way to extend R. Writing our own functions is outside the scope  of this guide. As we get more and more familiar with R it is very likely that we  will eventually need to learn about them but for now we don't need to.
+## User Defined Functions (UDF)
+
+We can create our own functions, using the **`function()`**, which is a very powerful way to extend R.
 
 
 ::: callout-tip
-## Function components
+## What do we need to define a function?
 
-A function has three parts:
-
-1. The `formals()`, the list of arguments that control how you call the function.
-
-2. The `body()`, the code inside the function.
-
-3. The `environment()`, the data structure that determines how the function finds the values associated with the names.
-
+1. the function's name
+2. the arguments of the function
+3. the code of the function
 :::
-
-
 
 For example a function that convert Celsius to Kelvin is:
 
@@ -214,23 +230,40 @@ celsius_to_kelvin <- function(temp_C) {
 celsius_to_kelvin(0)
 ```
 
-While the formals and body are specified **explicitly** when you create a function, the environment is specified implicitly, based on **where** we defined the function. The function environment always exists, but it is only printed when the function isn’t defined in the R global environment.
+We defined the function by “assigning” the `function(temp_C)` to the name `celsius_to_kelvin` using the assignment operator `<-` (see ).
+
+
+So, in most cases, a function has a name (e.g., `celsius_to_kelvin`), some arguments used as input to the function, within the `()` following the keyword ‘function’ (e.g., `temp_C`); a body, which is the code within the curly braces `{}`, where we carry out the computation; and can have one or more return values (the output here is the `temp_K` which is a numeric value). 
 
 
 
 
 ::: {.callout-caution collapse="true" icon="false"}
-## `r fa("rocket", fill = "orange")` Function components in detail
+## `r fa("rocket", fill = "orange")` Function components
+
+
+A function has three components:
+
+1. The `formals()`, the list of arguments that control how you call the function.
+
+2. The `body()`, the code inside the function.
+
+3. The `environment()`, the data structure that determines how the function finds the values associated with the names.
+
+
+While the formals and body are specified **explicitly** when you create a function, the environment is specified implicitly, based on **where** we defined the function. The function environment always exists, but it is only printed when the function isn’t defined in the R global environment. For example:
+
 
 ```{r}
 formals(celsius_to_kelvin)         # the argument of the function
 
-body(celsius_to_kelvin)            # the code
+body(celsius_to_kelvin)            # the code of the function
 
-environment(celsius_to_kelvin)     # the function environment
+environment(celsius_to_kelvin)     # the function's environment
 ```
 
 :::
+
 
 
 
