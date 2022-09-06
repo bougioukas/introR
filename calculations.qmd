@@ -1,0 +1,174 @@
+# Calculations {#sec-calculations}
+
+```{r}
+#| include: false
+
+library(tidyverse)
+
+library(kableExtra)
+
+```
+
+
+
+## Using R as a calculator
+
+
+### Arithmetic calculations
+
+The simplest thing we could do with R is do arithmetic with numbers. For example:
+
+```{r}
+1 + 100
+```
+
+R printed out the answer, with a preceding `[1]`.
+
+ 
+
+### Order of operations (arithmetic operators)
+
+The basic arithmetic operators are presented in Figure @fig-arithmetic_operators:
+
+![Arithmetic operators](images/arithmetic_operators.png){#fig-arithmetic_operators width="80%"}
+
+
+Remember when using R as a calculator, the order of operations is the same as we would have learned back in school.
+
+From highest to lowest precedence:
+
+ * Parentheses: `( )`
+ * Exponents: `^` or `**`
+ * Divide: `/`
+ * Multiply: `*`
+ * Add: `+`
+ * Subtract: `-`  
+
+
+
+Therefore:
+
+```{r}
+3 + 5 * 2
+```
+
+ 
+
+### Parentheses
+
+Use parentheses to group operations in order to force the order of evaluation if it differs from the default, or to make clear what we intend.
+
+```{r}
+(3 + 5) * 2
+```
+
+\vspace{12pt} 
+
+This can get unwieldy when not needed, but  clarifies our intentions. Remember that others may later read our code.
+
+```{r}
+#| eval: false
+
+(3 + (5 * (2 ^ 2))) # hard to read
+3 + 5 * 2 ^ 2       # clear, if we remember the rules
+3 + 5 * (2 ^ 2)     # if we forget some rules, this might help
+```
+
+
+::: callout-important
+## Comments with \#
+
+The text after each line of code is called a **comment**. Anything that follows after the hash symbol **`#`** is ignored by R when it executes code. It is considered good practice to comment your code when working in an `.R` script. 
+
+:::
+
+ 
+
+## Mathematical functions
+
+R has many built in mathematical functions. To call a function, we simply **type its name, followed by  open and closing parentheses**. Remember that anything we type inside the parentheses are called the function's **arguments**.  
+
+
+
+**Examples**
+
+::: {.callout-note icon=false}
+## Trigonometry functions (angles in radians)
+
+```{r}
+sin(pi/2) 
+
+cos(pi)
+```
+:::
+
+ 
+
+
+::: {.callout-note icon=false}
+## Logarithms and exponentials
+
+```{r}
+log(100) # natural logarithm
+
+log10(100) # base-10 logarithm
+
+exp(0.5) # exponential e^(1/2)
+
+```
+
+:::
+
+
+ 
+
+
+
+::: {.callout-note icon=false}
+## Other mathematical functions
+
+```{r}
+
+sqrt(9)    # squared root
+
+abs(-9)   # absolute value
+
+```
+
+:::
+
+
+ 
+
+
+The **`round()`** function is often very useful. The round function follows the **rounding principle**. By default, we will get the nearest integer. For example: 
+
+
+```{r}
+round(7 / 3)  # rounding 7/3 (2.333) to the nearest integer
+```
+
+
+If we want to control the approximation accuracy, we can add a digits argument to specify how many digits we want after the decimal point. For example:  
+
+```{r}
+round(7 / 3, digits = 2)  # rounding 7/3 to two decimal places
+```
+
+ 
+
+::: callout-important
+## Round rule when the dropped digit is 5
+
+If the first digit that is dropped is exactly 5, R uses a rule that’s common in programming languages: Always round to the nearest **even** number. For example:
+
+```{r}
+round(1.5)
+round(2.5)
+
+round(4.5)
+round(5.5)
+```
+
+:::
+

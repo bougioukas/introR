@@ -212,7 +212,3 @@ What `here()` does is tell R that the file structure starts at the Project-level
 
 The relative path from inside the project folder (`data/covid19.csv`) is the same on both computers; any code that uses relative paths will work on both!
 
-
-
-
-
