@@ -7,25 +7,17 @@ library(fontawesome)
 
 ```
 
-
-In programming, we use functions to incorporate sets of instructions that we want to use repeatedly or that, because of their complexity, are better self-contained in a sub program and called when needed. 
+In programming, we use functions to incorporate sets of commands that we want to use repeatedly or that, because of their complexity, are better self-contained in a sub program and called when needed.
 
 We have already used some R functions searching for help (i.e., `help()`, `example()`, `apropos()`). Most of the computations in R involves using functions. The base version of R includes many other functions, and thousands of others can be added (by installing packages or by creating them from scratch).
 
-
-
->A function in R is defined by its **name** and by the list of its **arguments**:
->`function_name(arg1 = val1, arg2 = val2, ...)`
-
+> A function in R is defined by its **name** and by the list of its **arguments**: `function_name(arg1 = val1, arg2 = val2, ...)`
 
 where `arg1, arg2,` ... are called the arguments of the function, whereas `value1` is the value given to the argument arg1, etc.
 
-
  
 
-
 ## Characteristics of R Functions
-
 
 
 **A. Name and argumnets of a function**
@@ -49,8 +41,7 @@ seq(5, 8, 0.5)
 ::: callout-tip
 ## Name the arguments in the functions
 
-We do not necessarily need to indicate the names of the arguments, but only the values, as long as we follow their order.
-However, it's a good idea to name at least some of the arguments in the functions. This practice minimizes errors assigning unnamed arguments to options and makes code more readable.
+We do not necessarily need to indicate the names of the arguments, but only the values, as long as we follow their order. However, it's a good idea to name at least some of the arguments in the functions. This practice minimizes errors assigning unnamed arguments to options and makes code more readable.
 :::
 
  
@@ -89,21 +80,17 @@ args(log)
 
 In the `log()` function `x` is a required argument while `base` is an optional argument and comes with a default value `exp(1)`.
 
-
 If we don't supply a value for `base`, R will use the default value `exp(1)`:
 
 ```{r}
 log(15)  # R uses the default value of `exp(1)`
 ```
 
-
 Otherwise, R will use for `base` the value that we supply:
 
 ```{r}
 log(15, base = 10)  # R uses our value 10
 ```
-
-
 
 In contrast, `x` is a required argument because if we don't supply `x` argument the `log()` function will fail:
 
@@ -113,7 +100,6 @@ log(base=10)
 
 `r kableExtra::text_spec("Error: argument x is missing, with no default", color = "red")`
 
-
 ::: callout-tip
 ## Required and optional arguments
 
@@ -122,7 +108,6 @@ For R functions, some arguments must be specified (they are required) and others
 
  
 
-
 Not all functions have (or require) arguments.
 
 For example:
@@ -130,9 +115,6 @@ For example:
 ```{r}
 date()
 ```
-
-
-
 
 ::: callout-note
 ## Playing with the arguments in several different ways
@@ -152,7 +134,6 @@ log(3, exp(1))
 log(base=exp(1), 3)
 log(base=exp(1), x=3)
 ```
-
 :::
 
  
@@ -170,7 +151,6 @@ log(exp(1), 3)
 
 calculates the logarithm of exp(1) in base 3.
 :::
-
 
  
 
@@ -202,26 +182,30 @@ Additionally, the `options()` function in R can be used to change various defaul
 help(options)
 ```
 
-
-
  
 
 ## User Defined Functions (UDF)
 
-We can create our own functions, using the **`function()`**, which is a very powerful way to extend R.
+We can create our own functions, using the **`function()`**, which is a very powerful way to extend R. @fig-fun_syntax displays the syntax for creating an R function.
 
+ 
+
+![The syntax of a function in R](images/fun_syntax.png){#fig-fun_syntax width="80%"}
+
+ 
 
 ::: callout-tip
 ## What do we need to define a function?
 
-1. the function's name
-2. the arguments of the function
-3. the code of the function
+1.  the function's name
+2.  the arguments of the function
+3.  the code of the function (statements)
 :::
+
 
 For example a function that convert Celsius to Kelvin is:
 
-``` {r}
+```{r}
 celsius_to_kelvin <- function(temp_C) {
   temp_K <- temp_C + 273.15
   return(temp_K)
@@ -230,29 +214,22 @@ celsius_to_kelvin <- function(temp_C) {
 celsius_to_kelvin(0)
 ```
 
-We defined the function by “assigning” the `function(temp_C)` to the name `celsius_to_kelvin` using the assignment operator `<-` (see ).
+We defined the function by "assigning" the `function(temp_C)` to the name `celsius_to_kelvin` using the assignment operator `<-` (see ).
 
-
-So, in most cases, a function has a name (e.g., `celsius_to_kelvin`), some arguments used as input to the function, within the `()` following the keyword ‘function’ (e.g., `temp_C`); a body, which is the code within the curly braces `{}`, where we carry out the computation; and can have one or more return values (the output here is the `temp_K` which is a numeric value). 
-
-
-
+So, in most cases, a function has a name (e.g., `celsius_to_kelvin`), some arguments used as input to the function, within the `()` following the keyword 'function' (e.g., `temp_C`); a body, which is the code within the curly braces `{}`, where we carry out the computation; and can have one or more return values (the output here is the `temp_K` which is a numeric value).
 
 ::: {.callout-caution collapse="true" icon="false"}
 ## `r fa("rocket", fill = "orange")` Function components
 
-
 A function has three components:
 
-1. The `formals()`, the list of arguments that control how you call the function.
+1.  The `formals()`, the list of arguments that control how you call the function.
 
-2. The `body()`, the code inside the function.
+2.  The `body()`, the code inside the function.
 
-3. The `environment()`, the data structure that determines how the function finds the values associated with the names.
+3.  The `environment()`, the data structure that determines how the function finds the values associated with the names.
 
-
-While the formals and body are specified **explicitly** when you create a function, the environment is specified implicitly, based on **where** we defined the function. The function environment always exists, but it is only printed when the function isn’t defined in the R global environment. For example:
-
+While the formals and body are specified **explicitly** when you create a function, the environment is specified implicitly, based on **where** we defined the function. The function environment always exists, but it is only printed when the function isn't defined in the R global environment. For example:
 
 ```{r}
 formals(celsius_to_kelvin)         # the argument of the function
@@ -261,12 +238,4 @@ body(celsius_to_kelvin)            # the code of the function
 
 environment(celsius_to_kelvin)     # the function's environment
 ```
-
 :::
-
-
-
-
-
-
-
