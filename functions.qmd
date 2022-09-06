@@ -15,10 +15,16 @@ We have already used some R functions searching for help (i.e., `help()`, `examp
 
 where `arg1, arg2,` ... are called the arguments of the function, whereas `value1` is the value given to the argument arg1, etc.
 
+
+::: callout-tip
+## Call a function
+
+To **call** a function in R, we simply **type its name**, followed by open and closing parentheses. Anything we type inside the parentheses are the **function's arguments**.
+:::
+
  
 
 ## Characteristics of R Functions
-
 
 **A. Name and argumnets of a function**
 
@@ -108,14 +114,6 @@ For R functions, some arguments must be specified (they are required) and others
 
  
 
-Not all functions have (or require) arguments.
-
-For example:
-
-```{r}
-date()
-```
-
 ::: callout-note
 ## Playing with the arguments in several different ways
 
@@ -152,6 +150,17 @@ log(exp(1), 3)
 calculates the logarithm of exp(1) in base 3.
 :::
 
+
+ 
+
+Not all functions have (or require) arguments.
+
+For example:
+
+```{r}
+date()
+```
+
  
 
 **D. Functions "live" in packages**
@@ -162,7 +171,116 @@ calculates the logarithm of exp(1) in base 3.
 
  
 
-## The sessionInfo() and option() Functions
+
+
+## Mathematical functions
+
+R has many built in mathematical functions such as the `log(x)` that we have already seen.
+
+
+### Logarithms and exponentials
+
+![The natural logarithm function ln(x) is the inverse of the exponential function y = e\^x](images/log_exp.png){#fig-log_exp width="50%"}
+
+::: {.callout-note icon="false"}
+## Examples: Logarithms and exponentials
+
+```{r}
+log(100) # natural logarithm ln(x)
+
+log10(100) # base-10 logarithm
+
+exp(0.5) # exponential e^(1/2)
+
+```
+:::
+
+ 
+
+### Trigonometric functions
+
+Trigonometric functions define the relationship among the sides and angles of a right angle triangle (@fig-triangle). They also allow us to use angle measures, in radians or degrees, to find the coordinates of a point on a circle (e.g., unit circle)(@fig-trig_circle).
+
+::: {#fig-elephants layout-ncol="2"}
+![Right-Angled Triangle](images/triangle.png){#fig-triangle width="25%"}
+
+![Trigonometric circle](images/trig_circle.png){#fig-trig_circle width="20%"}
+
+Basic Trigonometry
+:::
+
+The main functions in trigonometry are sine, cosine and tangent.
+
+$$ sin(\theta)=\frac{opposite}{hypotenuse} $$ {#eq-sin} $$ cos(\theta)=\frac{adjacent}{hypotenuse} $$ {#eq-cos} $$ tan(\theta)=\frac{opposite}{adjacent} $$ {#eq-tan}
+
+ 
+
+::: {.callout-note icon="false"}
+## Examples: Trigonometric functions in R (angles in radians)
+
+```{r}
+sin(pi/2) 
+
+cos(pi)
+
+tan(pi/3)
+```
+:::
+
+ 
+
+
+### Other mathematical functions
+
+::: {.callout-note icon="false"}
+## Examples: Other mathematical functions
+
+```{r}
+
+sqrt(9)    # squared root
+
+abs(-9)   # absolute value
+
+factorial(3)   # factorial 3! = 1x2x3
+
+```
+:::
+
+ 
+
+### The `round()` function
+
+The **`round()`** function is often very useful. The round function follows the **rounding principle**. By default, we will get the nearest integer. For example:
+
+```{r}
+round(7 / 3)  # rounding 7/3 (2.333) to the nearest integer
+```
+
+If we want to control the approximation accuracy, we can add a digits argument to specify how many digits we want after the decimal point. For example:
+
+```{r}
+round(7 / 3, digits = 2)  # rounding 7/3 to two decimal places
+```
+
+ 
+
+::: callout-important
+## Round rule when the dropped digit is 5
+
+If the first digit that is dropped is exactly 5, R uses a rule that's common in programming languages: Always round to the nearest **even** number. For example:
+
+```{r}
+round(1.5)
+round(2.5)
+
+round(4.5)
+round(5.5)
+```
+:::
+
+ 
+
+## The sessionInfo() and option() functions
 
 We can obtain information about R, the OS and attached or loaded packages running the following function:
 
@@ -201,7 +319,6 @@ We can create our own functions, using the **`function()`**, which is a very pow
 2.  the arguments of the function
 3.  the code of the function (statements)
 :::
-
 
 For example a function that convert Celsius to Kelvin is:
 

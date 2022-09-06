@@ -94,10 +94,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -206,25 +203,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
 <li><a href="#using-r-as-a-calculator" id="toc-using-r-as-a-calculator" class="nav-link active" data-scroll-target="#using-r-as-a-calculator"> <span class="header-section-number">4.1</span> Using R as a calculator</a></li>
   <li>
-<a href="#r-arithmetic-operators" id="toc-r-arithmetic-operators" class="nav-link" data-scroll-target="#r-arithmetic-operators"> <span class="header-section-number">4.2</span> R Arithmetic Operators</a>
+<a href="#arithmetic-operators-in-r" id="toc-arithmetic-operators-in-r" class="nav-link" data-scroll-target="#arithmetic-operators-in-r"> <span class="header-section-number">4.2</span> Arithmetic Operators in R</a>
   <ul class="collapse">
 <li><a href="#parentheses" id="toc-parentheses" class="nav-link" data-scroll-target="#parentheses">Parentheses</a></li>
   </ul>
 </li>
-  <li><a href="#r-relational-operators" id="toc-r-relational-operators" class="nav-link" data-scroll-target="#r-relational-operators"> <span class="header-section-number">4.3</span> R Relational Operators</a></li>
+  <li><a href="#relational-operators-in-r" id="toc-relational-operators-in-r" class="nav-link" data-scroll-target="#relational-operators-in-r"> <span class="header-section-number">4.3</span> Relational Operators in R</a></li>
+  <li><a href="#floating-point-number" id="toc-floating-point-number" class="nav-link" data-scroll-target="#floating-point-number"> <span class="header-section-number">4.4</span> Floating point number</a></li>
+  <li><a href="#scientific-notation" id="toc-scientific-notation" class="nav-link" data-scroll-target="#scientific-notation"> <span class="header-section-number">4.5</span> Scientific notation</a></li>
   <li>
-<a href="#mathematical-functions" id="toc-mathematical-functions" class="nav-link" data-scroll-target="#mathematical-functions"> <span class="header-section-number">4.4</span> Mathematical functions</a>
-  <ul class="collapse">
-<li><a href="#trigonometric-functions" id="toc-trigonometric-functions" class="nav-link" data-scroll-target="#trigonometric-functions">Trigonometric functions</a></li>
-  <li><a href="#logarithms-and-exponentials" id="toc-logarithms-and-exponentials" class="nav-link" data-scroll-target="#logarithms-and-exponentials">Logarithms and exponentials</a></li>
-  <li><a href="#other-mathematical-functions" id="toc-other-mathematical-functions" class="nav-link" data-scroll-target="#other-mathematical-functions">Other mathematical functions</a></li>
-  <li><a href="#the-round-function" id="toc-the-round-function" class="nav-link" data-scroll-target="#the-round-function">The <code>round()</code> function</a></li>
-  </ul>
-</li>
-  <li><a href="#floating-point-number" id="toc-floating-point-number" class="nav-link" data-scroll-target="#floating-point-number"> <span class="header-section-number">4.5</span> Floating point number</a></li>
-  <li><a href="#scientific-notation" id="toc-scientific-notation" class="nav-link" data-scroll-target="#scientific-notation"> <span class="header-section-number">4.6</span> Scientific notation</a></li>
-  <li>
-<a href="#special-values-in-r" id="toc-special-values-in-r" class="nav-link" data-scroll-target="#special-values-in-r"> <span class="header-section-number">4.7</span> Special values in R</a>
+<a href="#special-values-in-r" id="toc-special-values-in-r" class="nav-link" data-scroll-target="#special-values-in-r"> <span class="header-section-number">4.6</span> Special values in R</a>
   <ul class="collapse">
 <li><a href="#missing-values-na" id="toc-missing-values-na" class="nav-link" data-scroll-target="#missing-values-na">Missing values (NA)</a></li>
   <li><a href="#infinitive--inf-or-inf" id="toc-infinitive--inf-or-inf" class="nav-link" data-scroll-target="#infinitive--inf-or-inf">Infinitive: -Inf or Inf</a></li>
@@ -259,9 +247,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>R printed out the answer, with a preceding <code>[1]</code>.</p>
 <p>&nbsp;</p>
-</section><section id="r-arithmetic-operators" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="r-arithmetic-operators">
-<span class="header-section-number">4.2</span> R Arithmetic Operators</h2>
-<p>In the previous calculation the <code>+</code> sign was used to carry out the addition. Here is a list of arithmetic operators available in R (<a href="#tbl-arithmetic_operators">Table&nbsp;<span>4.1</span></a>).</p>
+</section><section id="arithmetic-operators-in-r" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="arithmetic-operators-in-r">
+<span class="header-section-number">4.2</span> Arithmetic Operators in R</h2>
+<p>In the previous calculation the <code>+</code> sign was used to carry out the addition. <a href="#tbl-arithmetic_operators">Table&nbsp;<span>4.1</span></a> presents a list of arithmetic operators available in R.</p>
 <div id="tbl-arithmetic_operators" class="anchored">
 <table class="table">
 <caption>Table 4.1: Arithmetic Operators in R</caption>
@@ -353,8 +341,8 @@ Comments with #
 </div>
 </div>
 <p>&nbsp;</p>
-</section></section><section id="r-relational-operators" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="r-relational-operators">
-<span class="header-section-number">4.3</span> R Relational Operators</h2>
+</section></section><section id="relational-operators-in-r" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="relational-operators-in-r">
+<span class="header-section-number">4.3</span> Relational Operators in R</h2>
 <p><strong>Relational (or comparison) operators</strong> are used to compare between values. Here is a list of relational operators available in R (<a href="#tbl-relational_operators">Table&nbsp;<span>4.2</span></a>).</p>
 <div id="tbl-relational_operators" class="anchored">
 <table class="table">
@@ -440,181 +428,21 @@ Examples
 </div>
 </div>
 <p>&nbsp;</p>
-</section><section id="mathematical-functions" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="mathematical-functions">
-<span class="header-section-number">4.4</span> Mathematical functions</h2>
-<p>R has many built in mathematical functions. To call a function, we simply <strong>type its name, followed by open and closing parentheses</strong>. Remember that anything we type inside the parentheses are called the function’s <strong>arguments</strong>.</p>
-<section id="trigonometric-functions" class="level3"><h3 class="anchored" data-anchor-id="trigonometric-functions">Trigonometric functions</h3>
-<p>Trigonometric functions define the relationship among the sides and angles of a right angle triangle (<a href="#fig-triangle">Figure&nbsp;<span>4.1 (a)</span></a>). They also allow us to use angle measures, in radians or degrees, to find the coordinates of a point on a circle (e.g., unit circle)(<a href="#fig-trig_circle">Figure&nbsp;<span>4.1 (b)</span></a>).</p>
-<div id="fig-elephants" class="quarto-layout-panel">
-<figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
-<div id="fig-triangle" class="quarto-figure quarto-figure-center anchored" style="flex-basis: 50.0%;justify-content: center;">
-<figure class="figure"><p><a href="images/triangle.png" class="lightbox" title="Right-Angled Triangle" data-gallery="quarto-lightbox-gallery-1"><img src="images/triangle.png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">(a) Right-Angled Triangle</figcaption><p></p>
-</figure>
-</div>
-<div id="fig-trig_circle" class="quarto-figure quarto-figure-center anchored" style="flex-basis: 50.0%;justify-content: center;">
-<figure class="figure"><p><a href="images/trig_circle.png" class="lightbox" title="Trigonometric circle" data-gallery="quarto-lightbox-gallery-2"><img src="images/trig_circle.png" class="img-fluid figure-img"></a></p>
-<p></p><figcaption class="figure-caption">(b) Trigonometric circle</figcaption><p></p>
-</figure>
-</div>
-</div>
-<p></p><figcaption class="figure-caption">Figure 4.1: Basic Trigonometry</figcaption><p></p>
-</figure>
-</div>
-<p>The main functions in trigonometry are sine, cosine and tangent.</p>
-<p><span id="eq-sin"><span class="math display">\[ sin(\theta)=\frac{opposite}{hypotenuse}  \tag{4.1}\]</span></span> <span id="eq-cos"><span class="math display">\[ cos(\theta)=\frac{adjacent}{hypotenuse}  \tag{4.2}\]</span></span></p>
-<p><span id="eq-tan"><span class="math display">\[ tan(\theta)=\frac{opposite}{adjacent}  \tag{4.3}\]</span></span></p>
-<p>&nbsp;</p>
-<div class="callout-note callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Examples: Trigonometric functions in R (angles in radians)
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">sin</a></span><span class="op">(</span><span class="va">pi</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1</code></pre>
-</div>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">pi</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] -1</code></pre>
-</div>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">tan</a></span><span class="op">(</span><span class="va">pi</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.732051</code></pre>
-</div>
-</div>
-</div>
-</div>
-<p>&nbsp;</p>
-</section><section id="logarithms-and-exponentials" class="level3"><h3 class="anchored" data-anchor-id="logarithms-and-exponentials">Logarithms and exponentials</h3>
-<div id="fig-log_exp" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/log_exp.png" class="lightbox" title="The natural logarithm function ln(x) is the inverse of the exponential function y = e^x" data-gallery="quarto-lightbox-gallery-3"><img src="images/log_exp.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
-<p></p><figcaption class="figure-caption">Figure 4.2: The natural logarithm function ln(x) is the inverse of the exponential function y = e^x</figcaption><p></p>
-</figure>
-</div>
-<div class="callout-note callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Examples: Logarithms and exponentials
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="co"># natural logarithm ln(x)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.60517</code></pre>
-</div>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">log10</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span> <span class="co"># base-10 logarithm</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span> <span class="co"># exponential e^(1/2)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.648721</code></pre>
-</div>
-</div>
-</div>
-</div>
-<p>&nbsp;</p>
-</section><section id="other-mathematical-functions" class="level3"><h3 class="anchored" data-anchor-id="other-mathematical-functions">Other mathematical functions</h3>
-<div class="callout-note callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Examples: Other mathematical functions
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="cell">
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="fl">9</span><span class="op">)</span>    <span class="co"># squared root</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 3</code></pre>
-</div>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="fl">9</span><span class="op">)</span>   <span class="co"># absolute value</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 9</code></pre>
-</div>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Special.html">factorial</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>   <span class="co"># factorial 3! = 1x2x3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 6</code></pre>
-</div>
-</div>
-</div>
-</div>
-<p>&nbsp;</p>
-</section><section id="the-round-function" class="level3"><h3 class="anchored" data-anchor-id="the-round-function">The <code>round()</code> function</h3>
-<p>The <strong><code><a href="https://rdrr.io/r/base/Round.html">round()</a></code></strong> function is often very useful. The round function follows the <strong>rounding principle</strong>. By default, we will get the nearest integer. For example:</p>
-<div class="cell">
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">7</span> <span class="op">/</span> <span class="fl">3</span><span class="op">)</span>  <span class="co"># rounding 7/3 (2.333) to the nearest integer</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
-<p>If we want to control the approximation accuracy, we can add a digits argument to specify how many digits we want after the decimal point. For example:</p>
-<div class="cell">
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">7</span> <span class="op">/</span> <span class="fl">3</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>  <span class="co"># rounding 7/3 to two decimal places</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2.33</code></pre>
-</div>
-</div>
-<p>&nbsp;</p>
-<div class="callout-important callout callout-style-default callout-captioned">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-caption-container flex-fill">
-Round rule when the dropped digit is 5
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If the first digit that is dropped is exactly 5, R uses a rule that’s common in programming languages: Always round to the nearest <strong>even</strong> number. For example:</p>
-<div class="cell">
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">1.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">2.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">4.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fl">5.5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 6</code></pre>
-</div>
-</div>
-</div>
-</div>
-</section></section><section id="floating-point-number" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="floating-point-number">
-<span class="header-section-number">4.5</span> Floating point number</h2>
+</section><section id="floating-point-number" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="floating-point-number">
+<span class="header-section-number">4.4</span> Floating point number</h2>
 <p>When dealing with real numbers <a href="http://en.wikipedia.org/wiki/Floating_point">floating point number</a>, we must be very careful when checking equality.</p>
 <p>For example, we know from trigonometry that:</p>
 <p><span class="math display">\[\cos(\frac{\pi}{2}) = \cos( \frac{3 \pi}{2}) = 0  \]</span></p>
 <p>However, if we compare the two numbers we get:</p>
 <div class="cell">
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">pi</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="fl">3</span><span class="op">*</span><span class="va">pi</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">pi</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="fl">3</span><span class="op">*</span><span class="va">pi</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 <p>In this instance, we can test for ‘near equality’ applying the <code><a href="https://rdrr.io/r/base/all.equal.html">all.equal()</a></code> function which tests for equality with a difference tolerance of 1.5e-8.</p>
 <div class="cell">
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">pi</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="fl">3</span><span class="op">*</span><span class="va">pi</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="va">pi</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="fl">3</span><span class="op">*</span><span class="va">pi</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -622,7 +450,7 @@ Round rule when the dropped digit is 5
 <p>If the difference is greater than the tolerance level 1.5e-8 the function will return the mean relative difference.</p>
 <p>Try to test this:</p>
 <div class="cell">
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="fl">4.0000007</span>, <span class="fl">4.0000008</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/all.equal.html">all.equal</a></span><span class="op">(</span><span class="fl">4.0000007</span>, <span class="fl">4.0000008</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -637,8 +465,9 @@ Don’t use <strong>==</strong> to compare two numbers
 <p>We should never use <strong>==</strong> to compare two numbers unless they are integers (whole numbers) or fractions whose denominator is a power of 2 (<span class="math inline">\(2^n\)</span>, where n is integer). Computers may only represent decimal numbers with a certain degree of precision (rounded to typically 53 binary digits accuracy which allows representing decimal numbers to 15 or 16 significant digits), so two numbers which look the same when printed out by R, may actually have different underlying representations and therefore be different by a small margin of error (called Machine numeric tolerance).</p>
 </div>
 </div>
-</section><section id="scientific-notation" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="scientific-notation">
-<span class="header-section-number">4.6</span> Scientific notation</h2>
+<p>&nbsp;</p>
+</section><section id="scientific-notation" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="scientific-notation">
+<span class="header-section-number">4.5</span> Scientific notation</h2>
 <p>Scientific notation is a special way of expressing numbers that are too big or too small to be conveniently written in decimal form. Generally, it expresses numbers in forms of <span class="math inline">\(m \times 10^n\)</span> and R uses the <strong>e</strong> notation.</p>
 <div class="callout-note callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -676,13 +505,13 @@ Scientific notation Vs Euler’s number
 </div>
 </div>
 <p>&nbsp;</p>
-</section><section id="special-values-in-r" class="level2" data-number="4.7"><h2 data-number="4.7" class="anchored" data-anchor-id="special-values-in-r">
-<span class="header-section-number">4.7</span> Special values in R</h2>
+</section><section id="special-values-in-r" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="special-values-in-r">
+<span class="header-section-number">4.6</span> Special values in R</h2>
 <p>There are a few special values that are used in R.</p>
 <section id="missing-values-na" class="level3"><h3 class="anchored" data-anchor-id="missing-values-na">Missing values (NA)</h3>
 <p>For example, in the real world, missing values may occur when recording sensor information. R uses a special numeric value <code>NA</code> standing for “Not available”. Mathematical operations using <code>NA</code> produces <code>NA</code>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="cn">NA</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
@@ -692,14 +521,14 @@ Scientific notation Vs Euler’s number
 <p>There is also a special number <code>Inf</code> which represents infinity. Fortunately, R has special numbers for this.</p>
 <p>This allows us to represent entities like:</p>
 <div class="cell">
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span><span class="op">/</span><span class="fl">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span><span class="op">/</span><span class="fl">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Inf</code></pre>
 </div>
 </div>
 <p>The <code>Inf</code> can also be used in ordinary calculations:</p>
 <div class="cell">
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="cn">Inf</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0</code></pre>
 </div>
@@ -708,19 +537,19 @@ Scientific notation Vs Euler’s number
 </section><section id="not-a-number-nan" class="level3"><h3 class="anchored" data-anchor-id="not-a-number-nan">Not A Number (NaN)</h3>
 <p>The value NaN (stands for “not a number”) represents an undefined value and it is usually the product of some arithmetic operations. For example:</p>
 <div class="cell">
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="cn">Inf</span><span class="op">/</span><span class="cn">Inf</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="cn">Inf</span><span class="op">/</span><span class="cn">Inf</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NaN</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">0</span><span class="op">/</span><span class="fl">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">0</span><span class="op">/</span><span class="fl">0</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NaN</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="cn">Inf</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html">cos</a></span><span class="op">(</span><span class="cn">Inf</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in cos(Inf): NaNs produced</code></pre>
 </div>
@@ -858,7 +687,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":true,"openEffect":"zoom"});</script>
+</footer>
 
 
 </body></html>
