@@ -3,52 +3,43 @@
 ```{r}
 #| include: false
 
+library(tidyverse)
+
 library(kableExtra)
 
 ```
 
-
 ## What are R packages?
-
 
 ### Base R packages
 
-R installs automatically a set of standard packages (base packages) during installation process. **Base packages** contain the basic functions that allow R to work, and enable standard statistical and graphical functions on data sets. 
-
-
+R installs automatically a set of standard packages (base packages) during installation process. **Base packages** contain the basic functions that allow R to work, and enable standard statistical and graphical functions on data sets.
 
 ### Add-on packages
 
 More packages can be added later from repositories, when they are needed for some specific purpose (add-on R packages). **Add-on R packages** are written by a world-wide community of developers and R users and most of them can be installed for free from repositories.
 
+A **repository** is a place where packages are located and stored so we can install them from it. Some of the most popular repositories for R packages are:
 
-A **repository** is a place where packages are located and stored so we can install them from it. 
-Some of the most popular repositories for R packages are: 
+-   **CRAN:** Comprehensive R Archive Network(CRAN) is the official repository.
 
-* **CRAN:** Comprehensive R Archive Network(CRAN) is the official repository.
+-   **Github:** Github is the most popular repository for open source projects.
 
-* **Github:** Github is the most popular repository for open source projects.
-
-* **Bioconductor:** Bioconductor is a topic-specific repository, intended for open source software for bioinformatics.
+-   **Bioconductor:** Bioconductor is a topic-specific repository, intended for open source software for bioinformatics.
 
  
-
 
 ::: callout-tip
 ## Add-on R packages
 
-Add-on R packages **extend the functionality** of R by providing additional collection of functions, sample data, compiled code, some tests to check everything works as it should, and documentation for the package and the functions inside in a well-defined format. 
+Add-on R packages **extend the functionality** of R by providing additional collection of functions, sample data, compiled code, some tests to check everything works as it should, and documentation for the package and the functions inside in a well-defined format.
 :::
-
-
-
 
 To **use** an add-on package we need to:
 
-1. ***Install the package from a repository***. Once we've installed a package, we likely won't install it again unless we want to update it to a newer version.
+1.  ***Install the package from a repository***. Once we've installed a package, we likely won't install it again unless we want to update it to a newer version.
 
-1. ***Load the package in R session***. Add-on packages are not loaded by default when we start RStudio on our computer. Each add-on package needs to be loaded explicitly **every time** we start RStudio.
-
+2.  ***Load the package in R session***. Add-on packages are not loaded by default when we start RStudio on our computer. Each add-on package needs to be loaded explicitly **every time** we start RStudio.
 
 For example, among the many add-on packages, we will use in this textbook are the `dplyr` package for data wrangling, the `ggplot2` package for data visualization and and the `rstatix` package for statistical tests.
 
@@ -58,27 +49,22 @@ Let's now show how to perform these two steps for the `ggplot2` package for data
 
 ## Package installation
 
-There are two ways to install an add-on R package: an easy way and a more advanced way. 
-
+There are two ways to install an add-on R package: an easy way and a more advanced way.
 
 **A. Installing Packages Using RStudio UI**
 
 Let's install the `rstatix` package the easy way first as shown in Figure @fig-installation. In the Q4 - files, plots, packages, help pane of RStudio:
 
-a) Click on the "Packages" tab.
-a) Click on "Install".
-a) Type the name of the package under "Packages (separate multiple with space or comma):" In this case, type `rstatix`.
-a) Click "Install."  
-     
+a)  Click on the "Packages" tab.
+b)  Click on "Install".
+c)  Type the name of the package under "Packages (separate multiple with space or comma):" In this case, type `rstatix`.
+d)  Click "Install."
 
-![Installing packages in R the easy way](images/installation.png){#fig-installation width="80%"}
-
-
+![Installing packages in R the easy way](images/installation.png){#fig-installation width="55%"}
 
 **B. Installing packages from repositories using command**
 
 For installing the `rstatix` package from **CRAN** we type the following command in the console pane of RStudio and press **Enter** on our keyboard:
-
 
 ```{r}
 #| eval: false
@@ -88,7 +74,6 @@ install.packages("rstatix")
 
 Note we must include the **quotation marks** around the name of the package.
 
-
 In order to install **several** package at once, we just have to write:
 
 ```{r}
@@ -97,19 +82,11 @@ In order to install **several** package at once, we just have to write:
 install.packages(c("rstatix", "dplyr", "ggplot2"))
 ```
 
-
 **We only have to install a package once**. However, if we want to update a previously installed package to a newer version, we need to re-install it by repeating the earlier steps.
 
-
-Moreover, suppose, for instance, that we want to download the **development** version of the `rstatix` package from GitHub.
-The first step is to install and load the `devtools` package, available in CRAN. On Windows, in case we encounter some error means we also need to install the **Rtools**. Then we can call the `install_github()` function to install the R package from GitHub.
-
+Moreover, suppose, for instance, that we want to download the **development** version of the `rstatix` package from GitHub. The first step is to install and load the `devtools` package, available in CRAN. On Windows, in case we encounter some error means we also need to install the **Rtools**. Then we can call the `install_github()` function to install the R package from GitHub.
 
 In case we need to install an **older** version of a package the simplest method is to use the provided `install_version()` function of the devtools package to install the version we need.
-
-
-
-
 
 ## Package loading
 
@@ -121,24 +98,15 @@ Recall that after we've installed a package, we need to **load it**. In other wo
 library(rstatix)
 ```
 
-::: {.callout-important}
-## Packages Vs Libraries
-
-There is always confusion between a package and a library, and we find people calling libraries as packages.  The directories in R where the packages are stored are called the libraries.
-:::
-
 
 If after running the earlier code, a blinking cursor returns next to the `>` "prompt" sign in console, it means we were successful and the `rstatix` package is now loaded and ready to use. If however, we get a red "error message" that reads...
 
 `r text_spec("Error in library(rstatix) : there is no package called ‘rstatix’", color = "red")`
 
-... it means that we didn't successfully install it.    
+... it means that we didn't successfully install it.
 
 
- 
-
-
-There is one way in R that can use a `function` without using `library()`. To do this, we can simply use the notation `package::function` . 
+There is one way in R that can use a `function` without using `library()`. To do this, we can simply use the notation `package::function` .
 
 For example:
 
@@ -147,17 +115,102 @@ For example:
 
 rstatix::t_test()
 ```
-The above notation tells R to use the `t_test` function from `rstatix` without load the `rstatix` package. 
+
+The above notation tells R to use the `t_test` function from `rstatix` without load the `rstatix` package.
+
+ 
+
+::: callout-important
+## Packages Vs Libraries
+
+There is always confusion between a package and a library, and we find people calling libraries as packages. The directories in R where the packages are stored are called the libraries.
+:::
+
+
+ 
+
+
+## The `{tidyverse}` package
+
+In this textbook we will use the `tidyverse` package. The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.
+
+The command `install.packages("tidyverse")` will **install** the complete tidyverse. The `tidyverse` package provides a shortcut for downloading the following packages:
+
+```{r}
+#| echo: false
+tidyverse_packages()
+```
+
+
+When we **load** the tidyverse package with the command `library(tidyverse)`, R will load the **core tidyverse** and make it available in our current R session (@fig-tidyverse_packages):
+
+![Hex logos for the eight core tidyverse packages and their primary purposes (Image from Mine Çetinkaya-Rundel).](images/tidyverse_packages.png){#fig-tidyverse_packages width="90%"}
+
+
+::: callout-tip
+## Add-on R packages
+
+The `tidyverse` packages out of the core list have more specialized usage and are not loaded automatically with library(tidyverse), so we’ll need to load each one with its own call to `library()`.
+
+:::
+
+
+ 
+
+## The `{here}` package
+
+We’ve talked about what Projects are and why we should use them, but what really makes Projects in RStudio shine is the use of the `here()` function from the {here} package. What `here()` does is eliminate the need for us to do what’s called “hard-coding” our file path. 
+
+> The place where the file lives on our computer is called the *path*. We can think of the path as directions to the file. There are two kinds of paths: **absolute paths** and **relative paths**. 
+
+
+For example, suppose Alice and Bob are working on a project together and want to read in R studio of their computers a data set file named `covid19.csv` data. They could do this using either a relative or an absolute path. We show what both choices below:
+
+
+**A. Reading data using an absolute path**
+
+Alice’s file is stored at `C:/alice/project/data/covid19.csv`
+
+and the command in R script should be: 
+
+```{r}
+#| eval: false
+#| 
+covid19 <- read_csv("C:/alice/project/data/covid19.csv")  
+```
 
 
 
+while Bob’s is stored at `C:/bob/project/data/covid19.csv`
+
+and the command in R script should be:  
+
+```{r}
+#| eval: false
+#| 
+covid19 <- read_csv("C:/bob/project/data/covid19.csv")
+```
 
 
 
+Even though Alice and Bob stored their files in the same place on their computers (in their `C` disk), the absolute paths are different due to their different usernames. If Bob has code that loads the `covid19.csv` data using an absolute path, the code won’t work on Alice’s computer.
+
+ 
+
+**B. Reading data using a relative path**
+
+The command in R script should be:  
+
+```{r}
+#| eval: false
+
+covid19 <- read_csv(here("data", "covid19.csv"))
+```
 
 
+What `here()` does is tell R that the file structure starts at the Project-level, and so every subsequent call starts at the Project-level, and allows us to navigate throughout each of the folders and files within a given Project.  
 
-
+The relative path from inside the project folder (`data/covid19.csv`) is the same on both computers; any code that uses relative paths will work on both!
 
 
 
