@@ -15,7 +15,8 @@ book:
     - part: "Basics"
       chapters:
         - introduction.qmd
-        - funpack.qmd
+        - functions.qmd
+        - packages.qmd
 
     - part: "Special Topics"
       chapters:

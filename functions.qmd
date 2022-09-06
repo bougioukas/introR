@@ -1,4 +1,4 @@
-# R functions and packages {#sec-funpack}
+# R functions {#sec-functions}
 
 ```{r}
 #| include: false
@@ -195,7 +195,7 @@ We can create our own functions, using the **`function()`**, which is a very pow
  
 
 ::: callout-tip
-## What do we need to define a function?
+## What do we need to create a function?
 
 1.  the function's name
 2.  the arguments of the function

@@ -1,13 +1,5 @@
 # Introduction to R and Rstudio {#sec-introduction}
 
-```{r}
-#| include: false
-
-library(tidyverse)
-library(here)
-
-```
-
 ## Installing R and RStudio
 
 First things first. We need to download and install both R and RStudio (an integrated development environment for R) on our personal computer. First, we install R, then we will need to install RStudio.
