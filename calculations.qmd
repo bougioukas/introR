@@ -9,14 +9,9 @@ library(kableExtra)
 
 ```
 
-
-
 ## Using R as a calculator
 
-
-### Arithmetic calculations
-
-The simplest thing we could do with R is do arithmetic with numbers. For example:
+The simplest thing we could do with R is arithmetic operations with numbers. For example:
 
 ```{r}
 1 + 100
@@ -26,25 +21,32 @@ R printed out the answer, with a preceding `[1]`.
 
  
 
-### Order of operations (arithmetic operators)
+## R Arithmetic Operators
 
-The basic arithmetic operators are presented in Figure @fig-arithmetic_operators:
+In the previous calculation the `+` sign was used to carry out the addition. Here is a list of arithmetic operators available in R (@tbl-arithmetic_operators).
 
-![Arithmetic operators](images/arithmetic_operators.png){#fig-arithmetic_operators width="80%"}
+| Operator | Description                       |
+|----------|-----------------------------------|
+| \+       | addition                          |
+| \-       | subtraction                       |
+| \*       | multiplication                    |
+| /        | division                          |
+| \^       | exponent                          |
+| %%       | modulus (remainder from division) |
+| %/%      | integer division                  |
+: Arithmetic Operators in R {#tbl-arithmetic_operators}
 
 
 Remember when using R as a calculator, the order of operations is the same as we would have learned back in school.
 
 From highest to lowest precedence:
 
- * Parentheses: `( )`
- * Exponents: `^` or `**`
- * Divide: `/`
- * Multiply: `*`
- * Add: `+`
- * Subtract: `-`  
-
-
+-   Parentheses: `( )`
+-   Exponents: `^` or `**`
+-   Divide: `/`
+-   Multiply: `*`
+-   Add: `+`
+-   Subtract: `-`
 
 Therefore:
 
@@ -62,9 +64,9 @@ Use parentheses to group operations in order to force the order of evaluation if
 (3 + 5) * 2
 ```
 
-\vspace{12pt} 
+\vspace{12pt}
 
-This can get unwieldy when not needed, but  clarifies our intentions. Remember that others may later read our code.
+This can get unwieldy when not needed, but clarifies our intentions. Remember that others may later read our code.
 
 ```{r}
 #| eval: false
@@ -74,58 +76,153 @@ This can get unwieldy when not needed, but  clarifies our intentions. Remember t
 3 + 5 * (2 ^ 2)     # if we forget some rules, this might help
 ```
 
-
 ::: callout-important
 ## Comments with \#
 
-The text after each line of code is called a **comment**. Anything that follows after the hash symbol **`#`** is ignored by R when it executes code. It is considered good practice to comment your code when working in an `.R` script. 
+The text after each line of code is called a **comment**. Anything that follows after the hash symbol **`#`** is ignored by R when it executes code. It is considered good practice to comment your code when working in an `.R` script.
+:::
+
+ 
+
+
+## R Relational Operators
+
+**Relational (or comparison) operators** are used to compare between values. Here is a list of relational operators available in R (@tbl-relational_operators).
+
+
+
+| **symbol**        | **read as**                     |
+| ----------------  |:------------------------------  |
+| <                 | less than                       |
+| >                 | greater than                    |
+| ==                | equal to                        |
+| <=                | less than or equal to           | 
+| >=                | greater than or equal to        | 
+| !=                | not equal to                    |
+: Relational (comparison) operators in R {#tbl-relational_operators}
+
+
+
+::: {.callout-note icon="false"}
+## Examples
+
+```{r}
+2 < 1  # less than
+```
+
+
+
+```{r}
+1 > 0  # greater than
+```
+
+
+
+```{r}
+1 == 1  # equal to (double equal sign for equality)
+```
+
+ 
+
+```{r}
+1 <= 1  # less than or equal to
+```
+
+
+
+```{r}
+-9 >= -3 # greater than or equal to
+```
+
+
+
+```{r}
+1 != 2  # not equal to (inequality)
+```
 
 :::
+
 
  
 
 ## Mathematical functions
 
-R has many built in mathematical functions. To call a function, we simply **type its name, followed by  open and closing parentheses**. Remember that anything we type inside the parentheses are called the function's **arguments**.  
+R has many built in mathematical functions. To call a function, we simply **type its name, followed by open and closing parentheses**. Remember that anything we type inside the parentheses are called the function's **arguments**.
 
 
 
-**Examples**
+### Trigonometric functions
 
-::: {.callout-note icon=false}
-## Trigonometry functions (angles in radians)
+Trigonometric functions define the relationship among the sides and angles of a right angle triangle (@fig-triangle). 
+They also allow us to use angle measures, in radians or degrees, to find the coordinates of a point on a circle (e.g., unit circle)(@fig-trig_circle).
+
+
+::: {#fig-elephants layout-ncol=2}
+
+![Right-Angled Triangle](images/triangle.png){#fig-triangle width="40%"}
+
+![Trigonometric circle](images/trig_circle.png){#fig-trig_circle width="40%"}
+
+
+Basic Trigonometry
+:::
+
+
+
+The main functions in trigonometry are sine, cosine and tangent.
+
+$$ sin(\theta)=\frac{opposite}{hypotenuse} $$ {#eq-sin}
+$$ cos(\theta)=\frac{adjacent}{hypotenuse} $$ {#eq-cos}
+$$ tan(\theta)=\frac{opposite}{adjacent} $$ {#eq-tan}
+
+ 
+
+
+
+
+
+::: {.callout-note icon="false"}
+## Examples: Trigonometric functions in R (angles in radians)
 
 ```{r}
 sin(pi/2) 
 
 cos(pi)
+
+tan(pi/3)
 ```
 :::
 
  
 
 
-::: {.callout-note icon=false}
-## Logarithms and exponentials
+### Logarithms and exponentials
+
+
+![The natural logarithm function ln(x) is the inverse of the exponential function y = e^x](images/log_exp.png){#fig-log_exp width="50%"}
+
+
+::: {.callout-note icon="false"}
+## Examples: Logarithms and exponentials
 
 ```{r}
-log(100) # natural logarithm
+log(100) # natural logarithm ln(x)
 
 log10(100) # base-10 logarithm
 
 exp(0.5) # exponential e^(1/2)
 
 ```
-
 :::
-
 
  
 
 
 
-::: {.callout-note icon=false}
-## Other mathematical functions
+### Other mathematical functions
+
+::: {.callout-note icon="false"}
+## Examples: Other mathematical functions
 
 ```{r}
 
@@ -133,23 +230,23 @@ sqrt(9)    # squared root
 
 abs(-9)   # absolute value
 
-```
+factorial(3)   # factorial 3! = 1x2x3
 
+```
 :::
 
 
  
 
+### The `round()` function
 
-The **`round()`** function is often very useful. The round function follows the **rounding principle**. By default, we will get the nearest integer. For example: 
-
+The **`round()`** function is often very useful. The round function follows the **rounding principle**. By default, we will get the nearest integer. For example:
 
 ```{r}
 round(7 / 3)  # rounding 7/3 (2.333) to the nearest integer
 ```
 
-
-If we want to control the approximation accuracy, we can add a digits argument to specify how many digits we want after the decimal point. For example:  
+If we want to control the approximation accuracy, we can add a digits argument to specify how many digits we want after the decimal point. For example:
 
 ```{r}
 round(7 / 3, digits = 2)  # rounding 7/3 to two decimal places
@@ -160,7 +257,7 @@ round(7 / 3, digits = 2)  # rounding 7/3 to two decimal places
 ::: callout-important
 ## Round rule when the dropped digit is 5
 
-If the first digit that is dropped is exactly 5, R uses a rule that’s common in programming languages: Always round to the nearest **even** number. For example:
+If the first digit that is dropped is exactly 5, R uses a rule that's common in programming languages: Always round to the nearest **even** number. For example:
 
 ```{r}
 round(1.5)
@@ -169,6 +266,4 @@ round(2.5)
 round(4.5)
 round(5.5)
 ```
-
 :::
-
