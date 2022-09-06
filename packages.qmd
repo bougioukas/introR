@@ -212,3 +212,46 @@ What `here()` does is tell R that the file structure starts at the Project-level
 
 The relative path from inside the project folder (`data/covid19.csv`) is the same on both computers; any code that uses relative paths will work on both!
 
+
+
+
+
+## The {reprex} package
+
+If we are looking for help with an rstats problem, it is recommend that we:
+
+\faArrowAltCircleRight {} do *not* email an individual author or open source software (OSS) maintainer
+
+\faArrowAltCircleRight {} create a minimum reproducible example (a reprex) demonstrating your problem
+
+\faArrowAltCircleRight {} post on a public forum like RStudio Community or Stack Overflow
+
+
+### What is a reprex?
+
+The purpose of a reprex is to illustrate a particular outcome. The reader should know what outcome to expect. The reprex should do that one thing, and only that thing.
+
+The reprex should be able to be run by any user who so wishes and return the exact same result.
+
+It contains only the functions that are absolutely necessary to illustrate the point. If this is in the context of data analysis, the included dataset is as small as possible.
+
+
+
+### Why would we need a reprex?
+
+1. To demonstrate an issue or bug in our code
+
+2. To demonstrate a solution to an issue or bug in someone else’s code
+
+3. To document a useful snippet of code for future reference
+
+
+
+### Using the `reprex` package
+
+If we install `reprex` package we can use a function, `reprex()`
+to generate clean example code, with commented output. Of course, we need to create the minimal code our-self, but once we have it, calling the reprex function adds in the output so that others can see exactly what our computer returned. It’s a minor change but can make all the difference to someone who wants to help us.
+
+
+![A reprex example.](images/reprex_example.png){#fig-reprex_example width="90%"}
+

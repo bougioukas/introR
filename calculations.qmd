@@ -267,3 +267,151 @@ round(4.5)
 round(5.5)
 ```
 :::
+
+
+
+## Floating point number
+
+When dealing with real numbers [floating point number](http://en.wikipedia.org/wiki/Floating_point), we must be very careful when checking equality.
+
+For example, we know from trigonometry that:
+
+$$\cos(\frac{\pi}{2}) = \cos( \frac{3 \pi}{2}) = 0  $$
+
+
+However, if we compare the two numbers we get:
+
+```{r}
+cos(pi/2) == cos(3*pi/2)
+```
+
+
+In this instance, we can test for ‘near equality’ applying the `all.equal()` function which tests for equality with a difference tolerance of 1.5e-8. 
+
+```{r}
+all.equal(cos(pi/2), cos(3*pi/2))
+```
+
+
+If the difference is greater than the tolerance level 1.5e-8 the function will return the mean relative difference.
+
+Try to test this:
+
+```{r}
+#| eval: false
+
+all.equal(4.0000007, 4.0000008)
+```
+
+
+
+
+::: callout-important
+## Don't use **==** to compare two numbers
+
+We should never use **==** to compare two numbers unless they are integers (whole numbers) or fractions whose denominator is a power of 2 ($2^n$, where n is integer).
+Computers may only represent decimal numbers with a certain degree of precision (rounded to typically 53 binary digits accuracy which allows representing decimal numbers to 15 or 16 significant digits), so two numbers which look the same when printed out by R, may actually have different underlying representations and therefore be different by a small margin of error (called Machine numeric tolerance).
+
+:::
+
+
+
+
+
+## Scientific notation
+
+Scientific notation is a special way of expressing numbers that are too big or too small to be conveniently written in decimal form. Generally, it expresses numbers in forms of $m \times 10^n$ and R uses the **e** notation. 
+
+::: {.callout-note icon="false"}
+## Examples
+
+* 0.0055 is written $5.5 \times 10^{-3}$  
+because 0.0055 = 5.5 × 0.001 = 5.5 × $10^{-3}$ or 5.5e-3
+
+* 0.000000015 is written $1.5 \times 10^{-8}$   
+because 0.000000015 = 1.5 × 0.00000001 = 1.5 × $10^{-8}$ or 1.5e-8
+
+
+* 5500 is written $5.5 \times 10^{3}$  
+because 5500 = 5.5 × 1000 = 5.5 × $10^{3}$ or 5.5e3
+
+* 150000000 is written $1.5 \times 10^{8}$  
+because 150000000 = 1.5 × 100000000 = 1.5 × $10^{8}$ or 1.5e8
+
+:::
+
+
+::: callout-important
+## Scientific notation Vs Euler's number
+
+Note that the *e* notation has nothing to do with the Euler's number *e=2.718* .
+
+:::
+
+
+ 
+
+## Special values in R
+
+There are a few special values that are used in R.
+
+
+### Missing values (NA)
+
+For example, in the real world, missing values may occur when recording sensor information. R uses a special numeric value `NA` standing for "Not available". Mathematical operations using `NA` produces `NA`:
+
+```{r}
+cos(NA)
+```
+
+
+ 
+
+
+### Infinitive: -Inf  or Inf
+
+There is also a special number `Inf` which represents infinity. Fortunately, R has special numbers for this.
+
+This allows us to represent entities like: 
+
+```{r}
+1/0
+```
+
+
+
+The `Inf` can also be used in ordinary calculations:
+
+```{r}
+exp(-Inf)
+```
+
+
+ 
+
+### Not A Number (NaN)
+
+The value NaN (stands for "not a number") represents an undefined value and it is usually the product of some arithmetic operations. For example:
+
+```{r}
+Inf/Inf
+```
+
+
+
+```{r}
+0/0
+```
+
+
+```{r}
+cos(Inf)
+```
+
+
+ 
+
+### NULL
+
+Additionally, there is a null object in R, represented by the symbol NULL. (The symbol NULL always points to the same object.) NULL is often used as an argument in functions to mean that no value was assigned to the argument. Additionally, some functions may return NULL. Note that NULL is not the same as NA, Inf, -Inf, or NaN.
+
