@@ -18,6 +18,7 @@ book:
         - functions.qmd
         - packages.qmd
         - calculations.qmd
+        - objects.qmd
 
     - part: "Special Topics"
       chapters:

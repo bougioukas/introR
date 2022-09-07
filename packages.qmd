@@ -5,6 +5,8 @@
 
 library(tidyverse)
 
+library(fontawesome)
+
 library(kableExtra)
 
 ```
@@ -98,13 +100,11 @@ Recall that after we've installed a package, we need to **load it**. In other wo
 library(rstatix)
 ```
 
-
 If after running the earlier code, a blinking cursor returns next to the `>` "prompt" sign in console, it means we were successful and the `rstatix` package is now loaded and ready to use. If however, we get a red "error message" that reads...
 
 `r text_spec("Error in library(rstatix) : there is no package called ‘rstatix’", color = "red")`
 
 ... it means that we didn't successfully install it.
-
 
 There is one way in R that can use a `function` without using `library()`. To do this, we can simply use the notation `package::function` .
 
@@ -126,9 +126,7 @@ The above notation tells R to use the `t_test` function from `rstatix` without l
 There is always confusion between a package and a library, and we find people calling libraries as packages. The directories in R where the packages are stored are called the libraries.
 :::
 
-
  
-
 
 ## The `{tidyverse}` package
 
@@ -141,37 +139,31 @@ The command `install.packages("tidyverse")` will **install** the complete tidyve
 tidyverse_packages()
 ```
 
-
 When we **load** the tidyverse package with the command `library(tidyverse)`, R will load the **core tidyverse** and make it available in our current R session (@fig-tidyverse_packages):
 
 ![Hex logos for the eight core tidyverse packages and their primary purposes (Image from Mine Çetinkaya-Rundel).](images/tidyverse_packages.png){#fig-tidyverse_packages width="90%"}
 
-
 ::: callout-tip
 ## Add-on R packages
 
-The `tidyverse` packages out of the core list have more specialized usage and are not loaded automatically with library(tidyverse), so we’ll need to load each one with its own call to `library()`.
-
+The `tidyverse` packages out of the core list have more specialized usage and are not loaded automatically with library(tidyverse), so we'll need to load each one with its own call to `library()`.
 :::
-
 
  
 
 ## The `{here}` package
 
-We’ve talked about what Projects are and why we should use them, but what really makes Projects in RStudio shine is the use of the `here()` function from the {here} package. What `here()` does is eliminate the need for us to do what’s called “hard-coding” our file path. 
+We've talked about what Projects are and why we should use them, but what really makes Projects in RStudio shine is the use of the `here()` function from the {here} package. What `here()` does is eliminate the need for us to do what's called "hard-coding" our file path.
 
-> The place where the file lives on our computer is called the *path*. We can think of the path as directions to the file. There are two kinds of paths: **absolute paths** and **relative paths**. 
-
+> The place where the file lives on our computer is called the *path*. We can think of the path as directions to the file. There are two kinds of paths: **absolute paths** and **relative paths**.
 
 For example, suppose Alice and Bob are working on a project together and want to read in R studio of their computers a data set file named `covid19.csv` data. They could do this using either a relative or an absolute path. We show what both choices below:
 
-
 **A. Reading data using an absolute path**
 
-Alice’s file is stored at `C:/alice/project/data/covid19.csv`
+Alice's file is stored at `C:/alice/project/data/covid19.csv`
 
-and the command in R script should be: 
+and the command in R script should be:
 
 ```{r}
 #| eval: false
@@ -179,11 +171,9 @@ and the command in R script should be:
 covid19 <- read_csv("C:/alice/project/data/covid19.csv")  
 ```
 
+while Bob's is stored at `C:/bob/project/data/covid19.csv`
 
-
-while Bob’s is stored at `C:/bob/project/data/covid19.csv`
-
-and the command in R script should be:  
+and the command in R script should be:
 
 ```{r}
 #| eval: false
@@ -191,15 +181,13 @@ and the command in R script should be:
 covid19 <- read_csv("C:/bob/project/data/covid19.csv")
 ```
 
-
-
-Even though Alice and Bob stored their files in the same place on their computers (in their `C` disk), the absolute paths are different due to their different usernames. If Bob has code that loads the `covid19.csv` data using an absolute path, the code won’t work on Alice’s computer.
+Even though Alice and Bob stored their files in the same place on their computers (in their `C` disk), the absolute paths are different due to their different usernames. If Bob has code that loads the `covid19.csv` data using an absolute path, the code won't work on Alice's computer.
 
  
 
 **B. Reading data using a relative path**
 
-The command in R script should be:  
+The command in R script should be:
 
 ```{r}
 #| eval: false
@@ -207,25 +195,20 @@ The command in R script should be:
 covid19 <- read_csv(here("data", "covid19.csv"))
 ```
 
-
-What `here()` does is tell R that the file structure starts at the Project-level, and so every subsequent call starts at the Project-level, and allows us to navigate throughout each of the folders and files within a given Project.  
+What `here()` does is tell R that the file structure starts at the Project-level, and so every subsequent call starts at the Project-level, and allows us to navigate throughout each of the folders and files within a given Project.
 
 The relative path from inside the project folder (`data/covid19.csv`) is the same on both computers; any code that uses relative paths will work on both!
-
-
-
-
 
 ## The {reprex} package
 
 If we are looking for help with an rstats problem, it is recommend that we:
 
-\faArrowAltCircleRight {} do *not* email an individual author or open source software (OSS) maintainer
 
-\faArrowAltCircleRight {} create a minimum reproducible example (a reprex) demonstrating your problem
+`r fa("arrow-right", fill = "orange")` \ do *not* email an individual author or open source software (OSS) maintainer
 
-\faArrowAltCircleRight {} post on a public forum like RStudio Community or Stack Overflow
+`r fa("arrow-right", fill = "orange")` \  create a minimum reproducible example (a reprex) demonstrating your problem
 
+`r fa("arrow-right", fill = "orange")` \  post on a public forum like RStudio Community or Stack Overflow
 
 ### What is a reprex?
 
@@ -235,23 +218,16 @@ The reprex should be able to be run by any user who so wishes and return the exa
 
 It contains only the functions that are absolutely necessary to illustrate the point. If this is in the context of data analysis, the included dataset is as small as possible.
 
-
-
 ### Why would we need a reprex?
 
-1. To demonstrate an issue or bug in our code
+1.  To demonstrate an issue or bug in our code
 
-2. To demonstrate a solution to an issue or bug in someone else’s code
+2.  To demonstrate a solution to an issue or bug in someone else's code
 
-3. To document a useful snippet of code for future reference
-
-
+3.  To document a useful snippet of code for future reference
 
 ### Using the `reprex` package
 
-If we install `reprex` package we can use a function, `reprex()`
-to generate clean example code, with commented output. Of course, we need to create the minimal code our-self, but once we have it, calling the reprex function adds in the output so that others can see exactly what our computer returned. It’s a minor change but can make all the difference to someone who wants to help us.
-
+If we install `reprex` package we can use a function, `reprex()` to generate clean example code, with commented output. Of course, we need to create the minimal code our-self, but once we have it, calling the reprex function adds in the output so that others can see exactly what our computer returned. It's a minor change but can make all the difference to someone who wants to help us.
 
 ![A reprex example.](images/reprex_example.png){#fig-reprex_example width="90%"}
-

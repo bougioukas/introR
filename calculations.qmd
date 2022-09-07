@@ -1,23 +1,28 @@
 # Calculations {#sec-calculations}
 
-```{r}
-#| include: false
-
-library(tidyverse)
-
-library(kableExtra)
-
-```
-
 ## Using R as a calculator
 
 The simplest thing we could do with R is arithmetic operations with numbers. For example:
 
 ```{r}
-1 + 100
+# example of an arithmetic operation
+# addition
+
+1 + 100    # the `+` sign is the symbol of addition
 ```
 
-R printed out the answer, with a preceding `[1]`.
+R printed out the result, with a preceding `[1]`.
+
+
+
+::: callout-tip
+## Comments start with \#
+Comments can be used to explain R code, and to make it more readable. It can also be used to prevent execution when testing alternative code. **Comments start with a `#`** . When executing the R-code, R will ignore anything that starts with #. It is considered good practice to comment our code when working in an `.R` script.
+
+Keyboard Shortcut for commenting out/commenting in **multiple lines** at a
+time: **Control+Shift+C**
+
+:::
 
  
 
@@ -64,8 +69,6 @@ Use parentheses to group operations in order to force the order of evaluation if
 (3 + 5) * 2
 ```
 
-\vspace{12pt}
-
 This can get unwieldy when not needed, but clarifies our intentions. Remember that others may later read our code.
 
 ```{r}
@@ -76,10 +79,8 @@ This can get unwieldy when not needed, but clarifies our intentions. Remember th
 3 + 5 * (2 ^ 2)     # if we forget some rules, this might help
 ```
 
-::: callout-important
-## Comments with \#
-
-The text after each line of code is called a **comment**. Anything that follows after the hash symbol **`#`** is ignored by R when it executes code. It is considered good practice to comment your code when working in an `.R` script.
+::: {.callout-important}
+Remember that the text after each line of code is a **comment**. Anything that follows after the hash symbol **`#`** is ignored by R when executes code. 
 :::
 
  
@@ -128,7 +129,6 @@ The text after each line of code is called a **comment**. Anything that follows 
 :::
 
  
-
 
 ## Floating point number
 

@@ -176,6 +176,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./calculations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculations</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./objects.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R objects</span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -188,7 +193,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lab1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">LAB II: Descriptive Statistics</span></a>
+  <a href="./lab1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">LAB II: Descriptive Statistics</span></a>
   </div>
 </li>
       </ul>
@@ -285,7 +290,7 @@ Add-on R packages
 <li>Click “Install.”</li>
 </ol>
 <div id="fig-installation" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/installation.png" class="lightbox" title="Installing packages in R the easy way" data-gallery="quarto-lightbox-gallery-1"><img src="images/installation.png" class="img-fluid figure-img" style="width:55.0%"></a></p>
+<figure class="figure"><p><a href="images/installation.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Installing packages in R the easy way"><img src="images/installation.png" class="img-fluid figure-img" style="width:55.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure 3.1: Installing packages in R the easy way</figcaption><p></p>
 </figure>
 </div>
@@ -350,7 +355,7 @@ Packages Vs Libraries
 </div>
 <p>When we <strong>load</strong> the tidyverse package with the command <code><a href="https://tidyverse.tidyverse.org">library(tidyverse)</a></code>, R will load the <strong>core tidyverse</strong> and make it available in our current R session (<a href="#fig-tidyverse_packages">Figure&nbsp;<span>3.2</span></a>):</p>
 <div id="fig-tidyverse_packages" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/tidyverse_packages.png" class="lightbox" title="Hex logos for the eight core tidyverse packages and their primary purposes (Image from Mine Çetinkaya-Rundel)." data-gallery="quarto-lightbox-gallery-2"><img src="images/tidyverse_packages.png" class="img-fluid figure-img" style="width:90.0%"></a></p>
+<figure class="figure"><p><a href="images/tidyverse_packages.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Hex logos for the eight core tidyverse packages and their primary purposes (Image from Mine Çetinkaya-Rundel)."><img src="images/tidyverse_packages.png" class="img-fluid figure-img" style="width:90.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure 3.2: Hex logos for the eight core tidyverse packages and their primary purposes (Image from Mine Çetinkaya-Rundel).</figcaption><p></p>
 </figure>
 </div>
@@ -398,9 +403,9 @@ Add-on R packages
 </section><section id="the-reprex-package" class="level2" data-number="3.6"><h2 data-number="3.6" class="anchored" data-anchor-id="the-reprex-package">
 <span class="header-section-number">3.6</span> The {reprex} package</h2>
 <p>If we are looking for help with an rstats problem, it is recommend that we:</p>
-<p> do <em>not</em> email an individual author or open source software (OSS) maintainer</p>
-<p> create a minimum reproducible example (a reprex) demonstrating your problem</p>
-<p> post on a public forum like RStudio Community or Stack Overflow</p>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></path></svg> &nbsp;do <em>not</em> email an individual author or open source software (OSS) maintainer</p>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></path></svg> &nbsp; create a minimum reproducible example (a reprex) demonstrating your problem</p>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></path></svg> &nbsp; post on a public forum like RStudio Community or Stack Overflow</p>
 <section id="what-is-a-reprex" class="level3"><h3 class="anchored" data-anchor-id="what-is-a-reprex">What is a reprex?</h3>
 <p>The purpose of a reprex is to illustrate a particular outcome. The reader should know what outcome to expect. The reprex should do that one thing, and only that thing.</p>
 <p>The reprex should be able to be run by any user who so wishes and return the exact same result.</p>
@@ -413,7 +418,7 @@ Add-on R packages
 </ol></section><section id="using-the-reprex-package" class="level3"><h3 class="anchored" data-anchor-id="using-the-reprex-package">Using the <code>reprex</code> package</h3>
 <p>If we install <code>reprex</code> package we can use a function, <code>reprex()</code> to generate clean example code, with commented output. Of course, we need to create the minimal code our-self, but once we have it, calling the reprex function adds in the output so that others can see exactly what our computer returned. It’s a minor change but can make all the difference to someone who wants to help us.</p>
 <div id="fig-reprex_example" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/reprex_example.png" class="lightbox" title="A reprex example." data-gallery="quarto-lightbox-gallery-3"><img src="images/reprex_example.png" class="img-fluid figure-img" style="width:90.0%"></a></p>
+<figure class="figure"><p><a href="images/reprex_example.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="A reprex example."><img src="images/reprex_example.png" class="img-fluid figure-img" style="width:90.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure 3.3: A reprex example.</figcaption><p></p>
 </figure>
 </div>
@@ -544,7 +549,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":true});</script>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":true,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});</script>
 
 
 </body></html>
