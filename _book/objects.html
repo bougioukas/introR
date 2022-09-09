@@ -244,7 +244,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Attributes of an object (if any) can be accessed using the <code><a href="https://rdrr.io/r/base/attributes.html">attributes()</a></code> function. Not all R objects contain attributes, in which case the <code><a href="https://rdrr.io/r/base/attributes.html">attributes()</a></code> function returns <code>NULL</code>.</p>
 <p>For example, the attributes of the famous <code>iris</code> data set is a <code>data.frame</code> that contains 150 rows and 5 columns:</p>
 <div class="cell">
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span>   <span class="co"># Note: R commands can be separated by a semicolon</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "data.frame"</code></pre>
 </div>
@@ -271,13 +271,13 @@ $row.names
 [145] 145 146 147 148 149 150</code></pre>
 </div>
 </div>
-<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Tip
+Avoid to separate R commands with a semicolon
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -307,7 +307,7 @@ Tip
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Tip
+Remember
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -329,13 +329,13 @@ Tip
 </div>
 </div>
 <p>&nbsp;</p>
-<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-tip callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Space before and after operators
+Use space before and after operators (<em>Highly Recommended</em>)
 </div>
 </div>
 <div class="callout-body-container callout-body">

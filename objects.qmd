@@ -18,13 +18,14 @@ Attributes of an object (if any) can be accessed using the `attributes()` functi
 For example, the attributes of the famous `iris` data set is a `data.frame` that contains 150 rows and 5 columns:
 
 ```{r}
-class(iris); dim(iris)
+class(iris); dim(iris)   # Note: R commands can be separated by a semicolon
 attributes(iris)
 ```
 
-::: callout-tip
-R commands are usually separated by a new line but they can also be separated by a semicolon (**;**). However, this is bad practice and should be avoided wherever possible: it can lead to code that is
-difficult to follow.
+::: callout-important
+## Avoid to separate R commands with a semicolon
+
+R commands are usually separated by a new line but they can also be separated by a semicolon (**;**). However, this is bad practice and should be avoided wherever possible: it can lead to code that is difficult to follow.
 :::
 
 ## Named storage of objects
@@ -50,6 +51,8 @@ If we look for the `Environment` tab in one of the panes of RStudio, we will see
  
 
 ::: callout-tip
+## Remember
+
 Surrounding the assignment with parentheses results in both assignment and print to screen to happen. For example:
 
 ```{r}
@@ -67,8 +70,8 @@ log(x)
 
  
 
-::: callout-important
-## Space before and after operators
+::: callout-tip
+## Use space before and after operators (*Highly Recommended*) 
 
 It is important the space before and after comparison operators and assignments. For example, suppose we want to code the expression `x smaller than -1/50` (note that `x` is `1/40`):
 

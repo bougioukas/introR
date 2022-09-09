@@ -177,6 +177,8 @@ R has many built in mathematical functions such as the `log(x)` that we have alr
 
 ### Logarithms and exponentials
 
+ 
+
 ![The natural logarithm function ln(x) is the inverse of the exponential function y = e\^x](images/log_exp.png){#fig-log_exp width="50%"}
 
 ::: {.callout-note icon="false"}
