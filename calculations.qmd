@@ -123,7 +123,7 @@ But don’t forget to put brackets around the expression for which we want to ca
 
 
 
-Some simple comparisons with integer numbers follows:
+Some simple comparisons with integer numbers follow:
 
 ::: {.callout-note icon="false"}
 ## Examples

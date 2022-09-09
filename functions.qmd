@@ -216,7 +216,7 @@ $$ sin(\theta)=\frac{opposite}{hypotenuse} $$ {#eq-sin} $$ cos(\theta)=\frac{adj
 ## Examples: Trigonometric functions in R (angles in radians)
 
 ```{r}
-sin(pi/2) 
+sin(pi/2)  # pi equals to 3.14
 
 cos(pi)
 
