@@ -15,7 +15,6 @@ We have already used some R functions searching for help (i.e., `help()`, `examp
 
 where `arg1, arg2,` ... are called the arguments of the function, whereas `value1` is the value given to the argument arg1, etc.
 
-
 ::: callout-tip
 ## Call a function
 
@@ -150,7 +149,6 @@ log(exp(1), 3)
 calculates the logarithm of exp(1) in base 3.
 :::
 
-
  
 
 Not all functions have (or require) arguments.
@@ -171,12 +169,9 @@ date()
 
  
 
-
-
 ## Mathematical functions
 
 R has many built in mathematical functions such as the `log(x)` that we have already seen.
-
 
 ### Logarithms and exponentials
 
@@ -228,7 +223,6 @@ tan(pi/3)
 :::
 
  
-
 
 ### Other mathematical functions
 

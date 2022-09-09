@@ -203,12 +203,11 @@ The relative path from inside the project folder (`data/covid19.csv`) is the sam
 
 If we are looking for help with an rstats problem, it is recommend that we:
 
+`r fa("arrow-right", fill = "orange")`  do *not* email an individual author or open source software (OSS) maintainer
 
-`r fa("arrow-right", fill = "orange")` \ do *not* email an individual author or open source software (OSS) maintainer
+`r fa("arrow-right", fill = "orange")`   create a minimum reproducible example (a reprex) demonstrating your problem
 
-`r fa("arrow-right", fill = "orange")` \  create a minimum reproducible example (a reprex) demonstrating your problem
-
-`r fa("arrow-right", fill = "orange")` \  post on a public forum like RStudio Community or Stack Overflow
+`r fa("arrow-right", fill = "orange")`   post on a public forum like RStudio Community or Stack Overflow
 
 ### What is a reprex?
 

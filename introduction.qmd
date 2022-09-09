@@ -94,16 +94,19 @@ Well, R gave us a response (output) to our input (`14 + 16`). That response came
 
 ## R scripts
 
-Usually, we do our programming by writing our code in script files. An R script (with the ".R" extension) is simply a text file in which our R code is stored, and then can be "sent" to the console, where R will execute it.
 
-If we go to:
+### Open a new R script
+
+Usually, we do our programming by writing our code in script files. An R script (with the `.R` extension) is simply a text file in which our R code is stored, and then can be "sent" to the console, where R will execute it.
+
+In the RStudio menu, we go to:
 
 ```{mermaid}
 flowchart LR
   A[File] -.-> B(New File) -.-> C(R Script)
 ```
 
-in the RStudio menu, we should see another pane (Q1) opened on the left above the interactive console [@fig-RStudio_4panels]. This is where we can write a length script with lots of lines of code, and save the file for future use.
+Another pane (Q1) is opened on the left above the interactive console [@fig-RStudio_4panels]. This is where we can write a length script with lots of lines of code, and save the file for future use.
 
 ![RStudio Screenshot with four panes.](images/RStudio_4panels.png){#fig-RStudio_4panels width="100%"}
 
@@ -114,8 +117,8 @@ Therefore, the RStudio window is divided into **four** panes (quadrants) that co
 -   Q3 - environment (workspace), history
 -   Q4 - files, plots, packages, help, viewer (for local web content)
 
-::: callout-tip
-## Layout of the panes
+We can change the **shape** of the panes by either clicking the minimize or maximize buttons on the top right of each pane, or by clicking and dragging the middle of the borders of the windows.
+
 
 The four panes might be in a different order that those in @fig-RStudio_4panels. If we'd like, we can change the **order** of the windows under RStudio preferences. We select from RStudio menu:
 
@@ -124,10 +127,29 @@ flowchart LR
   A[Tools] -.-> B(Global Options) -.-> C(Pane layout)
 ```
 
-We can also change their **shape** by either clicking the minimize or maximize buttons on the top right of each pane, or by clicking and dragging the middle of the borders of the windows.
+ 
+
+
+### Execute the code written in R script
+
+Now, let's type `14 + 16` at a new R script and press the **run** button ![](images/run.png){#fig-run width="8%"}. The result is printed in the console:
+
+![The script pane.](images/script.png){#fig-script width="100%"}
+
+
+:::{.callout-tip}
+In `.R` script, we can execute our code line by line (by putting the cursor on the line) or selecting a chunk of lines (by highlighting the text) and pressing the **run** button in the source window. We can also run our selected code using the **keywboard shortcut `Ctrl + Enter`**.
 :::
 
-In Rscript, we can execute our code line by line by putting the cursor on the line or selecting a chunk of lines (by highlighting the text) and pressing the **run** button ![](images/run.png){#fig-run width="8%"} in the source window. We can also run our selected code using the **keywboard shortcut `Ctrl + Enter`**.
+
+
+Comments can also be used to explain R code, and to make it more readable (it can also be used to prevent execution when testing alternative code). **Comments start with a `#`** . When executing the R-code, R will ignore anything that starts with #. It is considered good practice to comment our code when working in an `.R` script.
+
+Keyboard Shortcut for commenting out/commenting in **multiple lines** at a time: **Control+Shift+C**
+
+
+ 
+
 
 ::: callout-tip
 ## Advantages writing our R code as an R script file
@@ -137,6 +159,10 @@ In Rscript, we can execute our code line by line by putting the cursor on the li
 -   We can share our work with others
 -   We can move beyond writing one line of code at a time
 :::
+
+
+ 
+
 
 ## Errors, warnings, and messages in R
 
