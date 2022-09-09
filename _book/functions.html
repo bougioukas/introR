@@ -407,7 +407,7 @@ Caution
 <div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/date.html">date</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Fri Sep  9 19:41:00 2022"</code></pre>
+<pre><code>[1] "Fri Sep  9 21:56:14 2022"</code></pre>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -416,7 +416,7 @@ Caution
 <p>Functions “live” in Base R and in R packages!</p>
 </blockquote>
 <div id="fig-packages" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/packages.png" class="lightbox" title="Functions live inside the R packages that can be downloaded from the internet" data-gallery="quarto-lightbox-gallery-1"><img src="images/packages.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<figure class="figure"><p><a href="images/packages.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Functions live inside the R packages that can be downloaded from the internet"><img src="images/packages.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure 2.1: Functions live inside the R packages that can be downloaded from the internet</figcaption><p></p>
 </figure>
 </div>
@@ -424,9 +424,10 @@ Caution
 </section><section id="mathematical-functions" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="mathematical-functions">
 <span class="header-section-number">2.2</span> Mathematical functions</h2>
 <p>R has many built in mathematical functions such as the <code>log(x)</code> that we have already seen.</p>
+<p>&nbsp;</p>
 <section id="logarithms-and-exponentials" class="level3"><h3 class="anchored" data-anchor-id="logarithms-and-exponentials">Logarithms and exponentials</h3>
 <div id="fig-log_exp" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/log_exp.png" class="lightbox" title="The natural logarithm function ln(x) is the inverse of the exponential function y = e^x" data-gallery="quarto-lightbox-gallery-2"><img src="images/log_exp.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
+<figure class="figure"><p><a href="images/log_exp.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="The natural logarithm function ln(x) is the inverse of the exponential function y = e^x"><img src="images/log_exp.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure 2.2: The natural logarithm function ln(x) is the inverse of the exponential function y = e^x</figcaption><p></p>
 </figure>
 </div>
@@ -462,12 +463,12 @@ Examples: Logarithms and exponentials
 <div id="fig-elephants" class="quarto-layout-panel">
 <figure class="figure"><div class="quarto-layout-row quarto-layout-valign-top">
 <div id="fig-triangle" class="quarto-figure quarto-figure-center anchored" style="flex-basis: 55.6%;justify-content: center;">
-<figure class="figure"><p><a href="images/triangle.png" class="lightbox" title="Right-Angled Triangle" data-gallery="quarto-lightbox-gallery-3"><img src="images/triangle.png" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="images/triangle.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Right-Angled Triangle"><img src="images/triangle.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">(a) Right-Angled Triangle</figcaption><p></p>
 </figure>
 </div>
 <div id="fig-trig_circle" class="quarto-figure quarto-figure-center anchored" style="flex-basis: 44.4%;justify-content: center;">
-<figure class="figure"><p><a href="images/trig_circle.png" class="lightbox" title="Trigonometric circle" data-gallery="quarto-lightbox-gallery-4"><img src="images/trig_circle.png" class="img-fluid figure-img"></a></p>
+<figure class="figure"><p><a href="images/trig_circle.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Trigonometric circle"><img src="images/trig_circle.png" class="img-fluid figure-img"></a></p>
 <p></p><figcaption class="figure-caption">(b) Trigonometric circle</figcaption><p></p>
 </figure>
 </div>
@@ -580,17 +581,36 @@ Round rule when the dropped digit is 5
 </div>
 </div>
 </div>
+<p>There are a couple of further functions that can be useful:</p>
+<div class="cell">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">ceiling</a></span><span class="op">(</span><span class="fl">16.2</span><span class="op">)</span>       <span class="co"># round to the nearest integer above</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 17</code></pre>
+</div>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="fl">16.2</span><span class="op">)</span>         <span class="co"># round to the nearest integer below</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 16</code></pre>
+</div>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">trunc</a></span><span class="op">(</span><span class="fl">125.2395</span><span class="op">)</span>     <span class="co">#  truncates that values in the decimal places</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 125</code></pre>
+</div>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span> <span class="op">(</span><span class="fl">271821</span>, <span class="fl">3</span><span class="op">)</span>  <span class="co"># round to the specified number of significant digits</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 272000</code></pre>
+</div>
+</div>
 <p>&nbsp;</p>
 </section></section><section id="the-sessioninfo-and-option-functions" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="the-sessioninfo-and-option-functions">
 <span class="header-section-number">2.3</span> The sessionInfo() and option() functions</h2>
 <p>We can obtain information about R, the OS and attached or loaded packages running the following function:</p>
 <div class="cell">
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>&nbsp;</p>
 <p>Additionally, the <code><a href="https://rdrr.io/r/base/options.html">options()</a></code> function in R can be used to change various default behaviors. For example, the digits argument controls the number of digits to display in output. The current options are returned when <code><a href="https://rdrr.io/r/base/options.html">options()</a></code> is called, to allow them to be restored. The command <code><a href="https://rdrr.io/r/base/options.html">help(options)</a></code> lists all of the set table options.</p>
 <div class="cell">
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span><span class="op">(</span><span class="va">options</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span><span class="op">(</span><span class="va">options</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>&nbsp;</p>
 </section><section id="user-defined-functions-udf" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="user-defined-functions-udf">
@@ -598,7 +618,7 @@ Round rule when the dropped digit is 5
 <p>We can create our own functions, using the <strong><code>function()</code></strong>, which is a very powerful way to extend R. <a href="#fig-fun_syntax">Figure&nbsp;<span>2.4</span></a> displays the syntax for creating an R function.</p>
 <p>&nbsp;</p>
 <div id="fig-fun_syntax" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/fun_syntax.png" class="lightbox" title="The syntax of a function in R" data-gallery="quarto-lightbox-gallery-5"><img src="images/fun_syntax.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<figure class="figure"><p><a href="images/fun_syntax.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="The syntax of a function in R"><img src="images/fun_syntax.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure 2.4: The syntax of a function in R</figcaption><p></p>
 </figure>
 </div>
@@ -622,7 +642,7 @@ What do we need to create a function?
 </div>
 <p>For example a function that convert Celsius to Kelvin is:</p>
 <div class="cell">
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">celsius_to_kelvin</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">temp_C</span><span class="op">)</span> <span class="op">{</span></span>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">celsius_to_kelvin</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">temp_C</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">temp_K</span> <span class="op">&lt;-</span> <span class="va">temp_C</span> <span class="op">+</span> <span class="fl">273.15</span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">temp_K</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
@@ -654,18 +674,18 @@ What do we need to create a function?
 </ol>
 <p>While the formals and body are specified <strong>explicitly</strong> when you create a function, the environment is specified implicitly, based on <strong>where</strong> we defined the function. The function environment always exists, but it is only printed when the function isn’t defined in the R global environment. For example:</p>
 <div class="cell">
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/formals.html">formals</a></span><span class="op">(</span><span class="va">celsius_to_kelvin</span><span class="op">)</span>         <span class="co"># the argument of the function</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/formals.html">formals</a></span><span class="op">(</span><span class="va">celsius_to_kelvin</span><span class="op">)</span>         <span class="co"># the argument of the function</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$temp_C</code></pre>
 </div>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/body.html">body</a></span><span class="op">(</span><span class="va">celsius_to_kelvin</span><span class="op">)</span>            <span class="co"># the code of the function</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/body.html">body</a></span><span class="op">(</span><span class="va">celsius_to_kelvin</span><span class="op">)</span>            <span class="co"># the code of the function</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{
     temp_K &lt;- temp_C + 273.15
     return(temp_K)
 }</code></pre>
 </div>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/environment.html">environment</a></span><span class="op">(</span><span class="va">celsius_to_kelvin</span><span class="op">)</span>     <span class="co"># the function's environment</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/environment.html">environment</a></span><span class="op">(</span><span class="va">celsius_to_kelvin</span><span class="op">)</span>     <span class="co"># the function's environment</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;environment: R_GlobalEnv&gt;</code></pre>
 </div>
@@ -800,7 +820,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","loop":true,"selector":".lightbox","closeEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","loop":true,"closeEffect":"zoom","descPosition":"bottom"});</script>
 
 
 </body></html>

@@ -173,6 +173,8 @@ date()
 
 R has many built in mathematical functions such as the `log(x)` that we have already seen.
 
+ 
+
 ### Logarithms and exponentials
 
 ![The natural logarithm function ln(x) is the inverse of the exponential function y = e\^x](images/log_exp.png){#fig-log_exp width="50%"}
@@ -271,6 +273,22 @@ round(4.5)
 round(5.5)
 ```
 :::
+
+
+There are a couple of further functions that can be useful:
+
+```{r}
+
+ceiling(16.2)       # round to the nearest integer above
+
+floor(16.2)         # round to the nearest integer below
+
+trunc(125.2395)     #  truncates that values in the decimal places
+
+signif (271821, 3)  # round to the specified number of significant digits
+
+```
+
 
  
 

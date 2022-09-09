@@ -35,10 +35,10 @@ From highest to lowest precedence:
 
 -   Parentheses: `( )`
 -   Exponents: `^` or `**`
--   Divide: `/`
--   Multiply: `*`
--   Add: `+`
--   Subtract: `-`
+-   Division: `/`
+-   Multiplication: `*`
+-   Addition: `+`
+-   Subtraction: `-`
 
 Therefore:
 
@@ -70,11 +70,45 @@ This can get unwieldy when not needed, but clarifies our intentions. Remember th
 Remember that the text after each line of code is a **comment**. Anything that follows after the hash symbol **`#`** is ignored by R when executes code.
 :::
 
+
+ 
+
+
+### Modular arithmetic
+
+Suppose we want to know the integer part of a division: say, how many 13s there are in 119:
+
+```{r}
+119 %/% 13
+```
+
+
+Now suppose we wanted to know the remainder (what is left over when 119 is divided by 13): in maths this is known as 119 modulo 13, and the value 13 is known as the modulus:
+
+```{r}
+119 %% 13
+```
+
+Modulo is very useful for testing whether one number is an exact multiple of some other number. For example, to find out whether 15421 is a multiple of 7:
+
+```{r}
+15421 %% 7
+```
+It is as there is no remainder. We can then carry out more complex modular arithmetic:
+
+```{r}
+(123 + 456) %% 19
+```
+
+But don’t forget to put brackets around the expression for which we want to carry out the modular calculation.
+
+
+
  
 
 ## Relational Operators in R
 
-**Relational (or comparison) operators** are used to compare between values. Here is a list of relational operators available in R (@tbl-relational_operators).
+**Relational (or comparison) operators** are used to compare between values. Comparisons in R typically evaluate to `TRUE` or `FALSE` (which in certain circumstances we can abbreviate to `T` and `F`). Here is a list of relational operators available in R (@tbl-relational_operators).
 
 | **symbol** | **read as**              |
 |------------|:-------------------------|
@@ -86,6 +120,10 @@ Remember that the text after each line of code is a **comment**. Anything that f
 | !=         | not equal to             |
 
 : Relational (comparison) operators in R {#tbl-relational_operators}
+
+
+
+Some simple comparisons with integer numbers follows:
 
 ::: {.callout-note icon="false"}
 ## Examples

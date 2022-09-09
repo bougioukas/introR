@@ -23,7 +23,8 @@ attributes(iris)
 ```
 
 ::: callout-tip
-R commands are usually separated by a new line but they can also be separated by a semicolon (**;**).
+R commands are usually separated by a new line but they can also be separated by a semicolon (**;**). However, this is bad practice and should be avoided wherever possible: it can lead to code that is
+difficult to follow.
 :::
 
 ## Named storage of objects
@@ -37,8 +38,6 @@ For example, suppose we would like to store the number `1/40` for future use. We
 ```{r}
 x <- 1/40
 ```
-
-
 
 Notice that assignment does not print a value. Instead, R stores it for later in the **object** `x`. Call object `x` now and see that it contains the **value** `0.025`:
 
@@ -56,11 +55,9 @@ Surrounding the assignment with parentheses results in both assignment and print
 ```{r}
 (x <- 1/40)
 ```
-
 :::
 
  
-
 
 Our object `x` can be used in place of a number in any calculation that expects a number. For example:
 
@@ -70,14 +67,12 @@ log(x)
 
  
 
-
-
 ::: callout-important
 ## Space before and after operators
 
 It is important the space before and after comparison operators and assignments. For example, suppose we want to code the expression `x smaller than -1/50` (note that `x` is `1/40`):
 
-- **With** spaces
+-   **With** spaces
 
 ```{r}
 x < -1/50    # with spaces 
@@ -85,8 +80,7 @@ x < -1/50    # with spaces
 
 The result is the logical `FALSE` because the value x (equals to 1/40) is higher than -1/50.
 
-
-- **Without** spaces
+-   **Without** spaces
 
 ```{r}
 x<-1/50    # without spaces
@@ -94,14 +88,11 @@ x
 ```
 
 If we omit the spaces we end up with the assignment operator and we have `x <- 1/50` which equals to 0.02.
-
 :::
-
 
  
 
 ### Other types of assignment
-
 
 It is also possible to use the **`=`** or **`->`** rightward operator for assignment (but these are much less common among R users).
 
@@ -119,10 +110,7 @@ or
 x
 ```
 
-
-
 It is a good idea to **be consistent** with the operator we use.
-
 
  
 
@@ -143,8 +131,6 @@ x
 
 `x` used to contain the value 0.025 and now it has the value 100.
 
-
-
 Moreover, assignment values can contain the object being assigned to:
 
 ```{r}
@@ -155,11 +141,9 @@ x
 
 The right hand side of the assignment can be any valid R expression and it is fully evaluated **before** the assignment takes place.
 
-
 ## Legal object names
 
 Object names must start with a letter and **can** contain letters, numbers, underscores `( _ )` and periods (.). They **cannot** start with a number or underscore, nor contain spaces at all. Moreover, they can not contain [Reserved words.](https://stat.ethz.ch/R-manual/R-devel/library/base/html/Reserved.html)
-
 
 Different people use different conventions for long object names, these include:
 
@@ -176,15 +160,11 @@ What we use is up to us, but we must **be consistent**. We might ask help:
 ??clean_names
 ```
 
-
-
 ::: callout-tip
 ## R is case-sensitive
 
 R treats capital letters differently from lower-case letters.
-
 :::
-
 
 ```{r}
 #| error: true
@@ -194,9 +174,7 @@ Y <- 50
 Y
 ```
 
-
 but...
-
 
 ```{r}
 #| error: true
