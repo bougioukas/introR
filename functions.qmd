@@ -68,8 +68,14 @@ Here, it is assumed that we want a sequence `from = 5` that goes `to = 8`. Since
 Moreover, the `seq()` function has other arguments that we could use which are documented in the help page running `?seq`. For example, we could use the argument `length.out` (instead of `by`) to fix the length of the sequence as follows:
 
 ```{r}
-seq(from = 5, to = 8, length.out = 16)
+seq(from = 5, to = 8, length.out = 26)  # 26 elements in the sequence
 ```
+
+::: {.callout-tip icon="false"}
+## Note
+
+The **numbers inside the brackets**, `[1]` and `[16]`, helps us figure out **where in the sequence we are per line**. For example, `[16]` is the id number of the first value (6.80) returned on the second line. Obviously, this number may change depending on the width of the console.
+:::
 
  
 
@@ -173,13 +179,22 @@ date()
 
 R has many built in mathematical functions such as the `log(x)` that we have already seen.
 
- 
 
 ### Logarithms and exponentials
 
  
 
 ![The natural logarithm function ln(x) is the inverse of the exponential function y = e\^x](images/log_exp.png){#fig-log_exp width="50%"}
+
+| Rule name                  | Rule                             |
+|----------------------------|----------------------------------|
+| Logarithm product          | $log_b(x*y) = log_bx + log_by$   |
+| Logarithm quotient rule    | $log_b(x/y) = log_bx - log_by$   |
+| Logarithm power rule       | $log_b(x^y) = y \cdot log_b(x)$   |
+| Logarithm base change rule | $log_b(x) = log_c(x) / log_c(b)$ |
+: The Four Basic Properties of Logs {#tbl-logs}
+
+ 
 
 ::: {.callout-note icon="false"}
 ## Examples: Logarithms and exponentials
@@ -235,11 +250,15 @@ tan(pi/3)
 
 ```{r}
 
-sqrt(9)    # squared root
+sqrt(9)       # squared root
 
-abs(-9)   # absolute value
+abs(-9)       # absolute value
 
-factorial(3)   # factorial 3! = 1x2x3
+sign(-9)      # the sign of the value, -1, 0, or 1
+
+factorial(3)  # factorial 3! = 1x2x3
+
+choose(6, 2)  # number of combinations without replacement 6!/(6-2)!2!
 
 ```
 :::
@@ -276,7 +295,6 @@ round(5.5)
 ```
 :::
 
-
 There are a couple of further functions that can be useful:
 
 ```{r}
@@ -290,7 +308,6 @@ trunc(125.2395)     #  truncates that values in the decimal places
 signif (271821, 3)  # round to the specified number of significant digits
 
 ```
-
 
  
 

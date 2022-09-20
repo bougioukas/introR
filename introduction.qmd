@@ -94,7 +94,6 @@ Well, R gave us a response (output) to our input (`14 + 16`). That response came
 
 ## R scripts
 
-
 ### Open a new R script
 
 Usually, we do our programming by writing our code in script files. An R script (with the `.R` extension) is simply a text file in which our R code is stored, and then can be "sent" to the console, where R will execute it.
@@ -119,7 +118,6 @@ Therefore, the RStudio window is divided into **four** panes (quadrants) that co
 
 We can change the **shape** of the panes by either clicking the minimize or maximize buttons on the top right of each pane, or by clicking and dragging the middle of the borders of the windows.
 
-
 The four panes might be in a different order that those in @fig-RStudio_4panels. If we'd like, we can change the **order** of the windows under RStudio preferences. We select from RStudio menu:
 
 ```{mermaid}
@@ -129,27 +127,21 @@ flowchart LR
 
  
 
-
 ### Execute the code written in R script
 
 Now, let's type `14 + 16` at a new R script and press the **run** button ![](images/run.png){#fig-run width="8%"}. The result is printed in the console:
 
 ![The script pane.](images/script.png){#fig-script width="100%"}
 
-
-:::{.callout-tip}
+::: callout-tip
 In `.R` script, we can execute our code line by line (by putting the cursor on the line) or selecting a chunk of lines (by highlighting the text) and pressing the **run** button in the source window. We can also run our selected code using the **keywboard shortcut `Ctrl + Enter`**.
 :::
-
-
 
 Comments can also be used to explain R code, and to make it more readable (it can also be used to prevent execution when testing alternative code). **Comments start with a `#`** . When executing the R-code, R will ignore anything that starts with #. It is considered good practice to comment our code when working in an `.R` script.
 
 Keyboard Shortcut for commenting out/commenting in **multiple lines** at a time: **Control+Shift+C**
 
-
  
-
 
 ::: callout-tip
 ## Advantages writing our R code as an R script file
@@ -160,9 +152,7 @@ Keyboard Shortcut for commenting out/commenting in **multiple lines** at a time:
 -   We can move beyond writing one line of code at a time
 :::
 
-
  
-
 
 ## Errors, warnings, and messages in R
 
@@ -180,7 +170,7 @@ we get the following error:\
 
 One thing that intimidates new R and RStudio users is how it reports errors, warnings, and messages. R reports errors, warnings, and messages in a glaring red font, which makes it seem like it is scolding us. However, seeing red text in the console is not always bad.
 
-R will show \textcolor{red}{red text} in the console pane in three different situations:
+R will show red text in the console pane in three different situations:
 
 -   **Errors:** When the red text is a legitimate error, it will be prefaced with "Error..." and try to explain what went wrong. Generally when there's an error, the code will not run.
 

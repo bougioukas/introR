@@ -1,0 +1,611 @@
+# Common data structures in R {#sec-structures}
+
+When we have finished this chapter, we should be able to:
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+-   Explore R data structures.
+-   Create vectors, matrices, and lists.
+-   Understand the concepts of coercion and vector recycling.
+-   Extract elements from a vector, a matrix, or a list.
+-   Create a data frame and access its variables.
+:::
+
+ 
+
+## Atomic and generic vectors in R
+
+The most fundamental concept in base R are the **vectors**. Vectors come in two flavours: **atomic vectors** and **lists (generic vectors)**. The atomic vectors must have all elements of the same basic type (e.g., integers, characters). On the contrary, in the lists different elements can have different types (e.g., some elements may be integers and some characters).
+
+The R language supports many types of data structures that we can use to organize and store information. We will see that complex structures such as **matrices, arrays, and data frames** can be created. Each data structure type serves a specific purpose and can contain specific kinds of data. They differ in terms of the type of data they can hold, how they're created, their structural complexity, the RAM that they occupy, and the notation used to identify and access individual elements. So, it's important to understand the differences between them so we can make the right choice based on our scenario. These data structures are schematically illustrated in @fig-objects
+
+```{r}
+#| label: fig-objects
+#| fig-align: center
+#| out-width: "95%"
+#| echo: false
+#| fig-cap: Data structures in R.
+
+knitr::include_graphics(here::here("images", "objects.png"))
+```
+
+## Atomic vectors
+
+There are four primary types of atomic vectors (also known as "atomic" classes):
+
+-   logical
+-   integer
+-   double
+-   character (which may contain strings)
+
+Collectively integer and double vectors are known as numeric vectors.
+
+There are also two rare types: complex and raw. We won't discuss them further because complex numbers are rarely needed in statistics, and raw vectors are a special type that's only needed when handling binary data (raw bytes).
+
+### One-element atomic vectors
+
+Each of the four primary types has a special syntax to create an individual value. **R has no 0-dimensional or scalar types**. Individual numbers or strings, are actually vectors of length one and in some instances we call them scalars.
+
+Therefore, **an one-element vector (oev) is just a single value** like a number and they can be used to construct more complex objects (longer vectors). We present some examples of one-element vectors for each of the four primary types (in order from least to most general):
+
+**1. Logical one-element vector:** Logical values are boolean values of `TRUE` or `FALSE` which can be abbreviated, when we type them as `T` or `F` (we do not suggest this).
+
+```{r}
+# Examples of logical one-element vectors (oev)
+oev_a <- TRUE  # assign the TRUE value to an object named oev_a
+oev_a          # call the object with its name
+oev_b <- FALSE
+oev_b
+oev_c <- T
+oev_c
+oev_d <- F
+oev_d
+```
+
+ 
+
+**2. Numeric (integer or double) one-element vector:** Even if we see a number like `1` or `2` in R, which we might think of as integers, they are likely represented behind the scenes as `1.00` or `2.00`. We need to place an "L" suffix for integer numbers. Doubles can be specified in decimal (e.g., 0.03) or scientific (e.g, 3e-2) format.
+
+```{r}
+# Examples of integer and double one-element vectors (oev)
+oev_e <- 3L          # integer
+oev_e
+oev_f <- 100L        # integer
+oev_f
+oev_g <- oev_e / oev_f
+oev_g               # double
+
+oev_scientific <- 3e-2
+oev_scientific     # double
+```
+
+::: {.callout-tip icon="false"}
+## Double format
+
+Double format is a **computer number format**, usually occupying 64 bits in computer memory.
+:::
+
+ 
+
+**3. Character one-element vector:** One-element vectors can also be characters (also known as `strings`). In R, we denote characters using quotation marks " or '. Here are examples of `character` one-element vectors:
+
+```{r}
+# Examples of character one-element vectors (oev)
+oev_h <- "hello"      # double quotation marks
+oev_h
+oev_i <- 'covid-19'   # single quotation marks
+oev_i
+oev_j <- "I love data analysis"
+oev_j
+```
+
+R treats numeric and character one-element vectors differently. For example, while we can do basic arithmetic operations on numeric one-element vectors -- they won't work on character one-element vectors. If we try to perform numeric operations (like addition) on character one-element vector, we'll get an error like the following:
+
+```{r}
+#| error: true
+#| eval: false
+
+h <- "1"
+k <- "2"
+h + k
+```
+
+`r kableExtra::text_spec("Error in h + k : non-numeric argument to binary operator", color = "red")`
+
+If we see an error like this one, it means that we're trying to apply numeric operations to character objects that's wrong.
+
+It's very rare that single values (one-element vectors) will be the center of an R session, so one of the first questions encountered when working with data in R is what sort of object should be used to hold collections of data. Next, we are going to talk about "longer" atomic vectors.
+
+## Making longer atomic vectors
+
+Atomic vectors can consisted of more than one element. In this case, **the vector elements are ordered, and they must all be of the same type of data**. Common example types of "long" atomic vectors are numeric (whole numbers and fractions), logical (e.g., TRUE or FALSE), and character (e.g., letters or words).
+
+Let's see how we can create "long" atomic vectors and some usefull vector properties through examples.
+
+### The colon operator `(:)`
+
+The **colon** operator **`:`** will generate sequences of consecutive values. For example:
+
+```{r}
+1:5
+```
+
+In this example, the colon operator `:` takes two integers 1 and 5 as arguments, and returns an atomic vector of integer numbers from the starting point 1 to the ending point 5 in steps of 1.
+
+We can assign (or name) the atomic vector to an object named `x_seq`:
+
+```{r}
+x_seq <- 1:5
+```
+
+and call it with its name:
+
+```{r}
+x_seq
+```
+
+We can determine the type of a vector with `typeof()`.
+
+```{r}
+typeof(x_seq)
+```
+
+The elements of the `x_seq` vector are integers.
+
+We can also find how many elements a vector contains applying the `length()` function:
+
+```{r}
+length(x_seq)
+```
+
+**Other examples:**
+
+```{r}
+5:1
+2.5:8.5
+-3:4
+```
+
+ 
+
+### The function `seq()`
+
+We have already explore in @sec-functions the **`seq()`** function which creates vectors of consecutive values (seq stands for sequence):
+
+```{r}
+seq(1, 5)    # increment by 1
+```
+
+ 
+
+### The `c()` function
+
+We can also create atomic vectors "by hand" using the **`c()`** function (or concatenate command) which *combines* values into a vector. Let's create a vector of values `2`, `4.5`, and `1`:
+
+```{r}
+c(2, 4.5, -1)
+```
+
+Of course, we can have an atomic vector with logical elements as the following example:
+
+```{r}
+c(TRUE, FALSE, TRUE, FALSE)
+```
+
+or equivalently
+
+```{r}
+c(T, F, T, F)
+```
+
+\vspace{14pt}
+
+and an atomic vector with character elements:
+
+```{r}
+c("male", "female", "female", "male")
+```
+
+ 
+
+::: {.callout-tip icon="false"}
+## Note: An atomic vector can be element of another vector:
+
+```{r}
+y_seq <- 3:7
+c(y_seq, 2, 4.5, -1)  # y_seq is an element of a vector
+```
+:::
+
+
+### Repeating vectors
+
+The `rep()` function allows us to conveniently repeat complete a vector or the elements of a vector. Let's see some examples:
+
+
+**1. Repeating the complete vector**.
+
+```{r}
+rep(1:4, times = 5)               # 5 times to repeat the complete vector
+rep(c(0, 4, 7), times = 3)        # 3 times to repeat the complete vector
+rep(c("a", "b", "c"), times = 2)  # 2 times to repeat the complete vector
+```
+
+ 
+
+**2. Repeating each element of the vector**.
+
+```{r}
+rep(1:4, each = 5)               # each element is repeated 5 times
+rep(c(0, 4, 7), each = 3)        # each element is repeated 3 times
+rep(c("a", "b", "c"), each = 2)  # each element is repeated 2 times
+
+```
+
+ 
+
+###  Default vectors 
+
+R comes with a few built-in default vectors, containing useful values:
+
+```{r}
+LETTERS
+letters
+month.abb
+month.name
+```
+
+We will use some of these built-in vectors in the examples that follow.
+
+ 
+
+## Mixing things in a vector - Coercion
+
+
+### Implicit coercion
+
+In general, **implicit coercion** is an attempt by R to be flexible with data types. When an entry does not match the expected value, R tries to guess what we meant before throwing in an error.
+
+For example, R assumes that everything in our atomic vector is of the same data type -- that is, all numbers or all characters or all logical elements. Let's create a “mixed” vector:
+
+```{r}
+my_vector <- c(1, 4, "hello", TRUE)
+```
+
+In this case, we will not have a vector with two numeric objects, one character object and one logical object. Instead, R will do what it can to convert them all into all the same object type, in this case all character objects. So `my_vector` will contain `1`, `4`, `hello` and `TRUE` as characters.
+
+
+
+**The hierarchy for coercion is:**
+
+**`logical < integer < numeric < character`**
+
+
+
+::: {.callout-note icon="false"}
+## Examples
+
+
+**1. `numeric` Vs `character`**
+
+```{r}
+a <- c(10.5 , 3.2, "I am a character")
+a
+typeof(a)
+```
+
+Adding a character string to a numeric vector converts all the elements in the vector to character values.
+
+
+**2. `logical` Vs `character`**
+
+```{r}
+b <- c(TRUE, FALSE, "Hello")
+b
+typeof(b)
+```
+Adding a character string to a logical vector converts all the elements in the vector to character values.
+
+
+**3. `logical` Vs `numeric`**
+
+```{r}
+d <- c(FALSE, TRUE, 2)
+d
+typeof(d)
+```
+
+Adding a numeric value to a logical vector converts all the elements in the vector to double (numeric) values. Logical values are converted to numbers as folowing: 
+**TRUE is converted to 1** and **FALSE to 0**.
+
+:::
+
+
+### Explicit coercion
+
+R also offers functions to force a specific coercion (**explicit coercion**). For example, we can turn numbers into characters with the **`as.character()`** function. Let's create a numeric vector `f`, with numbers 1 through 5, and convert it to a character vector `g`:
+```{r}
+f <- 1:5
+
+g <- as.character(f)
+g
+```
+
+
+We can turn the characters back to numbers using the **`as.numeric()`** function which converts characters or other data types into numeric:
+```{r}
+as.numeric(g)
+```
+
+This function is actually quite useful in practice, because many public datasets that include numbers, include them in a form that makes them appear to be character strings.
+
+
+\vspace{12pt}
+Now, suppose we define an object `q` of character strings "1", "b", "3" and we want to convert them to numbers using the `as.numeric()` function:
+
+```{r}
+q <- c("1", "b", "3")
+
+as.numeric(q)
+```
+
+
+As we can see R is able to convert the strings "1" and "3" to the numeric values 1 and 3, but it does not know what to do with "b". As a result, if we call `as.numeric()` on this vector, we get a warning that `NAs` introduced by coercion (the element "b" was converted to a missing value `NA`).
+
+
+Moreover, when nonsensical coercion takes place, we will usually get a warning from R. For example:
+
+```{r}
+x_abc <- c("a", "b", "c")
+as.numeric(x_abc)
+```
+
+ 
+
+## Sort, rank, and order numeric vectors
+
+We have learned how to create atomic vectors of different types including numeric, character and logical. In addition, we know how to create atomic vectors with patterns and how coercion works. An atomic vector usually contains more than one elements. Sometimes, we want to order the elements in various ways. In this section, we will introduce important functions that relate to ordering elements in an atomic vector.
+
+Firstly, let’s create a numeric vector which will be used throughout this part.
+
+```{r}
+num_vect <- c(2, 3, 2, 0, 4, 7) 
+num_vect 
+```
+
+### Sort vectors
+
+The first function we will introduce is `sort()`. By default, the `sort()` function sorts elements in vector in the ascending order, namely from the smallest to largest.
+
+```{r}
+sort(num_vect)
+```
+
+If we want to sort the vector in the descending order, namely from the largest to smallest, we can set a second argument `decreasing = TRUE`.
+
+```{r}
+sort(num_vect, decreasing = TRUE)
+```
+
+
+### Ranks of vectors
+
+Next, let’s talk about ranks. The `rank()` function references the position of the value in the sorted vector and is in the same order as the original sequence.
+
+
+```{r}
+num_vect
+rank(num_vect)
+```
+If we check the values of `num_vect`, we can see that the smallest value of `num_vect` is `0`, which corresponds to the fourth element. Thus, the fourth element has rank 1. The second smallest value of `num_vect` is 2, which is shared at the first and the third elements, resulting a tie (elements with the same value will result in a tie). Normally, these two elements would have ranks 2 and 3.  To break the tie, the `rank()` function assigns all the elements involving in the tie (the first and third elements in this example) the same rank, which is average of all their ranks (the average of 2 and 3), by default. In addition to this default behavior for handling ties, `rank()` also provides other options by setting the `ties.method` argument.
+
+If we want to break the ties by the order element appears in the vector, we can set `ties.method = "first"`. Then the earlier appearing element will have smaller ranks than the later one. In this example, the first element will have rank 2 and the third element has rank 3, since the first element appears earlier than the third element. 
+
+```{r}
+rank(num_vect, ties.method = "first")
+```
+
+Note that unlike `sort()`, we can’t get positions in the descending order from the `rank()` function, which means we can’t add `decreasing = TRUE` in `rank()`.
+
+
+
+
+### Order of vectors
+
+The next function we want to introduce is the `order()` function. Note that the function name order could be a bit misleading since ordering elements also has the same meaning of sorting. However, although it is related to sorting, `order()` is a very different function from `sort()`.
+
+
+Let’s recall the values of `num_vect` and apply `order()` on `num_vect`:
+
+```{r}
+num_vect
+order(num_vect)
+```
+
+From the result, we can see that the `order()` function returns the position of the original value and is in the order of sorted sequence, that is smallest value to largest value. For example, the first output is 4, indicating the 4th element in `num_vect` is the smallest. The second output is 1, showing the 1st element in `num_vect` is the second smallest.
+
+ 
+
+## Mathematical operations and functions applied to numeric vectors
+
+**Mathematical operations** applied to all the elements of a **numeric** vector (that is called **vectorization**):
+
+```{r}
+(1:5) * 2
+2^(1:5)
+```
+
+
+
+The same rule is applied to the elements of the vectors using **mathematical** functions:
+```{r}
+z_seq <- 3:9      
+sqrt(z_seq)    # calculate the square root of all the elements of z_seq
+```
+
+We can also round the results using the `round()` function and set the argument `digits = 2`, as following:
+
+```{r}
+round(sqrt(z_seq), digits = 2)
+```
+
+
+ 
+
+
+## Relational operators applied between a vector and a scalar
+
+For relational operators (>, <, ==, <=, >=, !=), each element of the vector is compared with a defined value (scalar). The result of comparison is a Boolean value (**`TRUE`** or **`FALSE`**). 
+
+**Examples:**
+
+```{r}
+m <- c(4, 2, 3, 8)
+```
+
+
+```{r}
+m > 3
+m >= 3
+m == 3
+m != 3
+```
+
+ 
+
+## Operators applied between two vectors
+
+
+### Arithmetic Operators
+
+The arithmetic operators `(+, -, *, /, ^)` act on each element of the vector. 
+
+**Examples:**
+```{r}
+v <- c(1, 2, 3)
+t <- c(8, 3, 2)
+```
+
+
+
+```{r}
+t + v
+t^v
+
+t + 3 * v / 2
+```
+
+
+
+Note that R will follow the **BODMAS** (Brackets, Orders (powers/roots), Division, Multiplication, Addition, Subtraction) rule for the order in which it will carry out calculations.
+
+ 
+
+### Relational Operators
+
+For relational operators (>, <, ==, <=, >=, !=), each element of the first vector is compared with the corresponding element of the second vector. The result of comparison is a Boolean value (**`TRUE`** or **`FALSE`**). 
+
+Examples:
+
+```{r}
+w <- c(2, 5.5, 6, 9)
+z <- c(8, 2.5, 14, 9)
+```
+
+```{r}
+z > w
+z == w
+
+z >= w
+z != w
+```
+
+ 
+
+### Logical Operators applied to vectors
+
+The logical (Boolean) operators are:  
+
+* `&` ,  `&&`  (AND)
+* `|` ,  `||`  (OR)
+* `!`          (NOT)  
+
+
+Logical operators are applicable to vectors of type **logical** or **numeric**. The result of comparison is a **logical (Boolean) value**.
+
+
+Suppose we have the following vectors:
+
+```{r}
+s <- c(1, 0, - 1, 0, TRUE, TRUE, FALSE)
+s
+u <- c(2, 0, - 2, 2, TRUE, FALSE, FALSE)
+u
+```
+
+How R will compute, for example, `s & u`? 
+
+
+**THE RULE: all non-zero values in the vectors are considered as logical value `TRUE` and all zeros are  considered as `FALSE`**.
+
+Therefore:
+
+```{r}
+s
+```
+
+*Logicals*: `TRUE FALSE  TRUE FALSE  TRUE  TRUE FALSE`
+
+
+
+```{r}
+u
+```
+
+*Logicals*: `TRUE FALSE  TRUE  TRUE  TRUE FALSE FALSE`
+
+ 
+
+**A. AND Operators (`&`, `&&`)**
+
+The `&` operator combines each element of the first vector with the corresponding element of the second vector and gives an output TRUE if **both** the elements are TRUE.
+
+```{r}
+s & u
+```
+
+
+Additionally, the `&&` operator takes the first element of both vectors and gives TRUE only if both are TRUE.
+
+```{r}
+s && u
+```
+
+
+
+**B. OR operators (`|`, `||`)**
+
+The `|` operator combines each element of the first vector with the corresponding element of the second vector and gives an output TRUE if **one of the elements** is TRUE.
+
+```{r}
+s | u
+```
+
+Additionally, the `||` operator takes the first element of both vectors and gives TRUE if one of them is TRUE.
+
+```{r}
+s || u
+```
+
+
+
+**C. NOT operator (`!`)**
+ 
+The `!` operator takes each element of the vector and gives the opposite logical value.
+
+```{r}
+! s
+! u
+```
+

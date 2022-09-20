@@ -51,7 +51,7 @@ If we look for the `Environment` tab in one of the panes of RStudio, we will see
  
 
 ::: callout-tip
-## Remember
+## How to print the results of assignment immediately
 
 Surrounding the assignment with parentheses results in both assignment and print to screen to happen. For example:
 

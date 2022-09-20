@@ -19,6 +19,7 @@ book:
         - packages.qmd
         - calculations.qmd
         - objects.qmd
+        - structures.qmd
 
     - part: "Special Topics"
       chapters:
