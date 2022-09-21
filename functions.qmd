@@ -179,7 +179,6 @@ date()
 
 R has many built in mathematical functions such as the `log(x)` that we have already seen.
 
-
 ### Logarithms and exponentials
 
  
@@ -190,8 +189,9 @@ R has many built in mathematical functions such as the `log(x)` that we have alr
 |----------------------------|----------------------------------|
 | Logarithm product          | $log_b(x*y) = log_bx + log_by$   |
 | Logarithm quotient rule    | $log_b(x/y) = log_bx - log_by$   |
-| Logarithm power rule       | $log_b(x^y) = y \cdot log_b(x)$   |
+| Logarithm power rule       | $log_b(x^y) = y \cdot log_b(x)$  |
 | Logarithm base change rule | $log_b(x) = log_c(x) / log_c(b)$ |
+
 : The Four Basic Properties of Logs {#tbl-logs}
 
  
@@ -305,7 +305,7 @@ floor(16.2)         # round to the nearest integer below
 
 trunc(125.2395)     #  truncates that values in the decimal places
 
-signif (271821, 3)  # round to the specified number of significant digits
+signif (2718214, 3)  # round to the specified number of significant digits
 
 ```
 
@@ -362,7 +362,7 @@ celsius_to_kelvin <- function(temp_C) {
 celsius_to_kelvin(0)
 ```
 
-We defined the function by "assigning" the `function(temp_C)` to the name `celsius_to_kelvin` using the assignment operator `<-` (see ).
+We defined the function by "assigning" the `function(temp_C)` to the name `celsius_to_kelvin` using the assignment operator `<-` (see @sec-objects).
 
 So, in most cases, a function has a name (e.g., `celsius_to_kelvin`), some arguments used as input to the function, within the `()` following the keyword 'function' (e.g., `temp_C`); a body, which is the code within the curly braces `{}`, where we carry out the computation; and can have one or more return values (the output here is the `temp_K` which is a numeric value).
 

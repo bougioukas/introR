@@ -178,7 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculations</span></a>
+  <a href="./calculations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculations in R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -188,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Common data structures in R</span></a>
+  <a href="./structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data structures in R: 1-Dimensional Vectors</span></a>
   </div>
 </li>
       </ul>
@@ -431,7 +431,7 @@ Caution
 <div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/date.html">date</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Tue Sep 20 22:33:33 2022"</code></pre>
+<pre><code>[1] "Wed Sep 21 05:59:51 2022"</code></pre>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -655,9 +655,9 @@ Round rule when the dropped digit is 5
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 125</code></pre>
 </div>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span> <span class="op">(</span><span class="fl">271821</span>, <span class="fl">3</span><span class="op">)</span>  <span class="co"># round to the specified number of significant digits</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span> <span class="op">(</span><span class="fl">2718214</span>, <span class="fl">3</span><span class="op">)</span>  <span class="co"># round to the specified number of significant digits</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 272000</code></pre>
+<pre><code>[1] 2720000</code></pre>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -712,7 +712,7 @@ What do we need to create a function?
 <pre><code>[1] 273.15</code></pre>
 </div>
 </div>
-<p>We defined the function by “assigning” the <code>function(temp_C)</code> to the name <code>celsius_to_kelvin</code> using the assignment operator <code>&lt;-</code> (see ).</p>
+<p>We defined the function by “assigning” the <code>function(temp_C)</code> to the name <code>celsius_to_kelvin</code> using the assignment operator <code>&lt;-</code> (see <a href="objects.html"><span>Chapter&nbsp;5</span></a>).</p>
 <p>So, in most cases, a function has a name (e.g., <code>celsius_to_kelvin</code>), some arguments used as input to the function, within the <code>()</code> following the keyword ‘function’ (e.g., <code>temp_C</code>); a body, which is the code within the curly braces <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code>, where we carry out the computation; and can have one or more return values (the output here is the <code>temp_K</code> which is a numeric value).</p>
 <div class="callout-caution callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
@@ -881,7 +881,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","selector":".lightbox","loop":true});</script>
+</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","loop":true,"openEffect":"zoom"});</script>
 
 
 </body></html>

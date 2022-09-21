@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.251">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>An Introduction to R - 4&nbsp; Calculations</title>
+<title>An Introduction to R - 4&nbsp; Calculations in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -123,7 +123,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculations</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculations in R</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -175,7 +175,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculations.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculations</span></a>
+  <a href="./calculations.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculations in R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -185,7 +185,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Common data structures in R</span></a>
+  <a href="./structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data structures in R: 1-Dimensional Vectors</span></a>
   </div>
 </li>
       </ul>
@@ -216,19 +216,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#using-r-as-a-calculator" id="toc-using-r-as-a-calculator" class="nav-link active" data-scroll-target="#using-r-as-a-calculator"><span class="toc-section-number">4.1</span>  Using R as a calculator</a></li>
-  <li>
-<a href="#arithmetic-operators-in-r" id="toc-arithmetic-operators-in-r" class="nav-link" data-scroll-target="#arithmetic-operators-in-r"><span class="toc-section-number">4.2</span>  Arithmetic Operators in R</a>
+<li>
+<a href="#arithmetic-operators-in-r" id="toc-arithmetic-operators-in-r" class="nav-link active" data-scroll-target="#arithmetic-operators-in-r"><span class="toc-section-number">4.1</span>  Arithmetic Operators in R</a>
   <ul class="collapse">
 <li><a href="#parentheses" id="toc-parentheses" class="nav-link" data-scroll-target="#parentheses">Parentheses</a></li>
   <li><a href="#modular-arithmetic" id="toc-modular-arithmetic" class="nav-link" data-scroll-target="#modular-arithmetic">Modular arithmetic</a></li>
   </ul>
 </li>
-  <li><a href="#relational-operators-in-r" id="toc-relational-operators-in-r" class="nav-link" data-scroll-target="#relational-operators-in-r"><span class="toc-section-number">4.3</span>  Relational Operators in R</a></li>
-  <li><a href="#floating-point-number" id="toc-floating-point-number" class="nav-link" data-scroll-target="#floating-point-number"><span class="toc-section-number">4.4</span>  Floating point number</a></li>
-  <li><a href="#scientific-notation" id="toc-scientific-notation" class="nav-link" data-scroll-target="#scientific-notation"><span class="toc-section-number">4.5</span>  Scientific notation</a></li>
+  <li><a href="#relational-operators-in-r" id="toc-relational-operators-in-r" class="nav-link" data-scroll-target="#relational-operators-in-r"><span class="toc-section-number">4.2</span>  Relational Operators in R</a></li>
+  <li><a href="#floating-point-number" id="toc-floating-point-number" class="nav-link" data-scroll-target="#floating-point-number"><span class="toc-section-number">4.3</span>  Floating point number</a></li>
+  <li><a href="#scientific-notation" id="toc-scientific-notation" class="nav-link" data-scroll-target="#scientific-notation"><span class="toc-section-number">4.4</span>  Scientific notation</a></li>
   <li>
-<a href="#special-values-in-r" id="toc-special-values-in-r" class="nav-link" data-scroll-target="#special-values-in-r"><span class="toc-section-number">4.6</span>  Special values in R</a>
+<a href="#special-values-in-r" id="toc-special-values-in-r" class="nav-link" data-scroll-target="#special-values-in-r"><span class="toc-section-number">4.5</span>  Special values in R</a>
   <ul class="collapse">
 <li><a href="#missing-values-na" id="toc-missing-values-na" class="nav-link" data-scroll-target="#missing-values-na">Missing values (NA)</a></li>
   <li><a href="#infinitive--inf-or-inf" id="toc-infinitive--inf-or-inf" class="nav-link" data-scroll-target="#infinitive--inf-or-inf">Infinitive: -Inf or Inf</a></li>
@@ -240,7 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-calculations" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculations</span></span></h1>
+<h1 class="title"><span id="sec-calculations" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculations in R</span></span></h1>
 </div>
 
 
@@ -252,8 +251,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><section id="using-r-as-a-calculator" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="using-r-as-a-calculator">
-<span class="header-section-number">4.1</span> Using R as a calculator</h2>
+</header><section id="arithmetic-operators-in-r" class="level2" data-number="4.1"><h2 data-number="4.1" class="anchored" data-anchor-id="arithmetic-operators-in-r">
+<span class="header-section-number">4.1</span> Arithmetic Operators in R</h2>
 <p>The simplest thing we could do with R is arithmetic operations with numbers. For example:</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fl">1</span> <span class="op">+</span> <span class="fl">100</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -263,8 +262,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>R printed out the result, with a preceding <code>[1]</code>.</p>
 <p>&nbsp;</p>
-</section><section id="arithmetic-operators-in-r" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="arithmetic-operators-in-r">
-<span class="header-section-number">4.2</span> Arithmetic Operators in R</h2>
 <p>In the previous calculation the <code>+</code> sign was used to carry out the addition. <a href="#tbl-arithmetic_operators">Table&nbsp;<span>4.1</span></a> presents a list of arithmetic operators available in R.</p>
 <div id="tbl-arithmetic_operators" class="anchored">
 <table class="table">
@@ -388,8 +385,8 @@ Important
 </div>
 <p>But don’t forget to put brackets around the expression for which we want to carry out the modular calculation.</p>
 <p>&nbsp;</p>
-</section></section><section id="relational-operators-in-r" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="relational-operators-in-r">
-<span class="header-section-number">4.3</span> Relational Operators in R</h2>
+</section></section><section id="relational-operators-in-r" class="level2" data-number="4.2"><h2 data-number="4.2" class="anchored" data-anchor-id="relational-operators-in-r">
+<span class="header-section-number">4.2</span> Relational Operators in R</h2>
 <p><strong>Relational (or comparison) operators</strong> are used to compare between values. Comparisons in R typically evaluate to <code>TRUE</code> or <code>FALSE</code> (which in certain circumstances we can abbreviate to <code>T</code> and <code>F</code>). Here is a list of relational operators available in R (<a href="#tbl-relational_operators">Table&nbsp;<span>4.2</span></a>).</p>
 <div id="tbl-relational_operators" class="anchored">
 <table class="table">
@@ -476,8 +473,8 @@ Examples
 </div>
 </div>
 <p>&nbsp;</p>
-</section><section id="floating-point-number" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="floating-point-number">
-<span class="header-section-number">4.4</span> Floating point number</h2>
+</section><section id="floating-point-number" class="level2" data-number="4.3"><h2 data-number="4.3" class="anchored" data-anchor-id="floating-point-number">
+<span class="header-section-number">4.3</span> Floating point number</h2>
 <p>When dealing with real numbers <a href="http://en.wikipedia.org/wiki/Floating_point">floating point number</a>, we must be very careful when checking equality.</p>
 <p>For example, we know from trigonometry that:</p>
 <p><span class="math display">\[\cos(\frac{\pi}{2}) = \cos( \frac{3 \pi}{2}) = 0  \]</span></p>
@@ -514,8 +511,8 @@ Don’t use <strong>==</strong> to compare two numbers
 </div>
 </div>
 <p>&nbsp;</p>
-</section><section id="scientific-notation" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="scientific-notation">
-<span class="header-section-number">4.5</span> Scientific notation</h2>
+</section><section id="scientific-notation" class="level2" data-number="4.4"><h2 data-number="4.4" class="anchored" data-anchor-id="scientific-notation">
+<span class="header-section-number">4.4</span> Scientific notation</h2>
 <p>Scientific notation is a special way of expressing numbers that are too big or too small to be conveniently written in decimal form. Generally, it expresses numbers in forms of <span class="math inline">\(m \times 10^n\)</span> and R uses the <strong>e</strong> notation.</p>
 <div class="callout-note callout callout-style-default no-icon callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -553,8 +550,8 @@ Scientific notation Vs Euler’s number
 </div>
 </div>
 <p>&nbsp;</p>
-</section><section id="special-values-in-r" class="level2" data-number="4.6"><h2 data-number="4.6" class="anchored" data-anchor-id="special-values-in-r">
-<span class="header-section-number">4.6</span> Special values in R</h2>
+</section><section id="special-values-in-r" class="level2" data-number="4.5"><h2 data-number="4.5" class="anchored" data-anchor-id="special-values-in-r">
+<span class="header-section-number">4.5</span> Special values in R</h2>
 <p>There are a few special values that are used in R.</p>
 <section id="missing-values-na" class="level3"><h3 class="anchored" data-anchor-id="missing-values-na">Missing values (NA)</h3>
 <p>For example, in the real world, missing values may occur when recording sensor information. R uses a special numeric value <code>NA</code> standing for “Not available”. Mathematical operations using <code>NA</code> produces <code>NA</code>:</p>

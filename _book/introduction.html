@@ -179,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculations</span></a>
+  <a href="./calculations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculations in R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -189,7 +189,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Common data structures in R</span></a>
+  <a href="./structures.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data structures in R: 1-Dimensional Vectors</span></a>
   </div>
 </li>
       </ul>
@@ -236,10 +236,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="#working-with-rstudio-projects" id="toc-working-with-rstudio-projects" class="nav-link" data-scroll-target="#working-with-rstudio-projects"><span class="toc-section-number">1.7</span>  Working with RStudio Projects</a>
   <ul class="collapse">
 <li><a href="#create-a-new-rstudio-project" id="toc-create-a-new-rstudio-project" class="nav-link" data-scroll-target="#create-a-new-rstudio-project">Create a new RStudio Project</a></li>
+  <li><a href="#rstudio-project-folder-structure" id="toc-rstudio-project-folder-structure" class="nav-link" data-scroll-target="#rstudio-project-folder-structure">RStudio Project folder structure</a></li>
   </ul>
 </li>
-  <li><a href="#rstudio-project-folder-structure" id="toc-rstudio-project-folder-structure" class="nav-link" data-scroll-target="#rstudio-project-folder-structure"><span class="toc-section-number">1.8</span>  RStudio Project folder structure</a></li>
-  <li><a href="#quitting-r-rstudio" id="toc-quitting-r-rstudio" class="nav-link" data-scroll-target="#quitting-r-rstudio"><span class="toc-section-number">1.9</span>  Quitting R &amp; RStudio</a></li>
+  <li><a href="#quitting-r-rstudio" id="toc-quitting-r-rstudio" class="nav-link" data-scroll-target="#quitting-r-rstudio"><span class="toc-section-number">1.8</span>  Quitting R &amp; RStudio</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -256,7 +256,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><section id="installing-r-and-rstudio" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="installing-r-and-rstudio">
+</header><p>When we have finished this chapter, we should be able to:</p>
+<div class="callout-caution callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Learning objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Describe the purpose and use of each pane in the RStudio IDE</li>
+<li>Understand the differences between errors, warnings, and messages in R</li>
+<li>Seek for help</li>
+<li>Work with R projects</li>
+</ul>
+</div>
+</div>
+<p>&nbsp;</p>
+<section id="installing-r-and-rstudio" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="installing-r-and-rstudio">
 <span class="header-section-number">1.1</span> Installing R and RStudio</h2>
 <p>First things first. We need to download and install both R and RStudio (an integrated development environment for R) on our personal computer. First, we install R, then we will need to install RStudio.</p>
 <ol type="1">
@@ -585,8 +605,8 @@ Store the RStudio Project somewhere sensible
 <p>We must think carefully in which <strong>subdirectory</strong> we will create the RStudio project. If we don’t store it somewhere sensible, it will be hard to find it in the future!</p>
 </div>
 </div>
-</section></section><section id="rstudio-project-folder-structure" class="level2" data-number="1.8"><h2 data-number="1.8" class="anchored" data-anchor-id="rstudio-project-folder-structure">
-<span class="header-section-number">1.8</span> RStudio Project folder structure</h2>
+<p>&nbsp;</p>
+</section><section id="rstudio-project-folder-structure" class="level3"><h3 class="anchored" data-anchor-id="rstudio-project-folder-structure">RStudio Project folder structure</h3>
 <p>The files on our computer are organised into folders. RStudio Projects live in our computer’s normal folders - they placemark the working directory of each analysis project. These project folders can be viewed or moved around the same way we normally work with files and folders on our computer.</p>
 <p>The proposed RStudio Project should contain the following sub-folders <a href="#fig-project_structure">Figure&nbsp;<span>1.7</span></a>:</p>
 <ul>
@@ -606,8 +626,8 @@ Store the RStudio Project somewhere sensible
 </figure>
 </div>
 <p>It is recommended to work with RStudio Projects. This enables us to switch between different projects without getting the data, scripts, or output files all mixed up. Everything gets read in or saved to the correct place. No more exporting a plot and then going through the various Documents, etc., folders on our computer trying to figure out where our plot might have been saved to. It got saved to the project folder.</p>
-</section><section id="quitting-r-rstudio" class="level2" data-number="1.9"><h2 data-number="1.9" class="anchored" data-anchor-id="quitting-r-rstudio">
-<span class="header-section-number">1.9</span> Quitting R &amp; RStudio</h2>
+</section></section><section id="quitting-r-rstudio" class="level2" data-number="1.8"><h2 data-number="1.8" class="anchored" data-anchor-id="quitting-r-rstudio">
+<span class="header-section-number">1.8</span> Quitting R &amp; RStudio</h2>
 <p>When we quit RStudio we will be asked whether to save workspace with two options:</p>
 <ul>
 <li>“Yes” – Our current R workspace (containing the work that we have done) will be restored next time we open RStudio.</li>
@@ -741,7 +761,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","loop":true,"openEffect":"zoom","closeEffect":"zoom"});</script>
 
 
 </body></html>

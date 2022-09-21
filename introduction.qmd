@@ -1,5 +1,19 @@
 # Introduction to R and Rstudio {#sec-introduction}
 
+When we have finished this chapter, we should be able to:
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+- Describe the purpose and use of each pane in the RStudio IDE 
+- Understand the differences between errors, warnings, and messages in R
+- Seek for help
+- Work with R projects
+:::
+
+ 
+
+
 ## Installing R and RStudio
 
 First things first. We need to download and install both R and RStudio (an integrated development environment for R) on our personal computer. First, we install R, then we will need to install RStudio.
@@ -284,7 +298,9 @@ The directory name we choose here will be the `project name`. We call it whateve
 We must think carefully in which **subdirectory** we will create the RStudio project. If we don't store it somewhere sensible, it will be hard to find it in the future!
 :::
 
-## RStudio Project folder structure
+ 
+
+### RStudio Project folder structure
 
 The files on our computer are organised into folders. RStudio Projects live in our computer's normal folders - they placemark the working directory of each analysis project. These project folders can be viewed or moved around the same way we normally work with files and folders on our computer.
 

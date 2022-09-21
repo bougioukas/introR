@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.251">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>An Introduction to R - 6&nbsp; Common data structures in R</title>
+<title>An Introduction to R - 6&nbsp; Data structures in R: 1-Dimensional Vectors</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -126,7 +126,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Common data structures in R</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data structures in R: 1-Dimensional Vectors</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -178,7 +178,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./calculations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculations</span></a>
+  <a href="./calculations.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculations in R</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -188,7 +188,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./structures.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Common data structures in R</span></a>
+  <a href="./structures.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data structures in R: 1-Dimensional Vectors</span></a>
   </div>
 </li>
       </ul>
@@ -219,7 +219,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#atomic-and-generic-vectors-in-r" id="toc-atomic-and-generic-vectors-in-r" class="nav-link active" data-scroll-target="#atomic-and-generic-vectors-in-r"><span class="toc-section-number">6.1</span>  Atomic and generic vectors in R</a></li>
+<li><a href="#introduction-to-vectors-in-r" id="toc-introduction-to-vectors-in-r" class="nav-link active" data-scroll-target="#introduction-to-vectors-in-r"><span class="toc-section-number">6.1</span>  Introduction to vectors in R</a></li>
   <li>
 <a href="#atomic-vectors" id="toc-atomic-vectors" class="nav-link" data-scroll-target="#atomic-vectors"><span class="toc-section-number">6.2</span>  Atomic vectors</a>
   <ul class="collapse">
@@ -261,11 +261,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#logical-operators-applied-to-vectors" id="toc-logical-operators-applied-to-vectors" class="nav-link" data-scroll-target="#logical-operators-applied-to-vectors">Logical Operators applied to vectors</a></li>
   </ul>
 </li>
+  <li><a href="#statistical-functions-applied-to-vectors" id="toc-statistical-functions-applied-to-vectors" class="nav-link" data-scroll-target="#statistical-functions-applied-to-vectors"><span class="toc-section-number">6.9</span>  Statistical functions applied to vectors</a></li>
   </ul></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-structures" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Common data structures in R</span></span></h1>
+<h1 class="title"><span id="sec-structures" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data structures in R: 1-Dimensional Vectors</span></span></h1>
 </div>
 
 
@@ -289,23 +290,22 @@ Learning objectives
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Explore R data structures.</li>
-<li>Create vectors, matrices, and lists.</li>
+<li>Know common R data structures.</li>
+<li>Create 1-dimensional vectors.</li>
 <li>Understand the concepts of coercion and vector recycling.</li>
-<li>Extract elements from a vector, a matrix, or a list.</li>
-<li>Create a data frame and access its variables.</li>
+<li>Extract elements from an 1-dimensional vector.</li>
 </ul>
 </div>
 </div>
 <p>&nbsp;</p>
-<section id="atomic-and-generic-vectors-in-r" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="atomic-and-generic-vectors-in-r">
-<span class="header-section-number">6.1</span> Atomic and generic vectors in R</h2>
+<section id="introduction-to-vectors-in-r" class="level2" data-number="6.1"><h2 data-number="6.1" class="anchored" data-anchor-id="introduction-to-vectors-in-r">
+<span class="header-section-number">6.1</span> Introduction to vectors in R</h2>
 <p>The most fundamental concept in base R are the <strong>vectors</strong>. Vectors come in two flavours: <strong>atomic vectors</strong> and <strong>lists (generic vectors)</strong>. The atomic vectors must have all elements of the same basic type (e.g., integers, characters). On the contrary, in the lists different elements can have different types (e.g., some elements may be integers and some characters).</p>
 <p>The R language supports many types of data structures that we can use to organize and store information. We will see that complex structures such as <strong>matrices, arrays, and data frames</strong> can be created. Each data structure type serves a specific purpose and can contain specific kinds of data. They differ in terms of the type of data they can hold, how they’re created, their structural complexity, the RAM that they occupy, and the notation used to identify and access individual elements. So, it’s important to understand the differences between them so we can make the right choice based on our scenario. These data structures are schematically illustrated in <a href="#fig-objects">Figure&nbsp;<span>6.1</span></a></p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-objects" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/objects.png" class="lightbox" title="Data structures in R." data-gallery="quarto-lightbox-gallery-1"><img src="images/objects.png" class="img-fluid figure-img" style="width:95.0%"></a></p>
+<figure class="figure"><p><a href="images/objects.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Data structures in R."><img src="images/objects.png" class="img-fluid figure-img" style="width:95.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Data structures in R.</figcaption><p></p>
 </figure>
 </div>
@@ -771,7 +771,7 @@ Examples
 <pre><code>[1]  2  4  8 16 32</code></pre>
 </div>
 </div>
-<p>The same rule is applied to the elements of the vectors using <strong>mathematical</strong> functions:</p>
+<p>The same rule is applied to the elements of the vectors using <strong>mathematical functions</strong>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb114"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">z_seq</span> <span class="op">&lt;-</span> <span class="fl">3</span><span class="op">:</span><span class="fl">9</span>      </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">z_seq</span><span class="op">)</span>    <span class="co"># calculate the square root of all the elements of z_seq</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -956,9 +956,64 @@ Warning in s &amp;&amp; u: 'length(x) = 7 &gt; 1' in coercion to 'logical(1)'</c
 <pre><code>[1] FALSE  TRUE FALSE FALSE FALSE  TRUE  TRUE</code></pre>
 </div>
 </div>
+<p>&nbsp;</p>
+</section></section><section id="statistical-functions-applied-to-vectors" class="level2" data-number="6.9"><h2 data-number="6.9" class="anchored" data-anchor-id="statistical-functions-applied-to-vectors">
+<span class="header-section-number">6.9</span> Statistical functions applied to vectors</h2>
+<p>Statistical functions in R such as <code><a href="https://rdrr.io/r/base/sum.html">sum()</a></code> and arithmetic <code><a href="https://rdrr.io/r/base/mean.html">mean()</a></code> take in the numeric values of a vector and return a single numeric value:</p>
+<div class="cell">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">v_seq</span> <span class="op">&lt;-</span> <span class="fl">5</span><span class="op">:</span><span class="fl">10</span>   </span>
+<span><span class="va">v_seq</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  5  6  7  8  9 10</code></pre>
+</div>
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">v_seq</span><span class="op">)</span>     <span class="co"># adds all the elements of a vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 45</code></pre>
+</div>
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">v_seq</span><span class="op">)</span>    <span class="co"># calculate the arithmetic mean</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.5</code></pre>
+</div>
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">v_seq</span><span class="op">)</span>  <span class="co"># calculate the median</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.5</code></pre>
+</div>
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">v_seq</span><span class="op">)</span>      <span class="co"># calculate the standard deviation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1.870829</code></pre>
+</div>
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">v_seq</span><span class="op">)</span>   <span class="co"># returns the minimum and maximum values</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  5 10</code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Next, we add a missing value <code>NA</code> in the <code>v_seq</code> vector:</p>
+<div class="cell">
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">v_seq2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">v_seq</span>, <span class="cn">NA</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">v_seq2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "integer"</code></pre>
+</div>
+</div>
+<p>We can see that the <code>v_seq2</code> vector is of integer type.</p>
+<p>However, if we try to calculate the mean of the <code>v_seq2</code>, R returns a <code>NA</code> value:</p>
+<div class="cell">
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">v_seq2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] NA</code></pre>
+</div>
+</div>
+<p>Therefore, if some of the values in a vector are missing, then the <code>mean</code> of the vector is unknown (NA). In this case, it makes sense to <strong>remove</strong> the <code>NA</code> and compute the mean of the other values in the vector setting the <code>na.rm</code> argument equals to TRUE:</p>
+<div class="cell">
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">v_seq2</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 7.5</code></pre>
+</div>
+</div>
 
 
-</section></section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -1084,7 +1139,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","loop":true});</script>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":true,"openEffect":"zoom","descPosition":"bottom"});</script>
 
 
 </body></html>

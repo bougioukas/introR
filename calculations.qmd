@@ -1,6 +1,7 @@
-# Calculations {#sec-calculations}
+# Calculations in R {#sec-calculations}
 
-## Using R as a calculator
+
+## Arithmetic Operators in R
 
 The simplest thing we could do with R is arithmetic operations with numbers. For example:
 
@@ -13,7 +14,6 @@ R printed out the result, with a preceding `[1]`.
 
  
 
-## Arithmetic Operators in R
 
 In the previous calculation the `+` sign was used to carry out the addition. @tbl-arithmetic_operators presents a list of arithmetic operators available in R.
 
@@ -70,9 +70,7 @@ This can get unwieldy when not needed, but clarifies our intentions. Remember th
 Remember that the text after each line of code is a **comment**. Anything that follows after the hash symbol **`#`** is ignored by R when executes code.
 :::
 
-
  
-
 
 ### Modular arithmetic
 
@@ -81,7 +79,6 @@ Suppose we want to know the integer part of a division: say, how many 13s there 
 ```{r}
 119 %/% 13
 ```
-
 
 Now suppose we wanted to know the remainder (what is left over when 119 is divided by 13): in maths this is known as 119 modulo 13, and the value 13 is known as the modulus:
 
@@ -94,15 +91,14 @@ Modulo is very useful for testing whether one number is an exact multiple of som
 ```{r}
 15421 %% 7
 ```
+
 It is as there is no remainder. We can then carry out more complex modular arithmetic:
 
 ```{r}
 (123 + 456) %% 19
 ```
 
-But don’t forget to put brackets around the expression for which we want to carry out the modular calculation.
-
-
+But don't forget to put brackets around the expression for which we want to carry out the modular calculation.
 
  
 
@@ -120,8 +116,6 @@ But don’t forget to put brackets around the expression for which we want to ca
 | !=         | not equal to             |
 
 : Relational (comparison) operators in R {#tbl-relational_operators}
-
-
 
 Some simple comparisons with integer numbers follow:
 

@@ -1,20 +1,19 @@
-# Common data structures in R {#sec-structures}
+# Data structures in R: 1-Dimensional Vectors {#sec-structures}
 
 When we have finished this chapter, we should be able to:
 
 ::: {.callout-caution icon="false"}
 ## Learning objectives
 
--   Explore R data structures.
--   Create vectors, matrices, and lists.
+-   Know common R data structures.
+-   Create 1-dimensional vectors.
 -   Understand the concepts of coercion and vector recycling.
--   Extract elements from a vector, a matrix, or a list.
--   Create a data frame and access its variables.
+-   Extract elements from an 1-dimensional vector.
 :::
 
  
 
-## Atomic and generic vectors in R
+## Introduction to vectors in R
 
 The most fundamental concept in base R are the **vectors**. Vectors come in two flavours: **atomic vectors** and **lists (generic vectors)**. The atomic vectors must have all elements of the same basic type (e.g., integers, characters). On the contrary, in the lists different elements can have different types (e.g., some elements may be integers and some characters).
 
@@ -218,11 +217,9 @@ c(y_seq, 2, 4.5, -1)  # y_seq is an element of a vector
 ```
 :::
 
-
 ### Repeating vectors
 
 The `rep()` function allows us to conveniently repeat complete a vector or the elements of a vector. Let's see some examples:
-
 
 **1. Repeating the complete vector**.
 
@@ -245,7 +242,7 @@ rep(c("a", "b", "c"), each = 2)  # each element is repeated 2 times
 
  
 
-###  Default vectors 
+### Default vectors
 
 R comes with a few built-in default vectors, containing useful values:
 
@@ -262,12 +259,11 @@ We will use some of these built-in vectors in the examples that follow.
 
 ## Mixing things in a vector - Coercion
 
-
 ### Implicit coercion
 
 In general, **implicit coercion** is an attempt by R to be flexible with data types. When an entry does not match the expected value, R tries to guess what we meant before throwing in an error.
 
-For example, R assumes that everything in our atomic vector is of the same data type -- that is, all numbers or all characters or all logical elements. Let's create a “mixed” vector:
+For example, R assumes that everything in our atomic vector is of the same data type -- that is, all numbers or all characters or all logical elements. Let's create a "mixed" vector:
 
 ```{r}
 my_vector <- c(1, 4, "hello", TRUE)
@@ -275,17 +271,12 @@ my_vector <- c(1, 4, "hello", TRUE)
 
 In this case, we will not have a vector with two numeric objects, one character object and one logical object. Instead, R will do what it can to convert them all into all the same object type, in this case all character objects. So `my_vector` will contain `1`, `4`, `hello` and `TRUE` as characters.
 
-
-
 **The hierarchy for coercion is:**
 
 **`logical < integer < numeric < character`**
 
-
-
 ::: {.callout-note icon="false"}
 ## Examples
-
 
 **1. `numeric` Vs `character`**
 
@@ -297,7 +288,6 @@ typeof(a)
 
 Adding a character string to a numeric vector converts all the elements in the vector to character values.
 
-
 **2. `logical` Vs `character`**
 
 ```{r}
@@ -305,8 +295,8 @@ b <- c(TRUE, FALSE, "Hello")
 b
 typeof(b)
 ```
-Adding a character string to a logical vector converts all the elements in the vector to character values.
 
+Adding a character string to a logical vector converts all the elements in the vector to character values.
 
 **3. `logical` Vs `numeric`**
 
@@ -316,15 +306,13 @@ d
 typeof(d)
 ```
 
-Adding a numeric value to a logical vector converts all the elements in the vector to double (numeric) values. Logical values are converted to numbers as folowing: 
-**TRUE is converted to 1** and **FALSE to 0**.
-
+Adding a numeric value to a logical vector converts all the elements in the vector to double (numeric) values. Logical values are converted to numbers as folowing: **TRUE is converted to 1** and **FALSE to 0**.
 :::
-
 
 ### Explicit coercion
 
 R also offers functions to force a specific coercion (**explicit coercion**). For example, we can turn numbers into characters with the **`as.character()`** function. Let's create a numeric vector `f`, with numbers 1 through 5, and convert it to a character vector `g`:
+
 ```{r}
 f <- 1:5
 
@@ -332,16 +320,16 @@ g <- as.character(f)
 g
 ```
 
-
 We can turn the characters back to numbers using the **`as.numeric()`** function which converts characters or other data types into numeric:
+
 ```{r}
 as.numeric(g)
 ```
 
 This function is actually quite useful in practice, because many public datasets that include numbers, include them in a form that makes them appear to be character strings.
 
-
 \vspace{12pt}
+
 Now, suppose we define an object `q` of character strings "1", "b", "3" and we want to convert them to numbers using the `as.numeric()` function:
 
 ```{r}
@@ -350,9 +338,7 @@ q <- c("1", "b", "3")
 as.numeric(q)
 ```
 
-
 As we can see R is able to convert the strings "1" and "3" to the numeric values 1 and 3, but it does not know what to do with "b". As a result, if we call `as.numeric()` on this vector, we get a warning that `NAs` introduced by coercion (the element "b" was converted to a missing value `NA`).
-
 
 Moreover, when nonsensical coercion takes place, we will usually get a warning from R. For example:
 
@@ -367,7 +353,7 @@ as.numeric(x_abc)
 
 We have learned how to create atomic vectors of different types including numeric, character and logical. In addition, we know how to create atomic vectors with patterns and how coercion works. An atomic vector usually contains more than one elements. Sometimes, we want to order the elements in various ways. In this section, we will introduce important functions that relate to ordering elements in an atomic vector.
 
-Firstly, let’s create a numeric vector which will be used throughout this part.
+Firstly, let's create a numeric vector which will be used throughout this part.
 
 ```{r}
 num_vect <- c(2, 3, 2, 0, 4, 7) 
@@ -388,35 +374,30 @@ If we want to sort the vector in the descending order, namely from the largest t
 sort(num_vect, decreasing = TRUE)
 ```
 
-
 ### Ranks of vectors
 
-Next, let’s talk about ranks. The `rank()` function references the position of the value in the sorted vector and is in the same order as the original sequence.
-
+Next, let's talk about ranks. The `rank()` function references the position of the value in the sorted vector and is in the same order as the original sequence.
 
 ```{r}
 num_vect
 rank(num_vect)
 ```
-If we check the values of `num_vect`, we can see that the smallest value of `num_vect` is `0`, which corresponds to the fourth element. Thus, the fourth element has rank 1. The second smallest value of `num_vect` is 2, which is shared at the first and the third elements, resulting a tie (elements with the same value will result in a tie). Normally, these two elements would have ranks 2 and 3.  To break the tie, the `rank()` function assigns all the elements involving in the tie (the first and third elements in this example) the same rank, which is average of all their ranks (the average of 2 and 3), by default. In addition to this default behavior for handling ties, `rank()` also provides other options by setting the `ties.method` argument.
 
-If we want to break the ties by the order element appears in the vector, we can set `ties.method = "first"`. Then the earlier appearing element will have smaller ranks than the later one. In this example, the first element will have rank 2 and the third element has rank 3, since the first element appears earlier than the third element. 
+If we check the values of `num_vect`, we can see that the smallest value of `num_vect` is `0`, which corresponds to the fourth element. Thus, the fourth element has rank 1. The second smallest value of `num_vect` is 2, which is shared at the first and the third elements, resulting a tie (elements with the same value will result in a tie). Normally, these two elements would have ranks 2 and 3. To break the tie, the `rank()` function assigns all the elements involving in the tie (the first and third elements in this example) the same rank, which is average of all their ranks (the average of 2 and 3), by default. In addition to this default behavior for handling ties, `rank()` also provides other options by setting the `ties.method` argument.
+
+If we want to break the ties by the order element appears in the vector, we can set `ties.method = "first"`. Then the earlier appearing element will have smaller ranks than the later one. In this example, the first element will have rank 2 and the third element has rank 3, since the first element appears earlier than the third element.
 
 ```{r}
 rank(num_vect, ties.method = "first")
 ```
 
-Note that unlike `sort()`, we can’t get positions in the descending order from the `rank()` function, which means we can’t add `decreasing = TRUE` in `rank()`.
-
-
-
+Note that unlike `sort()`, we can't get positions in the descending order from the `rank()` function, which means we can't add `decreasing = TRUE` in `rank()`.
 
 ### Order of vectors
 
 The next function we want to introduce is the `order()` function. Note that the function name order could be a bit misleading since ordering elements also has the same meaning of sorting. However, although it is related to sorting, `order()` is a very different function from `sort()`.
 
-
-Let’s recall the values of `num_vect` and apply `order()` on `num_vect`:
+Let's recall the values of `num_vect` and apply `order()` on `num_vect`:
 
 ```{r}
 num_vect
@@ -436,9 +417,8 @@ From the result, we can see that the `order()` function returns the position of 
 2^(1:5)
 ```
 
+The same rule is applied to the elements of the vectors using **mathematical functions**:
 
-
-The same rule is applied to the elements of the vectors using **mathematical** functions:
 ```{r}
 z_seq <- 3:9      
 sqrt(z_seq)    # calculate the square root of all the elements of z_seq
@@ -450,20 +430,17 @@ We can also round the results using the `round()` function and set the argument 
 round(sqrt(z_seq), digits = 2)
 ```
 
-
  
-
 
 ## Relational operators applied between a vector and a scalar
 
-For relational operators (>, <, ==, <=, >=, !=), each element of the vector is compared with a defined value (scalar). The result of comparison is a Boolean value (**`TRUE`** or **`FALSE`**). 
+For relational operators (\>, \<, ==, \<=, \>=, !=), each element of the vector is compared with a defined value (scalar). The result of comparison is a Boolean value (**`TRUE`** or **`FALSE`**).
 
 **Examples:**
 
 ```{r}
 m <- c(4, 2, 3, 8)
 ```
-
 
 ```{r}
 m > 3
@@ -476,18 +453,16 @@ m != 3
 
 ## Operators applied between two vectors
 
-
 ### Arithmetic Operators
 
-The arithmetic operators `(+, -, *, /, ^)` act on each element of the vector. 
+The arithmetic operators `(+, -, *, /, ^)` act on each element of the vector.
 
 **Examples:**
+
 ```{r}
 v <- c(1, 2, 3)
 t <- c(8, 3, 2)
 ```
-
-
 
 ```{r}
 t + v
@@ -496,15 +471,13 @@ t^v
 t + 3 * v / 2
 ```
 
-
-
 Note that R will follow the **BODMAS** (Brackets, Orders (powers/roots), Division, Multiplication, Addition, Subtraction) rule for the order in which it will carry out calculations.
 
  
 
 ### Relational Operators
 
-For relational operators (>, <, ==, <=, >=, !=), each element of the first vector is compared with the corresponding element of the second vector. The result of comparison is a Boolean value (**`TRUE`** or **`FALSE`**). 
+For relational operators (\>, \<, ==, \<=, \>=, !=), each element of the first vector is compared with the corresponding element of the second vector. The result of comparison is a Boolean value (**`TRUE`** or **`FALSE`**).
 
 Examples:
 
@@ -525,15 +498,13 @@ z != w
 
 ### Logical Operators applied to vectors
 
-The logical (Boolean) operators are:  
+The logical (Boolean) operators are:
 
-* `&` ,  `&&`  (AND)
-* `|` ,  `||`  (OR)
-* `!`          (NOT)  
-
+-   `&` , `&&` (AND)
+-   `|` , `||` (OR)
+-   `!` (NOT)
 
 Logical operators are applicable to vectors of type **logical** or **numeric**. The result of comparison is a **logical (Boolean) value**.
-
 
 Suppose we have the following vectors:
 
@@ -544,10 +515,9 @@ u <- c(2, 0, - 2, 2, TRUE, FALSE, FALSE)
 u
 ```
 
-How R will compute, for example, `s & u`? 
+How R will compute, for example, `s & u`?
 
-
-**THE RULE: all non-zero values in the vectors are considered as logical value `TRUE` and all zeros are  considered as `FALSE`**.
+**THE RULE: all non-zero values in the vectors are considered as logical value `TRUE` and all zeros are considered as `FALSE`**.
 
 Therefore:
 
@@ -556,8 +526,6 @@ s
 ```
 
 *Logicals*: `TRUE FALSE  TRUE FALSE  TRUE  TRUE FALSE`
-
-
 
 ```{r}
 u
@@ -575,14 +543,11 @@ The `&` operator combines each element of the first vector with the correspondin
 s & u
 ```
 
-
 Additionally, the `&&` operator takes the first element of both vectors and gives TRUE only if both are TRUE.
 
 ```{r}
 s && u
 ```
-
-
 
 **B. OR operators (`|`, `||`)**
 
@@ -598,10 +563,8 @@ Additionally, the `||` operator takes the first element of both vectors and give
 s || u
 ```
 
-
-
 **C. NOT operator (`!`)**
- 
+
 The `!` operator takes each element of the vector and gives the opposite logical value.
 
 ```{r}
@@ -609,3 +572,47 @@ The `!` operator takes each element of the vector and gives the opposite logical
 ! u
 ```
 
+
+ 
+
+
+## Statistical functions applied to vectors
+
+Statistical functions in R such as `sum()` and arithmetic `mean()` take in the numeric values of a vector and return a single numeric value:
+
+```{r}
+v_seq <- 5:10   
+v_seq
+
+sum(v_seq)     # adds all the elements of a vector
+
+mean(v_seq)    # calculate the arithmetic mean
+
+median(v_seq)  # calculate the median
+
+sd(v_seq)      # calculate the standard deviation
+
+range(v_seq)   # returns the minimum and maximum values
+```
+
+ 
+
+Next, we add a missing value `NA` in the `v_seq` vector:
+```{r}
+v_seq2 <- c(v_seq, NA)
+typeof(v_seq2)
+```
+
+We can see that the `v_seq2` vector is of integer type.
+
+
+However, if we try to calculate the mean of the `v_seq2`, R returns a `NA` value:
+```{r}
+mean(v_seq2)
+```
+
+Therefore, if some of the values in a vector are missing, then the `mean` of the vector is unknown (NA). In this case, it makes sense to **remove** the `NA` and compute the mean of the other values in the  vector setting the `na.rm` argument equals to TRUE:
+
+```{r}
+mean(v_seq2, na.rm = TRUE)
+```

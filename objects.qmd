@@ -1,4 +1,4 @@
-# R objects
+# R objects {#sec-objects}
 
 ```{r}
 #| include: false
@@ -71,7 +71,7 @@ log(x)
  
 
 ::: callout-tip
-## Use space before and after operators (*Highly Recommended*) 
+## Use space before and after operators (*Highly Recommended*)
 
 It is important the space before and after comparison operators and assignments. For example, suppose we want to code the expression `x smaller than -1/50` (note that `x` is `1/40`):
 
