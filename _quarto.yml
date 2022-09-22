@@ -20,6 +20,7 @@ book:
         - calculations.qmd
         - objects.qmd
         - structures.qmd
+        - structures2.qmd
 
     - part: "Special Topics"
       chapters:

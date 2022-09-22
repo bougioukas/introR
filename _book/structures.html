@@ -89,7 +89,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./lab1.html" rel="next">
+<link href="./structures2.html" rel="next">
 <link href="./objects.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -191,6 +191,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <a href="./structures.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data structures in R: 1-Dimensional Vectors</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./structures2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data structures in R: matrices, arrays, lists</span></a>
+  </div>
+</li>
       </ul>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -203,7 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./lab1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">LAB II: Descriptive Statistics</span></a>
+  <a href="./lab1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">LAB II: Descriptive Statistics</span></a>
   </div>
 </li>
       </ul>
@@ -262,6 +267,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </ul>
 </li>
   <li><a href="#statistical-functions-applied-to-vectors" id="toc-statistical-functions-applied-to-vectors" class="nav-link" data-scroll-target="#statistical-functions-applied-to-vectors"><span class="toc-section-number">6.9</span>  Statistical functions applied to vectors</a></li>
+  <li>
+<a href="#subsetting-vectors" id="toc-subsetting-vectors" class="nav-link" data-scroll-target="#subsetting-vectors"><span class="toc-section-number">6.10</span>  Subsetting vectors</a>
+  <ul class="collapse">
+<li><a href="#subsetting-indexing-a-vector-using" id="toc-subsetting-indexing-a-vector-using" class="nav-link" data-scroll-target="#subsetting-indexing-a-vector-using">Subsetting (indexing) a vector using <code>[ ]</code></a></li>
+  <li><a href="#subsetting-with-logical-vectors-indexing-by-conditon" id="toc-subsetting-with-logical-vectors-indexing-by-conditon" class="nav-link" data-scroll-target="#subsetting-with-logical-vectors-indexing-by-conditon">Subsetting with logical vectors (indexing by conditon)</a></li>
+  </ul>
+</li>
+  <li><a href="#vector-recycling" id="toc-vector-recycling" class="nav-link" data-scroll-target="#vector-recycling"><span class="toc-section-number">6.11</span>  Vector recycling</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -305,7 +318,7 @@ Learning objectives
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-objects" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/objects.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Data structures in R."><img src="images/objects.png" class="img-fluid figure-img" style="width:95.0%"></a></p>
+<figure class="figure"><p><a href="images/objects.png" class="lightbox" title="Data structures in R." data-gallery="quarto-lightbox-gallery-1"><img src="images/objects.png" class="img-fluid figure-img" style="width:95.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;6.1: Data structures in R.</figcaption><p></p>
 </figure>
 </div>
@@ -1011,6 +1024,186 @@ Warning in s &amp;&amp; u: 'length(x) = 7 &gt; 1' in coercion to 'logical(1)'</c
 <pre><code>[1] 7.5</code></pre>
 </div>
 </div>
+<p>&nbsp;</p>
+</section><section id="subsetting-vectors" class="level2" data-number="6.10"><h2 data-number="6.10" class="anchored" data-anchor-id="subsetting-vectors">
+<span class="header-section-number">6.10</span> Subsetting vectors</h2>
+<section id="subsetting-indexing-a-vector-using" class="level3"><h3 class="anchored" data-anchor-id="subsetting-indexing-a-vector-using">Subsetting (indexing) a vector using <code>[ ]</code>
+</h3>
+<p><strong>A. Extract specific elements of a vector</strong></p>
+<p>Having defined a vector, it’s often useful to <strong>extract parts</strong> of a vector. We do this with the <code>[ ]</code> operator. For example, using the built in <code>month.name</code> vector:</p>
+<div class="cell">
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">month.name</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>     <span class="co"># we extract only the second month of the year</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "February"</code></pre>
+</div>
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">month.name</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>   <span class="co"># we extract the second, third, and forth month of the year</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "February" "March"    "April"   </code></pre>
+</div>
+</div>
+<p>Let’s see the second example analytically. The vector <code>2:4</code> generates the sequence 2, 3, 4. This gets passed to the extract operator <code>[ ]</code>.</p>
+<p>We can also generate this sequence using the vector <code>c(2, 3, 4)</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">month.name</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "February" "March"    "April"   </code></pre>
+</div>
+</div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+The first element of a vector
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In R, the first element of a vector has an <strong>index of 1</strong>. (In many other programming languages [e.g., C and Python], the first element of a vector has an index of 0)</p>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>Note that values are returned in the order that we specify with the indices. For example:</p>
+<div class="cell">
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">month.name</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>  <span class="co"># extraction of 4, 3, 2 elements of the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "April"    "March"    "February"</code></pre>
+</div>
+</div>
+<p>We can also extract the same element more than once:</p>
+<div class="cell">
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">month.name</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "January"  "January"  "February" "March"    "April"   </code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<div class="callout-tip callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Missing data (NA) in vectors
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If we try and extract an element that doesn’t exist in the vector, the missing values are <code>NA</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">month.name</span><span class="op">[</span><span class="fl">10</span><span class="op">:</span><span class="fl">13</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "October"  "November" "December" NA        </code></pre>
+</div>
+</div>
+</div>
+</div>
+<p>&nbsp;</p>
+<p><strong>B. Skipping and removing elements from vectors</strong></p>
+<p>If we use a negative number as the index of a vector, R will return every element <strong>except</strong> for the one specified:</p>
+<div class="cell">
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">month.name</span><span class="op">[</span><span class="op">-</span><span class="fl">2</span><span class="op">]</span>   <span class="co"># remove the second month February from the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "January"   "March"     "April"     "May"       "June"      "July"     
+ [7] "August"    "September" "October"   "November"  "December" </code></pre>
+</div>
+</div>
+<p>We can also skip multiple elements:</p>
+<div class="cell">
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">month.name</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">5</span><span class="op">)</span><span class="op">]</span>  <span class="co"># remove the first and fifth elements of the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "February"  "March"     "April"     "June"      "July"      "August"   
+ [7] "September" "October"   "November"  "December" </code></pre>
+</div>
+</div>
+<p>which is equivalent to:</p>
+<div class="cell">
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">month.name</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span><span class="op">)</span><span class="op">]</span>  <span class="co"># remove the first and fifth elements of the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "February"  "March"     "April"     "June"      "July"      "August"   
+ [7] "September" "October"   "November"  "December" </code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+<p>A common error occurs when trying to skip slices of a vector. Suppose we want to skip the first five elements form the <code>month.name</code> vector. Most people first try to negate a sequence like so:</p>
+<div class="cell">
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">month.name</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This gives an error:<br><span style="     color: red !important;">Error in month.name [-1:5]: only 0’s may be mixed with negative subscripts</span></p>
+<p>Remember that the colon operator <code>:</code> is a function and in this example takes its first argument as -1, and second as 5, so generates the sequence of numbers: <code>-1, 0, 1, 2, 3, 4, 5</code>.</p>
+<p>The correct solution is to wrap that function call in brackets, so that the <code>-</code> operator is applied to the sequence:</p>
+<div class="cell">
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1 -2 -3 -4 -5</code></pre>
+</div>
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">month.name</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">]</span>  <span class="co"># remove the 1st to fifth element of the vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "June"      "July"      "August"    "September" "October"   "November" 
+[7] "December" </code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+</section><section id="subsetting-with-logical-vectors-indexing-by-conditon" class="level3"><h3 class="anchored" data-anchor-id="subsetting-with-logical-vectors-indexing-by-conditon">Subsetting with logical vectors (indexing by conditon)</h3>
+<p>As well as providing a list of indices we want to keep (or delete, if we prefix them with <code>-</code>), we can pass a <em>logical vector</em> to R indicating the indices we wish to select.</p>
+<p>For example, let’s say that we want to select only the first four months of the year:</p>
+<div class="cell">
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fourmonths</span> <span class="op">&lt;-</span> <span class="va">month.name</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span>
+<span><span class="va">fourmonths</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "January"  "February" "March"    "April"   </code></pre>
+</div>
+</div>
+<p>which is equivalent to:</p>
+<div class="cell">
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">month.name</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, </span>
+<span>             <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "January"  "February" "March"    "April"   </code></pre>
+</div>
+</div>
+<p>Furthermore, if we want to exlude “February” from the <code>fourmonths</code> vector we should code:</p>
+<div class="cell">
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fourmonths</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "January" "March"   "April"  </code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+</section></section><section id="vector-recycling" class="level2" data-number="6.11"><h2 data-number="6.11" class="anchored" data-anchor-id="vector-recycling">
+<span class="header-section-number">6.11</span> Vector recycling</h2>
+<p>What happens if we supply a logical vector that is shorter than the vector we’re extracting the elements from?</p>
+<p>For example:</p>
+<div class="cell">
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fourmonths</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "January" "March"  </code></pre>
+</div>
+</div>
+<p>This illustrates the idea of <strong>vector recycling</strong>. The <code>[ ]</code> extract operator silently “recycled” the values of the shorter vector <code>c(TRUE, FALSE)</code> in order to make the length compatible to the <code>fourmonths</code> vector:</p>
+<div class="cell">
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">fourmonths</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>,<span class="cn">FALSE</span>,<span class="cn">TRUE</span>,<span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "January" "March"  </code></pre>
+</div>
+</div>
+<p>For a further example, suppose we have two vectors <code>c(1,2,4)</code> , <code>c(6,0,9,10,13)</code>, where the first one is shorter with only 3 elements. Now if we sum these two, we will get a warning message as follows.</p>
+<div class="cell">
+<div class="sourceCode" id="cb216"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">4</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">0</span>,<span class="fl">9</span>,<span class="fl">10</span>,<span class="fl">13</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in c(1, 2, 4) + c(6, 0, 9, 10, 13): longer object length is not a
+multiple of shorter object length</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  7  2 13 11 15</code></pre>
+</div>
+</div>
+<p>Here R , sums those vectors by recycling or repeating the elements in shorter one, until it is long enough to match the longer one as follows:</p>
+<div class="cell">
+<div class="sourceCode" id="cb219"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">0</span>, <span class="fl">9</span>, <span class="fl">10</span>, <span class="fl">13</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  7  2 13 11 15</code></pre>
+</div>
+</div>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -1130,8 +1323,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./lab1.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">LAB II: Descriptive Statistics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./structures2.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data structures in R: matrices, arrays, lists</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1139,7 +1332,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":true,"openEffect":"zoom","descPosition":"bottom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","loop":true,"closeEffect":"zoom","openEffect":"zoom"});</script>
 
 
 </body></html>

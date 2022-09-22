@@ -1,6 +1,5 @@
 # Calculations in R {#sec-calculations}
 
-
 ## Arithmetic Operators in R
 
 The simplest thing we could do with R is arithmetic operations with numbers. For example:
@@ -13,7 +12,6 @@ The simplest thing we could do with R is arithmetic operations with numbers. For
 R printed out the result, with a preceding `[1]`.
 
  
-
 
 In the previous calculation the `+` sign was used to carry out the addition. @tbl-arithmetic_operators presents a list of arithmetic operators available in R.
 
@@ -221,10 +219,14 @@ There are a few special values that are used in R.
 
 ### Missing values (NA)
 
-For example, in the real world, missing values may occur when recording sensor information. R uses a special numeric value `NA` standing for "Not available". Mathematical operations using `NA` produces `NA`:
+For example, in the real world, missing values may occur when recording sensor information. R uses a special numeric value `NA` standing for "Not available" and represents a missing value. Mathematical functions/operations using `NA` produces `NA`:
 
 ```{r}
 cos(NA)
+```
+
+```{r}
+1 + NA
 ```
 
  

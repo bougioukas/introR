@@ -572,9 +572,7 @@ The `!` operator takes each element of the vector and gives the opposite logical
 ! u
 ```
 
-
  
-
 
 ## Statistical functions applied to vectors
 
@@ -598,6 +596,7 @@ range(v_seq)   # returns the minimum and maximum values
  
 
 Next, we add a missing value `NA` in the `v_seq` vector:
+
 ```{r}
 v_seq2 <- c(v_seq, NA)
 typeof(v_seq2)
@@ -605,14 +604,168 @@ typeof(v_seq2)
 
 We can see that the `v_seq2` vector is of integer type.
 
-
 However, if we try to calculate the mean of the `v_seq2`, R returns a `NA` value:
+
 ```{r}
 mean(v_seq2)
 ```
 
-Therefore, if some of the values in a vector are missing, then the `mean` of the vector is unknown (NA). In this case, it makes sense to **remove** the `NA` and compute the mean of the other values in the  vector setting the `na.rm` argument equals to TRUE:
+Therefore, if some of the values in a vector are missing, then the `mean` of the vector is unknown (NA). In this case, it makes sense to **remove** the `NA` and compute the mean of the other values in the vector setting the `na.rm` argument equals to TRUE:
 
 ```{r}
 mean(v_seq2, na.rm = TRUE)
+```
+
+ 
+
+## Subsetting vectors
+
+### Subsetting (indexing) a vector using `[ ]`
+
+**A. Extract specific elements of a vector**
+
+Having defined a vector, it's often useful to **extract parts** of a vector. We do this with the `[ ]` operator. For example, using the built in `month.name` vector:
+
+```{r}
+month.name[2]     # we extract only the second month of the year
+month.name[2:4]   # we extract the second, third, and forth month of the year
+```
+
+Let's see the second example analytically. The vector `2:4` generates the sequence 2, 3, 4. This gets passed to the extract operator `[ ]`.
+
+We can also generate this sequence using the vector `c(2, 3, 4)`:
+
+```{r}
+month.name[c(2, 3, 4)]
+```
+
+::: callout-important
+## The first element of a vector
+
+In R, the first element of a vector has an **index of 1**. (In many other programming languages \[e.g., C and Python\], the first element of a vector has an index of 0)
+:::
+
+ 
+
+Note that values are returned in the order that we specify with the indices. For example:
+
+```{r}
+month.name[4:2]  # extraction of 4, 3, 2 elements of the vector
+```
+
+We can also extract the same element more than once:
+
+```{r}
+month.name[c(1, 1, 2, 3, 4)]
+```
+
+ 
+
+::: {.callout-tip icon="false"}
+## Missing data (NA) in vectors
+
+If we try and extract an element that doesn't exist in the vector, the missing values are `NA`:
+
+```{r}
+month.name[10:13]
+```
+:::
+
+ 
+
+**B. Skipping and removing elements from vectors**
+
+If we use a negative number as the index of a vector, R will return every element **except** for the one specified:
+
+```{r}
+month.name[-2]   # remove the second month February from the vector
+```
+
+We can also skip multiple elements:
+
+```{r}
+month.name[c(-1, -5)]  # remove the first and fifth elements of the vector
+
+```
+
+which is equivalent to:
+
+```{r}
+month.name[-c(1, 5)]  # remove the first and fifth elements of the vector
+```
+
+ 
+
+A common error occurs when trying to skip slices of a vector. Suppose we want to skip the first five elements form the `month.name` vector. Most people first try to negate a sequence like so:
+
+```{r, error=TRUE, eval=FALSE}
+month.name[-1:5]  
+```
+
+This gives an error:\
+`r kableExtra::text_spec("Error in month.name [-1:5]: only 0's may be mixed with negative subscripts", color = "red")`
+
+Remember that the colon operator `:` is a function and in this example takes its first argument as -1, and second as 5, so generates the sequence of numbers: `-1, 0, 1, 2, 3, 4, 5`.
+
+The correct solution is to wrap that function call in brackets, so that the `-` operator is applied to the sequence:
+
+```{r}
+-(1:5)
+month.name[-(1:5)]  # remove the 1st to fifth element of the vector
+```
+
+ 
+
+### Subsetting with logical vectors (indexing by conditon)
+
+As well as providing a list of indices we want to keep (or delete, if we prefix them with `-`), we can pass a *logical vector* to R indicating the indices we wish to select.
+
+For example, let's say that we want to select only the first four months of the year:
+
+```{r}
+fourmonths <- month.name[1:4]
+fourmonths
+```
+
+which is equivalent to:
+
+```{r}
+month.name[c(TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, 
+             FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)]
+```
+
+Furthermore, if we want to exlude "February" from the `fourmonths` vector we should code:
+
+```{r}
+fourmonths[c(TRUE, FALSE, TRUE, TRUE)]
+```
+
+ 
+
+## Vector recycling
+
+What happens if we supply a logical vector that is shorter than the vector we're extracting the elements from?
+
+For example:
+
+```{r}
+fourmonths[c(TRUE, FALSE)]
+```
+
+This illustrates the idea of **vector recycling**. The `[ ]` extract operator silently "recycled" the values of the shorter vector `c(TRUE, FALSE)` in order to make the length compatible to the `fourmonths` vector:
+
+```{r}
+fourmonths[c(TRUE,FALSE,TRUE,FALSE)]
+```
+
+For a further example, suppose we have two vectors `c(1,2,4)` , `c(6,0,9,10,13)`, where the first one is shorter with only 3 elements. Now if we sum these two, we will get a warning message as follows.
+
+```{r}
+c(1,2,4) + c(6,0,9,10,13)
+```
+
+Here R , sums those vectors by recycling or repeating the elements in shorter one, until it is long enough to match the longer one as follows:
+
+```{r}
+c(1, 2, 4, 1, 2) + c(6, 0, 9, 10, 13)
 ```
