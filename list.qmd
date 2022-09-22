@@ -179,7 +179,7 @@ A **data frame** is a special type of list with **equal-length** atomic vectors.
 
 * Each **column** of a data frame is an **atomic vector** and remember that the data in an atomic vector must only be of one type (numeric, character, or logical).  
 * Data frames are similar to the **datasets** we’d typically see in spreadsheets (e.g., Excell files, Google sheets, LibreOffice Calc).  
-* Data frames are the most common data structure we’ll deal with in R. A data frame can be created with the `data.frame()` function in base R, the `tibble()` function in the tidyverse package (an improvement over data.frame), or the "fast" `data.table()` in the data.table package.  
+* Data frames are the most common data structure we’ll deal with in R. A data frame can be created with the `data.frame()` function in base R, the `tibble()` function in the tidyverse package (an improvement over data.frame), or the "fast" `data.table()` in the `{data.table}` package.  
 
 
 
@@ -192,7 +192,7 @@ The two basic variable categories are the categorical and numerical variables.
 
 ### Creating a data frame with `tibble()`
 
-We can create a data frame from column vectors with the `tibble()` function from `tibble` package which belongs to the “tidyverse” family of packages. A tibble is a specific kind of data frame and is short for “tidy table”.
+We can create a data frame from column vectors with the `tibble()` function from `{tibble}` package which belongs to the “tidyverse” family of packages. A tibble is a specific kind of data frame and is short for “tidy table”.
 
 In order to use the tidyverse packages, our input data frames must be in “tidy” format (long/narrow format). In tidy data there are three interrelated rules:
 
@@ -302,8 +302,7 @@ with(patient_data, table(diabetes, status))
 Categorical (nominal) and ordered categorical (ordinal) variables in R are usually transformed to **factors**. Factors can contain only predefined values and are crucial in R because they determine how data will be analyzed in statistical models and presented visually.
 
 
-
-In our example, we should convert the `diabetes` and `status` variables from character to factor variables. This can be done by applying the `convert_as_factor()` function from the `rstatix` package:
+In our example, we should convert the `diabetes` and `status` variables from character to factor variables. This can be done by applying the `convert_as_factor()` function from the `{rstatix}` package:
 
 ```{r}
 # convert from character to factor
@@ -351,7 +350,6 @@ Now we can use, for example, the comparison  operators `>` to check whether one 
 ```{r}
 patient_data$status[2] > patient_data$status[6]
 ```
-
 
 
 Factors are also useful when we know the set of possible values (based on theory or experimental design, not of the data) but **they’re not all present** in a given dataset. In contrast to a character vector, when we tabulate a factor (e.g. using the `table()` function) we will get counts of all categories, even unobserved ones:
@@ -425,7 +423,7 @@ as.numeric(date2)
 
 
 
-We’ve seen also one approach to parsing strings into `dates` variable in our data frame using the `ymd()` function from `lubridate` package. This is the most concise way to create a single date/time object, as we might need when filtering date/time data. The class of this object is:
+We’ve seen also one approach to parsing strings into `dates` variable in our data frame using the `ymd()` function from `{lubridate}` package. This is the most concise way to create a single date/time object, as we might need when filtering date/time data. The class of this object is:
 
 ```{r}
 class(patient_data$dates)

@@ -506,14 +506,14 @@ Data frame
 </li>
 <li>Data frames are similar to the <strong>datasets</strong> we’d typically see in spreadsheets (e.g., Excell files, Google sheets, LibreOffice Calc).<br>
 </li>
-<li>Data frames are the most common data structure we’ll deal with in R. A data frame can be created with the <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> function in base R, the <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> function in the tidyverse package (an improvement over data.frame), or the “fast” <code>data.table()</code> in the data.table package.</li>
+<li>Data frames are the most common data structure we’ll deal with in R. A data frame can be created with the <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> function in base R, the <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> function in the tidyverse package (an improvement over data.frame), or the “fast” <code>data.table()</code> in the <a href="https://r-datatable.com">data.table</a> package.</li>
 </ul>
 <p>Different traditions have different names for the <strong>rows</strong> and <strong>columns</strong> of a dataset. Statisticians refer to them as observations and variables, database analysts call them records and fields, and those from the data mining/machine learning disciplines call them examples and attributes. We’ll use the terms <strong>observations</strong> and <strong>variables</strong> throughout this textbook.</p>
 <p>The two basic variable categories are the categorical and numerical variables.</p>
 <p>&nbsp;</p>
 </section><section id="creating-a-data-frame-with-tibble" class="level3"><h3 class="anchored" data-anchor-id="creating-a-data-frame-with-tibble">Creating a data frame with <code>tibble()</code>
 </h3>
-<p>We can create a data frame from column vectors with the <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> function from <code>tibble</code> package which belongs to the “tidyverse” family of packages. A tibble is a specific kind of data frame and is short for “tidy table”.</p>
+<p>We can create a data frame from column vectors with the <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> function from <a href="https://tibble.tidyverse.org/">tibble</a> package which belongs to the “tidyverse” family of packages. A tibble is a specific kind of data frame and is short for “tidy table”.</p>
 <p>In order to use the tidyverse packages, our input data frames must be in “tidy” format (long/narrow format). In tidy data there are three interrelated rules:</p>
 <ul>
 <li>Each variable must have its own column.</li>
@@ -523,7 +523,7 @@ Data frame
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-tidy_data" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/tidy_data.PNG" class="lightbox" title="Tidy data." data-gallery="quarto-lightbox-gallery-1"><img src="images/tidy_data.PNG" class="img-fluid figure-img" style="width:90.0%"></a></p>
+<figure class="figure"><p><a href="images/tidy_data.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Tidy data."><img src="images/tidy_data.PNG" class="img-fluid figure-img" style="width:90.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;8.1: Tidy data.</figcaption><p></p>
 </figure>
 </div>
@@ -653,7 +653,7 @@ diabetes Excellent Improved Poor
 </section><section id="factors" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="factors">
 <span class="header-section-number">8.7</span> Factors</h2>
 <p>Categorical (nominal) and ordered categorical (ordinal) variables in R are usually transformed to <strong>factors</strong>. Factors can contain only predefined values and are crucial in R because they determine how data will be analyzed in statistical models and presented visually.</p>
-<p>In our example, we should convert the <code>diabetes</code> and <code>status</code> variables from character to factor variables. This can be done by applying the <code>convert_as_factor()</code> function from the <code>rstatix</code> package:</p>
+<p>In our example, we should convert the <code>diabetes</code> and <code>status</code> variables from character to factor variables. This can be done by applying the <code>convert_as_factor()</code> function from the <a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a> package:</p>
 <div class="cell">
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># convert from character to factor</span></span>
 <span><span class="va">patient_data</span> <span class="op">&lt;-</span> <span class="fu">rstatix</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/factors.html">convert_as_factor</a></span><span class="op">(</span><span class="va">patient_data</span>, <span class="va">diabetes</span>, <span class="va">status</span><span class="op">)</span></span>
@@ -778,7 +778,7 @@ m f
 <div class="cell">
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/difftime.html">difftime</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">date1</span>, units <span class="op">=</span> <span class="st">'days'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 816.8354 days</code></pre>
+<pre><code>Time difference of 816.8474 days</code></pre>
 </div>
 </div>
 <p>POSIXct stores a date and time. In numeric form, the number of seconds since <code>1970-01-01</code>.</p>
@@ -789,7 +789,7 @@ m f
 <pre><code>[1] 1340895600</code></pre>
 </div>
 </div>
-<p>We’ve seen also one approach to parsing strings into <code>dates</code> variable in our data frame using the <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd()</a></code> function from <code>lubridate</code> package. This is the most concise way to create a single date/time object, as we might need when filtering date/time data. The class of this object is:</p>
+<p>We’ve seen also one approach to parsing strings into <code>dates</code> variable in our data frame using the <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd()</a></code> function from <a href="https://lubridate.tidyverse.org">lubridate</a> package. This is the most concise way to create a single date/time object, as we might need when filtering date/time data. The class of this object is:</p>
 <div class="cell">
 <div class="sourceCode" id="cb95"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">$</span><span class="va">dates</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -924,7 +924,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":true,"selector":".lightbox","openEffect":"zoom","descPosition":"bottom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":true});</script>
 
 
 </body></html>
