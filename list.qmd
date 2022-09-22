@@ -5,7 +5,6 @@
 library(here)
 ```
 
-
 When we have finished this chapter, we should be able to:
 
 ::: {.callout-caution icon="false"}
@@ -163,28 +162,24 @@ class(my_unlist)
  
 
 ## Data frames
-A data frame is the most common way of storing data in R and, generally, is the data structure most often used for data analyses.
 
+A data frame is the most common way of storing data in R and, generally, is the data structure most often used for data analyses.
 
 ::: {.callout-tip icon="false"}
 ## Data frame
 
 A **data frame** is a special type of list with **equal-length** atomic vectors. Each component of the list can be thought of as a column and the length of each component of the list is the number of rows.
-
 :::
 
  
 
 ### Basic characteristics of data frames
 
-* Each **column** of a data frame is an **atomic vector** and remember that the data in an atomic vector must only be of one type (numeric, character, or logical).  
-* Data frames are similar to the **datasets** we’d typically see in spreadsheets (e.g., Excell files, Google sheets, LibreOffice Calc).  
-* Data frames are the most common data structure we’ll deal with in R. A data frame can be created with the `data.frame()` function in base R, the `tibble()` function in the tidyverse package (an improvement over data.frame), or the "fast" `data.table()` in the `{data.table}` package.  
+-   Each **column** of a data frame is an **atomic vector** and remember that the data in an atomic vector must only be of one type (numeric, character, or logical).\
+-   Data frames are similar to the **datasets** we'd typically see in spreadsheets (e.g., Excell files, Google sheets, LibreOffice Calc).\
+-   Data frames are the most common data structure we'll deal with in R. A data frame can be created with the `data.frame()` function in base R, the `tibble()` function in the tidyverse package (an improvement over data.frame), or the "fast" `data.table()` in the `{data.table}` package.
 
-
-
-Different traditions have different names for the **rows** and **columns** of a dataset. Statisticians refer to them as observations and variables, database analysts call them records and fields, and those from the data mining/machine learning disciplines call them examples and attributes. We’ll use the terms **observations** and **variables** throughout this textbook.  
-
+Different traditions have different names for the **rows** and **columns** of a dataset. Statisticians refer to them as observations and variables, database analysts call them records and fields, and those from the data mining/machine learning disciplines call them examples and attributes. We'll use the terms **observations** and **variables** throughout this textbook.
 
 The two basic variable categories are the categorical and numerical variables.
 
@@ -192,14 +187,13 @@ The two basic variable categories are the categorical and numerical variables.
 
 ### Creating a data frame with `tibble()`
 
-We can create a data frame from column vectors with the `tibble()` function from `{tibble}` package which belongs to the “tidyverse” family of packages. A tibble is a specific kind of data frame and is short for “tidy table”.
+We can create a data frame from column vectors with the `tibble()` function from `{tibble}` package which belongs to the "tidyverse" family of packages. A tibble is a specific kind of data frame and is short for "tidy table".
 
-In order to use the tidyverse packages, our input data frames must be in “tidy” format (long/narrow format). In tidy data there are three interrelated rules:
+In order to use the tidyverse packages, our input data frames must be in "tidy" format (long/narrow format). In tidy data there are three interrelated rules:
 
-- Each variable must have its own column.
-- Each observation must have its own row.
-- Each value must have its own cell.
-
+-   Each variable must have its own column.
+-   Each observation must have its own row.
+-   Each value must have its own cell.
 
 ```{r}
 #| label: fig-tidy_data
@@ -211,14 +205,13 @@ In order to use the tidyverse packages, our input data frames must be in “tidy
 knitr::include_graphics(here("images", "tidy_data.png"))
 ```
 
-
 Here, we provide a simple example of patient dataset:
 
 ```{r}
 #| message: false
 
-library(tidyverse)
-library(lubridate)
+library(tidyverse)   # load the tidyverse package
+library(lubridate)   # load the lubridate package
 
 patient_data <- tibble(
 patientID = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -233,17 +226,13 @@ dates = ymd("2020-10-09", "2020-10-12", "2020-10-18", "2020-10-27",
 patient_data
 ```
 
-
 In this data frame, `patientID` is a row or case identifier, `age` (in years) and `weight` (in kg) are continuous variables, `diabetes` (Type 1, Type 2) is a nominal (dichotomous) variable, `status` is an ordinal variable (Poor/Improved/Excellent), and `dates` variable with dates (note that we used the `ymd()` function to create this variable).
 
-
-First, let's take a look at the structure of the object _patient_data_ with the `glimpse()`:
-
+First, let's take a look at the structure of the object *patient_data* with the `glimpse()`:
 
 ```{r}
 glimpse(patient_data)
 ```
-
 
 We can also find the **type**, **class** and **dim** for the data table:
 
@@ -253,10 +242,10 @@ class(patient_data)
 dim(patient_data)
 ```
 
-The type is a _list_ but the class is a `tbl` _(tibble)_ object which is a "tidy" data frame. The dimensions are 8x6.
-
+The type is a *list* but the class is a `tbl` *(tibble)* object which is a "tidy" data frame. The dimensions are 8x6.
 
 The `attribute()` function help us to explore the characteristics/attributives of the tibbles:
+
 ```{r}
 attributes(patient_data)
 ```
@@ -265,12 +254,11 @@ attributes(patient_data)
 
 ### Access only one variable at a time from a tibble
 
-To access the variable _age_, we can use the **dollar sign (`$`)** like this:
+To access the variable *age*, we can use the **dollar sign (`$`)** like this:
 
 ```{r}
 patient_data$age
 ```
-
 
 For example, if we want to **cross tabulate** diabetes type by status, we could use the following code:
 
@@ -278,19 +266,17 @@ For example, if we want to **cross tabulate** diabetes type by status, we could 
 table(patient_data$diabetes, patient_data$status)
 ```
 
-
 ::: {.callout-tip icon="false"}
 ## Table
 
 The **`table()`** function builds a contingency table of the counts at each combination of levels of the variables.
-
 :::
 
  
 
 ## Access variables using the with() function
 
-It can get tiresome typing patient_data$ at the beginning of every variable name. An alternative approach is to use `with()` function. For example:
+It can get tiresome typing patient_data\$ at the beginning of every variable name. An alternative approach is to use `with()` function. For example:
 
 ```{r}
 with(patient_data, table(diabetes, status))
@@ -299,8 +285,8 @@ with(patient_data, table(diabetes, status))
  
 
 ## Factors
-Categorical (nominal) and ordered categorical (ordinal) variables in R are usually transformed to **factors**. Factors can contain only predefined values and are crucial in R because they determine how data will be analyzed in statistical models and presented visually.
 
+Categorical (nominal) and ordered categorical (ordinal) variables in R are usually transformed to **factors**. Factors can contain only predefined values and are crucial in R because they determine how data will be analyzed in statistical models and presented visually.
 
 In our example, we should convert the `diabetes` and `status` variables from character to factor variables. This can be done by applying the `convert_as_factor()` function from the `{rstatix}` package:
 
@@ -310,14 +296,12 @@ patient_data <- rstatix::convert_as_factor(patient_data, diabetes, status)
 patient_data
 ```
 
-
 Now, we can inspect the order of the levels for both factor variables using the `levels()` function:
 
 ```{r}
 levels(patient_data$diabetes) # show the levels of diabetes variable
 levels(patient_data$status) # show the levels of status variable
 ```
-
 
 Additionally, we may want to reorder the levels in the `status` variable using the `fct_relevel()` function from the `{forcats}` package. In this case, the argument `rev` in the function will reverse the order:
 
@@ -329,13 +313,12 @@ levels(patient_data$status)  # show the order of the levels
 ```
 
 or using the `fct_rev()` from `{forcats}` package:
+
 ```{r}
 #| eval: false
 
 patient_data$status <- fct_rev(patient_data$status)
 ```
-
-
 
 The `status` variable has a natural ordering between its categories. If we want to compare the values, we have to pass this information to R.
 
@@ -345,14 +328,13 @@ patient_data$status <-  factor(patient_data$status, ordered = TRUE)
 patient_data$status
 ```
 
-Now we can use, for example, the comparison  operators `>` to check whether one element of the ordered vector is larger than the other.
+Now we can use, for example, the comparison operators `>` to check whether one element of the ordered vector is larger than the other.
 
 ```{r}
 patient_data$status[2] > patient_data$status[6]
 ```
 
-
-Factors are also useful when we know the set of possible values (based on theory or experimental design, not of the data) but **they’re not all present** in a given dataset. In contrast to a character vector, when we tabulate a factor (e.g. using the `table()` function) we will get counts of all categories, even unobserved ones:
+Factors are also useful when we know the set of possible values (based on theory or experimental design, not of the data) but **they're not all present** in a given dataset. In contrast to a character vector, when we tabulate a factor (e.g. using the `table()` function) we will get counts of all categories, even unobserved ones:
 
 ```{r}
 sex_char <- c("m", "m", "m")
@@ -363,16 +345,15 @@ table(sex_char)
 table(sex_factor)
 ```
 
-
  
 
 ## Dates in R
 
 There are three types of date/time data that refer to an instant in time:
 
-* A **date**. Tibbles print this as `<date>`.
-* A **time** within a day. Tibbles print this as `<time>`.
-* A **date-time** is a date plus a time: it uniquely identifies an instant in time (typically to the nearest second). Tibbles print this as `<dttm>`. Elsewhere in R these are called POSIXct.
+-   A **date**. Tibbles print this as `<date>`.
+-   A **time** within a day. Tibbles print this as `<time>`.
+-   A **date-time** is a date plus a time: it uniquely identifies an instant in time (typically to the nearest second). Tibbles print this as `<dttm>`. Elsewhere in R these are called POSIXct.
 
 To get the current date or date-time you can use `Sys.Date()` or `now()`:
 
@@ -383,7 +364,7 @@ Sys.Date()
 now()
 ```
 
-Date vectors are built on top of double vectors but they have the special class “Date”:
+Date vectors are built on top of double vectors but they have the special class "Date":
 
 ```{r}
 today <- Sys.Date()
@@ -391,16 +372,14 @@ typeof(today)
 class(today)
 ```
 
-
 The value of the double (which can be seen by stripping the class), represents the number of days since `1970-01-01`:
 
 ```{r}
 unclass(today)
 ```
 
-
-
 So, in numeric form, `Date` counts the days since `1970-01-01`. For example:
+
 ```{r}
 date1 <- as.Date('2020-06-28')
 as.numeric(date1)
@@ -412,8 +391,6 @@ Now, we can use `difftime()` to find the amount of time in DAYS that has passed 
 difftime(Sys.time(), date1, units = 'days')
 ```
 
-
-
 POSIXct stores a date and time. In numeric form, the number of seconds since `1970-01-01`.
 
 ```{r}
@@ -421,11 +398,8 @@ date2 <- as.POSIXct('2012-06-28 18:00')
 as.numeric(date2)
 ```
 
-
-
-We’ve seen also one approach to parsing strings into `dates` variable in our data frame using the `ymd()` function from `{lubridate}` package. This is the most concise way to create a single date/time object, as we might need when filtering date/time data. The class of this object is:
+We've seen also one approach to parsing strings into `dates` variable in our data frame using the `ymd()` function from `{lubridate}` package. This is the most concise way to create a single date/time object, as we might need when filtering date/time data. The class of this object is:
 
 ```{r}
 class(patient_data$dates)
 ```
-
