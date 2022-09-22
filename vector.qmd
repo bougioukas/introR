@@ -1,4 +1,4 @@
-# Data structures in R: 1-Dimensional Vectors {#sec-structures}
+# Data structures in R: 1-Dimensional Vectors {#sec-vector}
 
 When we have finished this chapter, we should be able to:
 

@@ -1,4 +1,4 @@
-# Data structures in R: matrices, arrays, lists {#sec-structures2}
+# Data structures in R: matrices and arrays {#sec-matrix}
 
 ```{r}
 #| include: false
@@ -282,8 +282,7 @@ $$
 
 where $\overline{v}$ is the mean of observations, $\sum_{i=1}^{n}v_i$ is the sum of all observations, and $n$ is the number of observations.
 
-In matrix algebra, given that :
-
+In matrix algebra, given that:
 
 $$
 U = \left(\begin{array}{c} 
@@ -317,26 +316,20 @@ $$
     \begin{pmatrix}
       v_{1} \\
       v_{2} \\
-      \vdots \\
-      v_{i} \\
+      v_{3} \\
       \vdots \\
       v_{n} \\
     \end{pmatrix} =
-$$ 
-
+$$
 
 $$
- =
+=
     \frac{1}{n} \cdot
     \begin{pmatrix}
       1\cdot v_{1} + 1\cdot v_{2} +1\cdot v_{3} +...1\cdot v_{n} 
     \end{pmatrix} =
     \frac{1}{n}\sum_{i=1}^{n}v_i
-$$ 
-
-
-
-
+$$
 
 where $U^T$ is the transpose of $U$.
 
@@ -358,4 +351,26 @@ V
 ```{r}
 average_my_values <- t(U) %*% V/n
 average_my_values 
+```
+
+ 
+
+## Arrays
+
+Arrays are similar to matrices but can have **more than two dimensions**. They're created with an `array()` function from base R:
+
+```{r}
+# build the 2x3x4 array
+my_array <- array(1:24, dim = c(2,3,4))
+my_array
+```
+
+As you can see, arrays are a natural extension of matrices. They can be useful in programming new statistical methods. Like matrices, they contain a single type of data (e.g., numeric).
+
+We can find the `type`, `class` and the `dimensions` of the array:
+
+```{r}
+typeof(my_array)
+class(my_array)
+dim(my_array)
 ```

@@ -19,8 +19,9 @@ book:
         - packages.qmd
         - calculations.qmd
         - objects.qmd
-        - structures.qmd
-        - structures2.qmd
+        - vector.qmd
+        - matrix.qmd
+        - list.qmd
 
     - part: "Special Topics"
       chapters:
