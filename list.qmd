@@ -1,5 +1,11 @@
 # Data structures in R: lists and data frames {#sec-list}
 
+```{r}
+#| include: false
+library(here)
+```
+
+
 When we have finished this chapter, we should be able to:
 
 ::: {.callout-caution icon="false"}
@@ -8,23 +14,18 @@ When we have finished this chapter, we should be able to:
 
  
 
-
 ## Creating a list
 
-A list in R allows us to gather a variety of objects under one name (that is, the name of the list) in an ordered way. These objects can be matrices, vectors, data frames, even other lists, etc. It is not even required that these objects are related to each other in any way.
-We could say that a list is some kind super data type: we can store practically any piece of information in it!
+A list in R allows us to gather a variety of objects under one name (that is, the name of the list) in an ordered way. These objects can be matrices, vectors, data frames, even other lists, etc. It is not even required that these objects are related to each other in any way. We could say that a list is some kind super data type: we can store practically any piece of information in it!
 
-
-We construct a list using the `list()` function. The list items (or components  of a list) can be matrices, vectors, other lists. For example:
-
+We construct a list using the `list()` function. The list items (or components of a list) can be matrices, vectors, other lists. For example:
 
 ```{r}
 my_list <- list(1:5, c("apple", "orange"), TRUE)
 my_list
 ```
 
-This list consists of three components that are atomic vectors of different types of data (numeric, characters, and logical). 
-
+This list consists of three components that are atomic vectors of different types of data (numeric, characters, and logical).
 
 We can assign names to the list items:
 
@@ -36,22 +37,19 @@ my_list <- list(
 my_list
 ```
 
+We can also confirm that the class of the object is `list`:
 
-We can also confirm that the class of the object is `list`: 
 ```{r}
 class(my_list)
 ```
-
 
  
 
 ## Subsetting a list
 
-
 ### Subset list and preserve output as a list
 
 We can use the `[ ]` operator to extract one or more list items while preserving the output in list format:
-
 
 ```{r}
 my_list[1]    # extract the first list item
@@ -60,7 +58,6 @@ class(my_list[1])
 ```
 
  
-
 
 ### Subset list and simplify the output
 
@@ -74,7 +71,6 @@ class(my_list[[1]])
 my_list[["numbers"]]   # same as above but using the item's name
 ```
 
-
 We can also access the content of the list by typing the name of the list followed by a dollar sign `$` folowed by the name of the list item:
 
 ```{r}
@@ -83,21 +79,17 @@ my_list$numbers  # extract the numbers and simplify to a vector
 
 One thing that differentiates the `[[` operator from the `$` is that the `[[` operator can be used with computed indices and names. The `$` operator can only be used with names.
 
-
-
-
 ::: {.callout-important icon="false"}
 ## Simplifying Vs Preserving subsetting
+
 It's important to understand the difference between simplifying and preserving subsetting. Simplifying subsets returns the simplest possible data structure that can represent the output. Preserving subsets keeps the structure of the output the same as the input.
 :::
-           
+
  
 
 ### Subset list to get individual elements out of a list item
 
-To extract individual elements out of a specific list item combine the `[[` (or $) operator with the `[` operator:
-
-
+To extract individual elements out of a specific list item combine the `[[` (or \$) operator with the `[` operator:
 
 ```{r}
 my_list[[2]][2]          # using the index
@@ -107,7 +99,6 @@ my_list[["strings"]][2]  # using the name of the list item
 my_list$strings[2]       # using the $
 
 ```
-
 
  
 
@@ -125,10 +116,9 @@ my_list2
 
  
 
-
 **Subsetting a nested list**
 
-We can access list items of a nested list by using the combination of [[ ]] or $ operator and the [ ] operator. For example:
+We can access list items of a nested list by using the combination of \[\[ \]\] or \$ operator and the \[ \] operator. For example:
 
 ```{r}
 # preserve the output as a list
@@ -163,11 +153,281 @@ class(my_list2[[2]][[2]][3])
 ## Unlist a list
 
 We can turn a list into an atomic vector with `unlist()`:
+
 ```{r}
 my_unlist <- unlist(my_list)
 my_unlist
 class(my_unlist)
 ```
 
+ 
 
+## Data frames
+A data frame is the most common way of storing data in R and, generally, is the data structure most often used for data analyses.
+
+
+::: {.callout-tip icon="false"}
+## Data frame
+
+A **data frame** is a special type of list with **equal-length** atomic vectors. Each component of the list can be thought of as a column and the length of each component of the list is the number of rows.
+
+:::
+
+ 
+
+### Basic characteristics of data frames
+
+* Each **column** of a data frame is an **atomic vector** and remember that the data in an atomic vector must only be of one type (numeric, character, or logical).  
+* Data frames are similar to the **datasets** we’d typically see in spreadsheets (e.g., Excell files, Google sheets, LibreOffice Calc).  
+* Data frames are the most common data structure we’ll deal with in R. A data frame can be created with the `data.frame()` function in base R, the `tibble()` function in the tidyverse package (an improvement over data.frame), or the "fast" `data.table()` in the data.table package.  
+
+
+
+Different traditions have different names for the **rows** and **columns** of a dataset. Statisticians refer to them as observations and variables, database analysts call them records and fields, and those from the data mining/machine learning disciplines call them examples and attributes. We’ll use the terms **observations** and **variables** throughout this textbook.  
+
+
+The two basic variable categories are the categorical and numerical variables.
+
+ 
+
+### Creating a data frame with `tibble()`
+
+We can create a data frame from column vectors with the `tibble()` function from `tibble` package which belongs to the “tidyverse” family of packages. A tibble is a specific kind of data frame and is short for “tidy table”.
+
+In order to use the tidyverse packages, our input data frames must be in “tidy” format (long/narrow format). In tidy data there are three interrelated rules:
+
+- Each variable must have its own column.
+- Each observation must have its own row.
+- Each value must have its own cell.
+
+
+```{r}
+#| label: fig-tidy_data
+#| fig-align: center
+#| out-width: "90%"
+#| echo: false
+#| fig-cap: Tidy data.
+
+knitr::include_graphics(here("images", "tidy_data.png"))
+```
+
+
+Here, we provide a simple example of patient dataset:
+
+```{r}
+#| message: false
+
+library(tidyverse)
+library(lubridate)
+
+patient_data <- tibble(
+patientID = c(1, 2, 3, 4, 5, 6, 7, 8),
+age = c(25, 30, 28, 22, 31, 45, 37, 43),
+weight = c(94, 83, 71, 87, 94, 73, 89, 74),
+diabetes = c("Type 1", "Type 2", "Type 1", "Type 1", 
+              "Type 2", "Type 1", "Type 1", "Type 2"),
+status = c("Poor", "Improved", "Excellent", "Poor", 
+            "Poor","Excellent", "Improved", "Improved"),
+dates = ymd("2020-10-09", "2020-10-12", "2020-10-18", "2020-10-27",
+           "2020-11-04", "2020-11-09", "2020-11-22", "2020-12-02"))
+patient_data
+```
+
+
+In this data frame, `patientID` is a row or case identifier, `age` (in years) and `weight` (in kg) are continuous variables, `diabetes` (Type 1, Type 2) is a nominal (dichotomous) variable, `status` is an ordinal variable (Poor/Improved/Excellent), and `dates` variable with dates (note that we used the `ymd()` function to create this variable).
+
+
+First, let's take a look at the structure of the object _patient_data_ with the `glimpse()`:
+
+
+```{r}
+glimpse(patient_data)
+```
+
+
+We can also find the **type**, **class** and **dim** for the data table:
+
+```{r}
+typeof(patient_data)
+class(patient_data)
+dim(patient_data)
+```
+
+The type is a _list_ but the class is a `tbl` _(tibble)_ object which is a "tidy" data frame. The dimensions are 8x6.
+
+
+The `attribute()` function help us to explore the characteristics/attributives of the tibbles:
+```{r}
+attributes(patient_data)
+```
+
+ 
+
+### Access only one variable at a time from a tibble
+
+To access the variable _age_, we can use the **dollar sign (`$`)** like this:
+
+```{r}
+patient_data$age
+```
+
+
+For example, if we want to **cross tabulate** diabetes type by status, we could use the following code:
+
+```{r}
+table(patient_data$diabetes, patient_data$status)
+```
+
+
+::: {.callout-tip icon="false"}
+## Table
+
+The **`table()`** function builds a contingency table of the counts at each combination of levels of the variables.
+
+:::
+
+ 
+
+## Access variables using the with() function
+
+It can get tiresome typing patient_data$ at the beginning of every variable name. An alternative approach is to use `with()` function. For example:
+
+```{r}
+with(patient_data, table(diabetes, status))
+```
+
+ 
+
+## Factors
+Categorical (nominal) and ordered categorical (ordinal) variables in R are usually transformed to **factors**. Factors can contain only predefined values and are crucial in R because they determine how data will be analyzed in statistical models and presented visually.
+
+
+
+In our example, we should convert the `diabetes` and `status` variables from character to factor variables. This can be done by applying the `convert_as_factor()` function from the `rstatix` package:
+
+```{r}
+# convert from character to factor
+patient_data <- rstatix::convert_as_factor(patient_data, diabetes, status)
+patient_data
+```
+
+
+Now, we can inspect the order of the levels for both factor variables using the `levels()` function:
+
+```{r}
+levels(patient_data$diabetes) # show the levels of diabetes variable
+levels(patient_data$status) # show the levels of status variable
+```
+
+
+Additionally, we may want to reorder the levels in the `status` variable using the `fct_relevel()` function from the `{forcats}` package. In this case, the argument `rev` in the function will reverse the order:
+
+```{r}
+# reverse the order of the levels
+patient_data$status <-  fct_relevel(patient_data$status, rev)
+
+levels(patient_data$status)  # show the order of the levels
+```
+
+or using the `fct_rev()` from `{forcats}` package:
+```{r}
+#| eval: false
+
+patient_data$status <- fct_rev(patient_data$status)
+```
+
+
+
+The `status` variable has a natural ordering between its categories. If we want to compare the values, we have to pass this information to R.
+
+```{r}
+patient_data$status <-  factor(patient_data$status, ordered = TRUE)
+
+patient_data$status
+```
+
+Now we can use, for example, the comparison  operators `>` to check whether one element of the ordered vector is larger than the other.
+
+```{r}
+patient_data$status[2] > patient_data$status[6]
+```
+
+
+
+Factors are also useful when we know the set of possible values (based on theory or experimental design, not of the data) but **they’re not all present** in a given dataset. In contrast to a character vector, when we tabulate a factor (e.g. using the `table()` function) we will get counts of all categories, even unobserved ones:
+
+```{r}
+sex_char <- c("m", "m", "m")
+sex_factor <- factor(sex_char, levels = c("m", "f"))
+
+table(sex_char)
+
+table(sex_factor)
+```
+
+
+ 
+
+## Dates in R
+
+There are three types of date/time data that refer to an instant in time:
+
+* A **date**. Tibbles print this as `<date>`.
+* A **time** within a day. Tibbles print this as `<time>`.
+* A **date-time** is a date plus a time: it uniquely identifies an instant in time (typically to the nearest second). Tibbles print this as `<dttm>`. Elsewhere in R these are called POSIXct.
+
+To get the current date or date-time you can use `Sys.Date()` or `now()`:
+
+```{r}
+#| eval: false
+
+Sys.Date()
+now()
+```
+
+Date vectors are built on top of double vectors but they have the special class “Date”:
+
+```{r}
+today <- Sys.Date()
+typeof(today)
+class(today)
+```
+
+
+The value of the double (which can be seen by stripping the class), represents the number of days since `1970-01-01`:
+
+```{r}
+unclass(today)
+```
+
+
+
+So, in numeric form, `Date` counts the days since `1970-01-01`. For example:
+```{r}
+date1 <- as.Date('2020-06-28')
+as.numeric(date1)
+```
+
+Now, we can use `difftime()` to find the amount of time in DAYS that has passed since we created date1.
+
+```{r}
+difftime(Sys.time(), date1, units = 'days')
+```
+
+
+
+POSIXct stores a date and time. In numeric form, the number of seconds since `1970-01-01`.
+
+```{r}
+date2 <- as.POSIXct('2012-06-28 18:00')
+as.numeric(date2)
+```
+
+
+
+We’ve seen also one approach to parsing strings into `dates` variable in our data frame using the `ymd()` function from `lubridate` package. This is the most concise way to create a single date/time object, as we might need when filtering date/time data. The class of this object is:
+
+```{r}
+class(patient_data$dates)
+```
 

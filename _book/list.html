@@ -99,7 +99,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -237,6 +240,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
   <li><a href="#recursive-vectors-and-nested-lists" id="toc-recursive-vectors-and-nested-lists" class="nav-link" data-scroll-target="#recursive-vectors-and-nested-lists"><span class="toc-section-number">8.3</span>  Recursive vectors and Nested Lists</a></li>
   <li><a href="#unlist-a-list" id="toc-unlist-a-list" class="nav-link" data-scroll-target="#unlist-a-list"><span class="toc-section-number">8.4</span>  Unlist a list</a></li>
+  <li>
+<a href="#data-frames" id="toc-data-frames" class="nav-link" data-scroll-target="#data-frames"><span class="toc-section-number">8.5</span>  Data frames</a>
+  <ul class="collapse">
+<li><a href="#basic-characteristics-of-data-frames" id="toc-basic-characteristics-of-data-frames" class="nav-link" data-scroll-target="#basic-characteristics-of-data-frames">Basic characteristics of data frames</a></li>
+  <li><a href="#creating-a-data-frame-with-tibble" id="toc-creating-a-data-frame-with-tibble" class="nav-link" data-scroll-target="#creating-a-data-frame-with-tibble">Creating a data frame with <code>tibble()</code></a></li>
+  <li><a href="#access-only-one-variable-at-a-time-from-a-tibble" id="toc-access-only-one-variable-at-a-time-from-a-tibble" class="nav-link" data-scroll-target="#access-only-one-variable-at-a-time-from-a-tibble">Access only one variable at a time from a tibble</a></li>
+  </ul>
+</li>
+  <li><a href="#access-variables-using-the-with-function" id="toc-access-variables-using-the-with-function" class="nav-link" data-scroll-target="#access-variables-using-the-with-function"><span class="toc-section-number">8.6</span>  Access variables using the with() function</a></li>
+  <li><a href="#factors" id="toc-factors" class="nav-link" data-scroll-target="#factors"><span class="toc-section-number">8.7</span>  Factors</a></li>
+  <li><a href="#dates-in-r" id="toc-dates-in-r" class="nav-link" data-scroll-target="#dates-in-r"><span class="toc-section-number">8.8</span>  Dates in R</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -468,6 +482,320 @@ $item2$item2b_char
 <pre><code>[1] "character"</code></pre>
 </div>
 </div>
+<p>&nbsp;</p>
+</section><section id="data-frames" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="data-frames">
+<span class="header-section-number">8.5</span> Data frames</h2>
+<p>A data frame is the most common way of storing data in R and, generally, is the data structure most often used for data analyses.</p>
+<div class="callout-tip callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Data frame
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>data frame</strong> is a special type of list with <strong>equal-length</strong> atomic vectors. Each component of the list can be thought of as a column and the length of each component of the list is the number of rows.</p>
+</div>
+</div>
+<p>&nbsp;</p>
+<section id="basic-characteristics-of-data-frames" class="level3"><h3 class="anchored" data-anchor-id="basic-characteristics-of-data-frames">Basic characteristics of data frames</h3>
+<ul>
+<li>Each <strong>column</strong> of a data frame is an <strong>atomic vector</strong> and remember that the data in an atomic vector must only be of one type (numeric, character, or logical).<br>
+</li>
+<li>Data frames are similar to the <strong>datasets</strong> we’d typically see in spreadsheets (e.g., Excell files, Google sheets, LibreOffice Calc).<br>
+</li>
+<li>Data frames are the most common data structure we’ll deal with in R. A data frame can be created with the <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> function in base R, the <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> function in the tidyverse package (an improvement over data.frame), or the “fast” <code>data.table()</code> in the data.table package.</li>
+</ul>
+<p>Different traditions have different names for the <strong>rows</strong> and <strong>columns</strong> of a dataset. Statisticians refer to them as observations and variables, database analysts call them records and fields, and those from the data mining/machine learning disciplines call them examples and attributes. We’ll use the terms <strong>observations</strong> and <strong>variables</strong> throughout this textbook.</p>
+<p>The two basic variable categories are the categorical and numerical variables.</p>
+<p>&nbsp;</p>
+</section><section id="creating-a-data-frame-with-tibble" class="level3"><h3 class="anchored" data-anchor-id="creating-a-data-frame-with-tibble">Creating a data frame with <code>tibble()</code>
+</h3>
+<p>We can create a data frame from column vectors with the <code><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble()</a></code> function from <code>tibble</code> package which belongs to the “tidyverse” family of packages. A tibble is a specific kind of data frame and is short for “tidy table”.</p>
+<p>In order to use the tidyverse packages, our input data frames must be in “tidy” format (long/narrow format). In tidy data there are three interrelated rules:</p>
+<ul>
+<li>Each variable must have its own column.</li>
+<li>Each observation must have its own row.</li>
+<li>Each value must have its own cell.</li>
+</ul>
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div id="fig-tidy_data" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><a href="images/tidy_data.PNG" class="lightbox" title="Tidy data." data-gallery="quarto-lightbox-gallery-1"><img src="images/tidy_data.PNG" class="img-fluid figure-img" style="width:90.0%"></a></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;8.1: Tidy data.</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Here, we provide a simple example of patient dataset:</p>
+<div class="cell">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">patient_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>patientID <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span>, <span class="fl">8</span><span class="op">)</span>,</span>
+<span>age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">30</span>, <span class="fl">28</span>, <span class="fl">22</span>, <span class="fl">31</span>, <span class="fl">45</span>, <span class="fl">37</span>, <span class="fl">43</span><span class="op">)</span>,</span>
+<span>weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">94</span>, <span class="fl">83</span>, <span class="fl">71</span>, <span class="fl">87</span>, <span class="fl">94</span>, <span class="fl">73</span>, <span class="fl">89</span>, <span class="fl">74</span><span class="op">)</span>,</span>
+<span>diabetes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Type 1"</span>, <span class="st">"Type 2"</span>, <span class="st">"Type 1"</span>, <span class="st">"Type 1"</span>, </span>
+<span>              <span class="st">"Type 2"</span>, <span class="st">"Type 1"</span>, <span class="st">"Type 1"</span>, <span class="st">"Type 2"</span><span class="op">)</span>,</span>
+<span>status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Poor"</span>, <span class="st">"Improved"</span>, <span class="st">"Excellent"</span>, <span class="st">"Poor"</span>, </span>
+<span>            <span class="st">"Poor"</span>,<span class="st">"Excellent"</span>, <span class="st">"Improved"</span>, <span class="st">"Improved"</span><span class="op">)</span>,</span>
+<span>dates <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd</a></span><span class="op">(</span><span class="st">"2020-10-09"</span>, <span class="st">"2020-10-12"</span>, <span class="st">"2020-10-18"</span>, <span class="st">"2020-10-27"</span>,</span>
+<span>           <span class="st">"2020-11-04"</span>, <span class="st">"2020-11-09"</span>, <span class="st">"2020-11-22"</span>, <span class="st">"2020-12-02"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">patient_data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 6
+  patientID   age weight diabetes status    dates     
+      &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;     &lt;date&gt;    
+1         1    25     94 Type 1   Poor      2020-10-09
+2         2    30     83 Type 2   Improved  2020-10-12
+3         3    28     71 Type 1   Excellent 2020-10-18
+4         4    22     87 Type 1   Poor      2020-10-27
+5         5    31     94 Type 2   Poor      2020-11-04
+6         6    45     73 Type 1   Excellent 2020-11-09
+7         7    37     89 Type 1   Improved  2020-11-22
+8         8    43     74 Type 2   Improved  2020-12-02</code></pre>
+</div>
+</div>
+<p>In this data frame, <code>patientID</code> is a row or case identifier, <code>age</code> (in years) and <code>weight</code> (in kg) are continuous variables, <code>diabetes</code> (Type 1, Type 2) is a nominal (dichotomous) variable, <code>status</code> is an ordinal variable (Poor/Improved/Excellent), and <code>dates</code> variable with dates (note that we used the <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd()</a></code> function to create this variable).</p>
+<p>First, let’s take a look at the structure of the object <em>patient_data</em> with the <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 8
+Columns: 6
+$ patientID &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8
+$ age       &lt;dbl&gt; 25, 30, 28, 22, 31, 45, 37, 43
+$ weight    &lt;dbl&gt; 94, 83, 71, 87, 94, 73, 89, 74
+$ diabetes  &lt;chr&gt; "Type 1", "Type 2", "Type 1", "Type 1", "Type 2", "Type 1", …
+$ status    &lt;chr&gt; "Poor", "Improved", "Excellent", "Poor", "Poor", "Excellent"…
+$ dates     &lt;date&gt; 2020-10-09, 2020-10-12, 2020-10-18, 2020-10-27, 2020-11-04, …</code></pre>
+</div>
+</div>
+<p>We can also find the <strong>type</strong>, <strong>class</strong> and <strong>dim</strong> for the data table:</p>
+<div class="cell">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "list"</code></pre>
+</div>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8 6</code></pre>
+</div>
+</div>
+<p>The type is a <em>list</em> but the class is a <code>tbl</code> <em>(tibble)</em> object which is a “tidy” data frame. The dimensions are 8x6.</p>
+<p>The <code>attribute()</code> function help us to explore the characteristics/attributives of the tibbles:</p>
+<div class="cell">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$class
+[1] "tbl_df"     "tbl"        "data.frame"
+
+$row.names
+[1] 1 2 3 4 5 6 7 8
+
+$names
+[1] "patientID" "age"       "weight"    "diabetes"  "status"    "dates"    </code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+</section><section id="access-only-one-variable-at-a-time-from-a-tibble" class="level3"><h3 class="anchored" data-anchor-id="access-only-one-variable-at-a-time-from-a-tibble">Access only one variable at a time from a tibble</h3>
+<p>To access the variable <em>age</em>, we can use the <strong>dollar sign (<code>$</code>)</strong> like this:</p>
+<div class="cell">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">patient_data</span><span class="op">$</span><span class="va">age</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 25 30 28 22 31 45 37 43</code></pre>
+</div>
+</div>
+<p>For example, if we want to <strong>cross tabulate</strong> diabetes type by status, we could use the following code:</p>
+<div class="cell">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">$</span><span class="va">diabetes</span>, <span class="va">patient_data</span><span class="op">$</span><span class="va">status</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        
+         Excellent Improved Poor
+  Type 1         2        1    2
+  Type 2         0        2    1</code></pre>
+</div>
+</div>
+<div class="callout-tip callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Table
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The <strong><code><a href="https://rdrr.io/r/base/table.html">table()</a></code></strong> function builds a contingency table of the counts at each combination of levels of the variables.</p>
+</div>
+</div>
+<p>&nbsp;</p>
+</section></section><section id="access-variables-using-the-with-function" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="access-variables-using-the-with-function">
+<span class="header-section-number">8.6</span> Access variables using the with() function</h2>
+<p>It can get tiresome typing patient_data$ at the beginning of every variable name. An alternative approach is to use <code><a href="https://rdrr.io/r/base/with.html">with()</a></code> function. For example:</p>
+<div class="cell">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">patient_data</span>, <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">diabetes</span>, <span class="va">status</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        status
+diabetes Excellent Improved Poor
+  Type 1         2        1    2
+  Type 2         0        2    1</code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+</section><section id="factors" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="factors">
+<span class="header-section-number">8.7</span> Factors</h2>
+<p>Categorical (nominal) and ordered categorical (ordinal) variables in R are usually transformed to <strong>factors</strong>. Factors can contain only predefined values and are crucial in R because they determine how data will be analyzed in statistical models and presented visually.</p>
+<p>In our example, we should convert the <code>diabetes</code> and <code>status</code> variables from character to factor variables. This can be done by applying the <code>convert_as_factor()</code> function from the <code>rstatix</code> package:</p>
+<div class="cell">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># convert from character to factor</span></span>
+<span><span class="va">patient_data</span> <span class="op">&lt;-</span> <span class="fu">rstatix</span><span class="fu">::</span><span class="fu"><a href="https://rpkgs.datanovia.com/rstatix/reference/factors.html">convert_as_factor</a></span><span class="op">(</span><span class="va">patient_data</span>, <span class="va">diabetes</span>, <span class="va">status</span><span class="op">)</span></span>
+<span><span class="va">patient_data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 6
+  patientID   age weight diabetes status    dates     
+      &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;    &lt;fct&gt;     &lt;date&gt;    
+1         1    25     94 Type 1   Poor      2020-10-09
+2         2    30     83 Type 2   Improved  2020-10-12
+3         3    28     71 Type 1   Excellent 2020-10-18
+4         4    22     87 Type 1   Poor      2020-10-27
+5         5    31     94 Type 2   Poor      2020-11-04
+6         6    45     73 Type 1   Excellent 2020-11-09
+7         7    37     89 Type 1   Improved  2020-11-22
+8         8    43     74 Type 2   Improved  2020-12-02</code></pre>
+</div>
+</div>
+<p>Now, we can inspect the order of the levels for both factor variables using the <code><a href="https://rdrr.io/r/base/levels.html">levels()</a></code> function:</p>
+<div class="cell">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">$</span><span class="va">diabetes</span><span class="op">)</span> <span class="co"># show the levels of diabetes variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Type 1" "Type 2"</code></pre>
+</div>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">$</span><span class="va">status</span><span class="op">)</span> <span class="co"># show the levels of status variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Excellent" "Improved"  "Poor"     </code></pre>
+</div>
+</div>
+<p>Additionally, we may want to reorder the levels in the <code>status</code> variable using the <code><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel()</a></code> function from the <a href="https://forcats.tidyverse.org/">forcats</a> package. In this case, the argument <code>rev</code> in the function will reverse the order:</p>
+<div class="cell">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># reverse the order of the levels</span></span>
+<span><span class="va">patient_data</span><span class="op">$</span><span class="va">status</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_relevel.html">fct_relevel</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">$</span><span class="va">status</span>, <span class="va">rev</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/levels.html">levels</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">$</span><span class="va">status</span><span class="op">)</span>  <span class="co"># show the order of the levels</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Poor"      "Improved"  "Excellent"</code></pre>
+</div>
+</div>
+<p>or using the <code><a href="https://forcats.tidyverse.org/reference/fct_rev.html">fct_rev()</a></code> from <a href="https://forcats.tidyverse.org/">forcats</a> package:</p>
+<div class="cell">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">patient_data</span><span class="op">$</span><span class="va">status</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_rev.html">fct_rev</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">$</span><span class="va">status</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The <code>status</code> variable has a natural ordering between its categories. If we want to compare the values, we have to pass this information to R.</p>
+<div class="cell">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">patient_data</span><span class="op">$</span><span class="va">status</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">$</span><span class="va">status</span>, ordered <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">patient_data</span><span class="op">$</span><span class="va">status</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] Poor      Improved  Excellent Poor      Poor      Excellent Improved 
+[8] Improved 
+Levels: Poor &lt; Improved &lt; Excellent</code></pre>
+</div>
+</div>
+<p>Now we can use, for example, the comparison operators <code>&gt;</code> to check whether one element of the ordered vector is larger than the other.</p>
+<div class="cell">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">patient_data</span><span class="op">$</span><span class="va">status</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">&gt;</span> <span class="va">patient_data</span><span class="op">$</span><span class="va">status</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] FALSE</code></pre>
+</div>
+</div>
+<p>Factors are also useful when we know the set of possible values (based on theory or experimental design, not of the data) but <strong>they’re not all present</strong> in a given dataset. In contrast to a character vector, when we tabulate a factor (e.g.&nbsp;using the <code><a href="https://rdrr.io/r/base/table.html">table()</a></code> function) we will get counts of all categories, even unobserved ones:</p>
+<div class="cell">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">sex_char</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"m"</span>, <span class="st">"m"</span>, <span class="st">"m"</span><span class="op">)</span></span>
+<span><span class="va">sex_factor</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">sex_char</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"m"</span>, <span class="st">"f"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">sex_char</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>sex_char
+m 
+3 </code></pre>
+</div>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">sex_factor</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>sex_factor
+m f 
+3 0 </code></pre>
+</div>
+</div>
+<p>&nbsp;</p>
+</section><section id="dates-in-r" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="dates-in-r">
+<span class="header-section-number">8.8</span> Dates in R</h2>
+<p>There are three types of date/time data that refer to an instant in time:</p>
+<ul>
+<li>A <strong>date</strong>. Tibbles print this as <code>&lt;date&gt;</code>.</li>
+<li>A <strong>time</strong> within a day. Tibbles print this as <code>&lt;time&gt;</code>.</li>
+<li>A <strong>date-time</strong> is a date plus a time: it uniquely identifies an instant in time (typically to the nearest second). Tibbles print this as <code>&lt;dttm&gt;</code>. Elsewhere in R these are called POSIXct.</li>
+</ul>
+<p>To get the current date or date-time you can use <code><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date()</a></code> or <code><a href="https://lubridate.tidyverse.org/reference/now.html">now()</a></code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">now</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Date vectors are built on top of double vectors but they have the special class “Date”:</p>
+<div class="cell">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">today</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">today</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "double"</code></pre>
+</div>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">today</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Date"</code></pre>
+</div>
+</div>
+<p>The value of the double (which can be seen by stripping the class), represents the number of days since <code>1970-01-01</code>:</p>
+<div class="cell">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">unclass</a></span><span class="op">(</span><span class="va">today</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 19257</code></pre>
+</div>
+</div>
+<p>So, in numeric form, <code>Date</code> counts the days since <code>1970-01-01</code>. For example:</p>
+<div class="cell">
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">date1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="st">'2020-06-28'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">date1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 18441</code></pre>
+</div>
+</div>
+<p>Now, we can use <code><a href="https://rdrr.io/r/base/difftime.html">difftime()</a></code> to find the amount of time in DAYS that has passed since we created date1.</p>
+<div class="cell">
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/difftime.html">difftime</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">date1</span>, units <span class="op">=</span> <span class="st">'days'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Time difference of 816.8354 days</code></pre>
+</div>
+</div>
+<p>POSIXct stores a date and time. In numeric form, the number of seconds since <code>1970-01-01</code>.</p>
+<div class="cell">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">date2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html">as.POSIXct</a></span><span class="op">(</span><span class="st">'2012-06-28 18:00'</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">date2</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1340895600</code></pre>
+</div>
+</div>
+<p>We’ve seen also one approach to parsing strings into <code>dates</code> variable in our data frame using the <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd()</a></code> function from <code>lubridate</code> package. This is the most concise way to create a single date/time object, as we might need when filtering date/time data. The class of this object is:</p>
+<div class="cell">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">$</span><span class="va">dates</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Date"</code></pre>
+</div>
+</div>
 
 
 </section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
@@ -596,7 +924,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":true,"selector":".lightbox","openEffect":"zoom","descPosition":"bottom"});</script>
 
 
 </body></html>
