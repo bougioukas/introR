@@ -22,6 +22,7 @@ book:
         - vector.qmd
         - matrix.qmd
         - list.qmd
+        - transformation.qmd
 
     - part: "Special Topics"
       chapters:

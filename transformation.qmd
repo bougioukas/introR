@@ -1,0 +1,123 @@
+# Data transformation  {#sec-transformation}
+
+
+```{r}
+#| include: false
+
+library(dplyr)
+library(here)
+```
+
+When we have finished this chapter, we should be able to:
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+- Select rows in a data frame according to filtering conditions with the dplyr function `filter()`.
+- Select columns in a data frame with the dplyr function `select()`.
+- Direct the output of one dplyr function to the input of another function with the "pipe" operator `%>%`.
+- Add new columns to a data frame that are functions of existing columns with `mutate()`.
+- Use `summarize()` with `across()` to calculate summary statistics for multiple variables, and `group_by()` to split a data frame into groups of observations, apply summary statistics for each group, and then combine the results.
+:::
+
+ 
+
+
+
+## Importing data  
+
+Up to this point we have used data objects created with functions. Most of the time however, we work with data stored elsewhere and there are many ways to import such data into an R session. 
+
+Data are stored in spreadsheets which are often saved in one of the following two formats:  
+
+1. A *Comma Separated Values* `.csv` file.  We can think of a `.csv` file as a barebones spreadsheet where:
+
+* Each line in the file corresponds to one row of data/one observation.
+* Values for each line are separated with commas ",". In other words, the values of different variables are separated by commas.
+* The first line is often, but not always, a *header* row indicating the names of the columns/variables.
+
+2. An Excel `.xlsx` spreadsheet file. This format is based on Microsoft's proprietary Excel software. As opposed to a bare-bones `.csv` file, an `.xlsx` Excel files contains a lot of meta-data, or in other words, data about data. Some examples of Excel spreadsheet meta-data include the use of bold and italic fonts, colored cells, different column widths, and formula macros.
+
+
+We will use the dataset named `arrhythmia` which is a `.csv` file. 
+
+
+```{r}
+#| echo: false
+#| message: false
+#| label: fig-arrhythmia
+#| fig-cap: Table with raw data of arrhythmia data set.
+
+library(readr)
+arrhythmia <- read_csv(here("data", "arrhythmia.csv"))
+
+DT::datatable(arrhythmia, extensions = 'Scroller', 
+              options = list(deferRender = F, dom = 't', columnDefs = list(list(className = 'dt-center', targets = 1:6)), scrollY = 452, scroller = TRUE, scrollX = T, pageLength = 10))
+
+```
+
+
+The meta-data (data about the data) for this dataset are as following:
+
+1.  age: age (yrs)
+2.  sex: sex (0=male, 1=female)
+3.  height: height (cm)
+4.  weight: weight (kg)
+5.  QRS: mean duration of QRS (ms) ![](images/QRS_normal.png){width="88" height="68"}
+6.  heart_rate: heart rate (beats/min)
+
+
+If the data set is stored in our computer disc as a `.csv` file we can read it with the `read_csv` function from `{dplyr}` package:
+
+The function `read_csv()` is used to read the `arrhythmia.csv` file as following: 
+
+```{r}
+#| message: false
+
+library(readr)
+arrhythmia <- read_csv(here("data", "arrhythmia.csv"))
+
+arrhythmia
+```
+
+This data frame contains `r nrow(arrhythmia)` observations and `r ncol(arrhythmia)` variables. However, when we call the name of the object (arrhythmia), we can see in the console the first 10 rows, and all the columns that fit on screen.
+Note that by default the first row of the `.csv` file was used as the column names of the data frame.
+
+We might also have noticed the row of three letter abbreviation `dbl` under the column names. These describe the type of each variable and may be:
+
+- `dbl` stands for doubles, or real numbers.
+
+- `int` stands for integers.
+
+- `chr` stands for character vectors, or strings.
+
+- `lgl` stands for logical, vectors that contain only `TRUE` or `FALSE`.
+
+- `fct` stands for factors, which R uses to represent categorical variables with fixed possible values.
+
+- `date` stands for dates.
+
+- `dttm` stands for date-times (a date + a time).
+
+As we can see the categorical variable `sex` is coded as 0 for males and 1 for females, so it is recognized of `double` type.
+
+We can use the `factor()` function:  
+
+```{r}
+arrhythmia$sex = factor(arrhythmia$sex, levels = c(0, 1), 
+                       labels = c("male", "female"))
+```
+
+
+Let's look at the data again with the `glipmse()` function:
+
+```{r}
+glimpse(arrhythmia)
+```
+
+
+Now, the variable `sex` is a factor variable (`fct`) with two levels:
+
+```{r}
+levels(arrhythmia$sex)
+```
