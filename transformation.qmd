@@ -12,8 +12,9 @@ When we have finished this chapter, we should be able to:
 ::: {.callout-caution icon="false"}
 ## Learning objectives
 
--   Select rows in a data frame according to filtering conditions with the dplyr function `filter()`.
--   Select columns in a data frame with the dplyr function `select()`.
+-   Import the data from spreadsheets in R.
+-   Select rows in a data frame according to filtering conditions.
+-   Select columns in a data frame.
 -   Direct the output of one dplyr function to the input of another function with the "pipe" operator `%>%`.
 -   Add new columns to a data frame that are functions of existing columns with `mutate()`.
 -   Use `summarize()` with `across()` to calculate summary statistics for multiple variables, and `group_by()` to split a data frame into groups of observations, apply summary statistics for each group, and then combine the results.
@@ -33,7 +34,7 @@ Data are stored in spreadsheets which are often saved in one of the following tw
 -   Values for each line are separated with commas ",". In other words, the values of different variables are separated by commas.
 -   The first line is often, but not always, a *header* row indicating the names of the columns/variables.
 
-2.  An Excel `.xlsx` spreadsheet file. This format is based on Microsoft's proprietary Excel software. As opposed to a bare-bones `.csv` file, an `.xlsx` Excel files contains a lot of meta-data, or in other words, data about data. Some examples of Excel spreadsheet meta-data include the use of bold and italic fonts, colored cells, different column widths, and formula macros.
+2.  An Excel `.xlsx` spreadsheet file. This format is based on Microsoft's proprietary Excel software and may include the use of bold and italic fonts, colored cells, different column widths, and formula macros.
 
 We will use the dataset named `arrhythmia` which is a `.csv` file.
 
@@ -60,9 +61,7 @@ The meta-data (data about the data) for this dataset are as following:
 5.  QRS: mean duration of QRS (ms) ![](images/QRS_normal.png){width="88" height="68"}
 6.  heart_rate: heart rate (beats/min)
 
-If the data set is stored in our computer disc as a `.csv` file we can read it with the `read_csv` function from `{dplyr}` package:
-
-The function `read_csv()` is used to read the `arrhythmia.csv` file as following:
+If the dataset is stored in our computer disc as a `.csv` file (`arrhythmia.csv`) we can read it with the `read_csv` function from `{readr}` package as following:
 
 ```{r}
 #| message: false
@@ -75,7 +74,7 @@ arrhythmia
 
 This data frame contains `r nrow(arrhythmia)` observations and `r ncol(arrhythmia)` variables. However, when we call the name of the object (arrhythmia), we can see in the console the first 10 rows, and all the columns that fit on screen. Note that by default the first row of the `.csv` file was used as the column names of the data frame.
 
-We might have noticed that the categorical variable `sex` is coded as 0 for males and 1 for females, so it is recognized of `double` type. We can use the `factor()` function to encode a vector as a factor:
+We might have noticed that the categorical variable `sex` is coded as 0 (for males) and 1 (for females), so it is recognized of `double` type. We can use the `factor()` function to encode a variable as a factor:
 
 ```{r}
 arrhythmia$sex = factor(arrhythmia$sex, levels = c(0, 1), labels = c("male", "female"))
@@ -93,13 +92,15 @@ Now, the variable `sex` is a factor variable (`fct`) with two levels:
 levels(arrhythmia$sex)
 ```
 
-## Subseting variables
+ 
 
-We don't necessarily need all the variables, and a good practice for large data sets with many variables is to select only the variables we are actually interested in. In this chapter we review the different ways of selecting variables.
+## Subsetting variables
+
+We don't necessarily need all the variables, and a good practice for large datasets with many variables is to select only the variables we are actually interested in. In this chapter we review the different ways of selecting variables.
 
 Variable selection is not very useful with the `arrhythmia` data because we only have `r ncol(arrhythmia)` variables, but we can still get the general idea.
 
-### Select variables by name using `[ ]`
+**A. Select variables by name using `[ ]`**
 
 We can select only the `age`, `sex`, `QRS`, variables from the data frame:
 
@@ -108,7 +109,7 @@ dat1 <- arrhythmia[c("age", "sex" , "QRS")]
 head(dat1)
 ```
 
-### Select or exclude variables by indexing `[ ]`
+**B. Select or exclude variables by indexing `[ ]`** (not recommended)
 
 ```{r}
 dat2 <- arrhythmia[c(1, 2, 5)]
@@ -120,7 +121,7 @@ dat3 <- arrhythmia[-c(3, 4, 6)]
 head(dat3)
 ```
 
-### Select using the subset() function
+**C. Select variables using the `subset()` function**
 
 ```{r}
 dat4 <- subset(arrhythmia, select= c(1, 2, 5))
@@ -129,7 +130,7 @@ head(dat4)
 
 The `select` argument allows the selection by indexing the columns of interest in.
 
-### Select using the `select()` function from `dplyr`
+**D. Select variables using the `select()` function from `dplyr`**
 
 In `select()` function we pass the data frame first and then the variables separated by commas:
 
@@ -138,14 +139,18 @@ dat5 <- select(arrhythmia, age, sex, QRS)
 head(dat5)
 ```
 
-## Subseting observations
+ 
 
-### Select rows by indexing `[ ]`
+## Subsetting observations
+
+**A. Select rows by indexing `[ ]`**
 
 ```{r}
 dat6 <- arrhythmia[5:15, ]
 dat6
 ```
+
+**B. Select rows by conditions using `[ ]`**
 
 ```{r}
 dat7 <- arrhythmia[which(arrhythmia$age > 75), ]
@@ -157,7 +162,7 @@ dat8 <- arrhythmia[which(arrhythmia$age > 75 & arrhythmia$sex == "female"), ]
 dat8
 ```
 
-### Select rows using subset()
+**C. Select rows by conditions using `subset()` function**
 
 ```{r}
 dat9 <- subset(arrhythmia, age > 75)
@@ -169,7 +174,7 @@ dat10 <- subset(arrhythmia, age > 75 & sex == "female")
 dat10
 ```
 
-### Select rows using the `filter()` from `dplyr`
+**D. Select rows using the `filter()` from `dplyr`**
 
 We pass the data frame first and then one or more conditions separated by a comma:
 
@@ -185,16 +190,20 @@ dat12 <- filter(arrhythmia, age > 75, sex == "female")
 dat12
 ```
 
-## Select variables and observations
+ 
+
+## Subsetting variables and observations by indexing `[ ]`
 
 ```{r}
 dat13 <- arrhythmia[5:15, c(1, 2, 5)]
 dat13
 ```
 
+ 
+
 ## Reorder rows using `arrange()` from `dplyr`
 
-We can also arrange a table based on one or more variables. The `arrange()` function works similarly to `filter()` except that instead of selecting rows, it changes their order. It takes a data frame and a set of column names (or more complicated expressions) to order by. For example, we can arrange the rows of the `arrhythmia` table by the magnitude of `QRS` (in ascending order which is the default):
+We can also arrange a data frame based on one or more variables. The `arrange()` function works similarly to `filter()` except that instead of selecting rows, it changes their order. It takes a data frame and a set of column names (or more complicated expressions) to order by. For example, we can arrange the rows of the `arrhythmia` table by the magnitude of `QRS` (in ascending order which is the default):
 
 ```{r}
 dat14 <- arrange(arrhythmia, QRS)
@@ -208,16 +217,16 @@ dat15 <- arrange(arrhythmia, desc(QRS))
 head(dat15, 10)
 ```
 
-# Create new variables with `mutate()`
+ 
 
-Suppose we want to calculate BMI for the participants from weight and height. We can use the following code to calculate the BMI:
+## Create new variables with `mutate()`
+
+Suppose we want to calculate BMI for the participants from weight and height. We can use the following code to calculate the BMI (we divide the height with 100, because it was given in cm):
 
 ```{r, R.options = list(width = 200)}
 mutate(arrhythmia, bmi = round(weight / (height / 100)^ 2, digits = 1))
 
 ```
-
-**NOTE** We divided the height with 100, because it was given in cm.
 
 which is equivalent to:
 
@@ -226,7 +235,9 @@ arrhythmia %>%
      mutate(bmi = round(weight / (height / 100)^ 2, digits=1))
 ```
 
-# Using the pipe operator %\>% in a sequence of functions
+ 
+
+## Using the pipe operator %\>% in a sequence of functions
 
 Let's say that we want to find the BMI, and BMI categories only for the adults:
 
@@ -245,13 +256,13 @@ We would read this sequence as:
 
 1.  Take the dataset `arrythmia` *then*
 2.  Use this output as the input to the `filter()` to select only the adults (age \>=18) *then*
-3.  Use this output as the input to the `mutate()` to recode `sex` and calculate `bmi` and `bmi_cat`.
+3.  Use this output as the input to the `mutate()` to calculate `bmi` and `bmi_cat`.
 
 Can you imagine what is the function of `cut()` for?
 
-\vspace{14pt}
+ 
 
-# More examples and functions
+## More examples and functions
 
 Now, we want from the `arrhythmia_adults` to filter only the `overweight` or `obese` patients:
 
@@ -266,7 +277,7 @@ Here, we used the logical operator `|`. The logical operators are:
 -   `|` (or)
 -   `!` (not)
 
-\vspace{12pt}
+ 
 
 Alternatively we can use the `%in%` operator. This operator helps us to easily create multiple `OR` arguments:
 
@@ -274,8 +285,6 @@ Alternatively we can use the `%in%` operator. This operator helps us to easily c
 overweight_obese2 <- arrhythmia_adults %>% 
                        filter(bmi_cat %in% c("overweight", "obese"))
 ```
-
-\vspace{12pt}
 
 Let's say that we also want those overweight or obese people who have heart rate \> 85:
 
@@ -294,3 +303,334 @@ overweight_obese3 %>%
           select(HR, gender, everything())
                                    
 ```
+
+
+
+
+## Explore for outliers in the dataset
+
+Let’s take a look to the dataset *arrythmia_adults* with the `summary()` function:
+
+
+```{r}
+summary(arrhythmia_adults)
+```
+
+We can see that the minimum value in weight and bmi is `r min(arrhythmia_adults$weight)` kg and `r min(arrhythmia_adults$bmi)`, respectevely. However, these values can’t be right! We can also inspect the outliers in bmi variable using a simple boxplot @fig-boxplot_age:
+
+
+```{r}
+#| message: false
+#| label: fig-boxplot_age
+#| fig-cap: A Boxplot of age of adult patients.
+
+boxplot(arrhythmia_adults$bmi, main = "Boxplot of age of adult patients", ylab = "BMI", boxwex=.3, frame = FALSE, col= "blue")
+```
+
+
+
+## Summarizing data
+
+The next common task when working with data frames is to compute **summary measures**. Summary measures are **single numerical values** that summarize a large number of values.  
+Commonly known examples of summary measures for numerical data include the **arithmetic mean** (also called the average) and the **median** (the middle value). Other examples of summary measures that might not immediately come to mind include the **sum**, the smallest value also called the **minimum**, the largest value also called the **maximum**, the **1st quartile** and **3rd quartile**, the **standard deviation**, the **skewness**, and the **kurtosis**.  
+Summary measures for categorical data include **frequencies** and **percentages**.
+
+Summary functions in R take in many values and return a single value, as illustrated in Figure @fig-summary. 
+
+![Diagram illustrating a summary function in R](images/summary.png){#fig-summary width="75%"}
+
+
+### Summary Measures for Numerical variables
+
+
+**A. Summary measures for one variable**
+
+Let's calculate two summary measures for the `QRS` variable in the `arrhythmia_adults` data frame: the mean and standard deviation. To compute these summary measures, we need the `mean()` and `sd()` *statistical functions* in R. 
+
+```{r}
+mean(arrhythmia_adults$QRS, na.rm = TRUE)
+sd(arrhythmia_adults$QRS, na.rm = TRUE)
+
+```
+
+
+:::{.callout-tip}
+## `na.rm` argument
+
+The `na.rm` argument of `mean()` and `sd()` statistical functions takes a logical value (`TRUE`/ `FALSE`) indicating whether `NA` values should be stripped before the computation proceeds.
+
+:::
+
+ 
+
+Now, we'll use the `mean()` and `sd()` within the **`summarize()`** function from the `{dplyr}` package. Note we can also use the UK spelling of `summarise()`. The first argument should be a data frame with the raw data:
+
+```{r}
+
+summary_QRS <- arrhythmia_adults %>% 
+  summarize(mean_QRS = mean(QRS, na.rm = TRUE), 
+            sd_QRS = sd(QRS, na.rm = TRUE))
+summary_QRS
+```
+
+The results are saved in a new data frame `tibble` that has two columns/variables, the `mean_QRS` and the `sd_QRS`.
+
+
+Other summary functions that can be used inside the `summarize()` verb to compute summary measures are:
+
+* `mean()`: the mean AKA the average
+* `sd()`: the standard deviation, which is a measure of spread
+* `min()` and `max()`: the minimum and maximum values respectively
+* `IQR()`: Interquartile range
+* `sum()`: the sum
+* `skewness()` : the skewness
+* `kurtosis()` : the kurtosis
+* `n()`: a count of the number of rows/observations in each group. This particular summary function will make more sense when `group_by()`.
+
+
+
+**B. Summary measures for more variables**
+
+We can add more variables:
+
+```{r}
+
+summary_QRS_age <- arrhythmia_adults %>% 
+                   summarize(mean_QRS = mean(QRS, na.rm = TRUE), 
+                             sd_QRS = sd(QRS, na.rm = TRUE),
+                             mean_age = mean(age, na.rm = TRUE), 
+                             sd_age = sd(age, na.rm = TRUE)
+                             )
+summary_QRS_age
+```
+
+ 
+
+We can also calculate the mean if the variable is numeric with the `summarize_if()` function:
+```{r}
+summary_all_means <- arrhythmia_adults %>% 
+  summarise_if(is.numeric, mean, na.rm = TRUE)
+        
+summary_all_means
+```
+
+ 
+
+### Grouping rows by a categorical variable and `summarize()`
+
+Say instead of a single mean of QRS for all the adults, we want the mean QRS for the participants in each bmi category, separately. In other words, we would like to compute the mean `QRS` split by `bmi_cat`:
+
+```{r}
+summary_QRS_bmi <- arrhythmia_adults %>% 
+  group_by(bmi_cat) %>% 
+  summarize(mean_QRS = mean(QRS, na.rm = TRUE), 
+            sd_QRS = sd(QRS, na.rm = TRUE)) %>% 
+  ungroup() # ungrouping variable is a good habit to prevent errors
+
+summary_QRS_bmi 
+```
+
+
+This code is identical to the previous code that created `summary_QRS`, but with an extra function `group_by()` added before the `summarize()`. Grouping the `arrhythmia_adults` dataset by `bmi_cat` and then applying the `summarize()` function yields a data frame that displays the mean and standard deviation QRS split by bmi categories.
+
+
+
+:::{.callout-tip}
+## `group_by()` function
+
+It is important to note that the `group_by()` function doesn't change data frames by itself. Rather it changes the grouping structure. It is only after we apply the `summarize()` function that the data frame changes.
+
+:::
+
+
+
+### Grouping by more than one variable
+
+We are not limited to grouping by one variable. Say we want to know the mean QRS of males and females in each of the four bmi catecories:
+
+```{r}
+QRS_bmi_sex <- arrhythmia_adults %>% 
+  group_by(bmi_cat, sex) %>% 
+  summarize(mean_QRS = mean(QRS, na.rm = TRUE), 
+            sd_QRS = sd(QRS, na.rm = TRUE)) %>% 
+  ungroup()
+
+QRS_bmi_sex
+```
+
+
+
+### More summary statistics
+
+Let’s look at some summary statistics of the `QRS` variable by considering multiple statistical functions at once in the same `summarize()` code:
+
+```{r}
+
+QRS_summary <- arrhythmia_adults %>% 
+  summarize(
+    min = min(QRS, na.rm = TRUE),
+    q1 = quantile(QRS, 0.25, na.rm = TRUE),
+    median = quantile(QRS, 0.5, na.rm = TRUE),
+    q3 = quantile(QRS, 0.75, na.rm = TRUE),
+    max = max(QRS, na.rm = TRUE),
+    mean = mean(QRS, na.rm = TRUE),
+    sd = sd(QRS, na.rm = TRUE),
+    skewness = moments::skewness(QRS, na.rm = TRUE),
+    kurtosis= moments::kurtosis(QRS, na.rm = TRUE),
+    missing = sum(is.na(QRS)),
+    n = n())
+
+QRS_summary
+```
+
+
+
+The distribution of the data can be represented by an histogram.
+
+```{r}
+#| message: false
+#| label: fig-hist_QRS
+#| fig-cap: A Histogram of QRS of adult patients.
+
+hist(arrhythmia_adults$QRS, main = "Histogram", xlab = "QRS (ms)", ylab = "Frequency")
+```
+
+As we can see the distribution of `QRS` variable is not symmetrical.
+
+
+If we want the summary statistics for males and females separately we must use the `group_by()` function:
+
+```{r}
+QRS_summary2 <- arrhythmia_adults %>% 
+  group_by(sex) %>% 
+  summarize(
+    min = min(QRS, na.rm = TRUE),
+    q1 = quantile(QRS, 0.25, na.rm = TRUE),
+    median = quantile(QRS, 0.5, na.rm = TRUE),
+    q3 = quantile(QRS, 0.75, na.rm = TRUE),
+    max = max(QRS, na.rm = TRUE),
+    mean = mean(QRS, na.rm = TRUE),
+    sd = sd(QRS, na.rm = TRUE),
+    skewness = moments::skewness(QRS, na.rm = TRUE),
+    kurtosis= moments::kurtosis(QRS, na.rm = TRUE),
+    missing = sum(is.na(QRS)),
+    n = n()
+  ) %>% 
+  ungroup()
+
+QRS_summary2
+```
+
+
+
+```{r}
+#| label: fig-hist_QRS_sex
+#| fig-cap: Histogram of QRS of males and females patients.
+#| fig-subcap: 
+#|   - "Histogram of QRS of males."
+#|   - "Histogram of QRS of females."
+#| layout-ncol: 2
+
+hist(arrhythmia_adults$QRS[arrhythmia_adults$sex=="male"],
+     main = "Histogram (males)", xlab = "QRS (ms)", ylab = "Frequency")
+
+hist(arrhythmia_adults$QRS[arrhythmia_adults$sex=="female"], 
+     main = "Histogram (females)", xlab = "QRS (ms)", ylab = "Frequency")
+```
+
+
+Let's see the `age` variable:
+
+```{r}
+weight_summary <- arrhythmia_adults %>% 
+  summarize(
+    min = min(age, na.rm = TRUE),
+    q1 = quantile(age, 0.25, na.rm = TRUE),
+    median = quantile(age, 0.5, na.rm = TRUE),
+    q3 = quantile(age, 0.75, na.rm = TRUE),
+    max = max(age, na.rm = TRUE),
+    mean = mean(age, na.rm = TRUE),
+    sd = sd(age, na.rm = TRUE),
+    skewness = moments::skewness(age, na.rm = TRUE),
+    kurtosis= moments::kurtosis(age, na.rm = TRUE),
+    missing = sum(is.na(age)),
+    n = n())
+
+weight_summary
+```
+
+
+
+
+```{r}
+#| message: false
+#| label: fig-hist_age
+#| fig-cap: A Histogram of age of adult patients.
+
+hist(arrhythmia_adults$age, main = "Histogram", xlab = "Age (years)", ylab = "Frequency")
+```
+
+
+The `age` variable approximate a **symmetrical distribution (bell-shaped)**.
+
+
+
+
+## Summary measures for Categorical variables
+
+### Frequency distribution table
+
+If we have two categorical variables, we might be interested in a 2-dimensional frequency distribution table. Say we want to know the number of males and females in each of the four bmi catecories. We can create a frequency distribution table with `table()` function for the variables `bmi_cat` and `sex`:
+
+```{r}
+tb1 <- table(arrhythmia_adults$bmi_cat, arrhythmia_adults$sex)
+
+tb1
+```
+
+
+We can also create a frequency distribution table using the functions `count()` from the `{dplyr}` package:
+
+```{r}
+tb2 <- arrhythmia_adults %>%
+             count(bmi_cat, sex)
+
+tb2
+```
+
+
+### Frequency distribution table with total percentages
+
+We can also create a summary statistics using the functions `count()` and `mutate()` from the `{dplyr}` package to find the **total** percentages:
+
+```{r}
+tb3 <- arrhythmia_adults %>%
+             count(bmi_cat, sex) %>%
+             mutate(percentage = round(n*100/sum(n), digits = 2))
+
+tb3
+```
+
+In the above table we can see the frequency for each category and the total percentage (the frequency is divided by the total number of observations, here 428). For example, the percentage of underweight males is 0.93\%, (4/428)\*100.
+
+
+
+### Frequency distribution table with percentages inside for each category
+
+However, we may want to calculate the percentage inside for each category. For example, the percentage of males (n = 4) in the underweigt category (n = 11) is 36.4\%, (4/11)\*100. We will use the functions `group_by()`, `summarize()` and `mutate()` from the `dplyr` package:
+
+
+```{r}
+#| message: false
+
+tb4 <- arrhythmia_adults %>% 
+  group_by(bmi_cat, sex) %>% 
+  summarize(n=n()) %>% 
+  mutate(percentage = round(n*100/sum(n), digits = 2)) %>% 
+  ungroup()
+
+tb4
+```
+
+
+

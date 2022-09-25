@@ -5,14 +5,13 @@ When we have finished this chapter, we should be able to:
 ::: {.callout-caution icon="false"}
 ## Learning objectives
 
-- Describe the purpose and use of each pane in the RStudio IDE 
-- Understand the differences between errors, warnings, and messages in R
-- Seek for help
-- Work with R projects
+-   Describe the purpose and use of each pane in the RStudio IDE.
+-   Understand the differences between errors, warnings, and messages in R.
+-   Seek for help.
+-   Work with R projects.
 :::
 
  
-
 
 ## Installing R and RStudio
 

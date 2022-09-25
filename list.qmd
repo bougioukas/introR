@@ -228,7 +228,6 @@ patient_data
 
 In this data frame, `patientID` is a row or case identifier, `age` (in years) and `weight` (in kg) are continuous variables, `diabetes` (Type 1, Type 2) is a nominal (dichotomous) variable, `status` is an ordinal variable (Poor/Improved/Excellent), and `dates` variable with dates (note that we used the `ymd()` function to create this variable).
 
-
 We might have noticed the row of three (or four) letter abbreviations under the column names. These describe the type of each variable:
 
 -   `dbl` stands for doubles, or real numbers.
@@ -237,8 +236,7 @@ We might have noticed the row of three (or four) letter abbreviations under the 
 
 -   `date` stands for dates.
 
-
-There are some other common types of variables that aren’t used in this dataset:
+There are some other common types of variables that aren't used in this dataset:
 
 -   `int` stands for integers.
 
@@ -248,15 +246,11 @@ There are some other common types of variables that aren’t used in this datase
 
 -   `dttm` stands for date-times (a date + a time).
 
-
-
 Often we use the `glimpse()` function in order to have a quick look at the structure of the data frame:
 
 ```{r}
 glimpse(patient_data)
 ```
-
-
 
 We can also find the **type**, **class** and **dim** for the data frame:
 
