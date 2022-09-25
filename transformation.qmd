@@ -1,5 +1,4 @@
-# Data transformation  {#sec-transformation}
-
+# Data transformation {#sec-transformation}
 
 ```{r}
 #| include: false
@@ -13,34 +12,30 @@ When we have finished this chapter, we should be able to:
 ::: {.callout-caution icon="false"}
 ## Learning objectives
 
-- Select rows in a data frame according to filtering conditions with the dplyr function `filter()`.
-- Select columns in a data frame with the dplyr function `select()`.
-- Direct the output of one dplyr function to the input of another function with the "pipe" operator `%>%`.
-- Add new columns to a data frame that are functions of existing columns with `mutate()`.
-- Use `summarize()` with `across()` to calculate summary statistics for multiple variables, and `group_by()` to split a data frame into groups of observations, apply summary statistics for each group, and then combine the results.
+-   Select rows in a data frame according to filtering conditions with the dplyr function `filter()`.
+-   Select columns in a data frame with the dplyr function `select()`.
+-   Direct the output of one dplyr function to the input of another function with the "pipe" operator `%>%`.
+-   Add new columns to a data frame that are functions of existing columns with `mutate()`.
+-   Use `summarize()` with `across()` to calculate summary statistics for multiple variables, and `group_by()` to split a data frame into groups of observations, apply summary statistics for each group, and then combine the results.
 :::
 
  
 
+## Importing data
 
+Up to this point we have used data objects created with functions. Most of the time however, we work with data stored elsewhere and there are many ways to import such data into an R session.
 
-## Importing data  
+Data are stored in spreadsheets which are often saved in one of the following two formats:
 
-Up to this point we have used data objects created with functions. Most of the time however, we work with data stored elsewhere and there are many ways to import such data into an R session. 
+1.  A *Comma Separated Values* `.csv` file. We can think of a `.csv` file as a barebones spreadsheet where:
 
-Data are stored in spreadsheets which are often saved in one of the following two formats:  
+-   Each line in the file corresponds to one row of data/one observation.
+-   Values for each line are separated with commas ",". In other words, the values of different variables are separated by commas.
+-   The first line is often, but not always, a *header* row indicating the names of the columns/variables.
 
-1. A *Comma Separated Values* `.csv` file.  We can think of a `.csv` file as a barebones spreadsheet where:
+2.  An Excel `.xlsx` spreadsheet file. This format is based on Microsoft's proprietary Excel software. As opposed to a bare-bones `.csv` file, an `.xlsx` Excel files contains a lot of meta-data, or in other words, data about data. Some examples of Excel spreadsheet meta-data include the use of bold and italic fonts, colored cells, different column widths, and formula macros.
 
-* Each line in the file corresponds to one row of data/one observation.
-* Values for each line are separated with commas ",". In other words, the values of different variables are separated by commas.
-* The first line is often, but not always, a *header* row indicating the names of the columns/variables.
-
-2. An Excel `.xlsx` spreadsheet file. This format is based on Microsoft's proprietary Excel software. As opposed to a bare-bones `.csv` file, an `.xlsx` Excel files contains a lot of meta-data, or in other words, data about data. Some examples of Excel spreadsheet meta-data include the use of bold and italic fonts, colored cells, different column widths, and formula macros.
-
-
-We will use the dataset named `arrhythmia` which is a `.csv` file. 
-
+We will use the dataset named `arrhythmia` which is a `.csv` file.
 
 ```{r}
 #| echo: false
@@ -56,7 +51,6 @@ DT::datatable(arrhythmia, extensions = 'Scroller',
 
 ```
 
-
 The meta-data (data about the data) for this dataset are as following:
 
 1.  age: age (yrs)
@@ -66,10 +60,9 @@ The meta-data (data about the data) for this dataset are as following:
 5.  QRS: mean duration of QRS (ms) ![](images/QRS_normal.png){width="88" height="68"}
 6.  heart_rate: heart rate (beats/min)
 
-
 If the data set is stored in our computer disc as a `.csv` file we can read it with the `read_csv` function from `{dplyr}` package:
 
-The function `read_csv()` is used to read the `arrhythmia.csv` file as following: 
+The function `read_csv()` is used to read the `arrhythmia.csv` file as following:
 
 ```{r}
 #| message: false
@@ -80,34 +73,13 @@ arrhythmia <- read_csv(here("data", "arrhythmia.csv"))
 arrhythmia
 ```
 
-This data frame contains `r nrow(arrhythmia)` observations and `r ncol(arrhythmia)` variables. However, when we call the name of the object (arrhythmia), we can see in the console the first 10 rows, and all the columns that fit on screen.
-Note that by default the first row of the `.csv` file was used as the column names of the data frame.
+This data frame contains `r nrow(arrhythmia)` observations and `r ncol(arrhythmia)` variables. However, when we call the name of the object (arrhythmia), we can see in the console the first 10 rows, and all the columns that fit on screen. Note that by default the first row of the `.csv` file was used as the column names of the data frame.
 
-We might also have noticed the row of three letter abbreviation `dbl` under the column names. These describe the type of each variable and may be:
-
-- `dbl` stands for doubles, or real numbers.
-
-- `int` stands for integers.
-
-- `chr` stands for character vectors, or strings.
-
-- `lgl` stands for logical, vectors that contain only `TRUE` or `FALSE`.
-
-- `fct` stands for factors, which R uses to represent categorical variables with fixed possible values.
-
-- `date` stands for dates.
-
-- `dttm` stands for date-times (a date + a time).
-
-As we can see the categorical variable `sex` is coded as 0 for males and 1 for females, so it is recognized of `double` type.
-
-We can use the `factor()` function:  
+We might have noticed that the categorical variable `sex` is coded as 0 for males and 1 for females, so it is recognized of `double` type. We can use the `factor()` function to encode a vector as a factor:
 
 ```{r}
-arrhythmia$sex = factor(arrhythmia$sex, levels = c(0, 1), 
-                       labels = c("male", "female"))
+arrhythmia$sex = factor(arrhythmia$sex, levels = c(0, 1), labels = c("male", "female"))
 ```
-
 
 Let's look at the data again with the `glipmse()` function:
 
@@ -115,9 +87,210 @@ Let's look at the data again with the `glipmse()` function:
 glimpse(arrhythmia)
 ```
 
-
 Now, the variable `sex` is a factor variable (`fct`) with two levels:
 
 ```{r}
 levels(arrhythmia$sex)
+```
+
+## Subseting variables
+
+We don't necessarily need all the variables, and a good practice for large data sets with many variables is to select only the variables we are actually interested in. In this chapter we review the different ways of selecting variables.
+
+Variable selection is not very useful with the `arrhythmia` data because we only have `r ncol(arrhythmia)` variables, but we can still get the general idea.
+
+### Select variables by name using `[ ]`
+
+We can select only the `age`, `sex`, `QRS`, variables from the data frame:
+
+```{r}
+dat1 <- arrhythmia[c("age", "sex" , "QRS")]
+head(dat1)
+```
+
+### Select or exclude variables by indexing `[ ]`
+
+```{r}
+dat2 <- arrhythmia[c(1, 2, 5)]
+head(dat2)
+```
+
+```{r}
+dat3 <- arrhythmia[-c(3, 4, 6)]
+head(dat3)
+```
+
+### Select using the subset() function
+
+```{r}
+dat4 <- subset(arrhythmia, select= c(1, 2, 5))
+head(dat4)
+```
+
+The `select` argument allows the selection by indexing the columns of interest in.
+
+### Select using the `select()` function from `dplyr`
+
+In `select()` function we pass the data frame first and then the variables separated by commas:
+
+```{r}
+dat5 <- select(arrhythmia, age, sex, QRS)
+head(dat5)
+```
+
+## Subseting observations
+
+### Select rows by indexing `[ ]`
+
+```{r}
+dat6 <- arrhythmia[5:15, ]
+dat6
+```
+
+```{r}
+dat7 <- arrhythmia[which(arrhythmia$age > 75), ]
+dat7
+```
+
+```{r}
+dat8 <- arrhythmia[which(arrhythmia$age > 75 & arrhythmia$sex == "female"), ]
+dat8
+```
+
+### Select rows using subset()
+
+```{r}
+dat9 <- subset(arrhythmia, age > 75)
+dat9
+```
+
+```{r}
+dat10 <- subset(arrhythmia, age > 75 & sex == "female")
+dat10
+```
+
+### Select rows using the `filter()` from `dplyr`
+
+We pass the data frame first and then one or more conditions separated by a comma:
+
+```{r}
+dat11 <- filter(arrhythmia, age > 75)
+dat11
+```
+
+If we want to select only female patients with age \> 75:
+
+```{r}
+dat12 <- filter(arrhythmia, age > 75, sex == "female")
+dat12
+```
+
+## Select variables and observations
+
+```{r}
+dat13 <- arrhythmia[5:15, c(1, 2, 5)]
+dat13
+```
+
+## Reorder rows using `arrange()` from `dplyr`
+
+We can also arrange a table based on one or more variables. The `arrange()` function works similarly to `filter()` except that instead of selecting rows, it changes their order. It takes a data frame and a set of column names (or more complicated expressions) to order by. For example, we can arrange the rows of the `arrhythmia` table by the magnitude of `QRS` (in ascending order which is the default):
+
+```{r}
+dat14 <- arrange(arrhythmia, QRS)
+head(dat14, 10)
+```
+
+We can use `desc()` to re-arrange in descending order. For example:
+
+```{r}
+dat15 <- arrange(arrhythmia, desc(QRS))
+head(dat15, 10)
+```
+
+# Create new variables with `mutate()`
+
+Suppose we want to calculate BMI for the participants from weight and height. We can use the following code to calculate the BMI:
+
+```{r, R.options = list(width = 200)}
+mutate(arrhythmia, bmi = round(weight / (height / 100)^ 2, digits = 1))
+
+```
+
+**NOTE** We divided the height with 100, because it was given in cm.
+
+which is equivalent to:
+
+```{r, eval=FALSE}
+arrhythmia %>%   
+     mutate(bmi = round(weight / (height / 100)^ 2, digits=1))
+```
+
+# Using the pipe operator %\>% in a sequence of functions
+
+Let's say that we want to find the BMI, and BMI categories only for the adults:
+
+```{r, R.options = list(width = 300)}
+arrhythmia_adults <- arrhythmia %>% 
+        filter(age >= 18) %>% 
+        mutate(bmi = round(weight / (height / 100)^ 2, digits=1),
+               bmi_cat=cut(bmi, breaks=c(-Inf, 18.5, 25.0, 30.0, Inf), 
+                   labels=c("underweight","normal","overweight", "obese"))
+               )
+
+arrhythmia_adults
+```
+
+We would read this sequence as:
+
+1.  Take the dataset `arrythmia` *then*
+2.  Use this output as the input to the `filter()` to select only the adults (age \>=18) *then*
+3.  Use this output as the input to the `mutate()` to recode `sex` and calculate `bmi` and `bmi_cat`.
+
+Can you imagine what is the function of `cut()` for?
+
+\vspace{14pt}
+
+# More examples and functions
+
+Now, we want from the `arrhythmia_adults` to filter only the `overweight` or `obese` patients:
+
+```{r, R.options = list(width = 300)}
+overweight_obese <- arrhythmia_adults %>% 
+                       filter(bmi_cat == "overweight" | bmi_cat == "obese")
+```
+
+Here, we used the logical operator `|`. The logical operators are:
+
+-   `&` (and)
+-   `|` (or)
+-   `!` (not)
+
+\vspace{12pt}
+
+Alternatively we can use the `%in%` operator. This operator helps us to easily create multiple `OR` arguments:
+
+```{r, R.options = list(width = 300)}
+overweight_obese2 <- arrhythmia_adults %>% 
+                       filter(bmi_cat %in% c("overweight", "obese"))
+```
+
+\vspace{12pt}
+
+Let's say that we also want those overweight or obese people who have heart rate \> 85:
+
+```{r, R.options = list(width = 300)}
+overweight_obese3 <- arrhythmia_adults %>% 
+                       filter(bmi_cat %in% c("overweight", "obese"), 
+                              heart_rate >= 85)
+overweight_obese3
+```
+
+Now, let's rename variables for example `heart_rate` to `HR` and `sex` to `gender` in the subset `overweight_obese3`. Moreover, `select()` can be used with `everything()` to hoist a variable up to the front of the tibble:
+
+```{r, R.options = list(width = 300)}
+overweight_obese3 %>% 
+          rename(HR = heart_rate,gender = sex) %>% 
+          select(HR, gender, everything())
+                                   
 ```

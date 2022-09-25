@@ -1,5 +1,19 @@
 # R objects {#sec-objects}
 
+When we have finished this chapter, we should be able to:
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+-   Understand the concept of objects in R.
+-   Know the types of assignment operators in R.
+-   Set legal names to objects.
+-   Work with assignment operators.
+:::
+
+ 
+
+
 ```{r}
 #| include: false
 

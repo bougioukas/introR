@@ -528,7 +528,7 @@ Data frame
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-tidy_data" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/tidy_data.PNG" class="lightbox" title="Tidy data." data-gallery="quarto-lightbox-gallery-1"><img src="images/tidy_data.PNG" class="img-fluid figure-img" style="width:90.0%"></a></p>
+<figure class="figure"><p><a href="images/tidy_data.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Tidy data."><img src="images/tidy_data.PNG" class="img-fluid figure-img" style="width:90.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;8.1: Tidy data.</figcaption><p></p>
 </figure>
 </div>
@@ -565,7 +565,20 @@ Data frame
 </div>
 </div>
 <p>In this data frame, <code>patientID</code> is a row or case identifier, <code>age</code> (in years) and <code>weight</code> (in kg) are continuous variables, <code>diabetes</code> (Type 1, Type 2) is a nominal (dichotomous) variable, <code>status</code> is an ordinal variable (Poor/Improved/Excellent), and <code>dates</code> variable with dates (note that we used the <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd()</a></code> function to create this variable).</p>
-<p>First, let’s take a look at the structure of the object <em>patient_data</em> with the <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code>:</p>
+<p>We might have noticed the row of three (or four) letter abbreviations under the column names. These describe the type of each variable:</p>
+<ul>
+<li><p><code>dbl</code> stands for doubles, or real numbers.</p></li>
+<li><p><code>chr</code> stands for character vectors, or strings.</p></li>
+<li><p><code>date</code> stands for dates.</p></li>
+</ul>
+<p>There are some other common types of variables that aren’t used in this dataset:</p>
+<ul>
+<li><p><code>int</code> stands for integers.</p></li>
+<li><p><code>lgl</code> stands for logical, vectors that contain only <code>TRUE</code> or <code>FALSE</code>.</p></li>
+<li><p><code>fct</code> stands for factors, which R uses to represent categorical variables with fixed possible values.</p></li>
+<li><p><code>dttm</code> stands for date-times (a date + a time).</p></li>
+</ul>
+<p>Often we use the <code><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse()</a></code> function in order to have a quick look at the structure of the data frame:</p>
 <div class="cell">
 <div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -579,7 +592,7 @@ $ status    &lt;chr&gt; "Poor", "Improved", "Excellent", "Poor", "Poor", "Excell
 $ dates     &lt;date&gt; 2020-10-09, 2020-10-12, 2020-10-18, 2020-10-27, 2020-11-04, …</code></pre>
 </div>
 </div>
-<p>We can also find the <strong>type</strong>, <strong>class</strong> and <strong>dim</strong> for the data table:</p>
+<p>We can also find the <strong>type</strong>, <strong>class</strong> and <strong>dim</strong> for the data frame:</p>
 <div class="cell">
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/typeof.html">typeof</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -594,7 +607,7 @@ $ dates     &lt;date&gt; 2020-10-09, 2020-10-12, 2020-10-18, 2020-10-27, 2020-11
 <pre><code>[1] 8 6</code></pre>
 </div>
 </div>
-<p>The type is a <em>list</em> but the class is a <code>tbl</code> <em>(tibble)</em> object which is a “tidy” data frame. The dimensions are 8x6.</p>
+<p>The type is a <em>list</em> but the class is a <code>tbl</code> <em>(tibble)</em> object which is a “tidy” data frame (tibbles work better in the tidyverse). The dimensions are 8x6.</p>
 <p>The <code>attribute()</code> function help us to explore the characteristics/attributives of the tibbles:</p>
 <div class="cell">
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/attributes.html">attributes</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -768,7 +781,7 @@ m f
 <div class="cell">
 <div class="sourceCode" id="cb87"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">unclass</a></span><span class="op">(</span><span class="va">today</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 19258</code></pre>
+<pre><code>[1] 19260</code></pre>
 </div>
 </div>
 <p>So, in numeric form, <code>Date</code> counts the days since <code>1970-01-01</code>. For example:</p>
@@ -783,7 +796,7 @@ m f
 <div class="cell">
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/difftime.html">difftime</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">date1</span>, units <span class="op">=</span> <span class="st">'days'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 817.1501 days</code></pre>
+<pre><code>Time difference of 819.2631 days</code></pre>
 </div>
 </div>
 <p>POSIXct stores a date and time. In numeric form, the number of seconds since <code>1970-01-01</code>.</p>
@@ -929,7 +942,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","loop":true,"descPosition":"bottom","selector":".lightbox"});</script>
 
 
 </body></html>

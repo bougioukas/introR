@@ -1,5 +1,20 @@
 # Calculations in R {#sec-calculations}
 
+When we have finished this chapter, we should be able to:
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+-   Know the basic arithmetic operators in R.
+-   Use R as a calculator.
+-   Understand the use of relational (or comparison) operators.
+-   Get familiar with scientific notation.
+-   Understand special values (i.e. NA, Inf, NaN, NULL) in R
+:::
+
+ 
+
+
 ## Arithmetic Operators in R
 
 The simplest thing we could do with R is arithmetic operations with numbers. For example:

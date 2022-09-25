@@ -234,9 +234,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#characteristics-of-r-functions" id="toc-characteristics-of-r-functions" class="nav-link active" data-scroll-target="#characteristics-of-r-functions"><span class="toc-section-number">2.1</span>  Characteristics of R Functions</a></li>
+<li><a href="#definition-of-function" id="toc-definition-of-function" class="nav-link active" data-scroll-target="#definition-of-function"><span class="toc-section-number">2.1</span>  Definition of function</a></li>
+  <li><a href="#characteristics-of-r-functions" id="toc-characteristics-of-r-functions" class="nav-link" data-scroll-target="#characteristics-of-r-functions"><span class="toc-section-number">2.2</span>  Characteristics of R Functions</a></li>
   <li>
-<a href="#mathematical-functions" id="toc-mathematical-functions" class="nav-link" data-scroll-target="#mathematical-functions"><span class="toc-section-number">2.2</span>  Mathematical functions</a>
+<a href="#mathematical-functions" id="toc-mathematical-functions" class="nav-link" data-scroll-target="#mathematical-functions"><span class="toc-section-number">2.3</span>  Mathematical functions</a>
   <ul class="collapse">
 <li><a href="#logarithms-and-exponentials" id="toc-logarithms-and-exponentials" class="nav-link" data-scroll-target="#logarithms-and-exponentials">Logarithms and exponentials</a></li>
   <li><a href="#trigonometric-functions" id="toc-trigonometric-functions" class="nav-link" data-scroll-target="#trigonometric-functions">Trigonometric functions</a></li>
@@ -244,8 +245,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#the-round-function" id="toc-the-round-function" class="nav-link" data-scroll-target="#the-round-function">The <code>round()</code> function</a></li>
   </ul>
 </li>
-  <li><a href="#the-sessioninfo-and-option-functions" id="toc-the-sessioninfo-and-option-functions" class="nav-link" data-scroll-target="#the-sessioninfo-and-option-functions"><span class="toc-section-number">2.3</span>  The sessionInfo() and option() functions</a></li>
-  <li><a href="#user-defined-functions-udf" id="toc-user-defined-functions-udf" class="nav-link" data-scroll-target="#user-defined-functions-udf"><span class="toc-section-number">2.4</span>  User Defined Functions (UDF)</a></li>
+  <li><a href="#the-sessioninfo-and-option-functions" id="toc-the-sessioninfo-and-option-functions" class="nav-link" data-scroll-target="#the-sessioninfo-and-option-functions"><span class="toc-section-number">2.4</span>  The sessionInfo() and option() functions</a></li>
+  <li><a href="#user-defined-functions-udf" id="toc-user-defined-functions-udf" class="nav-link" data-scroll-target="#user-defined-functions-udf"><span class="toc-section-number">2.5</span>  User Defined Functions (UDF)</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -262,7 +263,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </div>
   
 
-</header><p>In programming, we use functions to incorporate sets of commands that we want to use repeatedly or that, because of their complexity, are better self-contained in a sub program and called when needed.</p>
+</header><p>When we have finished this chapter, we should be able to:</p>
+<div class="callout-caution callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Learning objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Understand the concept of functions in R.</li>
+<li>Know of characteristics of functions.</li>
+<li>Be familiar with basic mathematical functions (e.g., logarithmic, trigonometric).</li>
+<li>Create our own functions.</li>
+</ul>
+</div>
+</div>
+<p>&nbsp;</p>
+<section id="definition-of-function" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="definition-of-function">
+<span class="header-section-number">2.1</span> Definition of function</h2>
+<p>In programming, we use functions to incorporate sets of commands that we want to use repeatedly or that, because of their complexity, are better self-contained in a sub program and called when needed.</p>
 <p>We have already used some R functions searching for help (i.e., <code><a href="https://rdrr.io/r/utils/help.html">help()</a></code>, <code><a href="https://rdrr.io/r/utils/example.html">example()</a></code>, <code><a href="https://rdrr.io/r/utils/apropos.html">apropos()</a></code>). Most of the computations in R involves using functions. The base version of R includes many other functions, and thousands of others can be added (by installing packages or by creating them from scratch).</p>
 <blockquote class="blockquote">
 <p>A function in R is defined by its <strong>name</strong> and by the list of its <strong>arguments</strong>: <code>function_name(arg1 = val1, arg2 = val2, ...)</code></p>
@@ -282,8 +305,8 @@ Call a function
 </div>
 </div>
 <p>&nbsp;</p>
-<section id="characteristics-of-r-functions" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="characteristics-of-r-functions">
-<span class="header-section-number">2.1</span> Characteristics of R Functions</h2>
+</section><section id="characteristics-of-r-functions" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="characteristics-of-r-functions">
+<span class="header-section-number">2.2</span> Characteristics of R Functions</h2>
 <p><strong>A. Name and argumnets of a function</strong></p>
 <blockquote class="blockquote">
 <p>A function essentially has a <strong>name</strong> and a list of <strong>arguments</strong> separated by a comma.</p>
@@ -446,7 +469,7 @@ Caution
 <div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/date.html">date</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Fri Sep 23 06:35:44 2022"</code></pre>
+<pre><code>[1] "Sun Sep 25 09:18:13 2022"</code></pre>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -460,8 +483,8 @@ Caution
 </figure>
 </div>
 <p>&nbsp;</p>
-</section><section id="mathematical-functions" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="mathematical-functions">
-<span class="header-section-number">2.2</span> Mathematical functions</h2>
+</section><section id="mathematical-functions" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="mathematical-functions">
+<span class="header-section-number">2.3</span> Mathematical functions</h2>
 <p>R has many built in mathematical functions such as the <code>log(x)</code> that we have already seen.</p>
 <section id="logarithms-and-exponentials" class="level3"><h3 class="anchored" data-anchor-id="logarithms-and-exponentials">Logarithms and exponentials</h3>
 <p>&nbsp;</p>
@@ -676,8 +699,8 @@ Round rule when the dropped digit is 5
 </div>
 </div>
 <p>&nbsp;</p>
-</section></section><section id="the-sessioninfo-and-option-functions" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="the-sessioninfo-and-option-functions">
-<span class="header-section-number">2.3</span> The sessionInfo() and option() functions</h2>
+</section></section><section id="the-sessioninfo-and-option-functions" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="the-sessioninfo-and-option-functions">
+<span class="header-section-number">2.4</span> The sessionInfo() and option() functions</h2>
 <p>We can obtain information about R, the OS and attached or loaded packages running the following function:</p>
 <div class="cell">
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -688,8 +711,8 @@ Round rule when the dropped digit is 5
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/help.html">help</a></span><span class="op">(</span><span class="va">options</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>&nbsp;</p>
-</section><section id="user-defined-functions-udf" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="user-defined-functions-udf">
-<span class="header-section-number">2.4</span> User Defined Functions (UDF)</h2>
+</section><section id="user-defined-functions-udf" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="user-defined-functions-udf">
+<span class="header-section-number">2.5</span> User Defined Functions (UDF)</h2>
 <p>We can create our own functions, using the <strong><code>function()</code></strong>, which is a very powerful way to extend R. <a href="#fig-fun_syntax">Figure&nbsp;<span>2.4</span></a> displays the syntax for creating an R function.</p>
 <p>&nbsp;</p>
 <div id="fig-fun_syntax" class="quarto-figure quarto-figure-center anchored">
@@ -730,7 +753,7 @@ What do we need to create a function?
 <p>We defined the function by “assigning” the <code>function(temp_C)</code> to the name <code>celsius_to_kelvin</code> using the assignment operator <code>&lt;-</code> (see <a href="objects.html"><span>Chapter&nbsp;5</span></a>).</p>
 <p>So, in most cases, a function has a name (e.g., <code>celsius_to_kelvin</code>), some arguments used as input to the function, within the <code>()</code> following the keyword ‘function’ (e.g., <code>temp_C</code>); a body, which is the code within the curly braces <code><a href="https://rdrr.io/r/base/Paren.html">{}</a></code>, where we carry out the computation; and can have one or more return values (the output here is the <code>temp_K</code> which is a numeric value).</p>
 <div class="callout-caution callout callout-style-default no-icon callout-captioned">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
@@ -739,7 +762,7 @@ What do we need to create a function?
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>A function has three components:</p>
 <ol type="1">
@@ -896,7 +919,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","selector":".lightbox","loop":true});</script>
+</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom"});</script>
 
 
 </body></html>

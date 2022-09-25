@@ -1,5 +1,18 @@
 # R packages {#sec-packages}
 
+When we have finished this chapter, we should be able to:
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+-   Understand the concept of packages in R.
+-   Know to install and load a package in R.
+-   Get familiar with the `tidyverse` and other packages.
+-   Create a reproducible example (reprex).
+:::
+
+ 
+
 ```{r}
 #| include: false
 

@@ -1,11 +1,26 @@
 # R functions {#sec-functions}
 
+When we have finished this chapter, we should be able to:
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+-   Understand the concept of functions in R.
+-   Know of characteristics of functions.
+-   Be familiar with basic mathematical functions (e.g., logarithmic, trigonometric).
+-   Create our own functions.
+:::
+
+ 
+
 ```{r}
 #| include: false
 
 library(fontawesome)
 
 ```
+
+## Definition of function
 
 In programming, we use functions to incorporate sets of commands that we want to use repeatedly or that, because of their complexity, are better self-contained in a sub program and called when needed.
 
