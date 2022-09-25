@@ -329,21 +329,21 @@ boxplot(arrhythmia_adults$bmi, main = "Boxplot of age of adult patients", ylab =
 
 
 
-## Summarizing data
+## Summarizing Numerical variables
+
+
+### Summary measures for one numerical variable
 
 The next common task when working with data frames is to compute **summary measures**. Summary measures are **single numerical values** that summarize a large number of values.  
 Commonly known examples of summary measures for numerical data include the **arithmetic mean** (also called the average) and the **median** (the middle value). Other examples of summary measures that might not immediately come to mind include the **sum**, the smallest value also called the **minimum**, the largest value also called the **maximum**, the **1st quartile** and **3rd quartile**, the **standard deviation**, the **skewness**, and the **kurtosis**.  
-Summary measures for categorical data include **frequencies** and **percentages**.
+
 
 Summary functions in R take in many values and return a single value, as illustrated in Figure @fig-summary. 
 
 ![Diagram illustrating a summary function in R](images/summary.png){#fig-summary width="75%"}
 
 
-### Summary Measures for Numerical variables
 
-
-**A. Summary measures for one variable**
 
 Let's calculate two summary measures for the `QRS` variable in the `arrhythmia_adults` data frame: the mean and standard deviation. To compute these summary measures, we need the `mean()` and `sd()` *statistical functions* in R. 
 
@@ -389,9 +389,9 @@ Other summary functions that can be used inside the `summarize()` verb to comput
 
 
 
-**B. Summary measures for more variables**
+### Summary measures for more numerical variables
 
-We can add more variables:
+We can add more numerical variables:
 
 ```{r}
 
@@ -406,7 +406,7 @@ summary_QRS_age
 
  
 
-We can also calculate the mean if the variable is numeric with the `summarize_if()` function:
+We can also calculate the mean for all numerical variables with the `summarize_if()`:
 ```{r}
 summary_all_means <- arrhythmia_adults %>% 
   summarise_if(is.numeric, mean, na.rm = TRUE)
@@ -449,6 +449,8 @@ It is important to note that the `group_by()` function doesn't change data frame
 We are not limited to grouping by one variable. Say we want to know the mean QRS of males and females in each of the four bmi catecories:
 
 ```{r}
+#| message: false
+
 QRS_bmi_sex <- arrhythmia_adults %>% 
   group_by(bmi_cat, sex) %>% 
   summarize(mean_QRS = mean(QRS, na.rm = TRUE), 
@@ -460,9 +462,9 @@ QRS_bmi_sex
 
 
 
-### More summary statistics
+### More summary measures
 
-Let’s look at some summary statistics of the `QRS` variable by considering multiple statistical functions at once in the same `summarize()` code:
+Let’s look at some summary measures of the `QRS` variable by considering multiple statistical functions at once in the same `summarize()` code:
 
 ```{r}
 
@@ -576,10 +578,11 @@ The `age` variable approximate a **symmetrical distribution (bell-shaped)**.
 
 
 
-## Summary measures for Categorical variables
+## Summarizing Categorical variables
 
 ### Frequency distribution table
 
+Summary measures for categorical data include **frequencies** and **percentages**.
 If we have two categorical variables, we might be interested in a 2-dimensional frequency distribution table. Say we want to know the number of males and females in each of the four bmi catecories. We can create a frequency distribution table with `table()` function for the variables `bmi_cat` and `sex`:
 
 ```{r}
