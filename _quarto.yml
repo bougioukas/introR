@@ -23,6 +23,7 @@ book:
         - matrix.qmd
         - list.qmd
         - transformation.qmd
+        - visualization.qmd
 
     - part: "Special Topics"
       chapters:
