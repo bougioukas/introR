@@ -13,6 +13,10 @@ library(ggfx)
 library(ggtext)
 library(gghighlight)
 library(ggforce)
+library(paletteer)
+library(patchwork)
+library(gganimate)
+library(plotly)
 
 library(fontawesome)
 
@@ -872,6 +876,367 @@ ggplot(aes(x = tests_per_capita, y = cases_per_100k)) +
 Note that the lines which come before the `ggplot()` function are piped `%>%` whereas from `ggplot()` onwards we have to use `+`. This is because `ggplot2` package was written before the pipe `%>%` was introduced. The `+` sign in `ggplot2` functions (similar to the pipe `%>%` in other functions in the tidyverse) allows code to be written from left to right adding different layers and customisations to the same plot.
 
 Moreover, as commands get longer, we suggest to add carriage returns (new lines), which must be inserted after the `%>%` or `+` symbols. In most cases, R is blind to white space and new lines, so this is a simple way to make our code more readable.
+
+
+
+
+
+## Practical example: the graph everyone wants to draw
+
+
+## Cumulative Number of Deaths from COVID-19
+
+Seeing the total number of deaths over time, on a country-by-country basis, can illustrate how the pandemic is expanding. Because the epidemic began at different times in different countries, viewing each country’s curve from the same starting point can allow us to more easily compare countries. The starting point for this chart is the day on which the 10th death was confirmed in each country, with the trend lines following the number of days since that event. 
+
+
+Let's say we want to focus on data of specific countries:
+
+```{r}
+focus_cn <- c("CHN", "GBR", "USA", "JPN", "GRC", "MEX",
+              "KOR", "ITA", "ESP", "BRA", "IND")
+```
+
+
+
+First, we have to prepare the data:
+
+```{r}
+covid_deaths <- covid_data %>%
+  select(date, iso3c, deaths) %>%
+  group_by(iso3c) %>%
+  arrange(date) %>%
+  filter(deaths > 10) %>%
+  mutate(days_elapsed = date - min(date),
+         end_label = ifelse(date == max(date), iso3c, NA),
+         end_label = case_when(iso3c %in% focus_cn ~ end_label,
+                      TRUE ~ NA_character_),
+         cgroup = case_when(iso3c %in% focus_cn ~ iso3c,
+                   TRUE ~ "OTHER")) %>% 
+  ungroup()
+
+covid_deaths
+
+```
+
+
+
+We also set particular colors for the selected countries:
+```{r}
+## Colors
+cgroup_cols <- c(prismatic::clr_darken(
+  paletteer_d("ggsci::category20_d3"), 0.2)[1:length(focus_cn)],
+  "gray70")
+```
+
+
+
+Now we are ready to create the chart with the cumulative number of confirmed deaths:
+
+```{r}
+#| warning: false
+
+death_curves <- covid_deaths %>% filter(cgroup != "OTHER") %>% 
+    ggplot(mapping = aes(x = days_elapsed, y = deaths,
+                         color = cgroup, label = end_label,
+                         group = iso3c)) +
+    geom_line(size = 0.8) +
+    geom_text_repel(nudge_x = 0.2,
+                    nudge_y = 0.1, size = 3,
+                    segment.color = NA) +
+    guides(color = FALSE) +
+    scale_color_manual(values = cgroup_cols) +
+    scale_y_continuous(labels = scales::comma_format(accuracy = 1), 
+                       limits = c(10, 6.1*10^5),
+                       breaks = seq(0, 6.*10^5, 10^5)) +
+    labs(x = "Days Since 10th Confirmed Death",
+         y = "Cumulative Number of Deaths",
+         title = "Cumulative Number of Deaths from COVID-19",
+         subtitle = paste("Data as of", format(max(covid_deaths$date),
+                                               "%d/%m/%y")),
+         caption = "Data: https://coronavirus.jhu.edu/map.html")
+
+death_curves
+```
+
+
+## Cumulative Number of Deaths from COVID-19 in logarithmic scale
+
+Next, we present the chart with the cumulative number of confirmed deaths in logarithmic scale:
+
+```{r}
+#| warning: false
+
+death_log_curves <- covid_deaths %>% filter(cgroup != "OTHER") %>% 
+    ggplot(mapping = aes(x = days_elapsed, y = deaths,
+                         color = cgroup, label = end_label,
+                         group = iso3c)) +
+    geom_line(size = 0.8) +
+    geom_text_repel(nudge_x = 0.2,
+                    nudge_y = 0.1, size = 3,
+                    segment.color = NA) +
+    guides(color = "none") +
+    scale_color_manual(values = cgroup_cols) +
+    scale_y_continuous(labels = scales::comma_format(accuracy = 1),
+                       limits = c(10, 2^20),
+                       breaks = 2^seq(4, 20),
+                       trans = "log2") +
+    labs(x = "Days Since 10th Confirmed Death",
+         y = "Cumulative Number of Deaths (log2 scale)",
+         title = "Cumulative Number of Deaths (log scale) from COVID-19",
+         subtitle = paste("Data as of", format(max(covid_deaths$date),
+                                               "%d/%m/%y")),
+         caption = "Data: https://coronavirus.jhu.edu/map.html")
+
+death_log_curves
+```
+
+
+This chart shows the cumulative number of confirmed deaths since the 10th confirmed death for each country. An upward bend in a curve can indicate either a time of explosive growth of coronavirus cases in a given country or a change in how deaths are defined or counted. Comparing across countries can also show where the pandemic is growing most rapidly at any point in time.
+
+Limited testing and challenges in the attribution of the cause of death means that the number of confirmed deaths may not be an accurate count of the true number of deaths from COVID-19.
+
+
+## Combine several plots into one figure
+
+
+### Assemble a number of plots
+
+Sometimes, we would like to combine several plots into one figure. This can be easily done with the `patchwork` package. For example, if we want to combine two `ggplot2` objects, say `death_curves` and `death_log_curves`, then we can directly call `death_curves + death_log_curves` to combine the two objects. Since the two plots share the same elements, patchwork allows us to use e.g. one top title, subtitle and tags by calling function `plot_annotation`.
+
+
+```{r}
+#| warning: false
+
+death_curves + death_log_curves +
+  plot_annotation(title = 'Cumulative Number of Deaths',
+                  subtitle = 'A: Linear scale; B: Log scale',
+                  tag_levels = 'A')
+```
+
+
+### Insets 
+
+Another approach is to use the `inset_element()` function which marks a plot or graphic object to be placed as an inset on the previous plot. It will thus not take up a slot in the provided layout, but share the slot with the previous plot. `inset_element()` allows us to freely position our inset relative to either the panel, plot, or full area of the previous plot, by specifying the location of the left, bottom, right, and top edge of the inset.
+
+```{r}
+#| warning: false
+
+death_curves + inset_element(death_log_curves, 
+                             left =0.02, right =0.4, 
+                             bottom = 0.45, top =0.98)
+```
+
+
+
+## Animated plots
+
+
+```{r}
+#| warning: false
+
+animate1 <- covid_deaths %>% 
+  filter(iso3c %in% focus_cn) %>% 
+  ggplot(mapping = aes(x = date, y = deaths, group= iso3c, 
+                       color = iso3c)) +
+  geom_path(size = 1) +
+  geom_point() +
+  geom_text(aes(label = iso3c), size = 5) +
+  scale_y_continuous(labels = scales::comma_format(accuracy = 1),
+                       limits = c(10, 2^20),
+                       breaks = 2^seq(4, 20),
+                       trans = "log2") +
+  scale_color_manual(values = cgroup_cols) +
+  labs(title = "Date: {round(frame_along, 0)}", 
+       x = 'Calendar time', 
+       y = 'Cumulative Number of Deaths (log2 scale)') +
+  theme_minimal() +
+  theme(legend.position = "none") +
+  transition_reveal(date) 
+
+animate1
+```
+
+
+
+## Interactive plots
+
+
+### Plotly 
+
+Any graph made with the plotly R package is powered by the JavaScript library `plotly.js1`. The `plot_ly()` function provides a ‘direct’ interface to `plotly.js` with some additional abstractions to help reduce typing. These abstractions, inspired by the Grammar of Graphics and `ggplot2`, make it much faster to iterate from one graphic to another, making it easier to discover interesting features in the data.
+`Plotly` allows the user to create high quality, interactive graphs. This includes scatter plots, histograms, heatmaps and many more! To demonstrate, we’ll use it to explore the covid_data and learn a bit how `plotly` works along the way.
+
+
+`Plotly` is an extensive package and we will merely scratch the surface of its capabilities in this course. More information about the package can be found at the website: [\color{blue}\underline {Plotly}](https://plotly.com/r/)
+
+
+A Plotly chart is created by using tree set of functions:
+
+* `plot_ly()`, can be thought of as the base which allows R objects to be mapped to the Plotly library. It is similar to `ggplot()` function.
+* `layout()`, is used to control the chart title, axis labels, legends, canvas, range and scales.
+* `add_trace()` (`add_*`), creates a geometry layer called a trace which is added to the chart. It defines the type of plot similar to geometries(geom_*) in ggplot.
+
+Note that multiple traces can be added on one plot. There are many add_* functions. Running the following code provides a list of these functions:
+
+
+```{r}
+stringr::str_subset(objects("package:plotly"), pattern ="^add_")
+```
+
+
+Let’s see an example of a simple interactive plot:
+
+```{r}
+
+plotly1 <- dat %>% 
+  plot_ly(x = ~gdp_capita, y = ~life_expectancy, 
+          color = ~region)
+
+plotly1
+```
+
+
+Although we did not specify the plot type, the produced chart is a scatter plot. The `plot_ly()` function is the base plotly command to initialize a plot from a dataframe, similar to `ggplot()` from ggplot2. Therefore, we observe that if we assign variable names (e.g., gdp_capita, life_expectancy, region, etc.) to visual properties (e.g., x, y, color, etc.) within `plot_ly()`, it tries to find a sensible geometric representation of that information for us. 
+
+Analytically, the type of plot is specified by setting the **trace** type. The scatter trace type is the foundation for many low-level geometries (e.g., points, lines, and text), thus we must also specify a mode. To create a scatter plot with points the mode is set to markers, but additional scatter modes include lines, paths, segments, ribbons, polygons, and text.
+
+The plot’s interactivity can be accessed via its tool bar. The functionality provided by this toolbar from left to right are as follows:
+
+* Downloading the plot as a png file.
+* Zooming in specific areas of the plot
+* Panning across the map.
+* Selecting all points using a box.
+* Selecting all points using a lasso.
+* Zooming in and out on
+
+Moreover, hovering over individual points displays their coordinates.
+
+
+Plotly functions take a plotly object as an input and return a modified plotly object, making it work perfectly with the **pipe operator** (`%>%`).
+Note that `plot_ly()` uses a `~` syntax for mapping aesthetics that is a bit different from the `ggplot()` syntax we’ve presented earlier.
+
+We can explicitly define the type and mode of the plot using the `add_trace()`. Additionally, we can change the palette of colors and use the layout function to set title and axis labels. For the axis labels we use the `xaxis` and `yaxis` arguments which require lists:
+
+
+```{r}
+#| warning: false
+
+plotly2 <- dat %>% 
+  plot_ly(x = ~gdp_capita, y = ~life_expectancy, 
+          color=~region) %>% 
+  add_trace(type = "scatter", mode = "markers", colors = "Set1") %>% 
+  layout(title = "Life expectancy vs. GDP per capita",
+         xaxis = list(
+           title = "GDP per capita ($)"),
+         yaxis = list(
+           title = "Life expectancy (years)")
+         )
+
+plotly2
+```
+
+Rather than using add_trace() and specifying the type and mode, we can use the convenience function add_markers() and change the "filled" circles with "open" circles. Note that if we want to use a constant value for an aesthetic (e.g., symbol), we must specify that the argument should be used “as-is,” using the `I()` function.
+Another important attribute that can be added is the name of the country using the `text` argument in the `plot_ly()`.
+
+```{r}
+#| warning: false
+
+plotly3 <- dat %>%
+  plot_ly(x = ~gdp_capita, y = ~life_expectancy, 
+          color=~region,
+          text = ~country) %>% 
+  add_markers(symbol = I("circle-open"), colors = "Set1") %>% 
+  layout(title = "Life expectancy vs. GDP per capita",
+         xaxis = list(
+           title = "GDP per capita ($)"),
+         yaxis = list(
+           title = "Life expectancy (years)")
+         )
+
+plotly3
+```
+
+Making other plot types is similarly easy by using the corresponding add_*() function.
+
+
+
+We can also create 3D interactive plots using the `scatter3d` type as follows:
+
+```{r}
+#| warning: false
+
+plotly4 <- dat %>%
+  plot_ly(x = ~gdp_capita, y = ~life_expectancy, 
+          z= ~tests_per_capita, color=~region, 
+          text = ~ country, size = I(200)) %>%
+  add_trace(type = "scatter3d", mode = "markers", 
+            symbol = I("circle-open"), colors = "Set1") %>%
+  layout(scene = list(
+    xaxis = list(
+      title = "x:GDP per capita ($)"),
+    yaxis = list(
+      title = "y:Life expectancy (years)"),
+    zaxis = list(
+      title = "z:Tests per capita")
+  ))
+
+plotly4
+```
+
+
+We can use the `paste()` function to create a more customized text label. Use HTML tags for any formatting. For example, to show both the variables in a more attractive format, we could run:
+
+```{r}
+#| warning: false
+
+plotly5 <- dat %>%
+  plot_ly(x = ~gdp_capita, y = ~life_expectancy, 
+          z= ~tests_per_capita, color=~region, 
+          size = I(200)) %>%
+  add_trace(type = "scatter3d", mode = "markers", 
+            symbol = I("circle-open"), colors = "Set1",
+            text = ~ paste("<b>Country:</b> ", country, "<br />",
+"<b>GDP per capita ($):</b> ", round(gdp_capita, digits=1),"<br />",
+"<b>Life expectancy (yrs):</b> ", round(life_expectancy, digits=1),"<br />",
+"<b>No. health measures:</b> ", tests_per_capita                   
+                           ), hoverinfo = "text") %>%
+  layout(scene = list(
+    xaxis = list(
+      title = "x:GDP per capita ($)"),
+    yaxis = list(
+      title = "y:Life expectancy (years)"),
+    zaxis = list(
+      title = "z:Tests per capita")
+  ))
+
+plotly5
+```
+
+
+
+## Integration with ggplot2: `ggplotly()`
+
+A ggplot object can be transformed into an interactive plot by calling the function `ggplotly()`.
+
+
+```{r}
+#| warning: false
+
+g_plot <- ggplot(dat, aes(x = gdp_capita, y = life_expectancy)) +
+  geom_point(aes(color = region)) +
+  geom_text(aes(label = country)) +
+labs(title = "Life expectancy vs. GDP per capita",
+         xaxis = list(
+           title = "GDP per capita ($)"),
+         yaxis = list(
+           title = "Life expectancy (years)")
+         )
+
+ggplotly(g_plot)
+```
+
+
+
 
 
 
