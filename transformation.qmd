@@ -124,7 +124,7 @@ head(dat3)
 **C. Select variables using the `subset()` function**
 
 ```{r}
-dat4 <- subset(arrhythmia, select= c(1, 2, 5))
+dat4 <- subset(arrhythmia, select = c(1, 2, 5))
 head(dat4)
 ```
 
@@ -244,9 +244,9 @@ Let's say that we want to find the BMI, and BMI categories only for the adults:
 ```{r, R.options = list(width = 300)}
 arrhythmia_adults <- arrhythmia %>% 
         filter(age >= 18) %>% 
-        mutate(bmi = round(weight / (height / 100)^ 2, digits=1),
-               bmi_cat=cut(bmi, breaks=c(-Inf, 18.5, 25.0, 30.0, Inf), 
-                   labels=c("underweight","normal","overweight", "obese"))
+        mutate(bmi = round(weight / (height / 100)^ 2, digits = 1),
+               bmi_cat = cut(bmi, breaks = c(-Inf, 18.5, 25.0, 30.0, Inf), 
+                   labels = c("underweight","normal","overweight", "obese"))
                )
 
 arrhythmia_adults
@@ -299,7 +299,7 @@ Now, let's rename variables for example `heart_rate` to `HR` and `sex` to `gende
 
 ```{r, R.options = list(width = 300)}
 overweight_obese3 %>% 
-          rename(HR = heart_rate,gender = sex) %>% 
+          rename(HR = heart_rate, gender = sex) %>% 
           select(HR, gender, everything())
                                    
 ```
@@ -446,7 +446,7 @@ It is important to note that the `group_by()` function doesn't change data frame
 
 ### Grouping by more than one variable
 
-We are not limited to grouping by one variable. Say we want to know the mean QRS of males and females in each of the four bmi catecories:
+We are not limited to grouping by one variable. Say we want to know the mean QRS of males and females in each of the four bmi categories:
 
 ```{r}
 #| message: false
@@ -544,7 +544,7 @@ hist(arrhythmia_adults$QRS[arrhythmia_adults$sex=="female"],
 Let's see the `age` variable:
 
 ```{r}
-weight_summary <- arrhythmia_adults %>% 
+age_summary <- arrhythmia_adults %>% 
   summarize(
     min = min(age, na.rm = TRUE),
     q1 = quantile(age, 0.25, na.rm = TRUE),
@@ -558,7 +558,7 @@ weight_summary <- arrhythmia_adults %>%
     missing = sum(is.na(age)),
     n = n())
 
-weight_summary
+age_summary
 ```
 
 
@@ -573,7 +573,7 @@ hist(arrhythmia_adults$age, main = "Histogram", xlab = "Age (years)", ylab = "Fr
 ```
 
 
-The `age` variable approximate a **symmetrical distribution (bell-shaped)**.
+The `age` variable approximates a **symmetrical distribution (bell-shaped)**.
 
 
 
@@ -618,9 +618,9 @@ In the above table we can see the frequency for each category and the total perc
 
 
 
-### Frequency distribution table with percentages inside for each category
+### Frequency distribution table with percentages inside for each bmi category
 
-However, we may want to calculate the percentage inside for each category. For example, the percentage of males (n = 4) in the underweigt category (n = 11) is 36.4\%, (4/11)\*100. We will use the functions `group_by()`, `summarize()` and `mutate()` from the `dplyr` package:
+However, we may want to calculate the percentage inside for each category. For example, the percentage of males (n = 4) in the underweight category (n = 11) is 36.4\%, (4/11)\*100. We will use the functions `group_by()`, `summarize()` and `mutate()` from the `dplyr` package:
 
 
 ```{r}
