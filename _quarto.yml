@@ -27,6 +27,7 @@ book:
 
     - part: "Special Topics"
       chapters:
+        - interactive.qmd
         - sql.qmd
 
     - references.qmd

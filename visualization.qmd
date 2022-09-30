@@ -15,15 +15,11 @@ library(gghighlight)
 library(ggforce)
 library(paletteer)
 library(patchwork)
-library(gganimate)
-library(plotly)
 
 library(fontawesome)
 
 library(kableExtra)
 ```
-
-
 
 When we have finished this chapter, we should be able to:
 
@@ -33,8 +29,7 @@ When we have finished this chapter, we should be able to:
 -   use `ggplot2` to generate publication-ready graphics.
 -   understand the basic grammar of graphics, including the aesthetics and geometry layers, adding statistics, transforming scales, and coloring or panelling by groups.
 -   understand how to save plots in a variety of formats.
--   find extensions for `ggplot2` to produce custom graphics. For example, animated graphs with the `gganimate` package which adds support for declaring animations using an API familiar to users of `ggplot2`, and linked data visualizations with the `ggiraph`.
--   create interactive charts with `plotly` , `highcharter` and `c3` packages.
+-   find extensions for `ggplot2` to produce custom graphics.
 :::
 
  
@@ -53,10 +48,9 @@ In this example, we investigate graphically the association between a country's 
 
 What other variables are associated to both wealth and COVID-19 cases? For example, wealthier countries may have more resources to test for the virus and a lack of reported cases in developing countries could indicate a scarcity of testing. Therefore, when assessing wealth and COVID-19 cases, we should be cautious when comparing countries with different testing rates. In addition, evidence suggests age is an important factor in COVID-19 infection and mortality. Therefore, we should be careful when comparing countries with higher proportions of older inhabitants to other countries. Using diagrams to depict multivariable associations may be helpful.
 
-
 ### Load the data
 
-We load the file `covid_data.csv` in R. 
+We load the file `covid_data.csv` in R.
 
 ```{r covid_data}
 #| message: false
@@ -98,11 +92,9 @@ Another informative function to inspect our dataset is `skim()` in the `skimr` p
 skimr::skim(covid_data)
 ```
 
-
-
 ### Data preparation for the plots
 
-The data cover a period from `r min(covid_data$date)` to `r max(covid_data$date)`. 
+The data cover a period from `r min(covid_data$date)` to `r max(covid_data$date)`.
 
 Suppose we are interested in investigating countries with population more than 1 million up to June, 12 2021 and we want also to calculate the cases per 100000 inhabitants and tests per capita:
 
@@ -112,7 +104,6 @@ dat <- covid_data %>%
   mutate(cases_per_100k = confirmed / population * 100000,
          tests_per_capita = total_tests / population)
 ```
-
 
 ## Step-by-step anatomy of a ggplot
 
@@ -141,8 +132,6 @@ Consequently, a ggplot is built up from a few basic elements (@fig-ggsyntax):
 knitr::include_graphics(here::here("images", "ggsyntax.png"))
 ```
 
-
-
 ### Start with a default blank ggplot
 
 We always start to define a plotting element by calling:
@@ -165,19 +154,15 @@ As we can see, only a panel is created when running this. Why? This is because w
 
 `ggplot2` allows us to store the current ggobject in an object of our choice by assigning it to a name, in our case called p. We can add other elements on top of the blank layer using the `+` operator.
 
-
 ::: callout-tip
-We don’t usually have to spell out data and mapping.
+We don't usually have to spell out data and mapping.
 :::
 
-
-Next, suppose that we want to create a scatter plot.  This type of graph can be useful for showing the association between at least two variables, because they allow us to encode data simultaneously on a horizontal x‐axis and vertical y‐axis to see whether and what association exists.  
-
+Next, suppose that we want to create a scatter plot. This type of graph can be useful for showing the association between at least two variables, because they allow us to encode data simultaneously on a horizontal x‐axis and vertical y‐axis to see whether and what association exists.
 
 ### Add a geometry
 
-Geoms are the geometric shapes that make up ggplot2 visualisations (@fig-geom2var). Each is called with a function that begins with geom_* and ends with the name of the geom (e.g., point or line). Each geom has a number of aesthetics that define its visual properties.
-
+Geoms are the geometric shapes that make up ggplot2 visualisations (@fig-geom2var). Each is called with a function that begins with geom\_\* and ends with the name of the geom (e.g., point or line). Each geom has a number of aesthetics that define its visual properties.
 
 ```{r}
 #| label: fig-geom2var
@@ -190,9 +175,7 @@ Geoms are the geometric shapes that make up ggplot2 visualisations (@fig-geom2va
 knitr::include_graphics(here("images", "geom2var.png"))
 ```
 
-
-Let’s tell `ggplot2` which style we want to use. For example,  we will built a scatter plot by adding points using a geom layer called **`geom_point`**. In this case, `geom_point()` inherits the `x` and `y` aesthetics from the `ggplot()` function.
-
+Let's tell `ggplot2` which style we want to use. For example, we will built a scatter plot by adding points using a geom layer called **`geom_point`**. In this case, `geom_point()` inherits the `x` and `y` aesthetics from the `ggplot()` function.
 
 ```{r p2}
 #| label: fig-points
@@ -201,28 +184,25 @@ Let’s tell `ggplot2` which style we want to use. For example,  we will built a
 p + geom_point()
 ```
 
+### Add aesthtics to geometries: `aes()`
 
-
-### Add aesthtics to geometries: `aes()` 
-
-Each `geom` comes with its own properties (called arguments) and the same argument may result in a different change depending on the geom we are using. 
+Each `geom` comes with its own properties (called arguments) and the same argument may result in a different change depending on the geom we are using.
 
 `Aesthetic attributes` describe every aspect of a given graphical element and refer to which variable is mapped onto it. We can map our data to anything that our geom supports.
 
 To add additional variables to a plot, we can use aesthetics like color, shape, and size.
 
->Each argument to `aes()` maps a **variable** in our data to a specific element in our `geom`.
+> Each argument to `aes()` maps a **variable** in our data to a specific element in our `geom`.
 
+**A. `color` aesthetics**
 
-
-**A. `color` aesthetics** 
-
-Color is an important dimension in human vision and is consequently equally important in the design of a scientific figure. However, color can be either our greatest ally or our worst enemy if not used properly. If we decide to use color, we should consider which colors to use and where to use them.  
+Color is an important dimension in human vision and is consequently equally important in the design of a scientific figure. However, color can be either our greatest ally or our worst enemy if not used properly. If we decide to use color, we should consider which colors to use and where to use them.
 
 \vspace{14pt}
-Color palettes (or colormaps) are classified into three main categories in `ggplot2`: 
 
-1. **Sequential:** one variation of a unique color, used for **quantitative** data varying from dark to light (@fig-sequential). These scales may exist in discrete or continuous forms or both.
+Color palettes (or colormaps) are classified into three main categories in `ggplot2`:
+
+1.  **Sequential:** one variation of a unique color, used for **quantitative** data varying from dark to light (@fig-sequential). These scales may exist in discrete or continuous forms or both.
 
 ```{r}
 #| label: fig-sequential
@@ -233,10 +213,7 @@ Color palettes (or colormaps) are classified into three main categories in `ggpl
 knitr::include_graphics(here("images", "sequential.png"))
 ```
 
-
-
-2. **Diverging:** variation from one color to another, used to highlight **deviation from a median value** (@fig-gradient)
-A diverging color scale creates a gradient between three different colors, allowing us to easily identify low, middle, and high values within our data. 
+2.  **Diverging:** variation from one color to another, used to highlight **deviation from a median value** (@fig-gradient) A diverging color scale creates a gradient between three different colors, allowing us to easily identify low, middle, and high values within our data.
 
 ```{r}
 #| echo: false
@@ -246,8 +223,7 @@ A diverging color scale creates a gradient between three different colors, allow
 knitr::include_graphics(here("images", "gradient.png"))
 ```
 
-
-3. **Qualitative:** a discrete set of distinct colors with no implied order, used mainly for discrete or **categorical** data (@fig-qualitative).
+3.  **Qualitative:** a discrete set of distinct colors with no implied order, used mainly for discrete or **categorical** data (@fig-qualitative).
 
 ```{r}
 #| echo: false
@@ -257,27 +233,21 @@ knitr::include_graphics(here("images", "gradient.png"))
 knitr::include_graphics(here("images", "qualitative.png"))
 ```
 
-
 Now, suppose we want to group the points according to the categorical variable `region` using different colors, as follows:
 
 ```{r p3}
 p + geom_point(aes(color = region))
 ```
 
-Here, we added inside the `aes()` of `geom_point` the color aesthetic. The data of the categorical variable `region` mapped to color aesthetic of `geom_point`. Obviously, the qualitative scale was applied automatically by `ggplot2`. 
-In addition, ggplot automatically created a legend to show the correspondence between the regions and colors.
+Here, we added inside the `aes()` of `geom_point` the color aesthetic. The data of the categorical variable `region` mapped to color aesthetic of `geom_point`. Obviously, the qualitative scale was applied automatically by `ggplot2`. In addition, ggplot automatically created a legend to show the correspondence between the regions and colors.
 
 To find all aesthetics that apply to the `geom_point()` function, run `?geom_point`. We can find a useful list of all aesthetic specifications there.
 
-
-
 ::: callout-important
-The grouping variable must be categorical—in other words, a factor or character vector. If it is stored as a vector of numeric values, it should be converted to a factor before it is used as a grouping variable.
+The grouping variable must be categorical---in other words, a factor or character vector. If it is stored as a vector of numeric values, it should be converted to a factor before it is used as a grouping variable.
 :::
 
-
-
-It is very important to understand the difference between including `ggplot` arguments **inside** or **outside** of the `aes()` function. For example, let’s see the difference if we add the color outside the `aes()` function:
+It is very important to understand the difference between including `ggplot` arguments **inside** or **outside** of the `aes()` function. For example, let's see the difference if we add the color outside the `aes()` function:
 
 ```{r p4}
 p + geom_point(color = "red")
@@ -285,34 +255,28 @@ p + geom_point(color = "red")
 
 In this case, we set an aesthetic to a **fixed value** (red) in the individual layer `geom_point` outside of `aes()`. In fact, we set the red color for the entire graph (constant aesthetics), so it changed the color of the plot globally.
 
-
 ::: callout-tip
-
 ggplot2 understands both color and colour as well as the short version col
 :::
 
-In R, colors can be specified either by name (e.g., `"blue"`) or as a hexadecimal RGB triplet (such as `#0072B2`). 
-The hexadecimal system defines each color (red, green, or blue) in terms of two values that range from 0–9, then from A–F, giving a total of 16 different values for each character.
+In R, colors can be specified either by name (e.g., `"blue"`) or as a hexadecimal RGB triplet (such as `#0072B2`). The hexadecimal system defines each color (red, green, or blue) in terms of two values that range from 0--9, then from A--F, giving a total of 16 different values for each character.
 
 We can also use palettes of colors such as `viridis` palette which we will use in the next graphs. In following Table we present a color blind-friendly palette.
 
-In R, the hex color code goes in quotes and is preceded by a \#. For example:
+In R, the hex color code goes in quotes and is preceded by a #. For example:
 
-Name            Hex code     
---------------  ------------ 
-        orange       #E69F00   
-      sky blue       #56B4E9 
-  bluish green       #009E73  
-        yellow       #F0E442     
-          blue       #0072B2   
-     vermilion       #D55E00  
-reddish purple       #CC79A7 
-         black       #000000 
+| Name           | Hex code |
+|:---------------|:---------|
+| orange         | #E69F00  |
+| sky blue       | #56B4E9  |
+| bluish green   | #009E73  |
+| yellow         | #F0E442  |
+| blue           | #0072B2  |
+| vermilion      | #D55E00  |
+| reddish purple | #CC79A7  |
+| black          | #000000  |
 
-
-Although the code for hexadecimal may not be intuitive, it is easy to look up online exactly what the code is for any color we want to use (just do an internet search for something like “RGB to Hex color”). The main advantage of the Hex system over RGB is that it is very compact to specify whatever color we want.
-
-
+Although the code for hexadecimal may not be intuitive, it is easy to look up online exactly what the code is for any color we want to use (just do an internet search for something like "RGB to Hex color"). The main advantage of the Hex system over RGB is that it is very compact to specify whatever color we want.
 
 **B. `shape` aesthetics**
 
@@ -321,8 +285,6 @@ Alternatively, we can group the points according to the `region` variable using 
 ```{r p5}
 p + geom_point(aes(shape = region))
 ```
-
-
 
 The different points shapes symbols commonly used in R are shown in the @fig-symbols below:
 
@@ -336,20 +298,15 @@ The different points shapes symbols commonly used in R are shown in the @fig-sym
 knitr::include_graphics(here("images", "symbols.png"))
 ```
 
-
 As we can observe in the previous graph, `ggplot2` by default allows only six different point shapes to be displayed. However, we will see how to change this using appropriate `scales`.
-
 
 **C. `size` aesthetics**
 
 Next, we can add a third variable `tests_per_capita` using the size aesthetic:
 
-
 ```{r p6}
 p + geom_point(aes(size = tests_per_capita))
 ```
-
-
 
 ### Add a new geom
 
@@ -361,9 +318,6 @@ ggplot(dat, aes(x = gdp_capita, y = cases_per_100k)) +
   geom_point() +
   geom_text_repel(aes(label = country))
 ```
-
-
-
 
 ## Change the default properties of the plot: `scales`
 
@@ -378,14 +332,9 @@ ggplot(dat, aes(x = gdp_capita, y = cases_per_100k)) +
   scale_y_continuous(trans = "log10") # or scale_y_log10()
 ```
 
-
 Continuous variable `tests_per_capital` mapped to size and categorical variable `region` mapped to color.
 
-
-
-
 ### Change the default colors
-
 
 ```{r p9}
 ggplot(dat, aes(x = gdp_capita, y = cases_per_100k)) +
@@ -396,7 +345,6 @@ ggplot(dat, aes(x = gdp_capita, y = cases_per_100k)) +
   scale_y_continuous(trans = "log10") +
   scale_color_npg()
 ```
-
 
 ### Change the default shape points
 
@@ -410,11 +358,7 @@ ggplot(dat, aes(x = gdp_capita, y = cases_per_100k)) +
   scale_shape_manual(values = c(4, 16, 2, 1, 0, 19, 8))
 ```
 
-
-However, when a variable is mapped to size (here, `test_per_capital`), it’s a good idea to not map a variable to shape (here, `region`). This is because it is difficult to compare the sizes of different shapes (e.g., a size 4 square with a size 4 triangle). Also, some of the shapes really are different sizes: shapes 16 and 19 are both circles, but at any given numeric size, shape 19 circles are visually larger than shape 16 circles.
-
-
-
+However, when a variable is mapped to size (here, `test_per_capital`), it's a good idea to not map a variable to shape (here, `region`). This is because it is difficult to compare the sizes of different shapes (e.g., a size 4 square with a size 4 triangle). Also, some of the shapes really are different sizes: shapes 16 and 19 are both circles, but at any given numeric size, shape 19 circles are visually larger than shape 16 circles.
 
 ## Modify axis, legend, and plot labels: `labs()`
 
@@ -436,14 +380,11 @@ ggplot(dat, aes(x = gdp_capita, y = cases_per_100k)) +
        tag = 'A')
 ```
 
-
 ## Modify theme components: `theme()`
 
 We can fine tune the appearance of the graph using themes. Theme functions (which start with `element_`) control background colors, fonts, grid-lines, legend placement, and other non-data related features of the graph.
 
 This function is very complex since it allows you to specify all the different details contributing to the plot appearance as well as generating your own format and style.
-
-
 
 ```{r theme_elements}
 #| label: fig-theme_elements
@@ -455,14 +396,12 @@ This function is very complex since it allows you to specify all the different d
 knitr::include_graphics(here::here("images", "theme_elements.png"))
 ```
 
-
 `ggplot2` theme system comes with multiple `element_` functions:
 
-* `element_text()`: specify the display of text elements
-* `element_line()`: specify the display of lines (i.e. axis lines)
-* `element_rect()`: specify the display of borders and backgrounds
-* `element_blank()`draw nothing
-
+-   `element_text()`: specify the display of text elements
+-   `element_line()`: specify the display of lines (i.e. axis lines)
+-   `element_rect()`: specify the display of borders and backgrounds
+-   `element_blank()`draw nothing
 
 ### `element_text()`
 
@@ -478,9 +417,7 @@ While making a plot with `ggplot2`, it automatically chooses appropriate values 
 knitr::include_graphics(here::here("images", "element_text.png"))
 ```
 
-
 With `element_text()`, we can customize the looks of the the texts. For example, to control the look of title of a plot, we will use `plot.title` element as argument to `theme()` function and use `element_text()` to specify the color, font and size of the plot title.
-
 
 ### `element_line()`
 
@@ -498,15 +435,11 @@ Broadly, with `element_line()` we can customize three groups of lines in a plot.
 knitr::include_graphics(here::here("images", "element_line.png"))
 ```
 
-
-
-
 ### `element_rect()`
 
 With `element_rect()`, we can customize all things that are rectangular in a plot. For example, we can customize the line and fill colors of rectangles that define borders and backgrounds in a plot.
 
 In total there are 7 aspects of rectangular elements we can control using using `element_rect()`.
-
 
 ```{r element_rect}
 #| label: fig-element_rect
@@ -518,12 +451,9 @@ In total there are 7 aspects of rectangular elements we can control using using 
 knitr::include_graphics(here::here("images", "element_rect.png"))
 ```
 
-
 ### `element_blank()`
 
-If we look at the `ggplot2` theme documentation page, we can see that `element_blank()` does not take any arguments. So what does it do? As it says `element_blank()`: draws nothing, and assigns no space.
-We can use `element_blank()` if we don’t want any specific non-data plot elements drawn on the plot (we disable them). With `element_blank()` we can suppress or remove change for each of the theme elements. For example, using `panel.grid.minor = element_blank()` in the `theme()` we disable the minor grid lines of the panel.
-
+If we look at the `ggplot2` theme documentation page, we can see that `element_blank()` does not take any arguments. So what does it do? As it says `element_blank()`: draws nothing, and assigns no space. We can use `element_blank()` if we don't want any specific non-data plot elements drawn on the plot (we disable them). With `element_blank()` we can suppress or remove change for each of the theme elements. For example, using `panel.grid.minor = element_blank()` in the `theme()` we disable the minor grid lines of the panel.
 
 ## Modify theme elements in practice
 
@@ -569,13 +499,11 @@ ggplot(dat, aes(x = gdp_capita, y = cases_per_100k)) +
 
 ```
 
-
 The figure depicts strong, positive relationships between the following pairs of variables: wealth/COVID-19 cases, wealth/COVID-19 testing, and COVID-19 cases/testing. Note the use of two plot attributes (size and color) to depict additional variables.
 
 ## Adding an in-build theme from `ggplot2`
 
 While it is possible to build up a new theme from the ground it is usually easier and less error-prone to modify an existing theme. This is done in `ggplot2` as well as can be seen by looking at e.g., `theme_minimal()`:
-
 
 ```{r p12.1}
 ggplot(dat, aes(x = gdp_capita, y = cases_per_100k)) +
@@ -595,19 +523,16 @@ ggplot(dat, aes(x = gdp_capita, y = cases_per_100k)) +
   theme_minimal()
 ```
 
-
 In-build theme from ggplot2:
 
-* **theme_gray()** – signature ggplot2 theme
-* **theme_bw()** – dark on light ggplot2 theme
-* **theme_linedraw()** – uses black lines on white backgrounds only
-* **theme_light()** – similar to linedraw() but with grey lines aswell
-* **theme_dark()** – lines on a dark background instead of light
-* **theme_minimal()** – no background annotations, minimal feel.
-* **theme_classic()** – theme with no grid lines.
-* **theme_void()** – empty theme with no elements
-
-
+-   **theme_gray()** -- signature ggplot2 theme
+-   **theme_bw()** -- dark on light ggplot2 theme
+-   **theme_linedraw()** -- uses black lines on white backgrounds only
+-   **theme_light()** -- similar to linedraw() but with grey lines aswell
+-   **theme_dark()** -- lines on a dark background instead of light
+-   **theme_minimal()** -- no background annotations, minimal feel.
+-   **theme_classic()** -- theme with no grid lines.
+-   **theme_void()** -- empty theme with no elements
 
 ## Blur points
 
@@ -641,11 +566,7 @@ ggplot(dat, aes(x = gdp_capita, y = cases_per_100k, size = tests_per_capita, col
 
 In the above graph, additional styling was applied via inline CSS (Cascading Style Sheets) to the title. The CSS properties color, font-size, and font-family are currently supported.
 
-
->
-The `ggtext` package defines a new theme element, `element_markdown()`. It behaves similarly to element_text() but render the provided text as `markdown/html`. `element_markdown()` is meant as a direct replacement for `element_text()`, and it renders text without word wrapping. To start a new line, use the `<br>` tag or add two spaces before the end of a line.
-
-
+> The `ggtext` package defines a new theme element, `element_markdown()`. It behaves similarly to element_text() but render the provided text as `markdown/html`. `element_markdown()` is meant as a direct replacement for `element_text()`, and it renders text without word wrapping. To start a new line, use the `<br>` tag or add two spaces before the end of a line.
 
 ## Highlight data points
 
@@ -675,11 +596,9 @@ ggplot(dat, aes(x = gdp_capita, y = cases_per_100k,
 
 ```
 
-
 ## Limit Axis Range (Zoom)
 
 Sometimes we want to zoom into our data. We can do this without subsettting our data. We can change the `X` and `Y` axis limits by zooming in to the region of interest without deleting points. This is done using `coord_cartesian()`.
-
 
 ```{r p13.4}
 #| warning: false
@@ -698,16 +617,13 @@ ggplot(dat, aes(x = gdp_capita, y = cases_per_100k)) +
         legend.box = 'vertical')
 ```
 
-
-Note that the text is above the points, because it is the ‘top layer’ of the plot. The `geom_*` layers that appear early in the command are drawn first, and can be obscured by the `geom_*` layers that come after them.
-
+Note that the text is above the points, because it is the 'top layer' of the plot. The `geom_*` layers that appear early in the command are drawn first, and can be obscured by the `geom_*` layers that come after them.
 
 What happens if we switch the order of the `geom_point()` and `geom_text()` functions above? What do we notice?
 
-
 ## Highlight a certain area of the figure
 
-The `facet_zoom()` function from the package `ggforce` provides the means to zoom in on a subset of the data, while keeping the view of the full dataset as a separate panel. 
+The `facet_zoom()` function from the package `ggforce` provides the means to zoom in on a subset of the data, while keeping the view of the full dataset as a separate panel.
 
 ```{r p13.5}
 #| warning: false
@@ -726,7 +642,6 @@ ggplot(dat, aes(x = gdp_capita, y = cases_per_100k)) +
        ) +
   facet_zoom(xlim = c(50000, 70000))
 ```
-
 
 Another way to zoom-in detail is using the package `ggpp`. The `geom_plot()` geometry plots ggplot objects, nested in a tibble passed as data argument, using aesthetics `x` and `y` for positioning, and label for the ggplot object containing the definition of the plot to be nested. As an example we produce a plot where the inset plot is a zoomed-in detail from the main plot. In this case the main and inset plots start as the same plot.
 
@@ -767,15 +682,11 @@ ggplot(dat, aes(x = gdp_capita, y = cases_per_100k)) +
 
 ```
 
-
-
-## Split a plot into a matrix of panels: `facet()` 
+## Split a plot into a matrix of panels: `facet()`
 
 Another technique for displaying categorical variables on a plot is faceting. The facet approach partitions a plot into a matrix of panels. Each panel shows a different subset of the data. Coordinate systems and faceting control the position of elements of the plot.
 
-
-There are two types of faceting provided by `ggplot2`: 
-`facet_wrap` and `facet_grid`. **Facet wrap** produces a 1d ribbon of panels that is wrapped into 2d to save space, while **facet grid** produces a `2d` grid of panels defined by variables which form the rows and columns. These differences are illustrated in Figure \ref{fig:facets}.
+There are two types of faceting provided by `ggplot2`: `facet_wrap` and `facet_grid`. **Facet wrap** produces a 1d ribbon of panels that is wrapped into 2d to save space, while **facet grid** produces a `2d` grid of panels defined by variables which form the rows and columns. These differences are illustrated in Figure \ref{fig:facets}.
 
 ```{r facets}
 #| label: fig-facets
@@ -788,8 +699,6 @@ There are two types of faceting provided by `ggplot2`:
 knitr::include_graphics(here("images", "facets.png"))
 ```
 
-
-
 ```{r facet_elements}
 #| label: fig-facet_elements
 #| fig-align: center
@@ -800,9 +709,6 @@ knitr::include_graphics(here("images", "facets.png"))
 
 knitr::include_graphics(here::here("images", "facet_elements.png"))
 ```
-
-
-
 
 ### `facet_wrap` multiple-panel plots based on one variable
 
@@ -821,12 +727,7 @@ ggplot(dat, aes(x = gdp_capita, y = cases_per_100k)) +
   
 ```
 
-
-
-The points in a scatter plot may obscure each other and prevent the
-viewer from accurately assessing the distribution of the data. This is called overplotting.
-If the amount of overplotting is low, you may be able to alleviate it by using smaller points, by using a different shape through which other points can be seen, or making the points semitransparent using `alpha`.
-
+The points in a scatter plot may obscure each other and prevent the viewer from accurately assessing the distribution of the data. This is called overplotting. If the amount of overplotting is low, you may be able to alleviate it by using smaller points, by using a different shape through which other points can be seen, or making the points semitransparent using `alpha`.
 
 ```{r p14.2}
 #| warning: false
@@ -841,13 +742,9 @@ ggplot(dat, aes(x = gdp_capita, y = cases_per_100k)) +
   
 ```
 
-
-
-
 ### `facet_grid` multiple-panel plots based on two variables
 
-The `facet_grid()` function does a similar thing but instead of creating different plots it creates different grids and then plots each plot in the grids. The data can be split up by one or two variables that vary on the horizontal and/or vertical direction.
-This is done by giving a formula to `facet_grid()`, of the form vertical ~ horizontal.
+The `facet_grid()` function does a similar thing but instead of creating different plots it creates different grids and then plots each plot in the grids. The data can be split up by one or two variables that vary on the horizontal and/or vertical direction. This is done by giving a formula to `facet_grid()`, of the form vertical \~ horizontal.
 
 ```{r p15}
 #| warning: false
@@ -871,23 +768,15 @@ ggplot(aes(x = tests_per_capita, y = cases_per_100k)) +
   
 ```
 
-
-
 Note that the lines which come before the `ggplot()` function are piped `%>%` whereas from `ggplot()` onwards we have to use `+`. This is because `ggplot2` package was written before the pipe `%>%` was introduced. The `+` sign in `ggplot2` functions (similar to the pipe `%>%` in other functions in the tidyverse) allows code to be written from left to right adding different layers and customisations to the same plot.
 
 Moreover, as commands get longer, we suggest to add carriage returns (new lines), which must be inserted after the `%>%` or `+` symbols. In most cases, R is blind to white space and new lines, so this is a simple way to make our code more readable.
 
-
-
-
-
 ## Practical example: the graph everyone wants to draw
-
 
 ## Cumulative Number of Deaths from COVID-19
 
-Seeing the total number of deaths over time, on a country-by-country basis, can illustrate how the pandemic is expanding. Because the epidemic began at different times in different countries, viewing each country’s curve from the same starting point can allow us to more easily compare countries. The starting point for this chart is the day on which the 10th death was confirmed in each country, with the trend lines following the number of days since that event. 
-
+Seeing the total number of deaths over time, on a country-by-country basis, can illustrate how the pandemic is expanding. Because the epidemic began at different times in different countries, viewing each country's curve from the same starting point can allow us to more easily compare countries. The starting point for this chart is the day on which the 10th death was confirmed in each country, with the trend lines following the number of days since that event.
 
 Let's say we want to focus on data of specific countries:
 
@@ -895,8 +784,6 @@ Let's say we want to focus on data of specific countries:
 focus_cn <- c("CHN", "GBR", "USA", "JPN", "GRC", "MEX",
               "KOR", "ITA", "ESP", "BRA", "IND")
 ```
-
-
 
 First, we have to prepare the data:
 
@@ -918,17 +805,14 @@ covid_deaths
 
 ```
 
-
-
 We also set particular colors for the selected countries:
+
 ```{r}
 ## Colors
 cgroup_cols <- c(prismatic::clr_darken(
   paletteer_d("ggsci::category20_d3"), 0.2)[1:length(focus_cn)],
   "gray70")
 ```
-
-
 
 Now we are ready to create the chart with the cumulative number of confirmed deaths:
 
@@ -957,7 +841,6 @@ death_curves <- covid_deaths %>% filter(cgroup != "OTHER") %>%
 
 death_curves
 ```
-
 
 ## Cumulative Number of Deaths from COVID-19 in logarithmic scale
 
@@ -990,19 +873,15 @@ death_log_curves <- covid_deaths %>% filter(cgroup != "OTHER") %>%
 death_log_curves
 ```
 
-
 This chart shows the cumulative number of confirmed deaths since the 10th confirmed death for each country. An upward bend in a curve can indicate either a time of explosive growth of coronavirus cases in a given country or a change in how deaths are defined or counted. Comparing across countries can also show where the pandemic is growing most rapidly at any point in time.
 
 Limited testing and challenges in the attribution of the cause of death means that the number of confirmed deaths may not be an accurate count of the true number of deaths from COVID-19.
 
-
 ## Combine several plots into one figure
-
 
 ### Assemble a number of plots
 
 Sometimes, we would like to combine several plots into one figure. This can be easily done with the `patchwork` package. For example, if we want to combine two `ggplot2` objects, say `death_curves` and `death_log_curves`, then we can directly call `death_curves + death_log_curves` to combine the two objects. Since the two plots share the same elements, patchwork allows us to use e.g. one top title, subtitle and tags by calling function `plot_annotation`.
-
 
 ```{r}
 #| warning: false
@@ -1013,8 +892,7 @@ death_curves + death_log_curves +
                   tag_levels = 'A')
 ```
 
-
-### Insets 
+### Insets
 
 Another approach is to use the `inset_element()` function which marks a plot or graphic object to be placed as an inset on the previous plot. It will thus not take up a slot in the provided layout, but share the slot with the previous plot. `inset_element()` allows us to freely position our inset relative to either the panel, plot, or full area of the previous plot, by specifying the location of the left, bottom, right, and top edge of the inset.
 
@@ -1025,219 +903,4 @@ death_curves + inset_element(death_log_curves,
                              left =0.02, right =0.4, 
                              bottom = 0.45, top =0.98)
 ```
-
-
-
-## Animated plots
-
-
-```{r}
-#| warning: false
-
-animate1 <- covid_deaths %>% 
-  filter(iso3c %in% focus_cn) %>% 
-  ggplot(mapping = aes(x = date, y = deaths, group= iso3c, 
-                       color = iso3c)) +
-  geom_path(size = 1) +
-  geom_point() +
-  geom_text(aes(label = iso3c), size = 5) +
-  scale_y_continuous(labels = scales::comma_format(accuracy = 1),
-                       limits = c(10, 2^20),
-                       breaks = 2^seq(4, 20),
-                       trans = "log2") +
-  scale_color_manual(values = cgroup_cols) +
-  labs(title = "Date: {round(frame_along, 0)}", 
-       x = 'Calendar time', 
-       y = 'Cumulative Number of Deaths (log2 scale)') +
-  theme_minimal() +
-  theme(legend.position = "none") +
-  transition_reveal(date) 
-
-animate1
-```
-
-
-
-## Interactive plots
-
-
-### Plotly 
-
-Any graph made with the plotly R package is powered by the JavaScript library `plotly.js1`. The `plot_ly()` function provides a ‘direct’ interface to `plotly.js` with some additional abstractions to help reduce typing. These abstractions, inspired by the Grammar of Graphics and `ggplot2`, make it much faster to iterate from one graphic to another, making it easier to discover interesting features in the data.
-`Plotly` allows the user to create high quality, interactive graphs. This includes scatter plots, histograms, heatmaps and many more! To demonstrate, we’ll use it to explore the covid_data and learn a bit how `plotly` works along the way.
-
-
-`Plotly` is an extensive package and we will merely scratch the surface of its capabilities in this course. More information about the package can be found at the website: [\color{blue}\underline {Plotly}](https://plotly.com/r/)
-
-
-A Plotly chart is created by using tree set of functions:
-
-* `plot_ly()`, can be thought of as the base which allows R objects to be mapped to the Plotly library. It is similar to `ggplot()` function.
-* `layout()`, is used to control the chart title, axis labels, legends, canvas, range and scales.
-* `add_trace()` (`add_*`), creates a geometry layer called a trace which is added to the chart. It defines the type of plot similar to geometries(geom_*) in ggplot.
-
-Note that multiple traces can be added on one plot. There are many add_* functions. Running the following code provides a list of these functions:
-
-
-```{r}
-stringr::str_subset(objects("package:plotly"), pattern ="^add_")
-```
-
-
-Let’s see an example of a simple interactive plot:
-
-```{r}
-
-plotly1 <- dat %>% 
-  plot_ly(x = ~gdp_capita, y = ~life_expectancy, 
-          color = ~region)
-
-plotly1
-```
-
-
-Although we did not specify the plot type, the produced chart is a scatter plot. The `plot_ly()` function is the base plotly command to initialize a plot from a dataframe, similar to `ggplot()` from ggplot2. Therefore, we observe that if we assign variable names (e.g., gdp_capita, life_expectancy, region, etc.) to visual properties (e.g., x, y, color, etc.) within `plot_ly()`, it tries to find a sensible geometric representation of that information for us. 
-
-Analytically, the type of plot is specified by setting the **trace** type. The scatter trace type is the foundation for many low-level geometries (e.g., points, lines, and text), thus we must also specify a mode. To create a scatter plot with points the mode is set to markers, but additional scatter modes include lines, paths, segments, ribbons, polygons, and text.
-
-The plot’s interactivity can be accessed via its tool bar. The functionality provided by this toolbar from left to right are as follows:
-
-* Downloading the plot as a png file.
-* Zooming in specific areas of the plot
-* Panning across the map.
-* Selecting all points using a box.
-* Selecting all points using a lasso.
-* Zooming in and out on
-
-Moreover, hovering over individual points displays their coordinates.
-
-
-Plotly functions take a plotly object as an input and return a modified plotly object, making it work perfectly with the **pipe operator** (`%>%`).
-Note that `plot_ly()` uses a `~` syntax for mapping aesthetics that is a bit different from the `ggplot()` syntax we’ve presented earlier.
-
-We can explicitly define the type and mode of the plot using the `add_trace()`. Additionally, we can change the palette of colors and use the layout function to set title and axis labels. For the axis labels we use the `xaxis` and `yaxis` arguments which require lists:
-
-
-```{r}
-#| warning: false
-
-plotly2 <- dat %>% 
-  plot_ly(x = ~gdp_capita, y = ~life_expectancy, 
-          color=~region) %>% 
-  add_trace(type = "scatter", mode = "markers", colors = "Set1") %>% 
-  layout(title = "Life expectancy vs. GDP per capita",
-         xaxis = list(
-           title = "GDP per capita ($)"),
-         yaxis = list(
-           title = "Life expectancy (years)")
-         )
-
-plotly2
-```
-
-Rather than using add_trace() and specifying the type and mode, we can use the convenience function add_markers() and change the "filled" circles with "open" circles. Note that if we want to use a constant value for an aesthetic (e.g., symbol), we must specify that the argument should be used “as-is,” using the `I()` function.
-Another important attribute that can be added is the name of the country using the `text` argument in the `plot_ly()`.
-
-```{r}
-#| warning: false
-
-plotly3 <- dat %>%
-  plot_ly(x = ~gdp_capita, y = ~life_expectancy, 
-          color=~region,
-          text = ~country) %>% 
-  add_markers(symbol = I("circle-open"), colors = "Set1") %>% 
-  layout(title = "Life expectancy vs. GDP per capita",
-         xaxis = list(
-           title = "GDP per capita ($)"),
-         yaxis = list(
-           title = "Life expectancy (years)")
-         )
-
-plotly3
-```
-
-Making other plot types is similarly easy by using the corresponding add_*() function.
-
-
-
-We can also create 3D interactive plots using the `scatter3d` type as follows:
-
-```{r}
-#| warning: false
-
-plotly4 <- dat %>%
-  plot_ly(x = ~gdp_capita, y = ~life_expectancy, 
-          z= ~tests_per_capita, color=~region, 
-          text = ~ country, size = I(200)) %>%
-  add_trace(type = "scatter3d", mode = "markers", 
-            symbol = I("circle-open"), colors = "Set1") %>%
-  layout(scene = list(
-    xaxis = list(
-      title = "x:GDP per capita ($)"),
-    yaxis = list(
-      title = "y:Life expectancy (years)"),
-    zaxis = list(
-      title = "z:Tests per capita")
-  ))
-
-plotly4
-```
-
-
-We can use the `paste()` function to create a more customized text label. Use HTML tags for any formatting. For example, to show both the variables in a more attractive format, we could run:
-
-```{r}
-#| warning: false
-
-plotly5 <- dat %>%
-  plot_ly(x = ~gdp_capita, y = ~life_expectancy, 
-          z= ~tests_per_capita, color=~region, 
-          size = I(200)) %>%
-  add_trace(type = "scatter3d", mode = "markers", 
-            symbol = I("circle-open"), colors = "Set1",
-            text = ~ paste("<b>Country:</b> ", country, "<br />",
-"<b>GDP per capita ($):</b> ", round(gdp_capita, digits=1),"<br />",
-"<b>Life expectancy (yrs):</b> ", round(life_expectancy, digits=1),"<br />",
-"<b>No. health measures:</b> ", tests_per_capita                   
-                           ), hoverinfo = "text") %>%
-  layout(scene = list(
-    xaxis = list(
-      title = "x:GDP per capita ($)"),
-    yaxis = list(
-      title = "y:Life expectancy (years)"),
-    zaxis = list(
-      title = "z:Tests per capita")
-  ))
-
-plotly5
-```
-
-
-
-## Integration with ggplot2: `ggplotly()`
-
-A ggplot object can be transformed into an interactive plot by calling the function `ggplotly()`.
-
-
-```{r}
-#| warning: false
-
-g_plot <- ggplot(dat, aes(x = gdp_capita, y = life_expectancy)) +
-  geom_point(aes(color = region)) +
-  geom_text(aes(label = country)) +
-labs(title = "Life expectancy vs. GDP per capita",
-         xaxis = list(
-           title = "GDP per capita ($)"),
-         yaxis = list(
-           title = "Life expectancy (years)")
-         )
-
-ggplotly(g_plot)
-```
-
-
-
-
-
-
 
