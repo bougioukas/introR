@@ -249,7 +249,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li>
 <a href="#mathematical-functions" id="toc-mathematical-functions" class="nav-link" data-scroll-target="#mathematical-functions"><span class="toc-section-number">2.3</span>  Mathematical functions</a>
   <ul class="collapse">
-<li><a href="#logarithms-and-exponentials" id="toc-logarithms-and-exponentials" class="nav-link" data-scroll-target="#logarithms-and-exponentials">Logarithms and exponentials</a></li>
+<li><a href="#logarithms-and-exponents" id="toc-logarithms-and-exponents" class="nav-link" data-scroll-target="#logarithms-and-exponents">Logarithms and exponents</a></li>
   <li><a href="#trigonometric-functions" id="toc-trigonometric-functions" class="nav-link" data-scroll-target="#trigonometric-functions">Trigonometric functions</a></li>
   <li><a href="#other-mathematical-functions" id="toc-other-mathematical-functions" class="nav-link" data-scroll-target="#other-mathematical-functions">Other mathematical functions</a></li>
   <li><a href="#the-round-function" id="toc-the-round-function" class="nav-link" data-scroll-target="#the-round-function">The <code>round()</code> function</a></li>
@@ -479,7 +479,7 @@ Caution
 <div class="cell">
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/date.html">date</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Fri Sep 30 13:31:02 2022"</code></pre>
+<pre><code>[1] "Sat Oct  1 10:50:17 2022"</code></pre>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -496,7 +496,7 @@ Caution
 </section><section id="mathematical-functions" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="mathematical-functions">
 <span class="header-section-number">2.3</span> Mathematical functions</h2>
 <p>R has many built in mathematical functions such as the <code>log(x)</code> that we have already seen.</p>
-<section id="logarithms-and-exponentials" class="level3"><h3 class="anchored" data-anchor-id="logarithms-and-exponentials">Logarithms and exponentials</h3>
+<section id="logarithms-and-exponents" class="level3"><h3 class="anchored" data-anchor-id="logarithms-and-exponents">Logarithms and exponents</h3>
 <p>&nbsp;</p>
 <div id="fig-log_exp" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><a href="images/log_exp.png" class="lightbox" title="The natural logarithm function ln(x) is the inverse of the exponential function y = e^x" data-gallery="quarto-lightbox-gallery-2"><img src="images/log_exp.png" class="img-fluid figure-img" style="width:50.0%"></a></p>
@@ -505,27 +505,27 @@ Caution
 </div>
 <div id="tbl-logs" class="anchored">
 <table class="table">
-<caption>Table&nbsp;2.1: The Four Basic Properties of Logs</caption>
+<caption>Table&nbsp;2.1: The Basic Properties of Logarithms and Exponents</caption>
 <thead><tr class="header">
 <th>Rule name</th>
-<th>Rule</th>
+<th>Logarithms</th>
+<th>Exponents</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td>Logarithm product</td>
-<td><span class="math inline">\(log_b(x*y) = log_bx + log_by\)</span></td>
+<td>Product</td>
+<td><span class="math inline">\(log_a(x*y) = log_ax + log_ay\)</span></td>
+<td><span class="math inline">\(a^x*a^y = a^{x+y}\)</span></td>
 </tr>
 <tr class="even">
-<td>Logarithm quotient rule</td>
-<td><span class="math inline">\(log_b(x/y) = log_bx - log_by\)</span></td>
+<td>Quotient</td>
+<td><span class="math inline">\(log_a(x/y) = log_ax - log_ay\)</span></td>
+<td><span class="math inline">\(a^x/a^y = a^{x-y}\)</span></td>
 </tr>
 <tr class="odd">
-<td>Logarithm power rule</td>
-<td><span class="math inline">\(log_b(x^y) = y \cdot log_b(x)\)</span></td>
-</tr>
-<tr class="even">
-<td>Logarithm base change rule</td>
-<td><span class="math inline">\(log_b(x) = log_c(x) / log_c(b)\)</span></td>
+<td>Power</td>
+<td><span class="math inline">\(log_a(x^y) = y \cdot log_a(x)\)</span></td>
+<td><span class="math inline">\((a^x)^y = a^{x*y}\)</span></td>
 </tr>
 </tbody>
 </table>
@@ -537,7 +537,7 @@ Caution
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Examples: Logarithms and exponentials
+Examples: Logarithms and exponents in R
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -929,7 +929,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","loop":true,"closeEffect":"zoom","descPosition":"bottom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});</script>
 
 
 </body></html>

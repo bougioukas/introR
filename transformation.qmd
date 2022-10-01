@@ -17,7 +17,7 @@ When we have finished this chapter, we should be able to:
 -   Select columns in a data frame.
 -   Direct the output of one dplyr function to the input of another function with the "pipe" operator `%>%`.
 -   Add new columns to a data frame that are functions of existing columns with `mutate()`.
--   Use `summarize()` with `across()` to calculate summary statistics for multiple variables, and `group_by()` to split a data frame into groups of observations, apply summary statistics for each group, and then combine the results.
+-   Use `summarize()` to calculate summary statistics for multiple variables, and `group_by()` to split a data frame into groups of observations, apply summary statistics for each group, and then combine the results.
 :::
 
  
@@ -304,20 +304,15 @@ overweight_obese3 %>%
                                    
 ```
 
-
-
-
 ## Explore for outliers in the dataset
 
-Let’s take a look to the dataset *arrythmia_adults* with the `summary()` function:
-
+Let's take a look to the dataset *arrythmia_adults* with the `summary()` function:
 
 ```{r}
 summary(arrhythmia_adults)
 ```
 
-We can see that the minimum value in weight and bmi is `r min(arrhythmia_adults$weight)` kg and `r min(arrhythmia_adults$bmi)`, respectevely. However, these values can’t be right! We can also inspect the outliers in bmi variable using a simple boxplot @fig-boxplot_age:
-
+We can see that the minimum value in weight and bmi is `r min(arrhythmia_adults$weight)` kg and `r min(arrhythmia_adults$bmi)`, respectevely. However, these values can't be right! We can also inspect the outliers in bmi variable using a simple boxplot @fig-boxplot_age:
 
 ```{r}
 #| message: false
@@ -327,25 +322,18 @@ We can see that the minimum value in weight and bmi is `r min(arrhythmia_adults$
 boxplot(arrhythmia_adults$bmi, main = "Boxplot of age of adult patients", ylab = "BMI", boxwex=.3, frame = FALSE, col= "blue")
 ```
 
-
-
 ## Summarizing Numerical variables
-
 
 ### Summary measures for one numerical variable
 
-The next common task when working with data frames is to compute **summary measures**. Summary measures are **single numerical values** that summarize a large number of values.  
-Commonly known examples of summary measures for numerical data include the **arithmetic mean** (also called the average) and the **median** (the middle value). Other examples of summary measures that might not immediately come to mind include the **sum**, the smallest value also called the **minimum**, the largest value also called the **maximum**, the **1st quartile** and **3rd quartile**, the **standard deviation**, the **skewness**, and the **kurtosis**.  
+The next common task when working with data frames is to compute **summary measures**. Summary measures are **single numerical values** that summarize a large number of values.\
+Commonly known examples of summary measures for numerical data include the **arithmetic mean** (also called the average) and the **median** (the middle value). Other examples of summary measures that might not immediately come to mind include the **sum**, the smallest value also called the **minimum**, the largest value also called the **maximum**, the **1st quartile** and **3rd quartile**, the **standard deviation**, the **skewness**, and the **kurtosis**.
 
-
-Summary functions in R take in many values and return a single value, as illustrated in Figure @fig-summary. 
+Summary functions in R take in many values and return a single value, as illustrated in Figure @fig-summary.
 
 ![Diagram illustrating a summary function in R](images/summary.png){#fig-summary width="75%"}
 
-
-
-
-Let's calculate two summary measures for the `QRS` variable in the `arrhythmia_adults` data frame: the mean and standard deviation. To compute these summary measures, we need the `mean()` and `sd()` *statistical functions* in R. 
+Let's calculate two summary measures for the `QRS` variable in the `arrhythmia_adults` data frame: the mean and standard deviation. To compute these summary measures, we need the `mean()` and `sd()` *statistical functions* in R.
 
 ```{r}
 mean(arrhythmia_adults$QRS, na.rm = TRUE)
@@ -353,12 +341,10 @@ sd(arrhythmia_adults$QRS, na.rm = TRUE)
 
 ```
 
-
-:::{.callout-tip}
+::: callout-tip
 ## `na.rm` argument
 
 The `na.rm` argument of `mean()` and `sd()` statistical functions takes a logical value (`TRUE`/ `FALSE`) indicating whether `NA` values should be stripped before the computation proceeds.
-
 :::
 
  
@@ -375,19 +361,16 @@ summary_QRS
 
 The results are saved in a new data frame `tibble` that has two columns/variables, the `mean_QRS` and the `sd_QRS`.
 
-
 Other summary functions that can be used inside the `summarize()` verb to compute summary measures are:
 
-* `mean()`: the mean AKA the average
-* `sd()`: the standard deviation, which is a measure of spread
-* `min()` and `max()`: the minimum and maximum values respectively
-* `IQR()`: Interquartile range
-* `sum()`: the sum
-* `skewness()` : the skewness
-* `kurtosis()` : the kurtosis
-* `n()`: a count of the number of rows/observations in each group. This particular summary function will make more sense when `group_by()`.
-
-
+-   `mean()`: the mean AKA the average
+-   `sd()`: the standard deviation, which is a measure of spread
+-   `min()` and `max()`: the minimum and maximum values respectively
+-   `IQR()`: Interquartile range
+-   `sum()`: the sum
+-   `skewness()` : the skewness
+-   `kurtosis()` : the kurtosis
+-   `n()`: a count of the number of rows/observations in each group. This particular summary function will make more sense when `group_by()`.
 
 ### Summary measures for more numerical variables
 
@@ -407,6 +390,7 @@ summary_QRS_age
  
 
 We can also calculate the mean for all numerical variables with the `summarize_if()`:
+
 ```{r}
 summary_all_means <- arrhythmia_adults %>% 
   summarise_if(is.numeric, mean, na.rm = TRUE)
@@ -430,19 +414,13 @@ summary_QRS_bmi <- arrhythmia_adults %>%
 summary_QRS_bmi 
 ```
 
-
 This code is identical to the previous code that created `summary_QRS`, but with an extra function `group_by()` added before the `summarize()`. Grouping the `arrhythmia_adults` dataset by `bmi_cat` and then applying the `summarize()` function yields a data frame that displays the mean and standard deviation QRS split by bmi categories.
 
-
-
-:::{.callout-tip}
+::: callout-tip
 ## `group_by()` function
 
 It is important to note that the `group_by()` function doesn't change data frames by itself. Rather it changes the grouping structure. It is only after we apply the `summarize()` function that the data frame changes.
-
 :::
-
-
 
 ### Grouping by more than one variable
 
@@ -460,11 +438,9 @@ QRS_bmi_sex <- arrhythmia_adults %>%
 QRS_bmi_sex
 ```
 
-
-
 ### More summary measures
 
-Let’s look at some summary measures of the `QRS` variable by considering multiple statistical functions at once in the same `summarize()` code:
+Let's look at some summary measures of the `QRS` variable by considering multiple statistical functions at once in the same `summarize()` code:
 
 ```{r}
 
@@ -485,8 +461,6 @@ QRS_summary <- arrhythmia_adults %>%
 QRS_summary
 ```
 
-
-
 The distribution of the data can be represented by an histogram.
 
 ```{r}
@@ -498,7 +472,6 @@ hist(arrhythmia_adults$QRS, main = "Histogram", xlab = "QRS (ms)", ylab = "Frequ
 ```
 
 As we can see the distribution of `QRS` variable is not symmetrical.
-
 
 If we want the summary statistics for males and females separately we must use the `group_by()` function:
 
@@ -523,8 +496,6 @@ QRS_summary2 <- arrhythmia_adults %>%
 QRS_summary2
 ```
 
-
-
 ```{r}
 #| label: fig-hist_QRS_sex
 #| fig-cap: Histogram of QRS of males and females patients.
@@ -539,7 +510,6 @@ hist(arrhythmia_adults$QRS[arrhythmia_adults$sex=="male"],
 hist(arrhythmia_adults$QRS[arrhythmia_adults$sex=="female"], 
      main = "Histogram (females)", xlab = "QRS (ms)", ylab = "Frequency")
 ```
-
 
 Let's see the `age` variable:
 
@@ -561,9 +531,6 @@ age_summary <- arrhythmia_adults %>%
 age_summary
 ```
 
-
-
-
 ```{r}
 #| message: false
 #| label: fig-hist_age
@@ -572,25 +539,19 @@ age_summary
 hist(arrhythmia_adults$age, main = "Histogram", xlab = "Age (years)", ylab = "Frequency")
 ```
 
-
 The `age` variable approximates a **symmetrical distribution (bell-shaped)**.
-
-
-
 
 ## Summarizing Categorical variables
 
 ### Frequency distribution table
 
-Summary measures for categorical data include **frequencies** and **percentages**.
-If we have two categorical variables, we might be interested in a 2-dimensional frequency distribution table. Say we want to know the number of males and females in each of the four bmi catecories. We can create a frequency distribution table with `table()` function for the variables `bmi_cat` and `sex`:
+Summary measures for categorical data include **frequencies** and **percentages**. If we have two categorical variables, we might be interested in a 2-dimensional frequency distribution table. Say we want to know the number of males and females in each of the four bmi catecories. We can create a frequency distribution table with `table()` function for the variables `bmi_cat` and `sex`:
 
 ```{r}
 tb1 <- table(arrhythmia_adults$bmi_cat, arrhythmia_adults$sex)
 
 tb1
 ```
-
 
 We can also create a frequency distribution table using the functions `count()` from the `{dplyr}` package:
 
@@ -600,7 +561,6 @@ tb2 <- arrhythmia_adults %>%
 
 tb2
 ```
-
 
 ### Frequency distribution table with total percentages
 
@@ -614,14 +574,11 @@ tb3 <- arrhythmia_adults %>%
 tb3
 ```
 
-In the above table we can see the frequency for each category and the total percentage (the frequency is divided by the total number of observations, here 428). For example, the percentage of underweight males is 0.93\%, (4/428)\*100.
-
-
+In the above table we can see the frequency for each category and the total percentage (the frequency is divided by the total number of observations, here 428). For example, the percentage of underweight males is 0.93%, (4/428)\*100.
 
 ### Frequency distribution table with percentages inside for each bmi category
 
-However, we may want to calculate the percentage inside for each category. For example, the percentage of males (n = 4) in the underweight category (n = 11) is 36.4\%, (4/11)\*100. We will use the functions `group_by()`, `summarize()` and `mutate()` from the `dplyr` package:
-
+However, we may want to calculate the percentage inside for each category. For example, the percentage of males (n = 4) in the underweight category (n = 11) is 36.4%, (4/11)\*100. We will use the functions `group_by()`, `summarize()` and `mutate()` from the `dplyr` package:
 
 ```{r}
 #| message: false
@@ -634,6 +591,3 @@ tb4 <- arrhythmia_adults %>%
 
 tb4
 ```
-
-
-

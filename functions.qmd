@@ -20,7 +20,6 @@ When we have finished this chapter, we should be able to:
 
  
 
-
 ## Definition of function
 
 In programming, we use functions to incorporate sets of commands that we want to use repeatedly or that, because of their complexity, are better self-contained in a sub program and called when needed.
@@ -195,25 +194,24 @@ date()
 
 R has many built in mathematical functions such as the `log(x)` that we have already seen.
 
-### Logarithms and exponentials
+### Logarithms and exponents
 
  
 
 ![The natural logarithm function ln(x) is the inverse of the exponential function y = e\^x](images/log_exp.png){#fig-log_exp width="50%"}
 
-| Rule name                  | Rule                             |
-|----------------------------|----------------------------------|
-| Logarithm product          | $log_b(x*y) = log_bx + log_by$   |
-| Logarithm quotient rule    | $log_b(x/y) = log_bx - log_by$   |
-| Logarithm power rule       | $log_b(x^y) = y \cdot log_b(x)$  |
-| Logarithm base change rule | $log_b(x) = log_c(x) / log_c(b)$ |
+| Rule name   | Logarithms                      | Exponents           |
+|-------------|---------------------------------|---------------------|
+| Product     | $log_a(x*y) = log_ax + log_ay$  | $a^x*a^y = a^{x+y}$ |
+| Quotient    | $log_a(x/y) = log_ax - log_ay$  | $a^x/a^y = a^{x-y}$ |
+| Power       | $log_a(x^y) = y \cdot log_a(x)$ | $(a^x)^y = a^{x*y}$ |
 
-: The Four Basic Properties of Logs {#tbl-logs}
+: The Basic Properties of Logarithms and Exponents {#tbl-logs}
 
  
 
 ::: {.callout-note icon="false"}
-## Examples: Logarithms and exponentials
+## Examples: Logarithms and exponents in R
 
 ```{r}
 log(100) # natural logarithm ln(x)

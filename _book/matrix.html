@@ -99,7 +99,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -286,7 +289,11 @@ Learning objectives
 </div>
 </div>
 <div class="callout-body-container callout-body">
-
+<ul>
+<li><p>Create and manipulate matrices in R.</p></li>
+<li><p>Conduct basic matrix algebra in R.</p></li>
+<li><p>Create arrays in R.</p></li>
+</ul>
 </div>
 </div>
 <p>&nbsp;</p>
@@ -537,7 +544,33 @@ Matrix
 </div>
 <p>&nbsp;</p>
 </section><section id="the-dot-product-inner-product-of-two-matrices" class="level3"><h3 class="anchored" data-anchor-id="the-dot-product-inner-product-of-two-matrices">The dot product (inner product) of two matrices</h3>
-<p>In R, an inner product of two matrices can be performed with the <code>%*%</code> operator.</p>
+<p>To multiply a matrix by another matrix we need to do the “dot product” of rows and columns. But what does that mean? Let us see with an example.</p>
+<p>To work out the answer for the 1st row and 1st column:</p>
+<div id="fig-dot1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><a href="images/dot1.png" class="lightbox" title="Dot product for the 1st row and 1st column" data-gallery="quarto-lightbox-gallery-1"><img src="images/dot1.png" class="img-fluid figure-img" style="width:65.0%"></a></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;7.1: Dot product for the 1st row and 1st column</figcaption><p></p>
+</figure>
+</div>
+<p>The “Dot Product” is where we multiply matching members, then sum up: 1×7 + 2×9 + 3×11 = 58</p>
+<p>We match the 1st members (1 and 7), multiply them, likewise for the 2nd members (2 and 9) and the 3rd members (3 and 11), and finally sum them up.</p>
+<p>Want to see another example? Here it is for the 1st row and 2nd column:</p>
+<div id="fig-dot2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><a href="images/dot2.png" class="lightbox" title="Dot product for the 1st row and 2nd column" data-gallery="quarto-lightbox-gallery-2"><img src="images/dot2.png" class="img-fluid figure-img" style="width:65.0%"></a></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;7.2: Dot product for the 1st row and 2nd column</figcaption><p></p>
+</figure>
+</div>
+<p>The “Dot Product” is: 1×8 + 2×10 + 3×12 = 64</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Example: Dot (inner) Product in R
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>In R, a dot (inner) product of two matrices can be performed with the <code>%*%</code> operator.</p>
 <div class="cell">
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">P</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">5</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">3</span>, <span class="fl">4</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">2</span>, ncol <span class="op">=</span> <span class="fl">3</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">Q</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="op">-</span><span class="fl">2</span>, <span class="fl">0</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span>, ncol <span class="op">=</span> <span class="fl">2</span>, byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -561,7 +594,21 @@ Matrix
 [2,]   -9   -8</code></pre>
 </div>
 </div>
-<p>Before inner multiplying two matrices check that the dimensions are compatible. The number of columns of the first matrix must be equal to the number of rows of the second.</p>
+</div>
+</div>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Before inner multiplying two matrices check that the <strong>dimensions</strong> are compatible. The number of columns of the first matrix must be equal to the number of rows of the second.</p>
+</div>
+</div>
 <p>&nbsp;</p>
 </section><section id="matrix-crossproduct" class="level3"><h3 class="anchored" data-anchor-id="matrix-crossproduct">Matrix crossproduct</h3>
 <p>If we need to calculate the inner product of a matrix and the transpose we can type <code>t(A) %*% B</code>, being A and B the names of the matrices.</p>
@@ -945,7 +992,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer>
+</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","descPosition":"bottom","loop":true,"closeEffect":"zoom","openEffect":"zoom"});</script>
 
 
 </body></html>

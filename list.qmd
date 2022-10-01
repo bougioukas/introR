@@ -9,6 +9,17 @@ When we have finished this chapter, we should be able to:
 
 ::: {.callout-caution icon="false"}
 ## Learning objectives
+
+-   Create a list using the `list()` function.
+
+-   Refer a list item using its name or index number.
+
+-   Create a data frame from equal length vectors using the `tibble` function.
+
+-   Refer to a column of a data frame using the $ notation.
+
+-   Convert variables from character to factor variables.
+
 :::
 
  
