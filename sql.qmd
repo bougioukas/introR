@@ -1,1 +1,437 @@
 # SQL {#sec-sql}
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(here)
+
+library(DBI)
+library(dbplyr)
+library(RSQLite)
+
+library(fontawesome)
+
+```
+
+When we have finished this chapter, we should be able to:
+
+::: {.callout-caution icon="false"}
+## Learning objectives
+
+-   Access a database from R using DBI.
+-   Run SQL queries within R using RSQLite.
+:::
+
+## Introduction to relational databases
+
+So far, we have dealt with datasets that easily fit into our computer's memory. But what about datasets that are too large for our computer to handle as a whole? In this case, storing the data outside of R and organizing it in a database is helpful. Connecting to the database allows us to retrieve only the chunks needed for the current analysis.
+
+A very common form of data storage is the relational database. There are many relational database management systems (RDBMS), such as `SQLite`, `MySQL`, `PostgreSQL`, `Oracle`, and many more. These different RDBMS each have their own advantages and limitations. Almost all employ `SQL` (structured query language) to pull data from the database.
+
+Thankfully, several packages have been written that allows R to connect to relational databases and use the R programming language as the front end (what the user types in) to pull data from them. In this tutorial, we will give examples of how to read and analyzed data using R with SQLite RDBMS.
+
+### Data from the Portal Project
+
+The Portal Project is a long-term ecological study being conducted near Portal, AZ. Since 1977, the site has been a primary focus of research on interactions among rodents, ants and plants and their respective responses to climate.
+
+Data from the Portal project is recorded in a relational database designed for reliable storage and rapid access to the bounty of information produced by this long-term ecological experiment.
+
+The research site consists of many **plots** -- patches of the Arizona desert that are intensively manipulated and repeatedly surveyed. The plots have some fixed characteristics, such as the type of manipulation, geographic location, aspect, etc.
+
+The plots have a lot of dynamic characteristics, and those changes are recorded in repeated **surveys**. In particular, the animals captured during each survey are identified to **species**, weighed, and measured.
+
+There is also the `portalr` R package that provides a collection of basic functions to summarize the Portal project data on rodents, plants, ants, and weather at our long-term field site in the Chihuahuan Desert.
+
+## Basic definitions in SQL
+
+**Database:** a container/repository (usually a file or set of files) to store organized data; a set of relational information.
+
+**Tables:** the information inside the database is organized in tables; a structured list of data
+
+Database terminology builds on common ways of characterizing data files. The breakdown of a table into **records** (also named rows) or **fields** (also named columns, or variables) is familiar to anyone who's worked in spreadsheets. The descriptions below formalize these terms, and provide an example referencing the Portal mammals database.
+
+## Types of SQL statements (DDL vs. DML)
+
+SQL statements fall into two different categories: Data Definition Language statements and Data Manipulation Language statements.
+
+Data Definition Language (or DDL) statements are used to define, change, or drop database objects such as tables.
+
+`r fa("arrow-right", fill = "orange")` Common DDL statement types include `CREATE`, `ALTER`, `TRUNCATE`, and `DROP`:
+
+`CREATE statement`: which is used for creating tables and defining its columns;
+
+`ALTER statement`: is used for altering tables including adding and dropping columns and modifying their datatypes;
+
+`TRUNCATE statement`: is used for deleting data in a table but not the table itself;
+
+`DROP statement`: is used for deleting tables.
+
+Data Manipulation Language (or DML) statements are used to read and modify data in tables. These are also sometimes referred to as CRUD operations, that is, Create, Read, Update and Delete rows in a table.
+
+`r fa("arrow-right", fill = "orange")` Common DML **statement** types include `INSERT`, `SELECT`, `UPDATE`, and `DELETE`:
+
+`INSERT statement`: is used for inserting a row or several rows of data into a table;
+
+`SELECT statement`: reads or selects column/row or columns/rows from a table;
+
+`UPDATE statement`: edits row or rows in a table;
+
+`DELETE statement`: removes a row or rows of data from a table.
+
+In these notes we will primarly use the `SELECT` statement.
+
+
+## Connecting to a database
+
+The first step from RStudio is creating a connection object that opens up a channel of communication to the database file.
+We will connect to our database using the `{DBI}` package. For the sake of example, we simply connect to an “in-memory” database, but a wide range of database connectors are available depending on where our data lives.
+
+```{r}
+# connect to the database
+mammals <- DBI::dbConnect(RSQLite::SQLite(),
+                          here("data", "portal_mammals.sqlite"))
+
+```
+
+
+This command uses 2 packages that helps `dbplyr` and `dplyr` talk to the `SQLite` database. `{DBI}` is not something that we’ll use directly as a user. It allows R to send commands to databases irrespective of the database management system used. The `{RSQLite}` allows R to interface with SQLite databases.
+
+
+This command does not load the data into the R session (as the `read_csv()` function does). Instead, it merely instructs R to connect to the `SQLite` database contained in the `portal_mammals.sqlite` file.
+
+
+Using a similar approach, we could connect to many other database management systems that are supported by R including `MySQL`, `PostgreSQL`, etc.
+
+
+## Explore the database
+
+With the connection object availble, we can begin exploring the database.
+
+
+First, we can list the tables at the connection:
+```{r}
+# mammals SQLite database can contain multiple tables (datasets)
+dbListTables(mammals)
+```
+
+or, alternately using the `src_dbi()` from {dbplyr}:
+
+```{r}
+src_dbi(mammals)
+```
+
+Just like a spreadsheet with multiple worksheets, a SQLite database can contain multiple tables. In this case three of them are listed in the tbls row in the output above:
+
+
+The three key tables in the relational database are:
+
+* plots
+* surveys
+* species
+
+
+Now, we’re done with set-up. Let’s explore the fields (variables) contained in a particular table:
+
+
+```{r}
+# List the fields (variables) in a particular table
+dbListFields(mammals, "plots")
+dbListFields(mammals, "surveys")
+dbListFields(mammals, "species")
+```
+
+
+## Simple database queries with SQL syntax (SELECT statements)
+
+
+### SELECT command (select columns)
+
+To connect to tables within a database, you can use the `tbl()` function from `{dplyr}`. This function can be used to send `SQL` queries to the database if it is combined with the `sql()` function. To demonstrate this functionality, let’s select the columns `record_id`, `year`, `species_id`, and `plot_id` from the `surveys` table:
+
+```{r}
+## SELECT statement
+tbl(mammals, sql("SELECT record_id, year, species_id, plot_id 
+                 FROM surveys")) %>% 
+  head()
+```
+
+Although it looks like we just got a data frame from the database, we didn’t! It’s a reference, showing us data that is still in the `SQLite` database (note the first two lines of the output). It does this because databases are often more efficient at selecting, filtering and joining large data sets than R. And typically, the database will not even be stored on our computer, but rather a more powerful machine somewhere on the web. So R is lazy and waits to bring this data into memory until we explicitly tell it to do so using the collect function from the `dbplyr` package.
+
+Note that SQL is case insensitive, so capitalization only helps for readability and is a good style to adopt.
+
+Alternatively, we can use `dbGetQuery()` function from {DBI} to pass SQL code to the database file:
+
+```{r}
+dbGetQuery(mammals, 
+           "SELECT record_id, year, species_id, plot_id 
+           FROM surveys") %>% 
+  head()
+```
+
+
+
+Note that the same operation can be done using dplyr’s verbs instead of writing SQL. First, we select the table on which to do the operations by creating the surveys object, and then we use the standard dplyr syntax as if it were a data frame:
+
+```{r}
+surveys <- tbl(mammals, "surveys")
+query1 <- surveys %>%
+  select(year, species_id, plot_id) %>% 
+  head()
+```
+
+Additionally, we can use dplyr’s `show_query()` function to show which SQL commands are actually sent to the database:
+```{r}
+show_query(query1)
+```
+
+
+
+
+### WHERE clause (filtering rows)
+
+Relational operation helps us in restricting the result set by allowing us to use the clause `WHERE`. The `WHERE` clause always requires a predicate.
+A predicate is conditioned evaluates to true, false or unknown. Predicates are used in the search condition of the `WHERE` clause.
+
+So, if we need to select the rows from the `surveys` table where the `species_id` is `DM` (Dipodomys), we use the `WHERE` clause with the predicate `species_id` equals `DM`. The result set is now restricted to rows whose condition evaluates to true.
+
+
+```{r}
+## Filtering with WHERE statement and using basic operators
+tbl(mammals, sql("SELECT record_id, year, species_id, plot_id 
+                 FROM surveys
+                 WHERE species_id = 'DM'")) %>% 
+  head()
+```
+
+
+
+Additionally, using `BETWEEN-AND` comparison operator we can filter a range of values:
+
+```{r}
+# BETWEEN ... AND ....  operator
+tbl(mammals, sql("SELECT record_id, year, species_id, plot_id 
+                 FROM surveys
+                 WHERE plot_id BETWEEN 3 AND 5")) %>% 
+  head()
+```
+
+
+
+We can also find the missing values `NA` for a specific field:
+
+```{r}
+# IS NULL operator
+tbl(mammals, sql("SELECT record_id, year, species_id, plot_id 
+                 FROM surveys
+                 WHERE species_id IS NULL")) %>% 
+  head()
+```
+
+
+
+Other operators is `IN` that we can use for searching specific values:
+
+
+```{r}
+# IN operator
+tbl(mammals, sql("SELECT record_id, year, species_id, plot_id 
+                 FROM surveys
+                 WHERE plot_id IN (1, 2, 7)")) %>% 
+  head()
+
+```
+
+
+
+and `OR` operator
+
+```{r}
+# OR operator
+tbl(mammals, sql("SELECT record_id, year, species_id, plot_id 
+                 FROM surveys
+                 WHERE species_id = 'NL' OR species_id = 'PF' ")) %>% 
+  head()
+```
+
+
+
+We can also combine `OR` and `AND` operators:
+
+```{r}
+# OR with AND (NOTE: use parenthesis, SQL processes AND before OR)
+tbl(mammals, sql("SELECT record_id, year, species_id, plot_id 
+                 FROM surveys
+                 WHERE (plot_id = 2 OR plot_id = 7) AND species_id = 'DM' ")) %>% 
+head()
+
+```
+
+
+
+
+
+
+Another operator is `NOT` that excludes the records with a specific value:
+
+```{r}
+# NOT operator (exclude records/rows)
+tbl(mammals, sql("SELECT record_id, year, species_id, plot_id 
+                 FROM surveys
+                 WHERE NOT species_id = 'PF' AND NOT species_id = 'DM' ")) %>% 
+  head()
+
+```
+
+
+
+
+
+
+### Additional useful expressions, `COUNT` and `LIMIT`
+
+Next, we'll briefly present a few additional useful expressions that
+are used with select statements.
+
+The first one is `COUNT` that is a built-in database function that
+retrieves the number of rows that match the query criteria.
+
+```{r}
+## COUNT species_id = 'DM'
+tbl(mammals, sql("SELECT COUNT (species_id)
+                 FROM surveys
+                 WHERE species_id = 'DM'"))
+```
+
+
+The second expression is `LIMIT` that is used for restricting the number of rows retrieved from the database. For example, we can retrieve just the first 10 rows from `surveys` table.
+
+```{r}
+## LIMIT (just a few rows)
+tbl(mammals, sql("SELECT *
+                 FROM surveys
+                 LIMIT 10 "))
+```
+
+Note that if we use the asterisk in the `SELECT`, we request all columns of the table (instead of column names). 
+
+
+We can also retrieve just a few rows in the `surveys` table for a particular year such as 1985.
+
+```{r}
+## WHERE and LIMIT (just a few rows for a particular year)
+tbl(mammals, sql("SELECT *
+                 FROM surveys
+                 WHERE year = 1985 LIMIT 10 "))
+```
+
+
+
+
+
+
+### Sorting results sets with `ORDER BY` clause
+
+```{r}
+## ORDER BY species_id
+tbl(mammals, sql("SELECT record_id, year, species_id, plot_id 
+                 FROM surveys
+                 ORDER BY species_id DESC")) %>% 
+  head()
+```
+
+Of note,  the `ORDER BY` clause must be always the last in a select statement.
+
+
+
+### Grouping Result Sets, `GROUP BY`
+
+
+```{r}
+## Just COUNT sex
+tbl(mammals, sql("SELECT COUNT (sex)
+                 FROM surveys
+                 "))
+```
+
+
+
+```{r}
+## COUNT BY GROUP
+tbl(mammals, sql("SELECT sex, COUNT(sex)
+                 AS count FROM surveys GROUP BY sex
+                 "))
+```
+
+
+```{r}
+## COUNT BY GROUP and use HAVING clause for selection 
+tbl(mammals, sql("SELECT sex, COUNT(sex)
+                 AS count FROM surveys GROUP BY sex
+                 HAVING COUNT(sex) > 16000"))
+```
+
+
+
+### Wildcards (using with string paterns) with `LIKE` predicate
+
+
+```{r}
+tbl(mammals, sql("SELECT species_id, genus, taxa 
+                 FROM species"))
+
+```
+
+
+
+
+```{r}
+## grabs anything ending with letters 'za' 
+tbl(mammals, sql("SELECT species_id, genus, taxa 
+                 FROM species
+                 WHERE genus LIKE '%za' "))
+```
+
+
+
+
+```{r}
+## grabs anything that starts with the letter 'A'
+tbl(mammals, sql("SELECT species_id, genus, taxa 
+                 FROM species
+                 WHERE genus LIKE 'A%' "))
+```
+
+
+
+
+```{r}
+## grabs anything before and after the letters 'sp'
+tbl(mammals, sql("SELECT species_id, genus, taxa 
+                 FROM species
+                 WHERE genus LIKE '%sp%' "))
+```
+
+
+
+```{r}
+## grabs anything that starts with 'c' and ends with 'us'
+tbl(mammals, sql("SELECT species_id, genus, taxa 
+                 FROM species
+                 WHERE genus LIKE 'c%us' "))
+
+```
+
+
+
+
+
+## Close the connection
+
+Good housekeeping means always remembering to disconnect once you’re done.
+
+```{r}
+dbDisconnect(mammals) # closes our DB connection
+```
+
+

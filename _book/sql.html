@@ -1,12 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.251">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-
 <title>An Introduction to R - 12&nbsp; SQL</title>
 <style>
 code{white-space: pre-wrap;}
@@ -20,8 +17,70 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
-
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
@@ -40,8 +99,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -60,28 +118,19 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
-
-
 </head>
-
 <body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-    <div class="container-fluid d-flex justify-content-between">
+  <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
       <h1 class="quarto-secondary-nav-title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SQL</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
     </div>
-  </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+  </nav></header><!-- content --><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto"><div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">An Introduction to R</a> 
         <div class="sidebar-tools-main">
@@ -96,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
       </div>
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">Preface</a>
   </div>
@@ -108,8 +157,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./introduction.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R and Rstudio</span></a>
   </div>
@@ -160,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">Special Topics</a>
@@ -168,8 +217,8 @@ ul.task-list li input[type="checkbox"] {
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
-      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
-          <li class="sidebar-item">
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
+<li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./interactive.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Animated and Interactive Plots</span></a>
   </div>
@@ -180,24 +229,44 @@ ul.task-list li input[type="checkbox"] {
   </div>
 </li>
       </ul>
-  </li>
+</li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
   </div>
 </li>
     </ul>
-    </div>
-</nav>
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+</div>
+</nav><!-- margin-sidebar --><div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+<li>
+<a href="#introduction-to-relational-databases" id="toc-introduction-to-relational-databases" class="nav-link active" data-scroll-target="#introduction-to-relational-databases"><span class="toc-section-number">12.1</span>  Introduction to relational databases</a>
+  <ul class="collapse">
+<li><a href="#data-from-the-portal-project" id="toc-data-from-the-portal-project" class="nav-link" data-scroll-target="#data-from-the-portal-project">Data from the Portal Project</a></li>
+  </ul>
+</li>
+  <li><a href="#basic-definitions-in-sql" id="toc-basic-definitions-in-sql" class="nav-link" data-scroll-target="#basic-definitions-in-sql"><span class="toc-section-number">12.2</span>  Basic definitions in SQL</a></li>
+  <li><a href="#types-of-sql-statements-ddl-vs.-dml" id="toc-types-of-sql-statements-ddl-vs.-dml" class="nav-link" data-scroll-target="#types-of-sql-statements-ddl-vs.-dml"><span class="toc-section-number">12.3</span>  Types of SQL statements (DDL vs.&nbsp;DML)</a></li>
+  <li><a href="#connecting-to-a-database" id="toc-connecting-to-a-database" class="nav-link" data-scroll-target="#connecting-to-a-database"><span class="toc-section-number">12.4</span>  Connecting to a database</a></li>
+  <li><a href="#explore-the-database" id="toc-explore-the-database" class="nav-link" data-scroll-target="#explore-the-database"><span class="toc-section-number">12.5</span>  Explore the database</a></li>
+  <li>
+<a href="#simple-database-queries-with-sql-syntax-select-statements" id="toc-simple-database-queries-with-sql-syntax-select-statements" class="nav-link" data-scroll-target="#simple-database-queries-with-sql-syntax-select-statements"><span class="toc-section-number">12.6</span>  Simple database queries with SQL syntax (SELECT statements)</a>
+  <ul class="collapse">
+<li><a href="#select-command-select-columns" id="toc-select-command-select-columns" class="nav-link" data-scroll-target="#select-command-select-columns">SELECT command (select columns)</a></li>
+  <li><a href="#where-clause-filtering-rows" id="toc-where-clause-filtering-rows" class="nav-link" data-scroll-target="#where-clause-filtering-rows">WHERE clause (filtering rows)</a></li>
+  <li><a href="#additional-useful-expressions-count-and-limit" id="toc-additional-useful-expressions-count-and-limit" class="nav-link" data-scroll-target="#additional-useful-expressions-count-and-limit">Additional useful expressions, <code>COUNT</code> and <code>LIMIT</code></a></li>
+  <li><a href="#sorting-results-sets-with-order-by-clause" id="toc-sorting-results-sets-with-order-by-clause" class="nav-link" data-scroll-target="#sorting-results-sets-with-order-by-clause">Sorting results sets with <code>ORDER BY</code> clause</a></li>
+  <li><a href="#grouping-result-sets-group-by" id="toc-grouping-result-sets-group-by" class="nav-link" data-scroll-target="#grouping-result-sets-group-by">Grouping Result Sets, <code>GROUP BY</code></a></li>
+  <li><a href="#wildcards-using-with-string-paterns-with-like-predicate" id="toc-wildcards-using-with-string-paterns-with-like-predicate" class="nav-link" data-scroll-target="#wildcards-using-with-string-paterns-with-like-predicate">Wildcards (using with string paterns) with <code>LIKE</code> predicate</a></li>
+  </ul>
+</li>
+  <li><a href="#close-the-connection" id="toc-close-the-connection" class="nav-link" data-scroll-target="#close-the-connection"><span class="toc-section-number">12.7</span>  Close the connection</a></li>
+  </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
 <h1 class="title"><span id="sec-sql" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SQL</span></span></h1>
 </div>
 
@@ -210,13 +279,537 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-</header>
+</header><p>When we have finished this chapter, we should be able to:</p>
+<div class="callout-caution callout callout-style-default no-icon callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Learning objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Access a database from R using DBI.</li>
+<li>Run SQL queries within R using RSQLite.</li>
+</ul>
+</div>
+</div>
+<section id="introduction-to-relational-databases" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="introduction-to-relational-databases">
+<span class="header-section-number">12.1</span> Introduction to relational databases</h2>
+<p>So far, we have dealt with datasets that easily fit into our computer’s memory. But what about datasets that are too large for our computer to handle as a whole? In this case, storing the data outside of R and organizing it in a database is helpful. Connecting to the database allows us to retrieve only the chunks needed for the current analysis.</p>
+<p>A very common form of data storage is the relational database. There are many relational database management systems (RDBMS), such as <code>SQLite</code>, <code>MySQL</code>, <code>PostgreSQL</code>, <code>Oracle</code>, and many more. These different RDBMS each have their own advantages and limitations. Almost all employ <code>SQL</code> (structured query language) to pull data from the database.</p>
+<p>Thankfully, several packages have been written that allows R to connect to relational databases and use the R programming language as the front end (what the user types in) to pull data from them. In this tutorial, we will give examples of how to read and analyzed data using R with SQLite RDBMS.</p>
+<section id="data-from-the-portal-project" class="level3"><h3 class="anchored" data-anchor-id="data-from-the-portal-project">Data from the Portal Project</h3>
+<p>The Portal Project is a long-term ecological study being conducted near Portal, AZ. Since 1977, the site has been a primary focus of research on interactions among rodents, ants and plants and their respective responses to climate.</p>
+<p>Data from the Portal project is recorded in a relational database designed for reliable storage and rapid access to the bounty of information produced by this long-term ecological experiment.</p>
+<p>The research site consists of many <strong>plots</strong> – patches of the Arizona desert that are intensively manipulated and repeatedly surveyed. The plots have some fixed characteristics, such as the type of manipulation, geographic location, aspect, etc.</p>
+<p>The plots have a lot of dynamic characteristics, and those changes are recorded in repeated <strong>surveys</strong>. In particular, the animals captured during each survey are identified to <strong>species</strong>, weighed, and measured.</p>
+<p>There is also the <code>portalr</code> R package that provides a collection of basic functions to summarize the Portal project data on rodents, plants, ants, and weather at our long-term field site in the Chihuahuan Desert.</p>
+</section></section><section id="basic-definitions-in-sql" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="basic-definitions-in-sql">
+<span class="header-section-number">12.2</span> Basic definitions in SQL</h2>
+<p><strong>Database:</strong> a container/repository (usually a file or set of files) to store organized data; a set of relational information.</p>
+<p><strong>Tables:</strong> the information inside the database is organized in tables; a structured list of data</p>
+<p>Database terminology builds on common ways of characterizing data files. The breakdown of a table into <strong>records</strong> (also named rows) or <strong>fields</strong> (also named columns, or variables) is familiar to anyone who’s worked in spreadsheets. The descriptions below formalize these terms, and provide an example referencing the Portal mammals database.</p>
+</section><section id="types-of-sql-statements-ddl-vs.-dml" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="types-of-sql-statements-ddl-vs.-dml">
+<span class="header-section-number">12.3</span> Types of SQL statements (DDL vs.&nbsp;DML)</h2>
+<p>SQL statements fall into two different categories: Data Definition Language statements and Data Manipulation Language statements.</p>
+<p>Data Definition Language (or DDL) statements are used to define, change, or drop database objects such as tables.</p>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></path></svg> Common DDL statement types include <code>CREATE</code>, <code>ALTER</code>, <code>TRUNCATE</code>, and <code>DROP</code>:</p>
+<p><code>CREATE statement</code>: which is used for creating tables and defining its columns;</p>
+<p><code>ALTER statement</code>: is used for altering tables including adding and dropping columns and modifying their datatypes;</p>
+<p><code>TRUNCATE statement</code>: is used for deleting data in a table but not the table itself;</p>
+<p><code>DROP statement</code>: is used for deleting tables.</p>
+<p>Data Manipulation Language (or DML) statements are used to read and modify data in tables. These are also sometimes referred to as CRUD operations, that is, Create, Read, Update and Delete rows in a table.</p>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></path></svg> Common DML <strong>statement</strong> types include <code>INSERT</code>, <code>SELECT</code>, <code>UPDATE</code>, and <code>DELETE</code>:</p>
+<p><code>INSERT statement</code>: is used for inserting a row or several rows of data into a table;</p>
+<p><code>SELECT statement</code>: reads or selects column/row or columns/rows from a table;</p>
+<p><code>UPDATE statement</code>: edits row or rows in a table;</p>
+<p><code>DELETE statement</code>: removes a row or rows of data from a table.</p>
+<p>In these notes we will primarly use the <code>SELECT</code> statement.</p>
+</section><section id="connecting-to-a-database" class="level2" data-number="12.4"><h2 data-number="12.4" class="anchored" data-anchor-id="connecting-to-a-database">
+<span class="header-section-number">12.4</span> Connecting to a database</h2>
+<p>The first step from RStudio is creating a connection object that opens up a channel of communication to the database file. We will connect to our database using the <a href="https://dbi.r-dbi.org">DBI</a> package. For the sake of example, we simply connect to an “in-memory” database, but a wide range of database connectors are available depending on where our data lives.</p>
+<div class="cell">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># connect to the database</span></span>
+<span><span class="va">mammals</span> <span class="op">&lt;-</span> <span class="fu">DBI</span><span class="fu">::</span><span class="fu"><a href="https://dbi.r-dbi.org/reference/dbConnect.html">dbConnect</a></span><span class="op">(</span><span class="fu">RSQLite</span><span class="fu">::</span><span class="fu"><a href="https://rsqlite.r-dbi.org/reference/SQLite.html">SQLite</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>                          <span class="fu">here</span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"portal_mammals.sqlite"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This command uses 2 packages that helps <code>dbplyr</code> and <code>dplyr</code> talk to the <code>SQLite</code> database. <a href="https://dbi.r-dbi.org">DBI</a> is not something that we’ll use directly as a user. It allows R to send commands to databases irrespective of the database management system used. The <a href="https://rsqlite.r-dbi.org">RSQLite</a> allows R to interface with SQLite databases.</p>
+<p>This command does not load the data into the R session (as the <code>read_csv()</code> function does). Instead, it merely instructs R to connect to the <code>SQLite</code> database contained in the <code>portal_mammals.sqlite</code> file.</p>
+<p>Using a similar approach, we could connect to many other database management systems that are supported by R including <code>MySQL</code>, <code>PostgreSQL</code>, etc.</p>
+</section><section id="explore-the-database" class="level2" data-number="12.5"><h2 data-number="12.5" class="anchored" data-anchor-id="explore-the-database">
+<span class="header-section-number">12.5</span> Explore the database</h2>
+<p>With the connection object availble, we can begin exploring the database.</p>
+<p>First, we can list the tables at the connection:</p>
+<div class="cell">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># mammals SQLite database can contain multiple tables (datasets)</span></span>
+<span><span class="fu">dbListTables</span><span class="op">(</span><span class="va">mammals</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "plots"   "species" "surveys"</code></pre>
+</div>
+</div>
+<p>or, alternately using the <code>src_dbi()</code> from {dbplyr}:</p>
+<div class="cell">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">src_dbi</span><span class="op">(</span><span class="va">mammals</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>src:  sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+tbls: plots, species, surveys</code></pre>
+</div>
+</div>
+<p>Just like a spreadsheet with multiple worksheets, a SQLite database can contain multiple tables. In this case three of them are listed in the tbls row in the output above:</p>
+<p>The three key tables in the relational database are:</p>
+<ul>
+<li>plots</li>
+<li>surveys</li>
+<li>species</li>
+</ul>
+<p>Now, we’re done with set-up. Let’s explore the fields (variables) contained in a particular table:</p>
+<div class="cell">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># List the fields (variables) in a particular table</span></span>
+<span><span class="fu">dbListFields</span><span class="op">(</span><span class="va">mammals</span>, <span class="st">"plots"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "plot_id"   "plot_type"</code></pre>
+</div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">dbListFields</span><span class="op">(</span><span class="va">mammals</span>, <span class="st">"surveys"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "record_id"       "month"           "day"             "year"           
+[5] "plot_id"         "species_id"      "sex"             "hindfoot_length"
+[9] "weight"         </code></pre>
+</div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">dbListFields</span><span class="op">(</span><span class="va">mammals</span>, <span class="st">"species"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "species_id" "genus"      "species"    "taxa"      </code></pre>
+</div>
+</div>
+</section><section id="simple-database-queries-with-sql-syntax-select-statements" class="level2" data-number="12.6"><h2 data-number="12.6" class="anchored" data-anchor-id="simple-database-queries-with-sql-syntax-select-statements">
+<span class="header-section-number">12.6</span> Simple database queries with SQL syntax (SELECT statements)</h2>
+<section id="select-command-select-columns" class="level3"><h3 class="anchored" data-anchor-id="select-command-select-columns">SELECT command (select columns)</h3>
+<p>To connect to tables within a database, you can use the <code>tbl()</code> function from <a href="https://dplyr.tidyverse.org">dplyr</a>. This function can be used to send <code>SQL</code> queries to the database if it is combined with the <code>sql()</code> function. To demonstrate this functionality, let’s select the columns <code>record_id</code>, <code>year</code>, <code>species_id</code>, and <code>plot_id</code> from the <code>surveys</code> table:</p>
+<div class="cell">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## SELECT statement</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
+<span><span class="st">                 FROM surveys"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [6 x 4]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  record_id  year species_id plot_id
+      &lt;int&gt; &lt;int&gt; &lt;chr&gt;        &lt;int&gt;
+1         1  1977 NL               2
+2         2  1977 NL               3
+3         3  1977 DM               2
+4         4  1977 DM               7
+5         5  1977 DM               3
+6         6  1977 PF               1</code></pre>
+</div>
+</div>
+<p>Although it looks like we just got a data frame from the database, we didn’t! It’s a reference, showing us data that is still in the <code>SQLite</code> database (note the first two lines of the output). It does this because databases are often more efficient at selecting, filtering and joining large data sets than R. And typically, the database will not even be stored on our computer, but rather a more powerful machine somewhere on the web. So R is lazy and waits to bring this data into memory until we explicitly tell it to do so using the collect function from the <code>dbplyr</code> package.</p>
+<p>Note that SQL is case insensitive, so capitalization only helps for readability and is a good style to adopt.</p>
+<p>Alternatively, we can use <code>dbGetQuery()</code> function from {DBI} to pass SQL code to the database file:</p>
+<div class="cell">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">dbGetQuery</span><span class="op">(</span><span class="va">mammals</span>, </span>
+<span>           <span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
+<span><span class="st">           FROM surveys"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  record_id year species_id plot_id
+1         1 1977         NL       2
+2         2 1977         NL       3
+3         3 1977         DM       2
+4         4 1977         DM       7
+5         5 1977         DM       3
+6         6 1977         PF       1</code></pre>
+</div>
+</div>
+<p>Note that the same operation can be done using dplyr’s verbs instead of writing SQL. First, we select the table on which to do the operations by creating the surveys object, and then we use the standard dplyr syntax as if it were a data frame:</p>
+<div class="cell">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">surveys</span> <span class="op">&lt;-</span> <span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="st">"surveys"</span><span class="op">)</span></span>
+<span><span class="va">query1</span> <span class="op">&lt;-</span> <span class="va">surveys</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">select</span><span class="op">(</span><span class="va">year</span>, <span class="va">species_id</span>, <span class="va">plot_id</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Additionally, we can use dplyr’s <code>show_query()</code> function to show which SQL commands are actually sent to the database:</p>
+<div class="cell">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">show_query</span><span class="op">(</span><span class="va">query1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;SQL&gt;
+SELECT `year`, `species_id`, `plot_id`
+FROM `surveys`
+LIMIT 6</code></pre>
+</div>
+</div>
+</section><section id="where-clause-filtering-rows" class="level3"><h3 class="anchored" data-anchor-id="where-clause-filtering-rows">WHERE clause (filtering rows)</h3>
+<p>Relational operation helps us in restricting the result set by allowing us to use the clause <code>WHERE</code>. The <code>WHERE</code> clause always requires a predicate. A predicate is conditioned evaluates to true, false or unknown. Predicates are used in the search condition of the <code>WHERE</code> clause.</p>
+<p>So, if we need to select the rows from the <code>surveys</code> table where the <code>species_id</code> is <code>DM</code> (Dipodomys), we use the <code>WHERE</code> clause with the predicate <code>species_id</code> equals <code>DM</code>. The result set is now restricted to rows whose condition evaluates to true.</p>
+<div class="cell">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Filtering with WHERE statement and using basic operators</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
+<span><span class="st">                 FROM surveys</span></span>
+<span><span class="st">                 WHERE species_id = 'DM'"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [6 x 4]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  record_id  year species_id plot_id
+      &lt;int&gt; &lt;int&gt; &lt;chr&gt;        &lt;int&gt;
+1         3  1977 DM               2
+2         4  1977 DM               7
+3         5  1977 DM               3
+4         8  1977 DM               1
+5         9  1977 DM               1
+6        12  1977 DM               7</code></pre>
+</div>
+</div>
+<p>Additionally, using <code>BETWEEN-AND</code> comparison operator we can filter a range of values:</p>
+<div class="cell">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># BETWEEN ... AND ....  operator</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
+<span><span class="st">                 FROM surveys</span></span>
+<span><span class="st">                 WHERE plot_id BETWEEN 3 AND 5"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [6 x 4]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  record_id  year species_id plot_id
+      &lt;int&gt; &lt;int&gt; &lt;chr&gt;        &lt;int&gt;
+1         2  1977 NL               3
+2         5  1977 DM               3
+3        11  1977 DS               5
+4        13  1977 DM               3
+5        16  1977 DM               4
+6        17  1977 DS               3</code></pre>
+</div>
+</div>
+<p>We can also find the missing values <code>NA</code> for a specific field:</p>
+<div class="cell">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># IS NULL operator</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
+<span><span class="st">                 FROM surveys</span></span>
+<span><span class="st">                 WHERE species_id IS NULL"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [6 x 4]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  record_id  year species_id plot_id
+      &lt;int&gt; &lt;int&gt; &lt;chr&gt;        &lt;int&gt;
+1       324  1977 &lt;NA&gt;             7
+2       325  1977 &lt;NA&gt;            10
+3       326  1977 &lt;NA&gt;            23
+4       401  1977 &lt;NA&gt;             3
+5       402  1977 &lt;NA&gt;            15
+6       403  1977 &lt;NA&gt;            19</code></pre>
+</div>
+</div>
+<p>Other operators is <code>IN</code> that we can use for searching specific values:</p>
+<div class="cell">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># IN operator</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
+<span><span class="st">                 FROM surveys</span></span>
+<span><span class="st">                 WHERE plot_id IN (1, 2, 7)"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [6 x 4]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  record_id  year species_id plot_id
+      &lt;int&gt; &lt;int&gt; &lt;chr&gt;        &lt;int&gt;
+1         1  1977 NL               2
+2         3  1977 DM               2
+3         4  1977 DM               7
+4         6  1977 PF               1
+5         7  1977 PE               2
+6         8  1977 DM               1</code></pre>
+</div>
+</div>
+<p>and <code>OR</code> operator</p>
+<div class="cell">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># OR operator</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
+<span><span class="st">                 FROM surveys</span></span>
+<span><span class="st">                 WHERE species_id = 'NL' OR species_id = 'PF' "</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [6 x 4]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  record_id  year species_id plot_id
+      &lt;int&gt; &lt;int&gt; &lt;chr&gt;        &lt;int&gt;
+1         1  1977 NL               2
+2         2  1977 NL               3
+3         6  1977 PF               1
+4        10  1977 PF               6
+5        19  1977 PF               4
+6        22  1977 NL              15</code></pre>
+</div>
+</div>
+<p>We can also combine <code>OR</code> and <code>AND</code> operators:</p>
+<div class="cell">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># OR with AND (NOTE: use parenthesis, SQL processes AND before OR)</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
+<span><span class="st">                 FROM surveys</span></span>
+<span><span class="st">                 WHERE (plot_id = 2 OR plot_id = 7) AND species_id = 'DM' "</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [6 x 4]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  record_id  year species_id plot_id
+      &lt;int&gt; &lt;int&gt; &lt;chr&gt;        &lt;int&gt;
+1         3  1977 DM               2
+2         4  1977 DM               7
+3        12  1977 DM               7
+4        64  1977 DM               7
+5        67  1977 DM               7
+6        71  1977 DM               7</code></pre>
+</div>
+</div>
+<p>Another operator is <code>NOT</code> that excludes the records with a specific value:</p>
+<div class="cell">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># NOT operator (exclude records/rows)</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
+<span><span class="st">                 FROM surveys</span></span>
+<span><span class="st">                 WHERE NOT species_id = 'PF' AND NOT species_id = 'DM' "</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [6 x 4]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  record_id  year species_id plot_id
+      &lt;int&gt; &lt;int&gt; &lt;chr&gt;        &lt;int&gt;
+1         1  1977 NL               2
+2         2  1977 NL               3
+3         7  1977 PE               2
+4        11  1977 DS               5
+5        17  1977 DS               3
+6        18  1977 PP               2</code></pre>
+</div>
+</div>
+</section><section id="additional-useful-expressions-count-and-limit" class="level3"><h3 class="anchored" data-anchor-id="additional-useful-expressions-count-and-limit">Additional useful expressions, <code>COUNT</code> and <code>LIMIT</code>
+</h3>
+<p>Next, we’ll briefly present a few additional useful expressions that are used with select statements.</p>
+<p>The first one is <code>COUNT</code> that is a built-in database function that retrieves the number of rows that match the query criteria.</p>
+<div class="cell">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## COUNT species_id = 'DM'</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT COUNT (species_id)</span></span>
+<span><span class="st">                 FROM surveys</span></span>
+<span><span class="st">                 WHERE species_id = 'DM'"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [1 x 1]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  `COUNT (species_id)`
+                 &lt;int&gt;
+1                10596</code></pre>
+</div>
+</div>
+<p>The second expression is <code>LIMIT</code> that is used for restricting the number of rows retrieved from the database. For example, we can retrieve just the first 10 rows from <code>surveys</code> table.</p>
+<div class="cell">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## LIMIT (just a few rows)</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT *</span></span>
+<span><span class="st">                 FROM surveys</span></span>
+<span><span class="st">                 LIMIT 10 "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [10 x 9]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+   record_id month   day  year plot_id species_id sex   hindfoot_length weight
+       &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;int&gt;  &lt;int&gt;
+ 1         1     7    16  1977       2 NL         M                  32     NA
+ 2         2     7    16  1977       3 NL         M                  33     NA
+ 3         3     7    16  1977       2 DM         F                  37     NA
+ 4         4     7    16  1977       7 DM         M                  36     NA
+ 5         5     7    16  1977       3 DM         M                  35     NA
+ 6         6     7    16  1977       1 PF         M                  14     NA
+ 7         7     7    16  1977       2 PE         F                  NA     NA
+ 8         8     7    16  1977       1 DM         M                  37     NA
+ 9         9     7    16  1977       1 DM         F                  34     NA
+10        10     7    16  1977       6 PF         F                  20     NA</code></pre>
+</div>
+</div>
+<p>Note that if we use the asterisk in the <code>SELECT</code>, we request all columns of the table (instead of column names).</p>
+<p>We can also retrieve just a few rows in the <code>surveys</code> table for a particular year such as 1985.</p>
+<div class="cell">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## WHERE and LIMIT (just a few rows for a particular year)</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT *</span></span>
+<span><span class="st">                 FROM surveys</span></span>
+<span><span class="st">                 WHERE year = 1985 LIMIT 10 "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [10 x 9]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+   record_id month   day  year plot_id species_id sex   hindfoot_length weight
+       &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;int&gt;  &lt;int&gt;
+ 1      9790     1    19  1985      16 RM         F                  16      4
+ 2      9791     1    19  1985      17 OT         F                  20     16
+ 3      9792     1    19  1985       6 DO         M                  35     48
+ 4      9793     1    19  1985      12 DO         F                  35     40
+ 5      9794     1    19  1985      24 RM         M                  16      4
+ 6      9795     1    19  1985      12 DO         M                  34     48
+ 7      9796     1    19  1985       6 DM         F                  37     35
+ 8      9797     1    19  1985      14 DM         M                  36     45
+ 9      9798     1    19  1985       6 DM         F                  36     38
+10      9799     1    19  1985      19 RM         M                  16      4</code></pre>
+</div>
+</div>
+</section><section id="sorting-results-sets-with-order-by-clause" class="level3"><h3 class="anchored" data-anchor-id="sorting-results-sets-with-order-by-clause">Sorting results sets with <code>ORDER BY</code> clause</h3>
+<div class="cell">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## ORDER BY species_id</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
+<span><span class="st">                 FROM surveys</span></span>
+<span><span class="st">                 ORDER BY species_id DESC"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [6 x 4]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  record_id  year species_id plot_id
+      &lt;int&gt; &lt;int&gt; &lt;chr&gt;        &lt;int&gt;
+1     14250  1988 ZL              18
+2     14351  1988 ZL              23
+3     35512  2002 US              11
+4     35513  2002 US              11
+5     35528  2002 US              13
+6     35544  2002 US              15</code></pre>
+</div>
+</div>
+<p>Of note, the <code>ORDER BY</code> clause must be always the last in a select statement.</p>
+</section><section id="grouping-result-sets-group-by" class="level3"><h3 class="anchored" data-anchor-id="grouping-result-sets-group-by">Grouping Result Sets, <code>GROUP BY</code>
+</h3>
+<div class="cell">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Just COUNT sex</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT COUNT (sex)</span></span>
+<span><span class="st">                 FROM surveys</span></span>
+<span><span class="st">                 "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [1 x 1]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  `COUNT (sex)`
+          &lt;int&gt;
+1         33038</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## COUNT BY GROUP</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT sex, COUNT(sex)</span></span>
+<span><span class="st">                 AS count FROM surveys GROUP BY sex</span></span>
+<span><span class="st">                 "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [3 x 2]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  sex   count
+  &lt;chr&gt; &lt;int&gt;
+1 &lt;NA&gt;      0
+2 F     15690
+3 M     17348</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## COUNT BY GROUP and use HAVING clause for selection </span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT sex, COUNT(sex)</span></span>
+<span><span class="st">                 AS count FROM surveys GROUP BY sex</span></span>
+<span><span class="st">                 HAVING COUNT(sex) &gt; 16000"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [1 x 2]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  sex   count
+  &lt;chr&gt; &lt;int&gt;
+1 M     17348</code></pre>
+</div>
+</div>
+</section><section id="wildcards-using-with-string-paterns-with-like-predicate" class="level3"><h3 class="anchored" data-anchor-id="wildcards-using-with-string-paterns-with-like-predicate">Wildcards (using with string paterns) with <code>LIKE</code> predicate</h3>
+<div class="cell">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT species_id, genus, taxa </span></span>
+<span><span class="st">                 FROM species"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [?? x 3]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+   species_id genus            taxa   
+   &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;  
+ 1 AB         Amphispiza       Bird   
+ 2 AH         Ammospermophilus Rodent 
+ 3 AS         Ammodramus       Bird   
+ 4 BA         Baiomys          Rodent 
+ 5 CB         Campylorhynchus  Bird   
+ 6 CM         Calamospiza      Bird   
+ 7 CQ         Callipepla       Bird   
+ 8 CS         Crotalus         Reptile
+ 9 CT         Cnemidophorus    Reptile
+10 CU         Cnemidophorus    Reptile
+# … with more rows</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## grabs anything ending with letters 'za' </span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT species_id, genus, taxa </span></span>
+<span><span class="st">                 FROM species</span></span>
+<span><span class="st">                 WHERE genus LIKE '%za' "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [2 x 3]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  species_id genus       taxa 
+  &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;
+1 AB         Amphispiza  Bird 
+2 CM         Calamospiza Bird </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## grabs anything that starts with the letter 'A'</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT species_id, genus, taxa </span></span>
+<span><span class="st">                 FROM species</span></span>
+<span><span class="st">                 WHERE genus LIKE 'A%' "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [3 x 3]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  species_id genus            taxa  
+  &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt; 
+1 AB         Amphispiza       Bird  
+2 AH         Ammospermophilus Rodent
+3 AS         Ammodramus       Bird  </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## grabs anything before and after the letters 'sp'</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT species_id, genus, taxa </span></span>
+<span><span class="st">                 FROM species</span></span>
+<span><span class="st">                 WHERE genus LIKE '%sp%' "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [7 x 3]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  species_id genus            taxa  
+  &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt; 
+1 AB         Amphispiza       Bird  
+2 AH         Ammospermophilus Rodent
+3 CM         Calamospiza      Bird  
+4 SB         Spizella         Bird  
+5 SS         Spermophilus     Rodent
+6 ST         Spermophilus     Rodent
+7 US         Sparrow          Bird  </code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## grabs anything that starts with 'c' and ends with 'us'</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT species_id, genus, taxa </span></span>
+<span><span class="st">                 FROM species</span></span>
+<span><span class="st">                 WHERE genus LIKE 'c%us' "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [9 x 3]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  species_id genus           taxa   
+  &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;  
+1 CB         Campylorhynchus Bird   
+2 CS         Crotalus        Reptile
+3 CT         Cnemidophorus   Reptile
+4 CU         Cnemidophorus   Reptile
+5 CV         Crotalus        Reptile
+6 PB         Chaetodipus     Rodent 
+7 PI         Chaetodipus     Rodent 
+8 PP         Chaetodipus     Rodent 
+9 PX         Chaetodipus     Rodent </code></pre>
+</div>
+</div>
+</section></section><section id="close-the-connection" class="level2" data-number="12.7"><h2 data-number="12.7" class="anchored" data-anchor-id="close-the-connection">
+<span class="header-section-number">12.7</span> Close the connection</h2>
+<p>Good housekeeping means always remembering to disconnect once you’re done.</p>
+<div class="cell">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">dbDisconnect</span><span class="op">(</span><span class="va">mammals</span><span class="op">)</span> <span class="co"># closes our DB connection</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
-
-
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
+</section></main><!-- /main --><script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
     const mode = bsSheetEl.getAttribute("data-mode");
@@ -327,9 +920,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
 });
-</script>
-<nav class="page-navigation">
-  <div class="nav-page nav-page-previous">
+</script><nav class="page-navigation"><div class="nav-page nav-page-previous">
       <a href="./interactive.html" class="pagination-link">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Animated and Interactive Plots</span></span>
       </a>          
@@ -341,12 +932,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav>
 </div> <!-- /content -->
-<footer class="footer">
-  <div class="nav-footer">
+<footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
 </footer>
-
 
 
 </body></html>
