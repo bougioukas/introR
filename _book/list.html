@@ -544,7 +544,7 @@ Data frame
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div id="fig-tidy_data" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/tidy_data.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Tidy data."><img src="images/tidy_data.PNG" class="img-fluid figure-img" style="width:90.0%"></a></p>
+<figure class="figure"><p><a href="images/tidy_data.PNG" class="lightbox" title="Tidy data." data-gallery="quarto-lightbox-gallery-1"><img src="images/tidy_data.PNG" class="img-fluid figure-img" style="width:90.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;8.1: Tidy data.</figcaption><p></p>
 </figure>
 </div>
@@ -563,7 +563,7 @@ Data frame
 <span>              <span class="st">"Type 2"</span>, <span class="st">"Type 1"</span>, <span class="st">"Type 1"</span>, <span class="st">"Type 2"</span><span class="op">)</span>,</span>
 <span>status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Poor"</span>, <span class="st">"Improved"</span>, <span class="st">"Excellent"</span>, <span class="st">"Poor"</span>, </span>
 <span>            <span class="st">"Poor"</span>,<span class="st">"Excellent"</span>, <span class="st">"Improved"</span>, <span class="st">"Improved"</span><span class="op">)</span>,</span>
-<span>dates <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd</a></span><span class="op">(</span><span class="st">"2020-10-09"</span>, <span class="st">"2020-10-12"</span>, <span class="st">"2020-10-18"</span>, <span class="st">"2020-10-27"</span>,</span>
+<span>dates <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/lubridate/man/ymd.html">ymd</a></span><span class="op">(</span><span class="st">"2020-10-09"</span>, <span class="st">"2020-10-12"</span>, <span class="st">"2020-10-18"</span>, <span class="st">"2020-10-27"</span>,</span>
 <span>           <span class="st">"2020-11-04"</span>, <span class="st">"2020-11-09"</span>, <span class="st">"2020-11-22"</span>, <span class="st">"2020-12-02"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">patient_data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -580,7 +580,7 @@ Data frame
 8         8    43     74 Type 2   Improved  2020-12-02</code></pre>
 </div>
 </div>
-<p>In this data frame, <code>patientID</code> is a row or case identifier, <code>age</code> (in years) and <code>weight</code> (in kg) are continuous variables, <code>diabetes</code> (Type 1, Type 2) is a nominal (dichotomous) variable, <code>status</code> is an ordinal variable (Poor/Improved/Excellent), and <code>dates</code> variable with dates (note that we used the <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd()</a></code> function to create this variable).</p>
+<p>In this data frame, <code>patientID</code> is a row or case identifier, <code>age</code> (in years) and <code>weight</code> (in kg) are continuous variables, <code>diabetes</code> (Type 1, Type 2) is a nominal (dichotomous) variable, <code>status</code> is an ordinal variable (Poor/Improved/Excellent), and <code>dates</code> variable with dates (note that we used the <code><a href="https://rdrr.io/pkg/lubridate/man/ymd.html">ymd()</a></code> function to create this variable).</p>
 <p>We might have noticed the row of three (or four) letter abbreviations under the column names. These describe the type of each variable:</p>
 <ul>
 <li><p><code>dbl</code> stands for doubles, or real numbers.</p></li>
@@ -776,10 +776,10 @@ m f
 <li>A <strong>time</strong> within a day. Tibbles print this as <code>&lt;time&gt;</code>.</li>
 <li>A <strong>date-time</strong> is a date plus a time: it uniquely identifies an instant in time (typically to the nearest second). Tibbles print this as <code>&lt;dttm&gt;</code>. Elsewhere in R these are called POSIXct.</li>
 </ul>
-<p>To get the current date or date-time you can use <code><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date()</a></code> or <code><a href="https://lubridate.tidyverse.org/reference/now.html">now()</a></code>:</p>
+<p>To get the current date or date-time you can use <code><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date()</a></code> or <code><a href="https://rdrr.io/pkg/lubridate/man/now.html">now()</a></code>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html">now</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/lubridate/man/now.html">now</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Date vectors are built on top of double vectors but they have the special class “Date”:</p>
 <div class="cell">
@@ -797,7 +797,7 @@ m f
 <div class="cell">
 <div class="sourceCode" id="cb87"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">unclass</a></span><span class="op">(</span><span class="va">today</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 19285</code></pre>
+<pre><code>[1] 19287</code></pre>
 </div>
 </div>
 <p>So, in numeric form, <code>Date</code> counts the days since <code>1970-01-01</code>. For example:</p>
@@ -812,7 +812,7 @@ m f
 <div class="cell">
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/difftime.html">difftime</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">date1</span>, units <span class="op">=</span> <span class="st">'days'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 844.7605 days</code></pre>
+<pre><code>Time difference of 846.8154 days</code></pre>
 </div>
 </div>
 <p>POSIXct stores a date and time. In numeric form, the number of seconds since <code>1970-01-01</code>.</p>
@@ -823,7 +823,7 @@ m f
 <pre><code>[1] 1340895600</code></pre>
 </div>
 </div>
-<p>We’ve seen also one approach to parsing strings into <code>dates</code> variable in our data frame using the <code><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd()</a></code> function from <a href="https://lubridate.tidyverse.org">lubridate</a> package. This is the most concise way to create a single date/time object, as we might need when filtering date/time data. The class of this object is:</p>
+<p>We’ve seen also one approach to parsing strings into <code>dates</code> variable in our data frame using the <code><a href="https://rdrr.io/pkg/lubridate/man/ymd.html">ymd()</a></code> function from <a href="https://lubridate.tidyverse.org">lubridate</a> package. This is the most concise way to create a single date/time object, as we might need when filtering date/time data. The class of this object is:</p>
 <div class="cell">
 <div class="sourceCode" id="cb95"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">patient_data</span><span class="op">$</span><span class="va">dates</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -958,7 +958,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"loop":true,"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","descPosition":"bottom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
 
 
 </body></html>

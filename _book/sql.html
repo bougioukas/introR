@@ -99,7 +99,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light"><script id="quarto-search-options" type="application/json">{
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
   "collapse-after": 3,
@@ -245,14 +248,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a href="#introduction-to-relational-databases" id="toc-introduction-to-relational-databases" class="nav-link active" data-scroll-target="#introduction-to-relational-databases"><span class="toc-section-number">12.1</span>  Introduction to relational databases</a>
   <ul class="collapse">
 <li><a href="#data-from-the-portal-project" id="toc-data-from-the-portal-project" class="nav-link" data-scroll-target="#data-from-the-portal-project">Data from the Portal Project</a></li>
+  <li><a href="#basic-definitions-in-sql" id="toc-basic-definitions-in-sql" class="nav-link" data-scroll-target="#basic-definitions-in-sql">Basic definitions in SQL</a></li>
+  <li><a href="#types-of-sql-statements-ddl-vs.-dml" id="toc-types-of-sql-statements-ddl-vs.-dml" class="nav-link" data-scroll-target="#types-of-sql-statements-ddl-vs.-dml">Types of SQL statements (DDL vs.&nbsp;DML)</a></li>
   </ul>
 </li>
-  <li><a href="#basic-definitions-in-sql" id="toc-basic-definitions-in-sql" class="nav-link" data-scroll-target="#basic-definitions-in-sql"><span class="toc-section-number">12.2</span>  Basic definitions in SQL</a></li>
-  <li><a href="#types-of-sql-statements-ddl-vs.-dml" id="toc-types-of-sql-statements-ddl-vs.-dml" class="nav-link" data-scroll-target="#types-of-sql-statements-ddl-vs.-dml"><span class="toc-section-number">12.3</span>  Types of SQL statements (DDL vs.&nbsp;DML)</a></li>
-  <li><a href="#connecting-to-a-database" id="toc-connecting-to-a-database" class="nav-link" data-scroll-target="#connecting-to-a-database"><span class="toc-section-number">12.4</span>  Connecting to a database</a></li>
-  <li><a href="#explore-the-database" id="toc-explore-the-database" class="nav-link" data-scroll-target="#explore-the-database"><span class="toc-section-number">12.5</span>  Explore the database</a></li>
+  <li><a href="#connecting-to-a-database" id="toc-connecting-to-a-database" class="nav-link" data-scroll-target="#connecting-to-a-database"><span class="toc-section-number">12.2</span>  Connecting to a database</a></li>
+  <li><a href="#explore-the-database" id="toc-explore-the-database" class="nav-link" data-scroll-target="#explore-the-database"><span class="toc-section-number">12.3</span>  Explore the database</a></li>
   <li>
-<a href="#simple-database-queries-with-sql-syntax-select-statements" id="toc-simple-database-queries-with-sql-syntax-select-statements" class="nav-link" data-scroll-target="#simple-database-queries-with-sql-syntax-select-statements"><span class="toc-section-number">12.6</span>  Simple database queries with SQL syntax (SELECT statements)</a>
+<a href="#simple-database-queries-with-sql-syntax-select-statements" id="toc-simple-database-queries-with-sql-syntax-select-statements" class="nav-link" data-scroll-target="#simple-database-queries-with-sql-syntax-select-statements"><span class="toc-section-number">12.4</span>  Simple database queries with SQL syntax (SELECT statements)</a>
   <ul class="collapse">
 <li><a href="#select-command-select-columns" id="toc-select-command-select-columns" class="nav-link" data-scroll-target="#select-command-select-columns">SELECT command (select columns)</a></li>
   <li><a href="#where-clause-filtering-rows" id="toc-where-clause-filtering-rows" class="nav-link" data-scroll-target="#where-clause-filtering-rows">WHERE clause (filtering rows)</a></li>
@@ -262,7 +265,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#wildcards-using-with-string-paterns-with-like-predicate" id="toc-wildcards-using-with-string-paterns-with-like-predicate" class="nav-link" data-scroll-target="#wildcards-using-with-string-paterns-with-like-predicate">Wildcards (using with string paterns) with <code>LIKE</code> predicate</a></li>
   </ul>
 </li>
-  <li><a href="#close-the-connection" id="toc-close-the-connection" class="nav-link" data-scroll-target="#close-the-connection"><span class="toc-section-number">12.7</span>  Close the connection</a></li>
+  <li><a href="#close-the-connection" id="toc-close-the-connection" class="nav-link" data-scroll-target="#close-the-connection"><span class="toc-section-number">12.5</span>  Close the connection</a></li>
   </ul></nav>
     </div>
 <!-- main -->
@@ -304,32 +307,33 @@ Learning objectives
 <section id="data-from-the-portal-project" class="level3"><h3 class="anchored" data-anchor-id="data-from-the-portal-project">Data from the Portal Project</h3>
 <p>The Portal Project is a long-term ecological study being conducted near Portal, AZ. Since 1977, the site has been a primary focus of research on interactions among rodents, ants and plants and their respective responses to climate.</p>
 <p>Data from the Portal project is recorded in a relational database designed for reliable storage and rapid access to the bounty of information produced by this long-term ecological experiment.</p>
-<p>The research site consists of many <strong>plots</strong> – patches of the Arizona desert that are intensively manipulated and repeatedly surveyed. The plots have some fixed characteristics, such as the type of manipulation, geographic location, aspect, etc.</p>
+<p>The research site consists of many <strong>plots</strong> – patches of the Arizona desert that are intensively manipulated and repeatedly surveyed (<a href="#fig-plots_sql">Figure&nbsp;<span>12.1</span></a>). The plots have some fixed characteristics, such as the type of manipulation, geographic location, aspect, etc.</p>
+<div id="fig-plots_sql" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure"><p><a href="images/plots_sql.png" class="lightbox" title="Location of all 24 plots (numbered and outlined in white). Blue flag marks the weather station location." data-gallery="quarto-lightbox-gallery-1"><img src="images/plots_sql.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;12.1: Location of all 24 plots (numbered and outlined in white). Blue flag marks the weather station location.</figcaption><p></p>
+</figure>
+</div>
 <p>The plots have a lot of dynamic characteristics, and those changes are recorded in repeated <strong>surveys</strong>. In particular, the animals captured during each survey are identified to <strong>species</strong>, weighed, and measured.</p>
-<p>There is also the <code>portalr</code> R package that provides a collection of basic functions to summarize the Portal project data on rodents, plants, ants, and weather at our long-term field site in the Chihuahuan Desert.</p>
-</section></section><section id="basic-definitions-in-sql" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="basic-definitions-in-sql">
-<span class="header-section-number">12.2</span> Basic definitions in SQL</h2>
+<p>There is also the <a href="https://weecology.github.io/portalr/">portalr</a> R package that provides a collection of basic functions to summarize the Portal project data on rodents, plants, ants, and weather at our long-term field site in the Chihuahuan Desert.</p>
+</section><section id="basic-definitions-in-sql" class="level3"><h3 class="anchored" data-anchor-id="basic-definitions-in-sql">Basic definitions in SQL</h3>
 <p><strong>Database:</strong> a container/repository (usually a file or set of files) to store organized data; a set of relational information.</p>
 <p><strong>Tables:</strong> the information inside the database is organized in tables; a structured list of data</p>
 <p>Database terminology builds on common ways of characterizing data files. The breakdown of a table into <strong>records</strong> (also named rows) or <strong>fields</strong> (also named columns, or variables) is familiar to anyone who’s worked in spreadsheets. The descriptions below formalize these terms, and provide an example referencing the Portal mammals database.</p>
-</section><section id="types-of-sql-statements-ddl-vs.-dml" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="types-of-sql-statements-ddl-vs.-dml">
-<span class="header-section-number">12.3</span> Types of SQL statements (DDL vs.&nbsp;DML)</h2>
+</section><section id="types-of-sql-statements-ddl-vs.-dml" class="level3"><h3 class="anchored" data-anchor-id="types-of-sql-statements-ddl-vs.-dml">Types of SQL statements (DDL vs.&nbsp;DML)</h3>
 <p>SQL statements fall into two different categories: Data Definition Language statements and Data Manipulation Language statements.</p>
-<p>Data Definition Language (or DDL) statements are used to define, change, or drop database objects such as tables.</p>
-<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></path></svg> Common DDL statement types include <code>CREATE</code>, <code>ALTER</code>, <code>TRUNCATE</code>, and <code>DROP</code>:</p>
-<p><code>CREATE statement</code>: which is used for creating tables and defining its columns;</p>
-<p><code>ALTER statement</code>: is used for altering tables including adding and dropping columns and modifying their datatypes;</p>
-<p><code>TRUNCATE statement</code>: is used for deleting data in a table but not the table itself;</p>
-<p><code>DROP statement</code>: is used for deleting tables.</p>
-<p>Data Manipulation Language (or DML) statements are used to read and modify data in tables. These are also sometimes referred to as CRUD operations, that is, Create, Read, Update and Delete rows in a table.</p>
-<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></path></svg> Common DML <strong>statement</strong> types include <code>INSERT</code>, <code>SELECT</code>, <code>UPDATE</code>, and <code>DELETE</code>:</p>
-<p><code>INSERT statement</code>: is used for inserting a row or several rows of data into a table;</p>
-<p><code>SELECT statement</code>: reads or selects column/row or columns/rows from a table;</p>
-<p><code>UPDATE statement</code>: edits row or rows in a table;</p>
-<p><code>DELETE statement</code>: removes a row or rows of data from a table.</p>
-<p>In these notes we will primarly use the <code>SELECT</code> statement.</p>
-</section><section id="connecting-to-a-database" class="level2" data-number="12.4"><h2 data-number="12.4" class="anchored" data-anchor-id="connecting-to-a-database">
-<span class="header-section-number">12.4</span> Connecting to a database</h2>
+<p><strong>A. Data Definition Language (or DDL) statements</strong> are used to define, change, or drop database objects such as tables. Common DDL statement types include <code>CREATE</code>, <code>ALTER</code>, <code>TRUNCATE</code>, and <code>DROP</code>.</p>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></path></svg><code>CREATE statement</code>: which is used for creating tables and defining its columns;</p>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></path></svg><code>ALTER statement</code>: is used for altering tables including adding and dropping columns and modifying their datatypes;</p>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></path></svg><code>TRUNCATE statement</code>: is used for deleting data in a table but not the table itself;</p>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></path></svg><code>DROP statement</code>: is used for deleting tables.</p>
+<p><strong>B. Data Manipulation Language (or DML) statements</strong> are used to read and modify data in tables. These are also sometimes referred to as CRUD operations, that is, Create, Read, Update and Delete rows in a table. Common DML statement types include <code>INSERT</code>, <code>SELECT</code>, <code>UPDATE</code>, and <code>DELETE</code>.</p>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></path></svg><code>INSERT statement</code>: is used for inserting a row or several rows of data into a table;</p>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></path></svg><code>SELECT statement</code>: reads or selects column/row or columns/rows from a table;</p>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></path></svg><code>UPDATE statement</code>: edits row or rows in a table;</p>
+<p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6l-160 160C272.4 444.9 264.2 448 256 448s-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L338.8 288H32C14.33 288 .0016 273.7 .0016 256S14.33 224 32 224h306.8l-105.4-105.4c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160C451.1 245.9 451.1 266.1 438.6 278.6z"></path></svg><code>DELETE statement</code>: removes a row or rows of data from a table.</p>
+<p>In this textbook we will primary use the <code>SELECT</code> statement.</p>
+</section></section><section id="connecting-to-a-database" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="connecting-to-a-database">
+<span class="header-section-number">12.2</span> Connecting to a database</h2>
 <p>The first step from RStudio is creating a connection object that opens up a channel of communication to the database file. We will connect to our database using the <a href="https://dbi.r-dbi.org">DBI</a> package. For the sake of example, we simply connect to an “in-memory” database, but a wide range of database connectors are available depending on where our data lives.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># connect to the database</span></span>
@@ -339,8 +343,8 @@ Learning objectives
 <p>This command uses 2 packages that helps <code>dbplyr</code> and <code>dplyr</code> talk to the <code>SQLite</code> database. <a href="https://dbi.r-dbi.org">DBI</a> is not something that we’ll use directly as a user. It allows R to send commands to databases irrespective of the database management system used. The <a href="https://rsqlite.r-dbi.org">RSQLite</a> allows R to interface with SQLite databases.</p>
 <p>This command does not load the data into the R session (as the <code>read_csv()</code> function does). Instead, it merely instructs R to connect to the <code>SQLite</code> database contained in the <code>portal_mammals.sqlite</code> file.</p>
 <p>Using a similar approach, we could connect to many other database management systems that are supported by R including <code>MySQL</code>, <code>PostgreSQL</code>, etc.</p>
-</section><section id="explore-the-database" class="level2" data-number="12.5"><h2 data-number="12.5" class="anchored" data-anchor-id="explore-the-database">
-<span class="header-section-number">12.5</span> Explore the database</h2>
+</section><section id="explore-the-database" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="explore-the-database">
+<span class="header-section-number">12.3</span> Explore the database</h2>
 <p>With the connection object availble, we can begin exploring the database.</p>
 <p>First, we can list the tables at the connection:</p>
 <div class="cell">
@@ -383,12 +387,58 @@ tbls: plots, species, surveys</code></pre>
 <pre><code>[1] "species_id" "genus"      "species"    "taxa"      </code></pre>
 </div>
 </div>
-</section><section id="simple-database-queries-with-sql-syntax-select-statements" class="level2" data-number="12.6"><h2 data-number="12.6" class="anchored" data-anchor-id="simple-database-queries-with-sql-syntax-select-statements">
-<span class="header-section-number">12.6</span> Simple database queries with SQL syntax (SELECT statements)</h2>
-<section id="select-command-select-columns" class="level3"><h3 class="anchored" data-anchor-id="select-command-select-columns">SELECT command (select columns)</h3>
-<p>To connect to tables within a database, you can use the <code>tbl()</code> function from <a href="https://dplyr.tidyverse.org">dplyr</a>. This function can be used to send <code>SQL</code> queries to the database if it is combined with the <code>sql()</code> function. To demonstrate this functionality, let’s select the columns <code>record_id</code>, <code>year</code>, <code>species_id</code>, and <code>plot_id</code> from the <code>surveys</code> table:</p>
+<p>To connect to tables within a database, we can use the <code>tbl()</code> function from <a href="https://dplyr.tidyverse.org">dplyr</a>:</p>
 <div class="cell">
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## SELECT statement</span></span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## connect to tables with tbl</span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="st">"plots"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [6 x 2]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  plot_id plot_type                
+    &lt;int&gt; &lt;chr&gt;                    
+1       1 Spectab exclosure        
+2       2 Control                  
+3       3 Long-term Krat Exclosure 
+4       4 Control                  
+5       5 Rodent Exclosure         
+6       6 Short-term Krat Exclosure</code></pre>
+</div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="st">"surveys"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [6 x 9]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  record_id month   day  year plot_id species_id sex   hindfoot_length weight
+      &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;int&gt;  &lt;int&gt;
+1         1     7    16  1977       2 NL         M                  32     NA
+2         2     7    16  1977       3 NL         M                  33     NA
+3         3     7    16  1977       2 DM         F                  37     NA
+4         4     7    16  1977       7 DM         M                  36     NA
+5         5     7    16  1977       3 DM         M                  35     NA
+6         6     7    16  1977       1 PF         M                  14     NA</code></pre>
+</div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="st">"species"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># Source:   SQL [6 x 4]
+# Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
+  species_id genus            species         taxa  
+  &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;           &lt;chr&gt; 
+1 AB         Amphispiza       bilineata       Bird  
+2 AH         Ammospermophilus harrisi         Rodent
+3 AS         Ammodramus       savannarum      Bird  
+4 BA         Baiomys          taylori         Rodent
+5 CB         Campylorhynchus  brunneicapillus Bird  
+6 CM         Calamospiza      melanocorys     Bird  </code></pre>
+</div>
+</div>
+</section><section id="simple-database-queries-with-sql-syntax-select-statements" class="level2" data-number="12.4"><h2 data-number="12.4" class="anchored" data-anchor-id="simple-database-queries-with-sql-syntax-select-statements">
+<span class="header-section-number">12.4</span> Simple database queries with SQL syntax (SELECT statements)</h2>
+<section id="select-command-select-columns" class="level3"><h3 class="anchored" data-anchor-id="select-command-select-columns">SELECT command (select columns)</h3>
+<p>The <code>tbl()</code> function can be used to send <code>SQL</code> queries to the database if it is combined with the <code>sql()</code> function. To demonstrate this functionality, let’s select the columns <code>record_id</code>, <code>year</code>, <code>species_id</code>, and <code>plot_id</code> from the <code>surveys</code> table:</p>
+<div class="cell">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## SELECT statement</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
 <span><span class="st">                 FROM surveys"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -409,7 +459,7 @@ tbls: plots, species, surveys</code></pre>
 <p>Note that SQL is case insensitive, so capitalization only helps for readability and is a good style to adopt.</p>
 <p>Alternatively, we can use <code>dbGetQuery()</code> function from {DBI} to pass SQL code to the database file:</p>
 <div class="cell">
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">dbGetQuery</span><span class="op">(</span><span class="va">mammals</span>, </span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">dbGetQuery</span><span class="op">(</span><span class="va">mammals</span>, </span>
 <span>           <span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
 <span><span class="st">           FROM surveys"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -425,14 +475,14 @@ tbls: plots, species, surveys</code></pre>
 </div>
 <p>Note that the same operation can be done using dplyr’s verbs instead of writing SQL. First, we select the table on which to do the operations by creating the surveys object, and then we use the standard dplyr syntax as if it were a data frame:</p>
 <div class="cell">
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">surveys</span> <span class="op">&lt;-</span> <span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="st">"surveys"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">surveys</span> <span class="op">&lt;-</span> <span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="st">"surveys"</span><span class="op">)</span></span>
 <span><span class="va">query1</span> <span class="op">&lt;-</span> <span class="va">surveys</span> <span class="op">%&gt;%</span></span>
 <span>  <span class="fu">select</span><span class="op">(</span><span class="va">year</span>, <span class="va">species_id</span>, <span class="va">plot_id</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Additionally, we can use dplyr’s <code>show_query()</code> function to show which SQL commands are actually sent to the database:</p>
 <div class="cell">
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">show_query</span><span class="op">(</span><span class="va">query1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">show_query</span><span class="op">(</span><span class="va">query1</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;SQL&gt;
 SELECT `year`, `species_id`, `plot_id`
@@ -444,7 +494,7 @@ LIMIT 6</code></pre>
 <p>Relational operation helps us in restricting the result set by allowing us to use the clause <code>WHERE</code>. The <code>WHERE</code> clause always requires a predicate. A predicate is conditioned evaluates to true, false or unknown. Predicates are used in the search condition of the <code>WHERE</code> clause.</p>
 <p>So, if we need to select the rows from the <code>surveys</code> table where the <code>species_id</code> is <code>DM</code> (Dipodomys), we use the <code>WHERE</code> clause with the predicate <code>species_id</code> equals <code>DM</code>. The result set is now restricted to rows whose condition evaluates to true.</p>
 <div class="cell">
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Filtering with WHERE statement and using basic operators</span></span>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Filtering with WHERE statement and using basic operators</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
 <span><span class="st">                 FROM surveys</span></span>
 <span><span class="st">                 WHERE species_id = 'DM'"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -464,7 +514,7 @@ LIMIT 6</code></pre>
 </div>
 <p>Additionally, using <code>BETWEEN-AND</code> comparison operator we can filter a range of values:</p>
 <div class="cell">
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># BETWEEN ... AND ....  operator</span></span>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># BETWEEN ... AND ....  operator</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
 <span><span class="st">                 FROM surveys</span></span>
 <span><span class="st">                 WHERE plot_id BETWEEN 3 AND 5"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -484,7 +534,7 @@ LIMIT 6</code></pre>
 </div>
 <p>We can also find the missing values <code>NA</code> for a specific field:</p>
 <div class="cell">
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># IS NULL operator</span></span>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># IS NULL operator</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
 <span><span class="st">                 FROM surveys</span></span>
 <span><span class="st">                 WHERE species_id IS NULL"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -504,7 +554,7 @@ LIMIT 6</code></pre>
 </div>
 <p>Other operators is <code>IN</code> that we can use for searching specific values:</p>
 <div class="cell">
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># IN operator</span></span>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># IN operator</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
 <span><span class="st">                 FROM surveys</span></span>
 <span><span class="st">                 WHERE plot_id IN (1, 2, 7)"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -524,7 +574,7 @@ LIMIT 6</code></pre>
 </div>
 <p>and <code>OR</code> operator</p>
 <div class="cell">
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># OR operator</span></span>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># OR operator</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
 <span><span class="st">                 FROM surveys</span></span>
 <span><span class="st">                 WHERE species_id = 'NL' OR species_id = 'PF' "</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -544,7 +594,7 @@ LIMIT 6</code></pre>
 </div>
 <p>We can also combine <code>OR</code> and <code>AND</code> operators:</p>
 <div class="cell">
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># OR with AND (NOTE: use parenthesis, SQL processes AND before OR)</span></span>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># OR with AND (NOTE: use parenthesis, SQL processes AND before OR)</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
 <span><span class="st">                 FROM surveys</span></span>
 <span><span class="st">                 WHERE (plot_id = 2 OR plot_id = 7) AND species_id = 'DM' "</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -564,7 +614,7 @@ LIMIT 6</code></pre>
 </div>
 <p>Another operator is <code>NOT</code> that excludes the records with a specific value:</p>
 <div class="cell">
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># NOT operator (exclude records/rows)</span></span>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># NOT operator (exclude records/rows)</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
 <span><span class="st">                 FROM surveys</span></span>
 <span><span class="st">                 WHERE NOT species_id = 'PF' AND NOT species_id = 'DM' "</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -587,7 +637,7 @@ LIMIT 6</code></pre>
 <p>Next, we’ll briefly present a few additional useful expressions that are used with select statements.</p>
 <p>The first one is <code>COUNT</code> that is a built-in database function that retrieves the number of rows that match the query criteria.</p>
 <div class="cell">
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## COUNT species_id = 'DM'</span></span>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## COUNT species_id = 'DM'</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT COUNT (species_id)</span></span>
 <span><span class="st">                 FROM surveys</span></span>
 <span><span class="st">                 WHERE species_id = 'DM'"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -601,7 +651,7 @@ LIMIT 6</code></pre>
 </div>
 <p>The second expression is <code>LIMIT</code> that is used for restricting the number of rows retrieved from the database. For example, we can retrieve just the first 10 rows from <code>surveys</code> table.</p>
 <div class="cell">
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## LIMIT (just a few rows)</span></span>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## LIMIT (just a few rows)</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT *</span></span>
 <span><span class="st">                 FROM surveys</span></span>
 <span><span class="st">                 LIMIT 10 "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -625,7 +675,7 @@ LIMIT 6</code></pre>
 <p>Note that if we use the asterisk in the <code>SELECT</code>, we request all columns of the table (instead of column names).</p>
 <p>We can also retrieve just a few rows in the <code>surveys</code> table for a particular year such as 1985.</p>
 <div class="cell">
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## WHERE and LIMIT (just a few rows for a particular year)</span></span>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## WHERE and LIMIT (just a few rows for a particular year)</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT *</span></span>
 <span><span class="st">                 FROM surveys</span></span>
 <span><span class="st">                 WHERE year = 1985 LIMIT 10 "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -648,7 +698,7 @@ LIMIT 6</code></pre>
 </div>
 </section><section id="sorting-results-sets-with-order-by-clause" class="level3"><h3 class="anchored" data-anchor-id="sorting-results-sets-with-order-by-clause">Sorting results sets with <code>ORDER BY</code> clause</h3>
 <div class="cell">
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## ORDER BY species_id</span></span>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## ORDER BY species_id</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT record_id, year, species_id, plot_id </span></span>
 <span><span class="st">                 FROM surveys</span></span>
 <span><span class="st">                 ORDER BY species_id DESC"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -670,7 +720,7 @@ LIMIT 6</code></pre>
 </section><section id="grouping-result-sets-group-by" class="level3"><h3 class="anchored" data-anchor-id="grouping-result-sets-group-by">Grouping Result Sets, <code>GROUP BY</code>
 </h3>
 <div class="cell">
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Just COUNT sex</span></span>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Just COUNT sex</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT COUNT (sex)</span></span>
 <span><span class="st">                 FROM surveys</span></span>
 <span><span class="st">                 "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -683,7 +733,7 @@ LIMIT 6</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## COUNT BY GROUP</span></span>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## COUNT BY GROUP</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT sex, COUNT(sex)</span></span>
 <span><span class="st">                 AS count FROM surveys GROUP BY sex</span></span>
 <span><span class="st">                 "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -698,10 +748,10 @@ LIMIT 6</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## COUNT BY GROUP and use HAVING clause for selection </span></span>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## COUNT BY GROUP and use HAVING clause for selection </span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT sex, COUNT(sex)</span></span>
 <span><span class="st">                 AS count FROM surveys GROUP BY sex</span></span>
-<span><span class="st">                 HAVING COUNT(sex) &gt; 16000"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span><span class="st">                 HAVING count &gt; 16000"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Source:   SQL [1 x 2]
 # Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
@@ -712,7 +762,7 @@ LIMIT 6</code></pre>
 </div>
 </section><section id="wildcards-using-with-string-paterns-with-like-predicate" class="level3"><h3 class="anchored" data-anchor-id="wildcards-using-with-string-paterns-with-like-predicate">Wildcards (using with string paterns) with <code>LIKE</code> predicate</h3>
 <div class="cell">
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT species_id, genus, taxa </span></span>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT species_id, genus, taxa </span></span>
 <span><span class="st">                 FROM species"</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Source:   SQL [?? x 3]
@@ -733,7 +783,7 @@ LIMIT 6</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## grabs anything ending with letters 'za' </span></span>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## grabs anything ending with letters 'za' </span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT species_id, genus, taxa </span></span>
 <span><span class="st">                 FROM species</span></span>
 <span><span class="st">                 WHERE genus LIKE '%za' "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -747,7 +797,7 @@ LIMIT 6</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## grabs anything that starts with the letter 'A'</span></span>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## grabs anything that starts with the letter 'A'</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT species_id, genus, taxa </span></span>
 <span><span class="st">                 FROM species</span></span>
 <span><span class="st">                 WHERE genus LIKE 'A%' "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -762,7 +812,7 @@ LIMIT 6</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## grabs anything before and after the letters 'sp'</span></span>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## grabs anything before and after the letters 'sp'</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT species_id, genus, taxa </span></span>
 <span><span class="st">                 FROM species</span></span>
 <span><span class="st">                 WHERE genus LIKE '%sp%' "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -781,7 +831,7 @@ LIMIT 6</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## grabs anything that starts with 'c' and ends with 'us'</span></span>
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## grabs anything that starts with 'c' and ends with 'us'</span></span>
 <span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT species_id, genus, taxa </span></span>
 <span><span class="st">                 FROM species</span></span>
 <span><span class="st">                 WHERE genus LIKE 'c%us' "</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -801,11 +851,11 @@ LIMIT 6</code></pre>
 9 PX         Chaetodipus     Rodent </code></pre>
 </div>
 </div>
-</section></section><section id="close-the-connection" class="level2" data-number="12.7"><h2 data-number="12.7" class="anchored" data-anchor-id="close-the-connection">
-<span class="header-section-number">12.7</span> Close the connection</h2>
+</section></section><section id="close-the-connection" class="level2" data-number="12.5"><h2 data-number="12.5" class="anchored" data-anchor-id="close-the-connection">
+<span class="header-section-number">12.5</span> Close the connection</h2>
 <p>Good housekeeping means always remembering to disconnect once you’re done.</p>
 <div class="cell">
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">dbDisconnect</span><span class="op">(</span><span class="va">mammals</span><span class="op">)</span> <span class="co"># closes our DB connection</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">dbDisconnect</span><span class="op">(</span><span class="va">mammals</span><span class="op">)</span> <span class="co"># closes our DB connection</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -935,7 +985,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer>
+</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});</script>
 
 
 </body></html>
