@@ -309,7 +309,7 @@ Learning objectives
 <p>Data from the Portal project is recorded in a relational database designed for reliable storage and rapid access to the bounty of information produced by this long-term ecological experiment.</p>
 <p>The research site consists of many <strong>plots</strong> – patches of the Arizona desert that are intensively manipulated and repeatedly surveyed (<a href="#fig-plots_sql">Figure&nbsp;<span>12.1</span></a>). The plots have some fixed characteristics, such as the type of manipulation, geographic location, aspect, etc.</p>
 <div id="fig-plots_sql" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/plots_sql.png" class="lightbox" title="Location of all 24 plots (numbered and outlined in white). Blue flag marks the weather station location." data-gallery="quarto-lightbox-gallery-1"><img src="images/plots_sql.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<figure class="figure"><p><a href="images/plots_sql.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Location of all 24 plots (numbered and outlined in white). Blue flag marks the weather station location."><img src="images/plots_sql.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;12.1: Location of all 24 plots (numbered and outlined in white). Blue flag marks the weather station location.</figcaption><p></p>
 </figure>
 </div>
@@ -390,49 +390,63 @@ tbls: plots, species, surveys</code></pre>
 <p>To connect to tables within a database, we can use the <code>tbl()</code> function from <a href="https://dplyr.tidyverse.org">dplyr</a>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## connect to tables with tbl</span></span>
-<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="st">"plots"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span></span>
+<span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="st">"plots"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># Source:   SQL [6 x 2]
+<pre><code># Source:   table&lt;plots&gt; [?? x 2]
 # Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
-  plot_id plot_type                
-    &lt;int&gt; &lt;chr&gt;                    
-1       1 Spectab exclosure        
-2       2 Control                  
-3       3 Long-term Krat Exclosure 
-4       4 Control                  
-5       5 Rodent Exclosure         
-6       6 Short-term Krat Exclosure</code></pre>
+   plot_id plot_type                
+     &lt;int&gt; &lt;chr&gt;                    
+ 1       1 Spectab exclosure        
+ 2       2 Control                  
+ 3       3 Long-term Krat Exclosure 
+ 4       4 Control                  
+ 5       5 Rodent Exclosure         
+ 6       6 Short-term Krat Exclosure
+ 7       7 Rodent Exclosure         
+ 8       8 Control                  
+ 9       9 Spectab exclosure        
+10      10 Rodent Exclosure         
+# … with more rows</code></pre>
 </div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="st">"surveys"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="st">"surveys"</span><span class="op">)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># Source:   SQL [6 x 9]
+<pre><code># Source:   table&lt;surveys&gt; [?? x 9]
 # Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
-  record_id month   day  year plot_id species_id sex   hindfoot_length weight
-      &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;int&gt;  &lt;int&gt;
-1         1     7    16  1977       2 NL         M                  32     NA
-2         2     7    16  1977       3 NL         M                  33     NA
-3         3     7    16  1977       2 DM         F                  37     NA
-4         4     7    16  1977       7 DM         M                  36     NA
-5         5     7    16  1977       3 DM         M                  35     NA
-6         6     7    16  1977       1 PF         M                  14     NA</code></pre>
+   record_id month   day  year plot_id species_id sex   hindfoot_length weight
+       &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;           &lt;int&gt;  &lt;int&gt;
+ 1         1     7    16  1977       2 NL         M                  32     NA
+ 2         2     7    16  1977       3 NL         M                  33     NA
+ 3         3     7    16  1977       2 DM         F                  37     NA
+ 4         4     7    16  1977       7 DM         M                  36     NA
+ 5         5     7    16  1977       3 DM         M                  35     NA
+ 6         6     7    16  1977       1 PF         M                  14     NA
+ 7         7     7    16  1977       2 PE         F                  NA     NA
+ 8         8     7    16  1977       1 DM         M                  37     NA
+ 9         9     7    16  1977       1 DM         F                  34     NA
+10        10     7    16  1977       6 PF         F                  20     NA
+# … with more rows</code></pre>
 </div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="st">"species"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="st">"species"</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># Source:   SQL [6 x 4]
+<pre><code># Source:   table&lt;species&gt; [?? x 4]
 # Database: sqlite 3.39.4 [C:\My_R\introR\data\portal_mammals.sqlite]
-  species_id genus            species         taxa  
-  &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;           &lt;chr&gt; 
-1 AB         Amphispiza       bilineata       Bird  
-2 AH         Ammospermophilus harrisi         Rodent
-3 AS         Ammodramus       savannarum      Bird  
-4 BA         Baiomys          taylori         Rodent
-5 CB         Campylorhynchus  brunneicapillus Bird  
-6 CM         Calamospiza      melanocorys     Bird  </code></pre>
+   species_id genus            species         taxa   
+   &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;           &lt;chr&gt;  
+ 1 AB         Amphispiza       bilineata       Bird   
+ 2 AH         Ammospermophilus harrisi         Rodent 
+ 3 AS         Ammodramus       savannarum      Bird   
+ 4 BA         Baiomys          taylori         Rodent 
+ 5 CB         Campylorhynchus  brunneicapillus Bird   
+ 6 CM         Calamospiza      melanocorys     Bird   
+ 7 CQ         Callipepla       squamata        Bird   
+ 8 CS         Crotalus         scutalatus      Reptile
+ 9 CT         Cnemidophorus    tigris          Reptile
+10 CU         Cnemidophorus    uniparens       Reptile
+# … with more rows</code></pre>
 </div>
 </div>
+<p>If we pay attention to the output for <code>species</code> table, we may notice “Source:” at the very first line of the calling. It says <code>“Lazy query”</code> with no information of the rows and 4 columns [?? x 4]. This is what happens when we navigate a table from relational database through R, it creates a local lazy tibble (<code>tbl_lazy</code>).</p>
 </section><section id="simple-database-queries-with-sql-syntax-select-statements" class="level2" data-number="12.4"><h2 data-number="12.4" class="anchored" data-anchor-id="simple-database-queries-with-sql-syntax-select-statements">
 <span class="header-section-number">12.4</span> Simple database queries with SQL syntax (SELECT statements)</h2>
 <section id="select-command-select-columns" class="level3"><h3 class="anchored" data-anchor-id="select-command-select-columns">SELECT command (select columns)</h3>
@@ -851,11 +865,39 @@ LIMIT 6</code></pre>
 9 PX         Chaetodipus     Rodent </code></pre>
 </div>
 </div>
+<p>Finally, we may add the <code>collect()</code> command from <a href="https://dplyr.tidyverse.org">dplyr</a> package that allows R to retrieve the data from the database. The data is then stored as a <code>tbl</code>, not as a <code>tbl_lazy</code> anymore. For example:</p>
+<div class="cell">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co">## Collect the data</span></span>
+<span><span class="va">species_c_us</span> <span class="op">&lt;-</span> <span class="fu">tbl</span><span class="op">(</span><span class="va">mammals</span>, <span class="fu">sql</span><span class="op">(</span><span class="st">"SELECT species_id, genus, taxa </span></span>
+<span><span class="st">                 FROM species</span></span>
+<span><span class="st">                 WHERE genus LIKE 'c%us' "</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
+<span>  <span class="fu">collect</span><span class="op">(</span><span class="op">)</span>  <span class="co"># retrieves data into a local tibble</span></span>
+<span></span>
+<span><span class="va">species_c_us</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 9 × 3
+  species_id genus           taxa   
+  &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;  
+1 CB         Campylorhynchus Bird   
+2 CS         Crotalus        Reptile
+3 CT         Cnemidophorus   Reptile
+4 CU         Cnemidophorus   Reptile
+5 CV         Crotalus        Reptile
+6 PB         Chaetodipus     Rodent 
+7 PI         Chaetodipus     Rodent 
+8 PP         Chaetodipus     Rodent 
+9 PX         Chaetodipus     Rodent </code></pre>
+</div>
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">species_c_us</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
+</div>
+</div>
 </section></section><section id="close-the-connection" class="level2" data-number="12.5"><h2 data-number="12.5" class="anchored" data-anchor-id="close-the-connection">
 <span class="header-section-number">12.5</span> Close the connection</h2>
 <p>Good housekeeping means always remembering to disconnect once you’re done.</p>
 <div class="cell">
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">dbDisconnect</span><span class="op">(</span><span class="va">mammals</span><span class="op">)</span> <span class="co"># closes our DB connection</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">dbDisconnect</span><span class="op">(</span><span class="va">mammals</span><span class="op">)</span> <span class="co"># closes our DB connection</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
@@ -985,7 +1027,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":true,"openEffect":"zoom"});</script>
 
 
 </body></html>

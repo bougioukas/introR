@@ -45,7 +45,6 @@ The plots have a lot of dynamic characteristics, and those changes are recorded 
 
 There is also the [portalr](https://weecology.github.io/portalr/) R package that provides a collection of basic functions to summarize the Portal project data on rodents, plants, ants, and weather at our long-term field site in the Chihuahuan Desert.
 
-	
 ### Basic definitions in SQL
 
 **Database:** a container/repository (usually a file or set of files) to store organized data; a set of relational information.
@@ -131,26 +130,20 @@ dbListFields(mammals, "surveys")
 dbListFields(mammals, "species")
 ```
 
-
 To connect to tables within a database, we can use the `tbl()` function from `{dplyr}`:
 
 ```{r}
 ## connect to tables with tbl
-tbl(mammals, "plots") %>% 
-  head()
 
-tbl(mammals, "surveys") %>% 
-  head()
+tbl(mammals, "plots")
 
+tbl(mammals, "surveys") 
 
-tbl(mammals, "species") %>% 
-  head()
+tbl(mammals, "species")
 
 ```
 
-
-
-
+If we pay attention to the output for `species` table, we may notice “Source:” at the very first line of the calling. It says `“Lazy query”` with no information of the rows and 4 columns [?? x 4]. This is what happens when we navigate a table from relational database through R, it creates a local lazy tibble (`tbl_lazy`).
 
 
 ## Simple database queries with SQL syntax (SELECT statements)
@@ -375,6 +368,23 @@ tbl(mammals, sql("SELECT species_id, genus, taxa
                  WHERE genus LIKE 'c%us' "))
 
 ```
+
+
+Finally, we may add the `collect()` command from `{dplyr}` package that allows R to retrieve the data from the database. The data is then stored as a `tbl`, not as a `tbl_lazy` anymore. For example:
+
+```{r}
+## Collect the data
+species_c_us <- tbl(mammals, sql("SELECT species_id, genus, taxa 
+                 FROM species
+                 WHERE genus LIKE 'c%us' ")) %>% 
+  collect()  # retrieves data into a local tibble
+
+species_c_us
+
+class(species_c_us)
+```
+
+
 
 ## Close the connection
 
