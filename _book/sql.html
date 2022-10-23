@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.1.251">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>An Introduction to R - 12&nbsp; SQL</title>
+<title>An Introduction to R - 12&nbsp; SQL queries within R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -126,7 +126,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top"><nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }"><div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SQL</span></h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SQL queries within R</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -228,7 +228,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./sql.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SQL</span></a>
+  <a href="./sql.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SQL queries within R</span></a>
   </div>
 </li>
       </ul>
@@ -270,7 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><div class="quarto-title">
-<h1 class="title"><span id="sec-sql" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SQL</span></span></h1>
+<h1 class="title"><span id="sec-sql" class="quarto-section-identifier d-none d-lg-block"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SQL queries within R</span></span></h1>
 </div>
 
 
@@ -309,7 +309,7 @@ Learning objectives
 <p>Data from the Portal project is recorded in a relational database designed for reliable storage and rapid access to the bounty of information produced by this long-term ecological experiment.</p>
 <p>The research site consists of many <strong>plots</strong> – patches of the Arizona desert that are intensively manipulated and repeatedly surveyed (<a href="#fig-plots_sql">Figure&nbsp;<span>12.1</span></a>). The plots have some fixed characteristics, such as the type of manipulation, geographic location, aspect, etc.</p>
 <div id="fig-plots_sql" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure"><p><a href="images/plots_sql.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Location of all 24 plots (numbered and outlined in white). Blue flag marks the weather station location."><img src="images/plots_sql.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+<figure class="figure"><p><a href="images/plots_sql.png" class="lightbox" title="Location of all 24 plots (numbered and outlined in white). Blue flag marks the weather station location." data-gallery="quarto-lightbox-gallery-1"><img src="images/plots_sql.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
 <p></p><figcaption class="figure-caption">Figure&nbsp;12.1: Location of all 24 plots (numbered and outlined in white). Blue flag marks the weather station location.</figcaption><p></p>
 </figure>
 </div>
@@ -446,7 +446,7 @@ tbls: plots, species, surveys</code></pre>
 # … with more rows</code></pre>
 </div>
 </div>
-<p>If we pay attention to the output for <code>species</code> table, we may notice “Source:” at the very first line of the calling. It says <code>“Lazy query”</code> with no information of the rows and 4 columns [?? x 4]. This is what happens when we navigate a table from relational database through R, it creates a local lazy tibble (<code>tbl_lazy</code>).</p>
+<p>If we pay attention to the output for <code>species</code> table, we may notice “Source:” at the very first line of the calling. It says <code>table&lt;species&gt;</code> with no information of the rows and 4 columns [?? x 4]. This is what happens when we navigate a table from relational database through R, it creates a local lazy tibble (<code>tbl_lazy</code>).</p>
 </section><section id="simple-database-queries-with-sql-syntax-select-statements" class="level2" data-number="12.4"><h2 data-number="12.4" class="anchored" data-anchor-id="simple-database-queries-with-sql-syntax-select-statements">
 <span class="header-section-number">12.4</span> Simple database queries with SQL syntax (SELECT statements)</h2>
 <section id="select-command-select-columns" class="level3"><h3 class="anchored" data-anchor-id="select-command-select-columns">SELECT command (select columns)</h3>
@@ -1027,7 +1027,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer"><div class="nav-footer">
     <div class="nav-footer-left">Copyright 2022, Konstantinos I. Bougioukas</div>   
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":true,"openEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom"});</script>
 
 
 </body></html>

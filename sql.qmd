@@ -1,4 +1,4 @@
-# SQL {#sec-sql}
+# SQL queries within R {#sec-sql}
 
 ```{r}
 #| include: false
@@ -143,7 +143,7 @@ tbl(mammals, "species")
 
 ```
 
-If we pay attention to the output for `species` table, we may notice “Source:” at the very first line of the calling. It says `“Lazy query”` with no information of the rows and 4 columns [?? x 4]. This is what happens when we navigate a table from relational database through R, it creates a local lazy tibble (`tbl_lazy`).
+If we pay attention to the output for `species` table, we may notice “Source:” at the very first line of the calling. It says `table<species>` with no information of the rows and 4 columns [?? x 4]. This is what happens when we navigate a table from relational database through R, it creates a local lazy tibble (`tbl_lazy`).
 
 
 ## Simple database queries with SQL syntax (SELECT statements)
