@@ -14,20 +14,20 @@ book:
     - index.qmd
     - part: "Basics"
       chapters:
-        #- introduction.qmd
-        #- functions.qmd
-        #- packages.qmd
-         - calculations.qmd
-        #- objects.qmd
-        #- vector.qmd
-        #- matrix.qmd
-        #- list.qmd
-        #- transformation.qmd
-        #- visualization.qmd
+        - introduction.qmd
+        - functions.qmd
+        - packages.qmd
+        - calculations.qmd
+        - objects.qmd
+        - vector.qmd
+        - matrix.qmd
+        - list.qmd
+        - transformation.qmd
+        - visualization.qmd
 
     - part: "Special Topics"
       chapters:
-        #- interactive.qmd
+        - interactive.qmd
         - sql.qmd
 
     - references.qmd

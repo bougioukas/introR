@@ -546,7 +546,7 @@ s & u
 Additionally, the `&&` operator takes the first element of both vectors and gives TRUE only if both are TRUE.
 
 ```{r}
-s && u
+#s && u
 ```
 
 **B. OR operators (`|`, `||`)**
@@ -560,7 +560,7 @@ s | u
 Additionally, the `||` operator takes the first element of both vectors and gives TRUE if one of them is TRUE.
 
 ```{r}
-s || u
+#s || u
 ```
 
 **C. NOT operator (`!`)**
