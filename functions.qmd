@@ -61,7 +61,7 @@ seq(5, 8, 0.5)
 ::: callout-tip
 ## Name the arguments in the functions
 
-We do not necessarily need to indicate the names of the arguments, but only the values, as long as we follow their order. However, it's a good idea to name at least some of the arguments in the functions. This practice minimizes errors assigning unnamed arguments to options and makes code more readable.
+We do not necessarily need to indicate the names of the arguments, but only the values, as long as we follow their order. However, it’s a good idea to name at least some of the arguments in the functions. This practice minimizes errors assigning unnamed arguments to options and makes code more readable.
 :::
 
  
