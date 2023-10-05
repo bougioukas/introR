@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.322">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>An Introduction to R - 1&nbsp; Data structures in R: lists and data frames</title>
+<title>An Introduction to R - 8&nbsp; Data structures in R: lists and data frames</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -60,8 +60,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./sql.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./transformation.html" rel="next">
+<link href="./matrix.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./list.html">Basics</a></li><li class="breadcrumb-item"><a href="./list.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data structures in R: lists and data frames</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction.html">Basics</a></li><li class="breadcrumb-item"><a href="./list.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data structures in R: lists and data frames</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -147,8 +147,62 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R and Rstudio</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./functions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R functions</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./packages.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">R packages</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./calculations.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculations in R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./objects.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R objects</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./vector.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data structures in R: 1-Dimensional Vectors</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./matrix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data structures in R: matrices and arrays</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./list.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data structures in R: lists and data frames</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data structures in R: lists and data frames</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./transformation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data transformation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./visualization.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Visualization: ggplot2</span></span></a>
   </div>
 </li>
       </ul>
@@ -164,8 +218,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./interactive.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Animated and Interactive Plots</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./sql.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">SQL queries within R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SQL queries within R</span></span></a>
   </div>
 </li>
       </ul>
@@ -184,33 +244,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <nav id="TOC" role="doc-toc" class="toc-active"><h2 id="toc-title">Table of contents</h2>
    
   <ul>
-<li><a href="#creating-a-list" id="toc-creating-a-list" class="nav-link active" data-scroll-target="#creating-a-list"><span class="header-section-number">1.1</span> Creating a list</a></li>
+<li><a href="#creating-a-list" id="toc-creating-a-list" class="nav-link active" data-scroll-target="#creating-a-list"><span class="header-section-number">8.1</span> Creating a list</a></li>
   <li>
-<a href="#subsetting-a-list" id="toc-subsetting-a-list" class="nav-link" data-scroll-target="#subsetting-a-list"><span class="header-section-number">1.2</span> Subsetting a list</a>
+<a href="#subsetting-a-list" id="toc-subsetting-a-list" class="nav-link" data-scroll-target="#subsetting-a-list"><span class="header-section-number">8.2</span> Subsetting a list</a>
   <ul class="collapse">
 <li><a href="#subset-list-and-preserve-output-as-a-list" id="toc-subset-list-and-preserve-output-as-a-list" class="nav-link" data-scroll-target="#subset-list-and-preserve-output-as-a-list">Subset list and preserve output as a list</a></li>
   <li><a href="#subset-list-and-simplify-the-output" id="toc-subset-list-and-simplify-the-output" class="nav-link" data-scroll-target="#subset-list-and-simplify-the-output">Subset list and simplify the output</a></li>
   <li><a href="#subset-list-to-get-individual-elements-out-of-a-list-item" id="toc-subset-list-to-get-individual-elements-out-of-a-list-item" class="nav-link" data-scroll-target="#subset-list-to-get-individual-elements-out-of-a-list-item">Subset list to get individual elements out of a list item</a></li>
   </ul>
 </li>
-  <li><a href="#recursive-vectors-and-nested-lists" id="toc-recursive-vectors-and-nested-lists" class="nav-link" data-scroll-target="#recursive-vectors-and-nested-lists"><span class="header-section-number">1.3</span> Recursive vectors and Nested Lists</a></li>
-  <li><a href="#unlist-a-list" id="toc-unlist-a-list" class="nav-link" data-scroll-target="#unlist-a-list"><span class="header-section-number">1.4</span> Unlist a list</a></li>
+  <li><a href="#recursive-vectors-and-nested-lists" id="toc-recursive-vectors-and-nested-lists" class="nav-link" data-scroll-target="#recursive-vectors-and-nested-lists"><span class="header-section-number">8.3</span> Recursive vectors and Nested Lists</a></li>
+  <li><a href="#unlist-a-list" id="toc-unlist-a-list" class="nav-link" data-scroll-target="#unlist-a-list"><span class="header-section-number">8.4</span> Unlist a list</a></li>
   <li>
-<a href="#data-frames" id="toc-data-frames" class="nav-link" data-scroll-target="#data-frames"><span class="header-section-number">1.5</span> Data frames</a>
+<a href="#data-frames" id="toc-data-frames" class="nav-link" data-scroll-target="#data-frames"><span class="header-section-number">8.5</span> Data frames</a>
   <ul class="collapse">
 <li><a href="#basic-characteristics-of-data-frames" id="toc-basic-characteristics-of-data-frames" class="nav-link" data-scroll-target="#basic-characteristics-of-data-frames">Basic characteristics of data frames</a></li>
   <li><a href="#creating-a-data-frame-with-tibble" id="toc-creating-a-data-frame-with-tibble" class="nav-link" data-scroll-target="#creating-a-data-frame-with-tibble">Creating a data frame with <code>tibble()</code></a></li>
   <li><a href="#access-only-one-variable-at-a-time-from-a-tibble" id="toc-access-only-one-variable-at-a-time-from-a-tibble" class="nav-link" data-scroll-target="#access-only-one-variable-at-a-time-from-a-tibble">Access only one variable at a time from a tibble</a></li>
   </ul>
 </li>
-  <li><a href="#access-variables-using-the-with-function" id="toc-access-variables-using-the-with-function" class="nav-link" data-scroll-target="#access-variables-using-the-with-function"><span class="header-section-number">1.6</span> Access variables using the with() function</a></li>
-  <li><a href="#factors" id="toc-factors" class="nav-link" data-scroll-target="#factors"><span class="header-section-number">1.7</span> Factors</a></li>
-  <li><a href="#dates-in-r" id="toc-dates-in-r" class="nav-link" data-scroll-target="#dates-in-r"><span class="header-section-number">1.8</span> Dates in R</a></li>
+  <li><a href="#access-variables-using-the-with-function" id="toc-access-variables-using-the-with-function" class="nav-link" data-scroll-target="#access-variables-using-the-with-function"><span class="header-section-number">8.6</span> Access variables using the with() function</a></li>
+  <li><a href="#factors" id="toc-factors" class="nav-link" data-scroll-target="#factors"><span class="header-section-number">8.7</span> Factors</a></li>
+  <li><a href="#dates-in-r" id="toc-dates-in-r" class="nav-link" data-scroll-target="#dates-in-r"><span class="header-section-number">8.8</span> Dates in R</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./list.html">Basics</a></li><li class="breadcrumb-item"><a href="./list.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data structures in R: lists and data frames</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-list" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data structures in R: lists and data frames</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./introduction.html">Basics</a></li><li class="breadcrumb-item"><a href="./list.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data structures in R: lists and data frames</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-list" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data structures in R: lists and data frames</span></span></h1>
 </div>
 
 
@@ -245,8 +305,8 @@ Learning objectives
 </div>
 </div>
 <p>&nbsp;</p>
-<section id="creating-a-list" class="level2" data-number="1.1"><h2 data-number="1.1" class="anchored" data-anchor-id="creating-a-list">
-<span class="header-section-number">1.1</span> Creating a list</h2>
+<section id="creating-a-list" class="level2" data-number="8.1"><h2 data-number="8.1" class="anchored" data-anchor-id="creating-a-list">
+<span class="header-section-number">8.1</span> Creating a list</h2>
 <p>A list in R allows us to gather a variety of objects under one name (that is, the name of the list) in an ordered way. These objects can be matrices, vectors, data frames, even other lists, etc. It is not even required that these objects are related to each other in any way. We could say that a list is some kind super data type: we can store practically any piece of information in it!</p>
 <p>We construct a list using the <code><a href="https://rdrr.io/r/base/list.html">list()</a></code> function. The list items (or components of a list) can be matrices, vectors, other lists. For example:</p>
 <div class="cell">
@@ -290,8 +350,8 @@ $logicals
 </div>
 </div>
 <p>&nbsp;</p>
-</section><section id="subsetting-a-list" class="level2" data-number="1.2"><h2 data-number="1.2" class="anchored" data-anchor-id="subsetting-a-list">
-<span class="header-section-number">1.2</span> Subsetting a list</h2>
+</section><section id="subsetting-a-list" class="level2" data-number="8.2"><h2 data-number="8.2" class="anchored" data-anchor-id="subsetting-a-list">
+<span class="header-section-number">8.2</span> Subsetting a list</h2>
 <section id="subset-list-and-preserve-output-as-a-list" class="level3"><h3 class="anchored" data-anchor-id="subset-list-and-preserve-output-as-a-list">Subset list and preserve output as a list</h3>
 <p>We can use the <code>[ ]</code> operator to extract one or more list items while preserving the output in list format:</p>
 <div class="cell">
@@ -361,8 +421,8 @@ Simplifying Vs Preserving subsetting
 </div>
 </div>
 <p>&nbsp;</p>
-</section></section><section id="recursive-vectors-and-nested-lists" class="level2" data-number="1.3"><h2 data-number="1.3" class="anchored" data-anchor-id="recursive-vectors-and-nested-lists">
-<span class="header-section-number">1.3</span> Recursive vectors and Nested Lists</h2>
+</section></section><section id="recursive-vectors-and-nested-lists" class="level2" data-number="8.3"><h2 data-number="8.3" class="anchored" data-anchor-id="recursive-vectors-and-nested-lists">
+<span class="header-section-number">8.3</span> Recursive vectors and Nested Lists</h2>
 <p>A <strong>recursive vector</strong> is a list that contains other lists. The sublists of a recursive vector are known as <strong>nested lists</strong>. For example:</p>
 <div class="cell">
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_list2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>item1 <span class="op">=</span> <span class="fl">3.14</span>,</span>
@@ -430,8 +490,8 @@ $item2$item2b_char
 </div>
 </div>
 <p>&nbsp;</p>
-</section><section id="unlist-a-list" class="level2" data-number="1.4"><h2 data-number="1.4" class="anchored" data-anchor-id="unlist-a-list">
-<span class="header-section-number">1.4</span> Unlist a list</h2>
+</section><section id="unlist-a-list" class="level2" data-number="8.4"><h2 data-number="8.4" class="anchored" data-anchor-id="unlist-a-list">
+<span class="header-section-number">8.4</span> Unlist a list</h2>
 <p>We can turn a list into an atomic vector with <code><a href="https://rdrr.io/r/base/unlist.html">unlist()</a></code>:</p>
 <div class="cell">
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="va">my_unlist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">my_list</span><span class="op">)</span></span>
@@ -446,8 +506,8 @@ $item2$item2b_char
 </div>
 </div>
 <p>&nbsp;</p>
-</section><section id="data-frames" class="level2" data-number="1.5"><h2 data-number="1.5" class="anchored" data-anchor-id="data-frames">
-<span class="header-section-number">1.5</span> Data frames</h2>
+</section><section id="data-frames" class="level2" data-number="8.5"><h2 data-number="8.5" class="anchored" data-anchor-id="data-frames">
+<span class="header-section-number">8.5</span> Data frames</h2>
 <p>A data frame is the most common way of storing data in R and, generally, is the data structure most often used for data analyses.</p>
 <div class="callout callout-style-default callout-tip no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -487,7 +547,7 @@ Data frame
 <div class="cell-output-display">
 <div id="fig-tidy_data" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><a href="images/tidy_data.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Tidy data."><img src="images/tidy_data.PNG" class="img-fluid figure-img" style="width:90.0%"></a></p>
-<figcaption class="figure-caption">Figure&nbsp;1.1: Tidy data.</figcaption></figure>
+<figcaption class="figure-caption">Figure&nbsp;8.1: Tidy data.</figcaption></figure>
 </div>
 </div>
 </div>
@@ -621,8 +681,8 @@ Table
 </div>
 </div>
 <p>&nbsp;</p>
-</section></section><section id="access-variables-using-the-with-function" class="level2" data-number="1.6"><h2 data-number="1.6" class="anchored" data-anchor-id="access-variables-using-the-with-function">
-<span class="header-section-number">1.6</span> Access variables using the with() function</h2>
+</section></section><section id="access-variables-using-the-with-function" class="level2" data-number="8.6"><h2 data-number="8.6" class="anchored" data-anchor-id="access-variables-using-the-with-function">
+<span class="header-section-number">8.6</span> Access variables using the with() function</h2>
 <p>It can get tiresome typing patient_data$ at the beginning of every variable name. An alternative approach is to use <code><a href="https://rdrr.io/r/base/with.html">with()</a></code> function. For example:</p>
 <div class="cell">
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/with.html">with</a></span><span class="op">(</span><span class="va">patient_data</span>, <span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">diabetes</span>, <span class="va">status</span><span class="op">)</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -634,8 +694,8 @@ diabetes Excellent Improved Poor
 </div>
 </div>
 <p>&nbsp;</p>
-</section><section id="factors" class="level2" data-number="1.7"><h2 data-number="1.7" class="anchored" data-anchor-id="factors">
-<span class="header-section-number">1.7</span> Factors</h2>
+</section><section id="factors" class="level2" data-number="8.7"><h2 data-number="8.7" class="anchored" data-anchor-id="factors">
+<span class="header-section-number">8.7</span> Factors</h2>
 <p>Categorical (nominal) and ordered categorical (ordinal) variables in R are usually transformed to <strong>factors</strong>. Factors can contain only predefined values and are crucial in R because they determine how data will be analyzed in statistical models and presented visually.</p>
 <p>In our example, we should convert the <code>diabetes</code> and <code>status</code> variables from character to factor variables. This can be done by applying the <code>convert_as_factor()</code> function from the <a href="https://rpkgs.datanovia.com/rstatix/">rstatix</a> package:</p>
 <div class="cell">
@@ -718,8 +778,8 @@ m f
 </div>
 </div>
 <p>&nbsp;</p>
-</section><section id="dates-in-r" class="level2" data-number="1.8"><h2 data-number="1.8" class="anchored" data-anchor-id="dates-in-r">
-<span class="header-section-number">1.8</span> Dates in R</h2>
+</section><section id="dates-in-r" class="level2" data-number="8.8"><h2 data-number="8.8" class="anchored" data-anchor-id="dates-in-r">
+<span class="header-section-number">8.8</span> Dates in R</h2>
 <p>There are three types of date/time data that refer to an instant in time:</p>
 <ul>
 <li>A <strong>date</strong>. Tibbles print this as <code>&lt;date&gt;</code>.</li>
@@ -762,7 +822,7 @@ m f
 <div class="cell">
 <div class="sourceCode" id="cb95"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/difftime.html">difftime</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html">Sys.time</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">date1</span>, units <span class="op">=</span> <span class="st">'days'</span><span class="op">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Time difference of 1194.794 days</code></pre>
+<pre><code>Time difference of 1194.834 days</code></pre>
 </div>
 </div>
 <p>POSIXct stores a date and time. In numeric form, the number of seconds since <code>1970-01-01</code>.</p>
@@ -1140,13 +1200,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Preface</span>
+      <a href="./matrix.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data structures in R: matrices and arrays</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./sql.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">SQL queries within R</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./transformation.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data transformation</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -1162,7 +1222,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":true,"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","loop":true});</script>
 
 
 </body></html>
