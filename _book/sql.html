@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="generator" content="quarto-1.4.322">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-<title>An Introduction to R - 12&nbsp; SQL queries within R</title>
+<title>An Introduction to R - 2&nbsp; SQL queries within R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -61,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
 <link href="./references.html" rel="next">
-<link href="./interactive.html" rel="prev">
+<link href="./list.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./interactive.html">Special Topics</a></li><li class="breadcrumb-item"><a href="./sql.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SQL queries within R</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sql.html">Special Topics</a></li><li class="breadcrumb-item"><a href="./sql.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">SQL queries within R</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -147,62 +147,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./introduction.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction to R and Rstudio</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./functions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">R functions</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./packages.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">R packages</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./calculations.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Calculations in R</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./objects.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">R objects</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./vector.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Data structures in R: 1-Dimensional Vectors</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./matrix.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Data structures in R: matrices and arrays</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./list.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data structures in R: lists and data frames</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./transformation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Data transformation</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./visualization.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Data Visualization: ggplot2</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data structures in R: lists and data frames</span></span></a>
   </div>
 </li>
       </ul>
@@ -218,14 +164,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">
 <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./interactive.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Animated and Interactive Plots</span></span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./sql.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SQL queries within R</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">SQL queries within R</span></span></a>
   </div>
 </li>
       </ul>
@@ -245,17 +185,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
 <li>
-<a href="#introduction-to-relational-databases" id="toc-introduction-to-relational-databases" class="nav-link active" data-scroll-target="#introduction-to-relational-databases"><span class="header-section-number">12.1</span> Introduction to relational databases</a>
+<a href="#introduction-to-relational-databases" id="toc-introduction-to-relational-databases" class="nav-link active" data-scroll-target="#introduction-to-relational-databases"><span class="header-section-number">2.1</span> Introduction to relational databases</a>
   <ul class="collapse">
 <li><a href="#data-from-the-portal-project" id="toc-data-from-the-portal-project" class="nav-link" data-scroll-target="#data-from-the-portal-project">Data from the Portal Project</a></li>
   <li><a href="#basic-definitions-in-sql" id="toc-basic-definitions-in-sql" class="nav-link" data-scroll-target="#basic-definitions-in-sql">Basic definitions in SQL</a></li>
   <li><a href="#types-of-sql-statements-ddl-vs.-dml" id="toc-types-of-sql-statements-ddl-vs.-dml" class="nav-link" data-scroll-target="#types-of-sql-statements-ddl-vs.-dml">Types of SQL statements (DDL vs.&nbsp;DML)</a></li>
   </ul>
 </li>
-  <li><a href="#connecting-to-a-database" id="toc-connecting-to-a-database" class="nav-link" data-scroll-target="#connecting-to-a-database"><span class="header-section-number">12.2</span> Connecting to a database</a></li>
-  <li><a href="#explore-the-database" id="toc-explore-the-database" class="nav-link" data-scroll-target="#explore-the-database"><span class="header-section-number">12.3</span> Explore the database</a></li>
+  <li><a href="#connecting-to-a-database" id="toc-connecting-to-a-database" class="nav-link" data-scroll-target="#connecting-to-a-database"><span class="header-section-number">2.2</span> Connecting to a database</a></li>
+  <li><a href="#explore-the-database" id="toc-explore-the-database" class="nav-link" data-scroll-target="#explore-the-database"><span class="header-section-number">2.3</span> Explore the database</a></li>
   <li>
-<a href="#simple-database-queries-with-sql-syntax-select-statements" id="toc-simple-database-queries-with-sql-syntax-select-statements" class="nav-link" data-scroll-target="#simple-database-queries-with-sql-syntax-select-statements"><span class="header-section-number">12.4</span> Simple database queries with SQL syntax (SELECT statements)</a>
+<a href="#simple-database-queries-with-sql-syntax-select-statements" id="toc-simple-database-queries-with-sql-syntax-select-statements" class="nav-link" data-scroll-target="#simple-database-queries-with-sql-syntax-select-statements"><span class="header-section-number">2.4</span> Simple database queries with SQL syntax (SELECT statements)</a>
   <ul class="collapse">
 <li><a href="#select-command-select-columns" id="toc-select-command-select-columns" class="nav-link" data-scroll-target="#select-command-select-columns">SELECT command (select columns)</a></li>
   <li><a href="#where-clause-filtering-rows" id="toc-where-clause-filtering-rows" class="nav-link" data-scroll-target="#where-clause-filtering-rows">WHERE clause (filtering rows)</a></li>
@@ -265,12 +205,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#wildcards-using-with-string-paterns-with-like-predicate" id="toc-wildcards-using-with-string-paterns-with-like-predicate" class="nav-link" data-scroll-target="#wildcards-using-with-string-paterns-with-like-predicate">Wildcards (using with string paterns) with <code>LIKE</code> predicate</a></li>
   </ul>
 </li>
-  <li><a href="#close-the-connection" id="toc-close-the-connection" class="nav-link" data-scroll-target="#close-the-connection"><span class="header-section-number">12.5</span> Close the connection</a></li>
+  <li><a href="#close-the-connection" id="toc-close-the-connection" class="nav-link" data-scroll-target="#close-the-connection"><span class="header-section-number">2.5</span> Close the connection</a></li>
   </ul></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./interactive.html">Special Topics</a></li><li class="breadcrumb-item"><a href="./sql.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SQL queries within R</span></a></li></ol></nav><div class="quarto-title">
-<h1 class="title"><span id="sec-sql" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">SQL queries within R</span></span></h1>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./sql.html">Special Topics</a></li><li class="breadcrumb-item"><a href="./sql.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">SQL queries within R</span></a></li></ol></nav><div class="quarto-title">
+<h1 class="title"><span id="sec-sql" class="quarto-section-identifier"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">SQL queries within R</span></span></h1>
 </div>
 
 
@@ -301,18 +241,18 @@ Learning objectives
 </ul>
 </div>
 </div>
-<section id="introduction-to-relational-databases" class="level2" data-number="12.1"><h2 data-number="12.1" class="anchored" data-anchor-id="introduction-to-relational-databases">
-<span class="header-section-number">12.1</span> Introduction to relational databases</h2>
+<section id="introduction-to-relational-databases" class="level2" data-number="2.1"><h2 data-number="2.1" class="anchored" data-anchor-id="introduction-to-relational-databases">
+<span class="header-section-number">2.1</span> Introduction to relational databases</h2>
 <p>So far, we have dealt with datasets that easily fit into our computer’s memory. But what about datasets that are too large for our computer to handle as a whole? In this case, storing the data outside of R and organizing it in a database is helpful. Connecting to the database allows us to retrieve only the chunks needed for the current analysis.</p>
 <p>A very common form of data storage is the relational database. There are many relational database management systems (RDBMS), such as <code>SQLite</code>, <code>MySQL</code>, <code>PostgreSQL</code>, <code>Oracle</code>, and many more. These different RDBMS each have their own advantages and limitations. Almost all employ <code>SQL</code> (structured query language) to pull data from the database.</p>
 <p>Thankfully, several packages have been written that allows R to connect to relational databases and use the R programming language as the front end (what the user types in) to pull data from them. In this tutorial, we will give examples of how to read and analyzed data using R with SQLite RDBMS.</p>
 <section id="data-from-the-portal-project" class="level3"><h3 class="anchored" data-anchor-id="data-from-the-portal-project">Data from the Portal Project</h3>
 <p>The Portal Project is a long-term ecological study being conducted near Portal, AZ. Since 1977, the site has been a primary focus of research on interactions among rodents, ants and plants and their respective responses to climate.</p>
 <p>Data from the Portal project is recorded in a relational database designed for reliable storage and rapid access to the bounty of information produced by this long-term ecological experiment.</p>
-<p>The research site consists of many <strong>plots</strong> – patches of the Arizona desert that are intensively manipulated and repeatedly surveyed (<a href="#fig-plots_sql" class="quarto-xref">Figure&nbsp;<span>12.1</span></a>). The plots have some fixed characteristics, such as the type of manipulation, geographic location, aspect, etc.</p>
+<p>The research site consists of many <strong>plots</strong> – patches of the Arizona desert that are intensively manipulated and repeatedly surveyed (<a href="#fig-plots_sql" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>). The plots have some fixed characteristics, such as the type of manipulation, geographic location, aspect, etc.</p>
 <div id="fig-plots_sql" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure"><p><a href="images/plots_sql.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Location of all 24 plots (numbered and outlined in white). Blue flag marks the weather station location."><img src="images/plots_sql.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
-<figcaption class="figure-caption">Figure&nbsp;12.1: Location of all 24 plots (numbered and outlined in white). Blue flag marks the weather station location.</figcaption></figure>
+<figcaption class="figure-caption">Figure&nbsp;2.1: Location of all 24 plots (numbered and outlined in white). Blue flag marks the weather station location.</figcaption></figure>
 </div>
 <p>The plots have a lot of dynamic characteristics, and those changes are recorded in repeated <strong>surveys</strong>. In particular, the animals captured during each survey are identified to <strong>species</strong>, weighed, and measured.</p>
 <p>There is also the <a href="https://weecology.github.io/portalr/">portalr</a> R package that provides a collection of basic functions to summarize the Portal project data on rodents, plants, ants, and weather at our long-term field site in the Chihuahuan Desert.</p>
@@ -333,8 +273,8 @@ Learning objectives
 <p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg><code>UPDATE statement</code>: edits row or rows in a table;</p>
 <p><svg aria-hidden="true" role="img" viewbox="0 0 448 512" style="height:1em;width:0.88em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:orange;overflow:visible;position:relative;"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"></path></svg><code>DELETE statement</code>: removes a row or rows of data from a table.</p>
 <p>In this textbook we will primary use the <code>SELECT</code> statement.</p>
-</section></section><section id="connecting-to-a-database" class="level2" data-number="12.2"><h2 data-number="12.2" class="anchored" data-anchor-id="connecting-to-a-database">
-<span class="header-section-number">12.2</span> Connecting to a database</h2>
+</section></section><section id="connecting-to-a-database" class="level2" data-number="2.2"><h2 data-number="2.2" class="anchored" data-anchor-id="connecting-to-a-database">
+<span class="header-section-number">2.2</span> Connecting to a database</h2>
 <p>The first step from RStudio is creating a connection object that opens up a channel of communication to the database file. We will connect to our database using the <a href="https://dbi.r-dbi.org">DBI</a> package. For the sake of example, we simply connect to an “in-memory” database, but a wide range of database connectors are available depending on where our data lives.</p>
 <div class="cell">
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="co"># connect to the database</span></span>
@@ -344,8 +284,8 @@ Learning objectives
 <p>This command uses 2 packages that helps <code>dbplyr</code> and <code>dplyr</code> talk to the <code>SQLite</code> database. <a href="https://dbi.r-dbi.org">DBI</a> is not something that we’ll use directly as a user. It allows R to send commands to databases irrespective of the database management system used. The <a href="https://rsqlite.r-dbi.org">RSQLite</a> allows R to interface with SQLite databases.</p>
 <p>This command does not load the data into the R session (as the <code>read_csv()</code> function does). Instead, it merely instructs R to connect to the <code>SQLite</code> database contained in the <code>portal_mammals.sqlite</code> file.</p>
 <p>Using a similar approach, we could connect to many other database management systems that are supported by R including <code>MySQL</code>, <code>PostgreSQL</code>, etc.</p>
-</section><section id="explore-the-database" class="level2" data-number="12.3"><h2 data-number="12.3" class="anchored" data-anchor-id="explore-the-database">
-<span class="header-section-number">12.3</span> Explore the database</h2>
+</section><section id="explore-the-database" class="level2" data-number="2.3"><h2 data-number="2.3" class="anchored" data-anchor-id="explore-the-database">
+<span class="header-section-number">2.3</span> Explore the database</h2>
 <p>With the connection object availble, we can begin exploring the database.</p>
 <p>First, we can list the tables at the connection:</p>
 <div class="cell">
@@ -448,8 +388,8 @@ tbls: plots, species, surveys</code></pre>
 </div>
 </div>
 <p>If we pay attention to the output for <code>species</code> table, we may notice “Source:” at the very first line of the calling. It says <code>table&lt;species&gt;</code> with no information of the rows and 4 columns [?? x 4]. This is what happens when we navigate a table from relational database through R, it creates a local lazy tibble (<code>tbl_lazy</code>).</p>
-</section><section id="simple-database-queries-with-sql-syntax-select-statements" class="level2" data-number="12.4"><h2 data-number="12.4" class="anchored" data-anchor-id="simple-database-queries-with-sql-syntax-select-statements">
-<span class="header-section-number">12.4</span> Simple database queries with SQL syntax (SELECT statements)</h2>
+</section><section id="simple-database-queries-with-sql-syntax-select-statements" class="level2" data-number="2.4"><h2 data-number="2.4" class="anchored" data-anchor-id="simple-database-queries-with-sql-syntax-select-statements">
+<span class="header-section-number">2.4</span> Simple database queries with SQL syntax (SELECT statements)</h2>
 <section id="select-command-select-columns" class="level3"><h3 class="anchored" data-anchor-id="select-command-select-columns">SELECT command (select columns)</h3>
 <p>The <code>tbl()</code> function can be used to send <code>SQL</code> queries to the database if it is combined with the <code>sql()</code> function. To demonstrate this functionality, let’s select the columns <code>record_id</code>, <code>year</code>, <code>species_id</code>, and <code>plot_id</code> from the <code>surveys</code> table:</p>
 <div class="cell">
@@ -894,8 +834,8 @@ LIMIT 6</code></pre>
 <pre><code>[1] "tbl_df"     "tbl"        "data.frame"</code></pre>
 </div>
 </div>
-</section></section><section id="close-the-connection" class="level2" data-number="12.5"><h2 data-number="12.5" class="anchored" data-anchor-id="close-the-connection">
-<span class="header-section-number">12.5</span> Close the connection</h2>
+</section></section><section id="close-the-connection" class="level2" data-number="2.5"><h2 data-number="2.5" class="anchored" data-anchor-id="close-the-connection">
+<span class="header-section-number">2.5</span> Close the connection</h2>
 <p>Good housekeeping means always remembering to disconnect once you’re done.</p>
 <div class="cell">
 <div class="sourceCode" id="cb67"><pre class="downlit sourceCode r code-with-copy"><code class="sourceCode R"><span><span class="fu">dbDisconnect</span><span class="op">(</span><span class="va">mammals</span><span class="op">)</span> <span class="co"># closes our DB connection</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1260,8 +1200,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
 });
 </script><nav class="page-navigation"><div class="nav-page nav-page-previous">
-      <a href="./interactive.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Animated and Interactive Plots</span></span>
+      <a href="./list.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Data structures in R: lists and data frames</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
@@ -1282,7 +1222,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       &nbsp;
     </div>
   </div>
-</footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":true,"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});</script>
+</footer><script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});</script>
 
 
 </body></html>

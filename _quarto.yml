@@ -6,7 +6,7 @@ book:
   subtitle: "1st Edition"
   author: 
     - "Konstantinos I. Bougioukas, PhD"
-    - "Anna-Bettina Haidich, Associate Professor"
+    #- "Anna-Bettina Haidich, Associate Professor"
   date: "August 7, 2022"
   cover-image: images/cover.png
   repo-url: https://github.com/bougioukas/introR
@@ -14,20 +14,20 @@ book:
     - index.qmd
     - part: "Basics"
       chapters:
-        - introduction.qmd
-        - functions.qmd
-        - packages.qmd
-        - calculations.qmd
-        - objects.qmd
-        - vector.qmd
-        - matrix.qmd
+        #- introduction.qmd
+        #- functions.qmd
+        #- packages.qmd
+        #- calculations.qmd
+        #- objects.qmd
+        #- vector.qmd
+        #- matrix.qmd
         - list.qmd
-        - transformation.qmd
-        - visualization.qmd
+        #- transformation.qmd
+        #- visualization.qmd
 
     - part: "Special Topics"
       chapters:
-        - interactive.qmd
+        #- interactive.qmd
         - sql.qmd
 
     - references.qmd
